@@ -1,3 +1,5 @@
+import Characters.Player;
+
 public class Item {
     private Player player;
     private String name;

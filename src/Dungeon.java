@@ -1,3 +1,5 @@
+import Characters.Player;
+
 public class Dungeon {
     private Player player;
     private int variant;
