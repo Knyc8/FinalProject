@@ -2,8 +2,10 @@ package ClientWindow;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class SwingWindow extends JPanel implements Runnable{
+public class SwingWindow extends JPanel implements Runnable {
     //Screen dimensions
     final int STANDARD_TILE_SIZE = 16;  //16 x 16 tiles/character sprites
     final int TILE_SCALE = 5;   //Makes 16x16 sprites bigger for modern computer resolutions
@@ -14,11 +16,14 @@ public class SwingWindow extends JPanel implements Runnable{
     final int SCREEN_HEIGHT = DISPLAYED_TILE_SIZE * SCREEN_TILE_ROWS;    //Vertical resolution (80 * 10 = 800 pixels)
 
     Thread gameThread;  //allows the game to run indefinitely
+    KeyManager keyManager = new KeyManager();  //allows the program to take key inputs
 
     public SwingWindow() {
         setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));   //sets the window size to 1280x800 pixels
         setBackground(Color.white);
         setDoubleBuffered(true);    //rendering sprites and animations
+        addKeyListener(keyManager);
+        setFocusable(true);  //makes the program focus for key inputs
     }
 
     /***
@@ -63,3 +68,4 @@ public class SwingWindow extends JPanel implements Runnable{
         graphic2D.dispose();  //application cleans up resources to save memory
     }
 }
+
