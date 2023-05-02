@@ -21,6 +21,9 @@ public class SwingWindow extends JPanel implements Runnable{
         setDoubleBuffered(true);    //rendering sprites and animations
     }
 
+    /***
+     * Calls and commences the game loop
+     */
     public void startThread() {
         gameThread = new Thread(this);  //passes this class into the thread class
         gameThread.start();     //automatically calls the run method
@@ -36,6 +39,27 @@ public class SwingWindow extends JPanel implements Runnable{
         while (gameThread != null) {
 //            System.out.println("Loop Running: " + count); //for testing
 //            count++;  //for testing
+            update();  //updates the information about a character (positions) based on the fps
+
+            repaint();  //redraws the sprite onto the screen however many times the fps is
         }
+    }
+
+    public void update() {}
+
+    /***
+     * Default java method to draw onto a JPanel
+     *
+     * @param graphic represents an object to draw onto the jpanel
+     */
+    public void paintComponent(Graphics graphic) {
+        super.paintComponent(graphic);
+        Graphics2D graphic2D = (Graphics2D) graphic;  //Casts graphics as a Graphics2D object, so it can be drawn on a 2D plane
+        graphic2D.setColor(Color.black);
+        graphic2D.fillRect(0, 0, DISPLAYED_TILE_SIZE, DISPLAYED_TILE_SIZE);  //for testing character sprites
+        graphic2D.fillRect(SCREEN_WIDTH-DISPLAYED_TILE_SIZE, 0, DISPLAYED_TILE_SIZE, DISPLAYED_TILE_SIZE);  //for testing character sprites
+        graphic2D.fillRect(0, SCREEN_HEIGHT-DISPLAYED_TILE_SIZE, DISPLAYED_TILE_SIZE, DISPLAYED_TILE_SIZE);  //for testing character sprites
+        graphic2D.fillRect(SCREEN_WIDTH-DISPLAYED_TILE_SIZE, SCREEN_HEIGHT-DISPLAYED_TILE_SIZE, DISPLAYED_TILE_SIZE, DISPLAYED_TILE_SIZE);  //for testing character sprites
+        graphic2D.dispose();  //application cleans up resources to save memory
     }
 }
