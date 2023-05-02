@@ -25,8 +25,17 @@ public class SwingWindow extends JPanel implements Runnable{
         gameThread = new Thread(this);  //passes this class into the thread class
         gameThread.start();     //automatically calls the run method
     }
+
+    /***
+     * Creates a game loop that allows the program to run indefinitely
+     */
+
     @Override
     public void run() {
-
+//        int count = 0;  //for testing
+        while (gameThread != null) {
+//            System.out.println("Loop Running: " + count); //for testing
+//            count++;  //for testing
+        }
     }
 }
