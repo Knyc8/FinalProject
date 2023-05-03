@@ -15,14 +15,23 @@ public class SwingWindow extends JPanel implements Runnable {
     final int SCREEN_WIDTH = DISPLAYED_TILE_SIZE * SCREEN_TILE_COLUMNS;   //Horizontal resolution (80 * 16 = 1280 pixels)
     final int SCREEN_HEIGHT = DISPLAYED_TILE_SIZE * SCREEN_TILE_ROWS;    //Vertical resolution (80 * 10 = 800 pixels)
 
+    //Game running
+    int framesPerSecond = 60;  //screen refreshes 60 times every second
     Thread gameThread;  //allows the game to run indefinitely
     KeyManager keyManager = new KeyManager();  //allows the program to take key inputs
+    int tempX = 100;  //for testing
+    int tempY = 100;  //for testing
+    int tempSpeed = 5;  //for testing
 
+    /***
+     * Initializes the dimensions of the screen and client inputs
+     */
     public SwingWindow() {
+        //initiation
         setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));   //sets the window size to 1280x800 pixels
         setBackground(Color.white);
         setDoubleBuffered(true);    //rendering sprites and animations
-        addKeyListener(keyManager);
+        addKeyListener(keyManager);  //listens to user keystrokes
         setFocusable(true);  //makes the program focus for key inputs
     }
 
@@ -36,21 +45,54 @@ public class SwingWindow extends JPanel implements Runnable {
 
     /***
      * Creates a game loop that allows the program to run indefinitely
+     * Constantly updates and repaints the screen
      */
-
     @Override
     public void run() {
-//        int count = 0;  //for testing
+        double refreshRate = 1000000000/framesPerSecond;  //program runs in nanoseconds, and 1E9 nanoseconds equals 1 second (1 second/ 60 frames).
+        double refreshInterval = System.nanoTime() + refreshRate;  //every refresh will occur 0.0167 seconds later than opposed to 1 nanosecond later.
+
         while (gameThread != null) {
-//            System.out.println("Loop Running: " + count); //for testing
-//            count++;  //for testing
             update();  //updates the information about a character (positions) based on the fps
 
             repaint();  //redraws the sprite onto the screen however many times the fps is
+
+            try {
+                double remainingRTime = refreshInterval - System.nanoTime();  //how much time left of one loop until the next refresh
+                remainingRTime = remainingRTime/1000000;  //sleep method only accepts ms rather than ns
+                if (remainingRTime < 0)
+                {
+                    remainingRTime = 0;  //prevents negative time and tells the thread to stop sleeping
+                }
+
+                Thread.sleep((long)remainingRTime);  //delays/stops the loops by the remaining refresh time so the program doesn't update instantly
+                refreshInterval += refreshRate;  //sets the next refresh time
+
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
-    public void update() {}
+    public void update() {
+        //Character movement
+        if (keyManager.isWPressed())  //up speed units
+        {
+            tempY -= tempSpeed;  //top left is (0, 0)
+        }
+        if (keyManager.isSPressed())  //down speed units
+        {
+            tempY += tempSpeed;
+        }
+        if (keyManager.isAPressed())  //left speed units
+        {
+            tempX -= tempSpeed;
+        }
+        if (keyManager.isDPressed())  //right speed units
+        {
+            tempX += tempSpeed;
+        }
+    }
 
     /***
      * Default java method to draw onto a JPanel
@@ -61,11 +103,11 @@ public class SwingWindow extends JPanel implements Runnable {
         super.paintComponent(graphic);
         Graphics2D graphic2D = (Graphics2D) graphic;  //Casts graphics as a Graphics2D object, so it can be drawn on a 2D plane
         graphic2D.setColor(Color.black);
-        graphic2D.fillRect(0, 0, DISPLAYED_TILE_SIZE, DISPLAYED_TILE_SIZE);  //for testing character sprites
-        graphic2D.fillRect(SCREEN_WIDTH-DISPLAYED_TILE_SIZE, 0, DISPLAYED_TILE_SIZE, DISPLAYED_TILE_SIZE);  //for testing character sprites
-        graphic2D.fillRect(0, SCREEN_HEIGHT-DISPLAYED_TILE_SIZE, DISPLAYED_TILE_SIZE, DISPLAYED_TILE_SIZE);  //for testing character sprites
-        graphic2D.fillRect(SCREEN_WIDTH-DISPLAYED_TILE_SIZE, SCREEN_HEIGHT-DISPLAYED_TILE_SIZE, DISPLAYED_TILE_SIZE, DISPLAYED_TILE_SIZE);  //for testing character sprites
-        graphic2D.dispose();  //application cleans up resources to save memory
+        graphic2D.fillRect(tempX, tempY, DISPLAYED_TILE_SIZE, DISPLAYED_TILE_SIZE);  //for testing character sprites
+//        graphic2D.fillRect(SCREEN_WIDTH-DISPLAYED_TILE_SIZE, 0, DISPLAYED_TILE_SIZE, DISPLAYED_TILE_SIZE);  //for testing character sprites
+//        graphic2D.fillRect(0, SCREEN_HEIGHT-DISPLAYED_TILE_SIZE, DISPLAYED_TILE_SIZE, DISPLAYED_TILE_SIZE);  //for testing character sprites
+//        graphic2D.fillRect(SCREEN_WIDTH-DISPLAYED_TILE_SIZE, SCREEN_HEIGHT-DISPLAYED_TILE_SIZE, DISPLAYED_TILE_SIZE, DISPLAYED_TILE_SIZE);  //for testing character sprites
+        graphic2D.dispose();  //Essentially removes the old window so that a new window can be drawn
     }
 }
 

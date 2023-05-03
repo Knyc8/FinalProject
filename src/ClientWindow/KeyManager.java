@@ -4,7 +4,24 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyManager implements KeyListener {
-    public boolean wPressed, sPressed, aPressed, dPressed;
+    private boolean wPressed, sPressed, aPressed, dPressed;
+
+    public boolean isWPressed() {
+        return wPressed;
+    }
+
+    public boolean isSPressed() {
+        return sPressed;
+    }
+
+    public boolean isAPressed() {
+        return aPressed;
+    }
+
+    public boolean isDPressed() {
+        return dPressed;
+    }
+
     @Override
     public void keyTyped(KeyEvent e) {/*unused*/}
 
