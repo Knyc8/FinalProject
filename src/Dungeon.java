@@ -7,9 +7,6 @@ public class Dungeon {
 
     public Dungeon()
     {
-        player = new Player();
-        variant = (int) (Math.random()*3) + 1;
-        difficulty = "n";
     }
     public Player getPlayer() {
         return player;

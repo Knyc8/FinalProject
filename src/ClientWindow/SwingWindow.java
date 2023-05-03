@@ -1,5 +1,7 @@
 package ClientWindow;
 
+import Characters.Player;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -19,9 +21,7 @@ public class SwingWindow extends JPanel implements Runnable {
     int framesPerSecond = 60;  //screen refreshes 60 times every second
     Thread gameThread;  //allows the game to run indefinitely
     KeyManager keyManager = new KeyManager();  //allows the program to take key inputs
-    int tempX = 100;  //for testing
-    int tempY = 100;  //for testing
-    int tempSpeed = 5;  //for testing
+    Player player = new Player(this, keyManager);
 
     /***
      * Initializes the dimensions of the screen and client inputs
@@ -75,23 +75,7 @@ public class SwingWindow extends JPanel implements Runnable {
     }
 
     public void update() {
-        //Character movement
-        if (keyManager.isWPressed())  //up speed units
-        {
-            tempY -= tempSpeed;  //top left is (0, 0)
-        }
-        if (keyManager.isSPressed())  //down speed units
-        {
-            tempY += tempSpeed;
-        }
-        if (keyManager.isAPressed())  //left speed units
-        {
-            tempX -= tempSpeed;
-        }
-        if (keyManager.isDPressed())  //right speed units
-        {
-            tempX += tempSpeed;
-        }
+        player.updateInfo();
     }
 
     /***
@@ -102,11 +86,7 @@ public class SwingWindow extends JPanel implements Runnable {
     public void paintComponent(Graphics graphic) {
         super.paintComponent(graphic);
         Graphics2D graphic2D = (Graphics2D) graphic;  //Casts graphics as a Graphics2D object, so it can be drawn on a 2D plane
-        graphic2D.setColor(Color.black);
-        graphic2D.fillRect(tempX, tempY, DISPLAYED_TILE_SIZE, DISPLAYED_TILE_SIZE);  //for testing character sprites
-//        graphic2D.fillRect(SCREEN_WIDTH-DISPLAYED_TILE_SIZE, 0, DISPLAYED_TILE_SIZE, DISPLAYED_TILE_SIZE);  //for testing character sprites
-//        graphic2D.fillRect(0, SCREEN_HEIGHT-DISPLAYED_TILE_SIZE, DISPLAYED_TILE_SIZE, DISPLAYED_TILE_SIZE);  //for testing character sprites
-//        graphic2D.fillRect(SCREEN_WIDTH-DISPLAYED_TILE_SIZE, SCREEN_HEIGHT-DISPLAYED_TILE_SIZE, DISPLAYED_TILE_SIZE, DISPLAYED_TILE_SIZE);  //for testing character sprites
+        player.drawPlayer((Graphics2D) graphic);
         graphic2D.dispose();  //Essentially removes the old window so that a new window can be drawn
     }
 }
