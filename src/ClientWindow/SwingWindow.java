@@ -32,7 +32,7 @@ public class SwingWindow extends JPanel implements Runnable {
     public SwingWindow() {
         //initiation
         setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));   //sets the window size to 1280x800 pixels
-        setBackground(Color.white);
+        setBackground(Color.darkGray);
         setDoubleBuffered(true);    //rendering sprites and animations
         addKeyListener(keyManager);  //listens to user keystrokes
         setFocusable(true);  //makes the program focus for key inputs
