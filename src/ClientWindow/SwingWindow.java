@@ -22,6 +22,9 @@ public class SwingWindow extends JPanel implements Runnable {
     Thread gameThread;  //allows the game to run indefinitely
     KeyManager keyManager = new KeyManager();  //allows the program to take key inputs
     Player player = new Player(this, keyManager);
+    int xCoord = 100;
+    int yCoord = 100;
+    int speed = 5;
 
     /***
      * Initializes the dimensions of the screen and client inputs
@@ -33,6 +36,18 @@ public class SwingWindow extends JPanel implements Runnable {
         setDoubleBuffered(true);    //rendering sprites and animations
         addKeyListener(keyManager);  //listens to user keystrokes
         setFocusable(true);  //makes the program focus for key inputs
+    }
+
+    public int getDISPLAYED_TILE_SIZE() {
+        return DISPLAYED_TILE_SIZE;
+    }
+
+    public int getSCREEN_WIDTH() {
+        return SCREEN_WIDTH;
+    }
+
+    public int getSCREEN_HEIGHT() {
+        return SCREEN_HEIGHT;
     }
 
     /***
@@ -75,6 +90,7 @@ public class SwingWindow extends JPanel implements Runnable {
     }
 
     public void update() {
+        //Character movement
         player.updateInfo();
     }
 
@@ -86,7 +102,7 @@ public class SwingWindow extends JPanel implements Runnable {
     public void paintComponent(Graphics graphic) {
         super.paintComponent(graphic);
         Graphics2D graphic2D = (Graphics2D) graphic;  //Casts graphics as a Graphics2D object, so it can be drawn on a 2D plane
-        player.drawPlayer((Graphics2D) graphic);
+        player.drawPlayer((Graphics2D) graphic);  //draws player on the screen
         graphic2D.dispose();  //Essentially removes the old window so that a new window can be drawn
     }
 }

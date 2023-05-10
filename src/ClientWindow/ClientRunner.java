@@ -15,6 +15,6 @@ public class ClientRunner {
         gameWindow.setLocationRelativeTo(null); //puts the window in the center of screen
         gameWindow.setVisible(true);
 
-        gamePanel.startThread();  //begins the game loop timer
+        gamePanel.startThread();  //begins the game loop timerasd
     }
 }
