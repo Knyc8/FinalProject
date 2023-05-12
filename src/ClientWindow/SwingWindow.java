@@ -9,13 +9,13 @@ import java.awt.event.KeyListener;
 
 public class SwingWindow extends JPanel implements Runnable {
     //Screen dimensions
-    final int STANDARD_TILE_SIZE = 16;  //16 x 16 tiles/character sprites
-    final int TILE_SCALE = 5;   //Makes 16x16 sprites bigger for modern computer resolutions
-    final int DISPLAYED_TILE_SIZE = STANDARD_TILE_SIZE * TILE_SCALE;    //The actual size the sprite will be displayed as (80x80 pixels)
+    final int STANDARD_TILE_SIZE = 32;  //32 x 32 tiles/character sprites
+    final int TILE_SCALE = 3;   //Makes 32x32 sprites bigger for modern computer resolutions
+    final int DISPLAYED_TILE_SIZE = STANDARD_TILE_SIZE * TILE_SCALE;    //The actual size the sprite will be displayed as (96x96 pixels)
     final int SCREEN_TILE_COLUMNS = 16;   //Num of tiles horizontally
     final int SCREEN_TILE_ROWS = 10;    //Num of tiles vertically
-    final int SCREEN_WIDTH = DISPLAYED_TILE_SIZE * SCREEN_TILE_COLUMNS;   //Horizontal resolution (80 * 16 = 1280 pixels)
-    final int SCREEN_HEIGHT = DISPLAYED_TILE_SIZE * SCREEN_TILE_ROWS;    //Vertical resolution (80 * 10 = 800 pixels)
+    final int SCREEN_WIDTH = DISPLAYED_TILE_SIZE * SCREEN_TILE_COLUMNS;   //Horizontal resolution (96 * 16 = 1536 pixels)
+    final int SCREEN_HEIGHT = DISPLAYED_TILE_SIZE * SCREEN_TILE_ROWS;    //Vertical resolution (96 * 10 = 960 pixels)
 
     //Game running
     int framesPerSecond = 60;  //screen refreshes 60 times every second

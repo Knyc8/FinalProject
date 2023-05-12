@@ -33,7 +33,7 @@ public class Player extends Entity{
     public void setDefaultValues() {
         xCoord = 100;
         yCoord = 100;
-        speed = 5;
+        speed = 7;
         direction = "front";
     }
 
@@ -95,16 +95,19 @@ public class Player extends Entity{
             }
         }
 
-        spriteCount++;
-        if (spriteCount > 10) {
-            if (spriteNum == 1)
-            {
-                spriteNum = 2;
+        if (!km.isWPressed() && !km.isAPressed() && !km.isSPressed() && !km.isDPressed()) {
+            spriteCount = 3;
+        }
+        else {
+            spriteCount++;
+            if (spriteCount > 10) {
+                if (spriteNum == 1) {
+                    spriteNum = 2;
+                } else if (spriteNum == 2) {
+                    spriteNum = 1;
+                }
+                spriteCount = 0;
             }
-            else if (spriteNum == 2) {
-                spriteNum = 1;
-            }
-            spriteCount = 0;
         }
     }
 
@@ -124,7 +127,10 @@ public class Player extends Entity{
                 {
                     image = back2;
                 }
-                //image = back3;
+                if (spriteNum == 3)
+                {
+                    image = back3;
+                }
                 break;
             case "front":
                 if (spriteNum == 1)
@@ -135,7 +141,10 @@ public class Player extends Entity{
                 {
                     image = front2;
                 }
-                //image = front3;
+                if (spriteNum == 3)
+                {
+                    image = front3;
+                }
                 break;
             case "left":
                 if (spriteNum == 1)
@@ -146,7 +155,10 @@ public class Player extends Entity{
                 {
                     image = left2;
                 }
-                //image = left3;
+                if (spriteNum == 3)
+                {
+                    image = left3;
+                }
                 break;
             case "right":
                 if (spriteNum == 1)
@@ -157,7 +169,10 @@ public class Player extends Entity{
                 {
                     image = right2;
                 }
-                //image = right3;
+                if (spriteNum == 3)
+                {
+                    image = right3;
+                }
                 break;
         }
         graphic2D.drawImage(image, xCoord, yCoord, sw.getDISPLAYED_TILE_SIZE(), sw.getDISPLAYED_TILE_SIZE(), null);  //draws sprite on the screen
