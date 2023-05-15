@@ -33,24 +33,22 @@ public class Player extends Entity{
     public void setDefaultValues() {
         xCoord = 100;
         yCoord = 100;
-        speed = 7;
+        speed = 5;
         direction = "front";
     }
 
     public void getPlayerSprite() {
         try{
-            back1 = ImageIO.read(getClass().getResource("/player_sprites/back1.png"));
-            back2 = ImageIO.read(getClass().getResource("/player_sprites/back2.png"));
-            back1 = ImageIO.read(getClass().getResource("/player_sprites/back3.png"));
-            front1 = ImageIO.read(getClass().getResource("/player_sprites/front1.png"));
-            front2 = ImageIO.read(getClass().getResource("/player_sprites/front2.png"));
-            front3 = ImageIO.read(getClass().getResource("/player_sprites/front3.png"));
-            left1 = ImageIO.read(getClass().getResource("/player_sprites/left1.png"));
-            left2 = ImageIO.read(getClass().getResource("/player_sprites/left2.png"));
-            left3 = ImageIO.read(getClass().getResource("/player_sprites/left3.png"));
-            right1 = ImageIO.read(getClass().getResource("/player_sprites/right1.png"));
-            right2 = ImageIO.read(getClass().getResource("/player_sprites/right2.png"));
-            right3 = ImageIO.read(getClass().getResource("/player_sprites/right3.png"));
+            back1 = ImageIO.read(getClass().getResource("/player_sprites/pigzard_b1.png"));
+            back2 = ImageIO.read(getClass().getResource("/player_sprites/pigzard_b2.png"));
+            back3 = ImageIO.read(getClass().getResource("/player_sprites/pigzard_b3.png"));
+            front1 = ImageIO.read(getClass().getResource("/player_sprites/pigzard_f1.png"));
+            front2 = ImageIO.read(getClass().getResource("/player_sprites/pigzard_f2.png"));
+            front3 = ImageIO.read(getClass().getResource("/player_sprites/pigzard_f3.png"));
+            left1 = ImageIO.read(getClass().getResource("/player_sprites/pigzard_l1.png"));
+            left2 = ImageIO.read(getClass().getResource("/player_sprites/pigzard_l2.png"));
+            right1 = ImageIO.read(getClass().getResource("/player_sprites/pigzard_r1.png"));
+            right2 = ImageIO.read(getClass().getResource("/player_sprites/pigzard_r2.png"));
         } catch (IOException ex) {
             ex.printStackTrace();;
         }
@@ -155,10 +153,6 @@ public class Player extends Entity{
                 {
                     image = left2;
                 }
-                if (spriteNum == 3)
-                {
-                    image = left3;
-                }
                 break;
             case "right":
                 if (spriteNum == 1)
@@ -168,10 +162,6 @@ public class Player extends Entity{
                 if (spriteNum == 2)
                 {
                     image = right2;
-                }
-                if (spriteNum == 3)
-                {
-                    image = right3;
                 }
                 break;
         }
