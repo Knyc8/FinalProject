@@ -1,6 +1,7 @@
 package ClientWindow;
 
 import Characters.Player;
+import Dungeon.TileMapper;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +14,7 @@ public class SwingWindow extends JPanel implements Runnable {
     final int TILE_SCALE = 3;   //Makes 32x32 sprites bigger for modern computer resolutions
     final int DISPLAYED_TILE_SIZE = STANDARD_TILE_SIZE * TILE_SCALE;    //The actual size the sprite will be displayed as (96x96 pixels)
     final int SCREEN_TILE_COLUMNS = 16;   //Num of tiles horizontally
-    final int SCREEN_TILE_ROWS = 8;    //Num of tiles vertically
+    final int SCREEN_TILE_ROWS = 10;    //Num of tiles vertically
     final int SCREEN_WIDTH = DISPLAYED_TILE_SIZE * SCREEN_TILE_COLUMNS;   //Horizontal resolution (96 * 16 = 1536 pixels)
     final int SCREEN_HEIGHT = DISPLAYED_TILE_SIZE * SCREEN_TILE_ROWS;    //Vertical resolution (96 * 10 = 960 pixels)
 
@@ -21,10 +22,8 @@ public class SwingWindow extends JPanel implements Runnable {
     int framesPerSecond = 60;  //screen refreshes 60 times every second
     Thread gameThread;  //allows the game to run indefinitely
     KeyManager keyManager = new KeyManager();  //allows the program to take key inputs
+    TileMapper tileMapper = new TileMapper(this);
     Player player = new Player(this, keyManager);
-    int xCoord = 100;
-    int yCoord = 100;
-    int speed = 5;
 
     /***
      * Initializes the dimensions of the screen and client inputs
@@ -66,7 +65,6 @@ public class SwingWindow extends JPanel implements Runnable {
     public void run() {
         double refreshRate = 1000000000/framesPerSecond;  //program runs in nanoseconds, and 1E9 nanoseconds equals 1 second (1 second/ 60 frames).
         double refreshInterval = System.nanoTime() + refreshRate;  //every refresh will occur 0.0167 seconds later than opposed to 1 nanosecond later.
-
         while (gameThread != null) {
             update();  //updates the information about a character (positions) based on the fps
 
@@ -102,6 +100,7 @@ public class SwingWindow extends JPanel implements Runnable {
     public void paintComponent(Graphics graphic) {
         super.paintComponent(graphic);
         Graphics2D graphic2D = (Graphics2D) graphic;  //Casts graphics as a Graphics2D object, so it can be drawn on a 2D plane
+        tileMapper.drawTiles(graphic2D);  //draws background before player so it's behind the player
         player.drawPlayer((Graphics2D) graphic);  //draws player on the screen
         graphic2D.dispose();  //Essentially removes the old window so that a new window can be drawn
     }

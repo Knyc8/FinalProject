@@ -93,19 +93,14 @@ public class Player extends Entity{
             }
         }
 
-        if (!km.isWPressed() && !km.isAPressed() && !km.isSPressed() && !km.isDPressed()) {
-            spriteCount = 3;
-        }
-        else {
-            spriteCount++;
-            if (spriteCount > 10) {
-                if (spriteNum == 1) {
-                    spriteNum = 2;
-                } else if (spriteNum == 2) {
-                    spriteNum = 1;
-                }
-                spriteCount = 0;
+        spriteCount++;
+        if (spriteCount > 10) {
+            if (spriteNum == 1) {
+                spriteNum = 2;
+            } else if (spriteNum == 2) {
+                spriteNum = 1;
             }
+            spriteCount = 0;
         }
     }
 
@@ -117,51 +112,59 @@ public class Player extends Entity{
         switch(direction)
         {
             case "back":
-                if (spriteNum == 1)
-                {
-                    image = back1;
-                }
-                if (spriteNum == 2)
-                {
-                    image = back2;
-                }
-                if (spriteNum == 3)
+                if (!km.isWPressed() && !km.isAPressed() && !km.isSPressed() && !km.isDPressed())
                 {
                     image = back3;
                 }
+                else {
+                    if (spriteNum == 1) {
+                        image = back1;
+                    }
+                    if (spriteNum == 2) {
+                        image = back2;
+                    }
+                }
                 break;
             case "front":
-                if (spriteNum == 1)
-                {
-                    image = front1;
-                }
-                if (spriteNum == 2)
-                {
-                    image = front2;
-                }
-                if (spriteNum == 3)
+                if (!km.isWPressed() && !km.isAPressed() && !km.isSPressed() && !km.isDPressed())
                 {
                     image = front3;
                 }
+                else {
+                    if (spriteNum == 1) {
+                        image = front1;
+                    }
+                    if (spriteNum == 2) {
+                        image = front2;
+                    }
+                }
                 break;
             case "left":
-                if (spriteNum == 1)
+                if (!km.isWPressed() && !km.isAPressed() && !km.isSPressed() && !km.isDPressed())
                 {
                     image = left1;
                 }
-                if (spriteNum == 2)
-                {
-                    image = left2;
+                else {
+                    if (spriteNum == 1) {
+                        image = left1;
+                    }
+                    if (spriteNum == 2) {
+                        image = left2;
+                    }
                 }
                 break;
             case "right":
-                if (spriteNum == 1)
+                if (!km.isWPressed() && !km.isAPressed() && !km.isSPressed() && !km.isDPressed())
                 {
                     image = right1;
                 }
-                if (spriteNum == 2)
-                {
-                    image = right2;
+                else {
+                    if (spriteNum == 1) {
+                        image = right1;
+                    }
+                    if (spriteNum == 2) {
+                        image = right2;
+                    }
                 }
                 break;
         }

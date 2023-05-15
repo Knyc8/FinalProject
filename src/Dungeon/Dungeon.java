@@ -1,3 +1,5 @@
+package Dungeon;
+
 import Characters.Player;
 
 public class Dungeon {
