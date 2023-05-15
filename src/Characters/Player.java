@@ -60,36 +60,36 @@ public class Player extends Entity{
         {
             direction = "back";
             yCoord -= speed;  //top left is (0, 0)
-            if (yCoord < 0)
+            if (yCoord < sw.getDISPLAYED_TILE_SIZE())
             {
-                yCoord = 0;
+                yCoord = sw.getDISPLAYED_TILE_SIZE();
             }
         }
         if (km.isSPressed())  //down speed units
         {
             direction = "front";
             yCoord += speed;
-            if (yCoord > sw.getSCREEN_HEIGHT() - sw.getDISPLAYED_TILE_SIZE())
+            if (yCoord > sw.getSCREEN_HEIGHT() - sw.getDISPLAYED_TILE_SIZE() * 2)
             {
-                yCoord = sw.getSCREEN_HEIGHT() - sw.getDISPLAYED_TILE_SIZE();
+                yCoord = sw.getSCREEN_HEIGHT() - sw.getDISPLAYED_TILE_SIZE() * 2;
             }
         }
         if (km.isAPressed())  //left speed units
         {
             direction = "left";
             xCoord -= speed;
-            if (xCoord < 0)
+            if (xCoord < sw.getDISPLAYED_TILE_SIZE())
             {
-                xCoord = 0;
+                xCoord = sw.getDISPLAYED_TILE_SIZE();
             }
         }
         if (km.isDPressed())  //right speed units
         {
             direction = "right";
             xCoord += speed;
-            if (xCoord > sw.getSCREEN_WIDTH() - sw.getDISPLAYED_TILE_SIZE())
+            if (xCoord > sw.getSCREEN_WIDTH() - sw.getDISPLAYED_TILE_SIZE() * 2)
             {
-                xCoord = sw.getSCREEN_WIDTH() - sw.getDISPLAYED_TILE_SIZE();
+                xCoord = sw.getSCREEN_WIDTH() - sw.getDISPLAYED_TILE_SIZE() * 2;
             }
         }
 
