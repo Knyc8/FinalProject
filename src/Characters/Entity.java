@@ -1,5 +1,6 @@
 package Characters;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Entity {
@@ -10,4 +11,6 @@ public class Entity {
     public String direction;
     public int spriteCount = 0;
     public int spriteNum = 1;
+    public Rectangle hitbox;
+    public boolean collisionOn = false;
 }

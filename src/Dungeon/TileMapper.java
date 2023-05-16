@@ -53,24 +53,35 @@ public class TileMapper {
      */
     public void getTileImg() {
         try {
+            //floor
             tiles[0] = new Tile();
             tiles[0].setImg(ImageIO.read(getClass().getResource("/dungeon_tiles/floor.png")));
+
+            //walls
             tiles[1] = new Tile();
             tiles[1].setImg(ImageIO.read(getClass().getResource("/dungeon_tiles/tlWall.png")));
+            tiles[1].setCollisionTrue();
             tiles[2] = new Tile();
             tiles[2].setImg(ImageIO.read(getClass().getResource("/dungeon_tiles/tWall.png")));
+            tiles[2].setCollisionTrue();
             tiles[3] = new Tile();
             tiles[3].setImg(ImageIO.read(getClass().getResource("/dungeon_tiles/trWall.png")));
+            tiles[3].setCollisionTrue();
             tiles[4] = new Tile();
             tiles[4].setImg(ImageIO.read(getClass().getResource("/dungeon_tiles/rWall.png")));
+            tiles[4].setCollisionTrue();
             tiles[5] = new Tile();
             tiles[5].setImg(ImageIO.read(getClass().getResource("/dungeon_tiles/brWall.png")));
+            tiles[5].setCollisionTrue();
             tiles[6] = new Tile();
             tiles[6].setImg(ImageIO.read(getClass().getResource("/dungeon_tiles/bWall.png")));
+            tiles[6].setCollisionTrue();
             tiles[7] = new Tile();
             tiles[7].setImg(ImageIO.read(getClass().getResource("/dungeon_tiles/blWall.png")));
+            tiles[7].setCollisionTrue();
             tiles[8] = new Tile();
             tiles[8].setImg(ImageIO.read(getClass().getResource("/dungeon_tiles/lWall.png")));
+            tiles[8].setCollisionTrue();
 
         } catch(IOException ex) {
             ex.printStackTrace();
