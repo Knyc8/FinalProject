@@ -81,9 +81,18 @@ public class TileMapper {
         int tileSize = sw.getDISPLAYED_TILE_SIZE();
         for (int dr = 0; dr < sw.getDUNGEON_ROW(); dr++) {
             for (int dc = 0; dc < sw.getDUNGEON_COL(); dc++) {
-                int xScreenLoc = (dc*tileSize) - sw.getPlayer().xCoord + sw.getPlayer().SCREEN_X;
-                int yScreenLoc = (dr*tileSize) - sw.getPlayer().yCoord + sw.getPlayer().SCREEN_Y;
-                graphics2D.drawImage(tiles[tileNum[dr][dc]].getImg(), xScreenLoc, yScreenLoc, tileSize, tileSize, null);
+                int dungeonX = (dc*tileSize);
+                int dungeonY = (dr*tileSize);
+                int xScreenLoc = dungeonX - sw.getPlayer().xCoord + sw.getPlayer().SCREEN_X;
+                int yScreenLoc = dungeonY - sw.getPlayer().yCoord + sw.getPlayer().SCREEN_Y;
+
+                //creates a boundary with which the tiles are drawn, thus minimizes the drawing of unseen tiles (especially for larger maps)
+                if (dungeonX + sw.getDISPLAYED_TILE_SIZE() > sw.getPlayer().xCoord - sw.getPlayer().SCREEN_X &&
+                        dungeonX - sw.getDISPLAYED_TILE_SIZE() < sw.getPlayer().xCoord + sw.getPlayer().SCREEN_X &&
+                        dungeonY + sw.getDISPLAYED_TILE_SIZE() > sw.getPlayer().yCoord - sw.getPlayer().SCREEN_Y &&
+                        dungeonY - sw.getDISPLAYED_TILE_SIZE() < sw.getPlayer().yCoord + sw.getPlayer().SCREEN_Y) {
+                    graphics2D.drawImage(tiles[tileNum[dr][dc]].getImg(), xScreenLoc, yScreenLoc, tileSize, tileSize, null);
+                }
         }
     }
 
