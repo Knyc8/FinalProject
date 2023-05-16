@@ -18,6 +18,12 @@ public class SwingWindow extends JPanel implements Runnable {
     final int SCREEN_WIDTH = DISPLAYED_TILE_SIZE * SCREEN_TILE_COLUMNS;   //Horizontal resolution (96 * 16 = 1536 pixels)
     final int SCREEN_HEIGHT = DISPLAYED_TILE_SIZE * SCREEN_TILE_ROWS;    //Vertical resolution (96 * 10 = 960 pixels)
 
+    //Dungeon setting
+    final int DUNGEON_COL = 25;
+    final int DUNGEON_ROW = 25;
+    final int DUNGEON_WIDTH = DISPLAYED_TILE_SIZE * DUNGEON_COL;
+    final int DUNGEON_HEIGHT = DISPLAYED_TILE_SIZE * DUNGEON_ROW;
+
     //Game running
     int framesPerSecond = 60;  //screen refreshes 60 times every second
     Thread gameThread;  //allows the game to run indefinitely
@@ -31,7 +37,7 @@ public class SwingWindow extends JPanel implements Runnable {
     public SwingWindow() {
         //initiation
         setPreferredSize(new Dimension(SCREEN_WIDTH, SCREEN_HEIGHT));   //sets the window size to 1280x800 pixels
-        setBackground(Color.darkGray);
+        setBackground(Color.black);
         setDoubleBuffered(true);    //rendering sprites and animations
         addKeyListener(keyManager);  //listens to user keystrokes
         setFocusable(true);  //makes the program focus for key inputs
@@ -47,6 +53,26 @@ public class SwingWindow extends JPanel implements Runnable {
 
     public int getSCREEN_HEIGHT() {
         return SCREEN_HEIGHT;
+    }
+
+    public int getSCREEN_TILE_COLUMNS() {
+        return SCREEN_TILE_COLUMNS;
+    }
+
+    public int getSCREEN_TILE_ROWS() {
+        return SCREEN_TILE_ROWS;
+    }
+
+    public int getDUNGEON_COL() {
+        return DUNGEON_COL;
+    }
+
+    public int getDUNGEON_ROW() {
+        return DUNGEON_ROW;
+    }
+
+    public Player getPlayer() {
+        return player;
     }
 
     /***

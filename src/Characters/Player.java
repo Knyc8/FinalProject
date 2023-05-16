@@ -12,6 +12,8 @@ import java.io.IOException;
 public class Player extends Entity{
     SwingWindow sw;
     KeyManager km;
+    public final int SCREEN_X;
+    public final int SCREEN_Y;
 
     /***
      * Initializes the SwingWindow and KeyManager
@@ -23,6 +25,9 @@ public class Player extends Entity{
         this.sw = sw;
         this.km = km;
 
+        SCREEN_X = sw.getSCREEN_WIDTH()/2 - (sw.getDISPLAYED_TILE_SIZE()/2);
+        SCREEN_Y = sw.getSCREEN_HEIGHT()/2 - (sw.getDISPLAYED_TILE_SIZE()/2);
+
         setDefaultValues();
         getPlayerSprite();
     }
@@ -31,8 +36,8 @@ public class Player extends Entity{
      * Sets the players intial location, speed, and direction
      */
     public void setDefaultValues() {
-        xCoord = 100;
-        yCoord = 100;
+        xCoord = sw.getDISPLAYED_TILE_SIZE() * 12;
+        yCoord = sw.getDISPLAYED_TILE_SIZE() * 12;
         speed = 5;
         direction = "front";
     }
@@ -60,37 +65,37 @@ public class Player extends Entity{
         {
             direction = "back";
             yCoord -= speed;  //top left is (0, 0)
-            if (yCoord < sw.getDISPLAYED_TILE_SIZE())
-            {
-                yCoord = sw.getDISPLAYED_TILE_SIZE();
-            }
+//            if (yCoord < sw.getDISPLAYED_TILE_SIZE())
+//            {
+//                yCoord = sw.getDISPLAYED_TILE_SIZE();
+//            }
         }
         if (km.isSPressed())  //down speed units
         {
             direction = "front";
             yCoord += speed;
-            if (yCoord > sw.getSCREEN_HEIGHT() - sw.getDISPLAYED_TILE_SIZE() * 2)
-            {
-                yCoord = sw.getSCREEN_HEIGHT() - sw.getDISPLAYED_TILE_SIZE() * 2;
-            }
+//            if (yCoord > sw.getSCREEN_HEIGHT() - sw.getDISPLAYED_TILE_SIZE() * 2)
+//            {
+//                yCoord = sw.getSCREEN_HEIGHT() - sw.getDISPLAYED_TILE_SIZE() * 2;
+//            }
         }
         if (km.isAPressed())  //left speed units
         {
             direction = "left";
             xCoord -= speed;
-            if (xCoord < sw.getDISPLAYED_TILE_SIZE())
-            {
-                xCoord = sw.getDISPLAYED_TILE_SIZE();
-            }
+//            if (xCoord < sw.getDISPLAYED_TILE_SIZE())
+//            {
+//                xCoord = sw.getDISPLAYED_TILE_SIZE();
+//            }
         }
         if (km.isDPressed())  //right speed units
         {
             direction = "right";
             xCoord += speed;
-            if (xCoord > sw.getSCREEN_WIDTH() - sw.getDISPLAYED_TILE_SIZE() * 2)
-            {
-                xCoord = sw.getSCREEN_WIDTH() - sw.getDISPLAYED_TILE_SIZE() * 2;
-            }
+//            if (xCoord > sw.getSCREEN_WIDTH() - sw.getDISPLAYED_TILE_SIZE() * 2)
+//            {
+//                xCoord = sw.getSCREEN_WIDTH() - sw.getDISPLAYED_TILE_SIZE() * 2;
+//            }
         }
 
         spriteCount++;
@@ -168,7 +173,7 @@ public class Player extends Entity{
                 }
                 break;
         }
-        graphic2D.drawImage(image, xCoord, yCoord, sw.getDISPLAYED_TILE_SIZE(), sw.getDISPLAYED_TILE_SIZE(), null);  //draws sprite on the screen
+        graphic2D.drawImage(image, SCREEN_X, SCREEN_Y, sw.getDISPLAYED_TILE_SIZE(), sw.getDISPLAYED_TILE_SIZE(), null);  //draws sprite on the screen
 
     }
 }
