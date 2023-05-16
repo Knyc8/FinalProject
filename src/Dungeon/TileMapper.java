@@ -12,7 +12,7 @@ import java.io.InputStreamReader;
 public class TileMapper {
     public SwingWindow sw;
     public Tile[] tiles;
-    int tileNum[][];
+    public int tileNum[][];
 
     public TileMapper(SwingWindow sw) {
         this.sw = sw;
@@ -92,8 +92,8 @@ public class TileMapper {
         int tileSize = sw.getDISPLAYED_TILE_SIZE();
         for (int dr = 0; dr < sw.getDUNGEON_ROW(); dr++) {
             for (int dc = 0; dc < sw.getDUNGEON_COL(); dc++) {
-                int dungeonX = (dc*tileSize);
-                int dungeonY = (dr*tileSize);
+                int dungeonX = (dc * tileSize);
+                int dungeonY = (dr * tileSize);
                 int xScreenLoc = dungeonX - sw.getPlayer().xCoord + sw.getPlayer().SCREEN_X;
                 int yScreenLoc = dungeonY - sw.getPlayer().yCoord + sw.getPlayer().SCREEN_Y;
 
@@ -104,52 +104,7 @@ public class TileMapper {
                         dungeonY - sw.getDISPLAYED_TILE_SIZE() < sw.getPlayer().yCoord + sw.getPlayer().SCREEN_Y) {
                     graphics2D.drawImage(tiles[tileNum[dr][dc]].getImg(), xScreenLoc, yScreenLoc, tileSize, tileSize, null);
                 }
+            }
         }
-    }
-
-        //testing:
-//        for (int r = 0; r < sw.getSCREEN_HEIGHT(); r+=tileSize){
-//            for (int c = 0; c < sw.getSCREEN_WIDTH(); c+=tileSize) {
-//                if (r == 0 || c == 0 || r == sw.getSCREEN_HEIGHT() - tileSize || c == sw.getSCREEN_WIDTH() - tileSize)
-//                {
-//                    if (r == 0) {
-//                        if (c == 0) {
-//                            graphics2D.drawImage(tiles[1].getImg(), c, r, tileSize, tileSize, null);
-//                        }
-//                        else if (c == sw.getSCREEN_WIDTH() - tileSize) {
-//                            graphics2D.drawImage(tiles[3].getImg(), c, r, tileSize, tileSize, null);
-//                        }
-//                        else {
-//                            graphics2D.drawImage(tiles[2].getImg(), c, r, tileSize, tileSize, null);
-//                        }
-//                    }
-//                    if (c == 0 && r != 0) {
-//                        if (r == sw.getSCREEN_HEIGHT()- tileSize) {
-//                            graphics2D.drawImage(tiles[7].getImg(), c, r, tileSize, tileSize, null);
-//                        }
-//                        else {
-//                            graphics2D.drawImage(tiles[8].getImg(), c, r, tileSize, tileSize, null);
-//                        }
-//                    }
-//                    if (c == sw.getSCREEN_WIDTH() - tileSize && r != 0) {
-//                        {
-//                            if (r == sw.getSCREEN_HEIGHT()- tileSize) {
-//                                graphics2D.drawImage(tiles[5].getImg(), c, r, tileSize, tileSize, null);
-//                            }
-//                            else {
-//                                graphics2D.drawImage(tiles[4].getImg(), c, r, tileSize, tileSize, null);
-//                            }
-//                        }
-//                    }
-//                    if (r == sw.getSCREEN_HEIGHT() - tileSize && (c != 0 && c!= sw.getSCREEN_WIDTH()- tileSize))
-//                    {
-//                        graphics2D.drawImage(tiles[6].getImg(), c, r, tileSize, tileSize, null);
-//                    }
-//                }
-//                else {
-//                    graphics2D.drawImage(tiles[0].getImg(), c, r, tileSize, tileSize, null);
-//                }
-//            }
-//        }
     }
 }

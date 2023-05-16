@@ -28,7 +28,7 @@ public class Player extends Entity{
         SCREEN_X = sw.getSCREEN_WIDTH()/2 - (sw.getDISPLAYED_TILE_SIZE()/2);
         SCREEN_Y = sw.getSCREEN_HEIGHT()/2 - (sw.getDISPLAYED_TILE_SIZE()/2);
 
-        hitbox = new Rectangle(0, 0, sw.getDISPLAYED_TILE_SIZE(), sw.getDISPLAYED_TILE_SIZE());
+        hitbox = new Rectangle(24, 36, 33, 51);
 
         setDefaultValues();
         getPlayerSprite();
@@ -62,52 +62,52 @@ public class Player extends Entity{
     }
 
     public void updateInfo() {
-        //Character movement
-        if (km.isWPressed())  //up speed units
-        {
-            direction = "back";
-            yCoord -= speed;  //top left is (0, 0)
-//            if (yCoord < sw.getDISPLAYED_TILE_SIZE())
-//            {
-//                yCoord = sw.getDISPLAYED_TILE_SIZE();
-//            }
-        }
-        if (km.isSPressed())  //down speed units
-        {
-            direction = "front";
-            yCoord += speed;
-//            if (yCoord > sw.getSCREEN_HEIGHT() - sw.getDISPLAYED_TILE_SIZE() * 2)
-//            {
-//                yCoord = sw.getSCREEN_HEIGHT() - sw.getDISPLAYED_TILE_SIZE() * 2;
-//            }
-        }
-        if (km.isAPressed())  //left speed units
-        {
-            direction = "left";
-            xCoord -= speed;
-//            if (xCoord < sw.getDISPLAYED_TILE_SIZE())
-//            {
-//                xCoord = sw.getDISPLAYED_TILE_SIZE();
-//            }
-        }
-        if (km.isDPressed())  //right speed units
-        {
-            direction = "right";
-            xCoord += speed;
-//            if (xCoord > sw.getSCREEN_WIDTH() - sw.getDISPLAYED_TILE_SIZE() * 2)
-//            {
-//                xCoord = sw.getSCREEN_WIDTH() - sw.getDISPLAYED_TILE_SIZE() * 2;
-//            }
-        }
-
-        spriteCount++;
-        if (spriteCount > 10) {
-            if (spriteNum == 1) {
-                spriteNum = 2;
-            } else if (spriteNum == 2) {
-                spriteNum = 1;
+        if (km.isWPressed() || km.isSPressed() || km.isAPressed() || km.isDPressed()) {
+            //Character orientation
+            if (km.isWPressed())  //up speed units
+            {
+                direction = "back";
             }
-            spriteCount = 0;
+            if (km.isSPressed())  //down speed units
+            {
+                direction = "front";
+            }
+            if (km.isAPressed())  //left speed units
+            {
+                direction = "left";
+            }
+            if (km.isDPressed())  //right speed units
+            {
+                direction = "right";
+            }
+
+            //check for collisions
+            colliding = false;
+            sw.getCollisionDetector().detectTile(this);
+            if (colliding == false) {
+                if (direction.equals("back")) {
+                    yCoord -= speed;  //top left is (0, 0)
+                }
+                if (direction.equals("front")) {
+                    yCoord += speed;
+                }
+                if (direction.equals("left")) {
+                    xCoord -= speed;
+                }
+                if (direction.equals("right")) {
+                    xCoord += speed;
+                }
+            }
+
+            spriteCount++;
+            if (spriteCount > 10) {
+                if (spriteNum == 1) {
+                    spriteNum = 2;
+                } else if (spriteNum == 2) {
+                    spriteNum = 1;
+                }
+                spriteCount = 0;
+            }
         }
     }
 

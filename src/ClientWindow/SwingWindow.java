@@ -1,5 +1,6 @@
 package ClientWindow;
 
+import Characters.CollisionDetector;
 import Characters.Player;
 import Dungeon.TileMapper;
 
@@ -29,6 +30,7 @@ public class SwingWindow extends JPanel implements Runnable {
     Thread gameThread;  //allows the game to run indefinitely
     KeyManager keyManager = new KeyManager();  //allows the program to take key inputs
     TileMapper tileMapper = new TileMapper(this);
+    CollisionDetector collisionDetector = new CollisionDetector(this);
     Player player = new Player(this, keyManager);
 
     /***
@@ -69,6 +71,14 @@ public class SwingWindow extends JPanel implements Runnable {
 
     public int getDUNGEON_ROW() {
         return DUNGEON_ROW;
+    }
+
+    public TileMapper getTileMapper() {
+        return tileMapper;
+    }
+
+    public CollisionDetector getCollisionDetector() {
+        return collisionDetector;
     }
 
     public Player getPlayer() {
