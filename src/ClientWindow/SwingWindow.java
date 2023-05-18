@@ -20,8 +20,8 @@ public class SwingWindow extends JPanel implements Runnable {
     final int SCREEN_HEIGHT = DISPLAYED_TILE_SIZE * SCREEN_TILE_ROWS;    //Vertical resolution (96 * 10 = 960 pixels)
 
     //Dungeon setting
-    final int DUNGEON_COL = 7;
-    final int DUNGEON_ROW = 7;
+    final int DUNGEON_COL = 23;
+    final int DUNGEON_ROW = 23;
     final int DUNGEON_WIDTH = DISPLAYED_TILE_SIZE * DUNGEON_COL;
     final int DUNGEON_HEIGHT = DISPLAYED_TILE_SIZE * DUNGEON_ROW;
 

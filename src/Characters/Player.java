@@ -38,8 +38,8 @@ public class Player extends Entity{
      * Sets the players intial location, speed, and direction
      */
     public void setDefaultValues() {
-        xCoord = sw.getDISPLAYED_TILE_SIZE() * 3;
-        yCoord = sw.getDISPLAYED_TILE_SIZE() * 4;
+        xCoord = sw.getDISPLAYED_TILE_SIZE() * 11;
+        yCoord = sw.getDISPLAYED_TILE_SIZE() * 11;
         speed = 5;
         direction = "front";
     }
