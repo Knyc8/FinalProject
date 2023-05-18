@@ -1,0 +1,21 @@
+5 2 2 2 2 2 3
+5 0 0 0 0 0 3
+5 0 0 0 0 0 3
+5 0 0 0 0 0 3
+5 0 0 0 0 0 3
+5 0 0 0 0 0 3
+9 4 4 4 4 4 8
+-------------------------------
+25x25 map
+
+0 = floor
+1 = background
+--------------
+2 = top wall
+3 = right wall
+4 = bottom wall
+5 = left wall
+6 = top left
+7 = top right
+8 = bottom right
+9 = bottom left

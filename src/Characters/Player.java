@@ -28,7 +28,7 @@ public class Player extends Entity{
         SCREEN_X = sw.getSCREEN_WIDTH()/2 - (sw.getDISPLAYED_TILE_SIZE()/2);
         SCREEN_Y = sw.getSCREEN_HEIGHT()/2 - (sw.getDISPLAYED_TILE_SIZE()/2);
 
-        hitbox = new Rectangle(24, 36, 33, 51);
+        hitbox = new Rectangle(24, 30, 33, 66);
 
         setDefaultValues();
         getPlayerSprite();
@@ -38,8 +38,8 @@ public class Player extends Entity{
      * Sets the players intial location, speed, and direction
      */
     public void setDefaultValues() {
-        xCoord = sw.getDISPLAYED_TILE_SIZE() * 12;
-        yCoord = sw.getDISPLAYED_TILE_SIZE() * 12;
+        xCoord = sw.getDISPLAYED_TILE_SIZE() * 3;
+        yCoord = sw.getDISPLAYED_TILE_SIZE() * 4;
         speed = 5;
         direction = "front";
     }
