@@ -16,7 +16,7 @@ public class TileMapper {
 
     public TileMapper(SwingWindow sw) {
         this.sw = sw;
-        tiles = new Tile[10];  //The array length represents the different types of tiles
+        tiles = new Tile[12];  //The array length represents the different types of tiles
         tileNum = new int[sw.getDUNGEON_ROW()][sw.getDUNGEON_COL()];
 
         loadMapFile("/map_files/map2.txt");
@@ -85,6 +85,12 @@ public class TileMapper {
             tiles[9] = new Tile();
             tiles[9].setImg(ImageIO.read(getClass().getResource("/dungeon_tiles/BLWall.png")));
             tiles[9].setCollisionTrue();
+            tiles[10] = new Tile();
+            tiles[10].setImg(ImageIO.read(getClass().getResource("/dungeon_tiles/TRIWall.png")));
+            tiles[10].setCollisionTrue();
+            tiles[11] = new Tile();
+            tiles[11].setImg(ImageIO.read(getClass().getResource("/dungeon_tiles/TLIWall.png")));
+            tiles[11].setCollisionTrue();
 
         } catch(IOException ex) {
             ex.printStackTrace();
