@@ -64,19 +64,19 @@ public class Player extends Entity{
     public void updateInfo() {
         if (km.isWPressed() || km.isSPressed() || km.isAPressed() || km.isDPressed()) {
             //Character orientation
-            if (km.isWPressed())  //up speed units
+            if (km.isWPressed())
             {
                 direction = "back";
             }
-            if (km.isSPressed())  //down speed units
+            if (km.isSPressed())
             {
                 direction = "front";
             }
-            if (km.isAPressed())  //left speed units
+            if (km.isAPressed())
             {
                 direction = "left";
             }
-            if (km.isDPressed())  //right speed units
+            if (km.isDPressed())
             {
                 direction = "right";
             }
@@ -85,16 +85,16 @@ public class Player extends Entity{
             colliding = false;
             //sw.getCollisionDetector().detectTile(this);
             if (colliding == false) {
-                if (direction.equals("back")) {
+                if (direction.equals("back")) {  //up speed units
                     yCoord -= speed;  //top left is (0, 0)
                 }
-                if (direction.equals("front")) {
+                if (direction.equals("front")) {  //down speed units
                     yCoord += speed;
                 }
-                if (direction.equals("left")) {
+                if (direction.equals("left")) {  //left speed units
                     xCoord -= speed;
                 }
-                if (direction.equals("right")) {
+                if (direction.equals("right")) {  //right speed units
                     xCoord += speed;
                 }
             }
