@@ -28,7 +28,7 @@ public class Player extends Entity{
         SCREEN_X = sw.getSCREEN_WIDTH()/2 - (sw.getDISPLAYED_TILE_SIZE()/2);
         SCREEN_Y = sw.getSCREEN_HEIGHT()/2 - (sw.getDISPLAYED_TILE_SIZE()/2);
 
-        hitbox = new Rectangle(24, 30, 33, 66);
+        hitbox = new Rectangle(24, 30, 30, 66);
 
         setDefaultValues();
         getPlayerSprite();
@@ -83,7 +83,7 @@ public class Player extends Entity{
 
             //check for collisions
             colliding = false;
-            //sw.getCollisionDetector().detectTile(this);
+            sw.getCollisionDetector().detectTile(this);
             if (colliding == false) {
                 if (direction.equals("back")) {  //up speed units
                     yCoord -= speed;  //top left is (0, 0)
@@ -112,8 +112,6 @@ public class Player extends Entity{
     }
 
     public void drawPlayer(Graphics2D graphic2D) {
-//        graphic2D.setColor(Color.black);
-//        graphic2D.fillRect(xCoord, yCoord, sw.getDISPLAYED_TILE_SIZE(), sw.getDISPLAYED_TILE_SIZE());  //for testing character sprites
         BufferedImage image = null;
 
         switch(direction)

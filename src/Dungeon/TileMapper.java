@@ -80,6 +80,7 @@ public class TileMapper {
         try {
             tiles[index] = new Tile();
             tiles[index].setImg(ImageIO.read(getClass().getResource("/dungeon_tiles/" + pathName + ".png")));
+            tiles[index].setPathName(pathName);
             tiles[index].setCollision(collision);
 
         } catch(IOException ex) {
