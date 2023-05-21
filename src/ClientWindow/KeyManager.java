@@ -4,7 +4,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyManager implements KeyListener {
+    SwingWindow sw;
     private boolean wPressed, sPressed, aPressed, dPressed;
+    public KeyManager(SwingWindow sw)
+    {
+        this.sw = sw;
+    }
 
     public boolean isWPressed() {
         return wPressed;
@@ -29,16 +34,32 @@ public class KeyManager implements KeyListener {
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();  //gets user keystroke
         if (keyCode == KeyEvent.VK_W) {
-            wPressed = true;
+            if (sw.gameState != sw.PAUSED_STATE) {  //prevents inputs when paused
+                wPressed = true;
+            }
         }
         if (keyCode == KeyEvent.VK_S) {
-            sPressed = true;
+            if (sw.gameState != sw.PAUSED_STATE) {  //prevents inputs when paused
+                sPressed = true;
+            }
         }
         if (keyCode == KeyEvent.VK_A) {
-            aPressed = true;
+            if (sw.gameState != sw.PAUSED_STATE) {  //prevents inputs when paused
+                aPressed = true;
+            }
         }
         if (keyCode == KeyEvent.VK_D) {
-            dPressed = true;
+            if (sw.gameState != sw.PAUSED_STATE) {  //prevents inputs when paused
+                dPressed = true;
+            }
+        }
+        if (keyCode == KeyEvent.VK_ESCAPE) {
+            if (sw.gameState == sw.PLAY_STATE) {  //prevents inputs when paused
+                sw.gameState = sw.PAUSED_STATE;
+            }
+            else if (sw.gameState == sw.PAUSED_STATE) {
+                sw.gameState = sw.PLAY_STATE;
+            }
         }
     }
 

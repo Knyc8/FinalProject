@@ -25,14 +25,22 @@ public class SwingWindow extends JPanel implements Runnable {
     final int DUNGEON_WIDTH = DISPLAYED_TILE_SIZE * DUNGEON_COL;
     final int DUNGEON_HEIGHT = DISPLAYED_TILE_SIZE * DUNGEON_ROW;
 
-    //Game running
+    //Game Setup
     int framesPerSecond = 60;  //screen refreshes 60 times every second
     Thread gameThread;  //allows the game to run indefinitely
     OnScreenUI ui = new OnScreenUI(this);
-    KeyManager keyManager = new KeyManager();  //allows the program to take key inputs
+    KeyManager keyManager = new KeyManager(this);  //allows the program to take key inputs
     TileMapper tileMapper = new TileMapper(this);
     CollisionDetector collisionDetector = new CollisionDetector(this);
+
+    //Entity settings
     Player player = new Player(this, keyManager);
+
+    //Game Running State
+    public int gameState = 1;
+    public final int MENU_STATE = 0;
+    public final int PLAY_STATE = 1;
+    public final int PAUSED_STATE = 2;
 
     /***
      * Initializes the dimensions of the screen and client inputs
@@ -125,8 +133,10 @@ public class SwingWindow extends JPanel implements Runnable {
     }
 
     public void update() {
-        //Character movement
-        player.updateInfo();
+        if (gameState == PLAY_STATE) {
+            //Character movement
+            player.updateInfo();
+        }
     }
 
     /***
