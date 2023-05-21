@@ -28,6 +28,7 @@ public class SwingWindow extends JPanel implements Runnable {
     //Game running
     int framesPerSecond = 60;  //screen refreshes 60 times every second
     Thread gameThread;  //allows the game to run indefinitely
+    OnScreenUI ui = new OnScreenUI(this);
     KeyManager keyManager = new KeyManager();  //allows the program to take key inputs
     TileMapper tileMapper = new TileMapper(this);
     CollisionDetector collisionDetector = new CollisionDetector(this);
@@ -138,6 +139,7 @@ public class SwingWindow extends JPanel implements Runnable {
         Graphics2D graphic2D = (Graphics2D) graphic;  //Casts graphics as a Graphics2D object, so it can be drawn on a 2D plane
         tileMapper.drawTiles(graphic2D);  //draws background before player so it's behind the player
         player.drawPlayer((Graphics2D) graphic);  //draws player on the screen
+        ui.draw(graphic2D);
         graphic2D.dispose();  //Essentially removes the old window so that a new window can be drawn
     }
 }

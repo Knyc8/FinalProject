@@ -52,34 +52,34 @@ public class TileMapper {
      * This method assigns a tile image to a tile object within the tiles array
      */
     public void getTileImg() {
-        assignTileImg(0, "/dungeon_tiles/00.png", false);
+        assignTileImg(0, "00", false);
 
         //floor 01-09
-        assignTileImg(1, "/dungeon_tiles/01.png", false);
-        assignTileImg(2, "/dungeon_tiles/02.png", false);
-        assignTileImg(3, "/dungeon_tiles/03.png", false);
-        assignTileImg(4, "/dungeon_tiles/04.png", false);
-        assignTileImg(5, "/dungeon_tiles/05.png", false);
-        assignTileImg(6, "/dungeon_tiles/06.png", false);
-        assignTileImg(7, "/dungeon_tiles/07.png", false);
-        assignTileImg(8, "/dungeon_tiles/08.png", false);
-        assignTileImg(9, "/dungeon_tiles/09.png", false);
+        assignTileImg(1, "01", false);
+        assignTileImg(2, "02", false);
+        assignTileImg(3, "03", false);
+        assignTileImg(4, "04", false);
+        assignTileImg(5, "05", false);
+        assignTileImg(6, "06", false);
+        assignTileImg(7, "07", false);
+        assignTileImg(8, "08", false);
+        assignTileImg(9, "09", false);
 
         //wall 10-17
-        assignTileImg(10, "/dungeon_tiles/10.png", true);
-        assignTileImg(11, "/dungeon_tiles/11.png", true);
-        assignTileImg(12, "/dungeon_tiles/12.png", true);
-        assignTileImg(13, "/dungeon_tiles/13.png", true);
-        assignTileImg(14, "/dungeon_tiles/14.png", true);
-        assignTileImg(15, "/dungeon_tiles/15.png", true);
-        assignTileImg(16, "/dungeon_tiles/16.png", true);
-        assignTileImg(17, "/dungeon_tiles/17.png", true);
+        assignTileImg(10, "10", true);
+        assignTileImg(11, "11", true);
+        assignTileImg(12, "12", true);
+        assignTileImg(13, "13", true);
+        assignTileImg(14, "14", true);
+        assignTileImg(15, "15", true);
+        assignTileImg(16, "16", true);
+        assignTileImg(17, "17", true);
     }
 
     public void assignTileImg(int index, String pathName, Boolean collision) {
         try {
             tiles[index] = new Tile();
-            tiles[index].setImg(ImageIO.read(getClass().getResource(pathName)));
+            tiles[index].setImg(ImageIO.read(getClass().getResource("/dungeon_tiles/" + pathName + ".png")));
             tiles[index].setCollision(collision);
 
         } catch(IOException ex) {
