@@ -9,9 +9,9 @@ public class Tile {
     private BufferedImage img;
     public boolean collision = false;
 
-    public void setCollisionTrue()
+    public void setCollision(Boolean c)
     {
-        collision = true;
+        collision = c;
     }
 
     public void setImg(BufferedImage bi)

@@ -16,10 +16,10 @@ public class TileMapper {
 
     public TileMapper(SwingWindow sw) {
         this.sw = sw;
-        tiles = new Tile[12];  //The array length represents the different types of tiles
+        tiles = new Tile[50];  //The array length represents the different types of tiles
         tileNum = new int[sw.getDUNGEON_ROW()][sw.getDUNGEON_COL()];
 
-        loadMapFile("/map_files/map2.txt");
+        loadMapFile("/map_files/map1.txt");
         getTileImg();
     }
 
@@ -52,45 +52,35 @@ public class TileMapper {
      * This method assigns a tile image to a tile object within the tiles array
      */
     public void getTileImg() {
-        try {
-            //floor
-            tiles[0] = new Tile();
-            tiles[0].setImg(ImageIO.read(getClass().getResource("/dungeon_tiles/floor.png")));
-            tiles[1] = new Tile();
-            tiles[1].setImg(ImageIO.read(getClass().getResource("/dungeon_tiles/background.png")));
-            tiles[1].setCollisionTrue();
+        assignTileImg(0, "/dungeon_tiles/00.png", false);
 
-            //walls
-            tiles[2] = new Tile();
-            tiles[2].setImg(ImageIO.read(getClass().getResource("/dungeon_tiles/WallTop.png")));
-            tiles[2].setCollisionTrue();
-            tiles[3] = new Tile();
-            tiles[3].setImg(ImageIO.read(getClass().getResource("/dungeon_tiles/WallRight.png")));
-            tiles[3].setCollisionTrue();
-            tiles[4] = new Tile();
-            tiles[4].setImg(ImageIO.read(getClass().getResource("/dungeon_tiles/WallBottom.png")));
-            tiles[4].setCollisionTrue();
-            tiles[5] = new Tile();
-            tiles[5].setImg(ImageIO.read(getClass().getResource("/dungeon_tiles/WallLeft.png")));
-            tiles[5].setCollisionTrue();
-            tiles[6] = new Tile();
-            tiles[6].setImg(ImageIO.read(getClass().getResource("/dungeon_tiles/TLWall.png")));
-            tiles[6].setCollisionTrue();
-            tiles[7] = new Tile();
-            tiles[7].setImg(ImageIO.read(getClass().getResource("/dungeon_tiles/TRWall.png")));
-            tiles[7].setCollisionTrue();
-            tiles[8] = new Tile();
-            tiles[8].setImg(ImageIO.read(getClass().getResource("/dungeon_tiles/BRWall.png")));
-            tiles[8].setCollisionTrue();
-            tiles[9] = new Tile();
-            tiles[9].setImg(ImageIO.read(getClass().getResource("/dungeon_tiles/BLWall.png")));
-            tiles[9].setCollisionTrue();
-            tiles[10] = new Tile();
-            tiles[10].setImg(ImageIO.read(getClass().getResource("/dungeon_tiles/TRIWall.png")));
-            tiles[10].setCollisionTrue();
-            tiles[11] = new Tile();
-            tiles[11].setImg(ImageIO.read(getClass().getResource("/dungeon_tiles/TLIWall.png")));
-            tiles[11].setCollisionTrue();
+        //floor 01-09
+        assignTileImg(1, "/dungeon_tiles/01.png", false);
+        assignTileImg(2, "/dungeon_tiles/02.png", false);
+        assignTileImg(3, "/dungeon_tiles/03.png", false);
+        assignTileImg(4, "/dungeon_tiles/04.png", false);
+        assignTileImg(5, "/dungeon_tiles/05.png", false);
+        assignTileImg(6, "/dungeon_tiles/06.png", false);
+        assignTileImg(7, "/dungeon_tiles/07.png", false);
+        assignTileImg(8, "/dungeon_tiles/08.png", false);
+        assignTileImg(9, "/dungeon_tiles/09.png", false);
+
+        //wall 10-17
+        assignTileImg(10, "/dungeon_tiles/10.png", true);
+        assignTileImg(11, "/dungeon_tiles/11.png", true);
+        assignTileImg(12, "/dungeon_tiles/12.png", true);
+        assignTileImg(13, "/dungeon_tiles/13.png", true);
+        assignTileImg(14, "/dungeon_tiles/14.png", true);
+        assignTileImg(15, "/dungeon_tiles/15.png", true);
+        assignTileImg(16, "/dungeon_tiles/16.png", true);
+        assignTileImg(17, "/dungeon_tiles/17.png", true);
+    }
+
+    public void assignTileImg(int index, String pathName, Boolean collision) {
+        try {
+            tiles[index] = new Tile();
+            tiles[index].setImg(ImageIO.read(getClass().getResource(pathName)));
+            tiles[index].setCollision(collision);
 
         } catch(IOException ex) {
             ex.printStackTrace();
