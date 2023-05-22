@@ -33,31 +33,61 @@ public class KeyManager implements KeyListener {
     @Override
     public void keyPressed(KeyEvent e) {
         int keyCode = e.getKeyCode();  //gets user keystroke
-        if (keyCode == KeyEvent.VK_W) {
-            if (sw.gameState != sw.PAUSED_STATE) {  //prevents inputs when paused
+
+        //TITLE SCREEN STATE
+        if (sw.gameState == sw.TITLE_SCREEN_STATE)
+        {
+            if (keyCode == KeyEvent.VK_W || keyCode == KeyEvent.VK_UP) {
+                sw.ui.optionNum--;
+                if (sw.ui.optionNum < 0)
+                {
+                    sw.ui.optionNum = 2;
+                }
+            }
+            if (keyCode == KeyEvent.VK_S || keyCode == KeyEvent.VK_DOWN) {
+                sw.ui.optionNum++;
+                if (sw.ui.optionNum > 2)
+                {
+                    sw.ui.optionNum = 0;
+                }
+            }
+            if (keyCode == KeyEvent.VK_SPACE) {
+                if (sw.ui.optionNum == 0)  //start game
+                {
+                    sw.gameState = sw.PLAY_STATE;
+                }
+                else if (sw.ui.optionNum == 1)  //load game
+                {
+                    System.out.println("Load games placeholder");  //for testing
+                }
+                else {
+                    System.exit(0);  //exit game
+                }
+            }
+        }
+
+        //PLAY STATE
+        if (sw.gameState != sw.PAUSED_STATE) {  //prevents inputs when paused or in title screen
+            if (keyCode == KeyEvent.VK_W) {
                 wPressed = true;
             }
-        }
-        if (keyCode == KeyEvent.VK_S) {
-            if (sw.gameState != sw.PAUSED_STATE) {  //prevents inputs when paused
+            if (keyCode == KeyEvent.VK_S) {
                 sPressed = true;
             }
-        }
-        if (keyCode == KeyEvent.VK_A) {
-            if (sw.gameState != sw.PAUSED_STATE) {  //prevents inputs when paused
+            if (keyCode == KeyEvent.VK_A) {
                 aPressed = true;
             }
-        }
-        if (keyCode == KeyEvent.VK_D) {
-            if (sw.gameState != sw.PAUSED_STATE) {  //prevents inputs when paused
+            if (keyCode == KeyEvent.VK_D) {
                 dPressed = true;
             }
-        }
-        if (keyCode == KeyEvent.VK_ESCAPE) {
-            if (sw.gameState == sw.PLAY_STATE) {  //prevents inputs when paused
+            if (keyCode == KeyEvent.VK_ESCAPE) {
                 sw.gameState = sw.PAUSED_STATE;
             }
-            else if (sw.gameState == sw.PAUSED_STATE) {
+        }
+
+        //PAUSED STATE
+        if (sw.gameState == sw.PAUSED_STATE) {
+            if (keyCode == KeyEvent.VK_ESCAPE) {
                 sw.gameState = sw.PLAY_STATE;
             }
         }

@@ -37,8 +37,8 @@ public class SwingWindow extends JPanel implements Runnable {
     Player player = new Player(this, keyManager);
 
     //Game Running State
-    public int gameState = 1;
-    public final int MENU_STATE = 0;
+    public int gameState;
+    public final int TITLE_SCREEN_STATE = 0;
     public final int PLAY_STATE = 1;
     public final int PAUSED_STATE = 2;
 
@@ -54,6 +54,13 @@ public class SwingWindow extends JPanel implements Runnable {
         setFocusable(true);  //makes the program focus for key inputs
     }
 
+    /***
+     * Sets up the title screen, etc. when the game is started
+     * @return
+     */
+    public void setUp() {
+        gameState = TITLE_SCREEN_STATE;
+    }
     public int getDISPLAYED_TILE_SIZE() {
         return DISPLAYED_TILE_SIZE;
     }
@@ -147,9 +154,21 @@ public class SwingWindow extends JPanel implements Runnable {
     public void paintComponent(Graphics graphic) {
         super.paintComponent(graphic);
         Graphics2D graphic2D = (Graphics2D) graphic;  //Casts graphics as a Graphics2D object, so it can be drawn on a 2D plane
-        tileMapper.drawTiles(graphic2D);  //draws background before player so it's behind the player
-        player.drawPlayer((Graphics2D) graphic);  //draws player on the screen
-        ui.draw(graphic2D);
+
+        //Title Screen
+        if (gameState == TITLE_SCREEN_STATE) {
+            ui.draw(graphic2D);
+        }
+        else {
+            //Dungeon map
+            tileMapper.drawTiles(graphic2D);  //draws background before player so it's behind the player
+
+            //Player
+            player.drawPlayer((Graphics2D) graphic);  //draws player on the screen
+
+            //Player ui
+            ui.draw(graphic2D);
+        }
         graphic2D.dispose();  //Essentially removes the old window so that a new window can be drawn
     }
 }

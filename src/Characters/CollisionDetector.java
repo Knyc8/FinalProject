@@ -30,8 +30,6 @@ public class CollisionDetector {
                 hitBoxBottomSide = (hitBoxBottomY + entity.speed)/sw.getDISPLAYED_TILE_SIZE();
                 tile1 = sw.getTileMapper().tileNum[hitBoxBottomSide][hitBoxLeftSide];  //bottom left corner
                 tile2 = sw.getTileMapper().tileNum[hitBoxBottomSide][hitBoxRightSide];  //bottom right corner
-                System.out.println("1: " + (sw.getTileMapper().tiles[tile1].collision == true) + sw.getTileMapper().tiles[tile1].getPathName());  //for testing
-                System.out.println("2: " + (sw.getTileMapper().tiles[tile2].collision == true) + sw.getTileMapper().tiles[tile2].getPathName());
                 if (sw.getTileMapper().tiles[tile1].collision == true || sw.getTileMapper().tiles[tile2].collision == true)
                 {
                     entity.colliding = true;
@@ -41,8 +39,6 @@ public class CollisionDetector {
                 hitBoxTopSide = (hitBoxTopY - entity.speed)/sw.getDISPLAYED_TILE_SIZE();
                 tile1 = sw.getTileMapper().tileNum[hitBoxTopSide][hitBoxLeftSide];  //top left corner
                 tile2 = sw.getTileMapper().tileNum[hitBoxTopSide][hitBoxRightSide];  //top right corner
-                System.out.println("1: " + (sw.getTileMapper().tiles[tile1].collision == true) + sw.getTileMapper().tiles[tile1].getPathName());  //for testing
-                System.out.println("2: " + (sw.getTileMapper().tiles[tile2].collision == true) + sw.getTileMapper().tiles[tile2].getPathName());
                 if (sw.getTileMapper().tiles[tile1].collision == true || sw.getTileMapper().tiles[tile2].collision == true)
                 {
                     entity.colliding = true;
@@ -52,8 +48,6 @@ public class CollisionDetector {
                 hitBoxLeftSide = (hitBoxLeftX - entity.speed)/sw.getDISPLAYED_TILE_SIZE();
                 tile1 = sw.getTileMapper().tileNum[hitBoxTopSide][hitBoxLeftSide];  //top left corner
                 tile2 = sw.getTileMapper().tileNum[hitBoxBottomSide][hitBoxLeftSide];  //bottom left corner
-                System.out.println("1: " + (sw.getTileMapper().tiles[tile1].collision == true) + sw.getTileMapper().tiles[tile1].getPathName());  //for testing
-                System.out.println("2: " + (sw.getTileMapper().tiles[tile2].collision == true) + sw.getTileMapper().tiles[tile2].getPathName());
                 if (sw.getTileMapper().tiles[tile1].collision == true || sw.getTileMapper().tiles[tile2].collision == true)
                 {
                     entity.colliding = true;
@@ -63,8 +57,6 @@ public class CollisionDetector {
                 hitBoxRightSide = (hitBoxRightX + entity.speed)/sw.getDISPLAYED_TILE_SIZE();
                 tile1 = sw.getTileMapper().tileNum[hitBoxTopSide][hitBoxRightSide];  //top right corner
                 tile2 = sw.getTileMapper().tileNum[hitBoxBottomSide][hitBoxRightSide];  //bottom right corner
-                System.out.println("1: " + (sw.getTileMapper().tiles[tile1].collision == true) + sw.getTileMapper().tiles[tile1].getPathName());  //for testing
-                System.out.println("2: " + (sw.getTileMapper().tiles[tile2].collision == true) + sw.getTileMapper().tiles[tile2].getPathName());
                 if (sw.getTileMapper().tiles[tile1].collision == true || sw.getTileMapper().tiles[tile2].collision == true)
                 {
                     entity.colliding = true;

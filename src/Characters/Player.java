@@ -40,7 +40,7 @@ public class Player extends Entity{
     public void setDefaultValues() {
         xCoord = sw.getDISPLAYED_TILE_SIZE() * 7;
         yCoord = sw.getDISPLAYED_TILE_SIZE() * 4;
-        speed = 5;
+        speed = 25;
         direction = "front";
     }
 
