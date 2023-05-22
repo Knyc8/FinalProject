@@ -80,14 +80,14 @@ public class KeyManager implements KeyListener {
             if (keyCode == KeyEvent.VK_D) {
                 dPressed = true;
             }
-            if (keyCode == KeyEvent.VK_ESCAPE) {
-                sw.gameState = sw.PAUSED_STATE;
-            }
         }
 
-        //PAUSED STATE
-        if (sw.gameState == sw.PAUSED_STATE) {
-            if (keyCode == KeyEvent.VK_ESCAPE) {
+        if (keyCode == KeyEvent.VK_ESCAPE) {
+            if (sw.gameState == sw.PLAY_STATE) {
+                sw.gameState = sw.PAUSED_STATE;
+                System.out.println(sw.gameState);
+            }
+            else if (sw.gameState == sw.PAUSED_STATE) {
                 sw.gameState = sw.PLAY_STATE;
             }
         }
