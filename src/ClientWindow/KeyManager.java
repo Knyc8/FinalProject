@@ -55,6 +55,7 @@ public class KeyManager implements KeyListener {
                 if (sw.ui.optionNum == 0)  //start game
                 {
                     sw.gameState = sw.PLAY_STATE;
+                    sw.player.setDefaultValues();
                 }
                 else if (sw.ui.optionNum == 1)  //load game
                 {
@@ -82,13 +83,40 @@ public class KeyManager implements KeyListener {
             }
         }
 
+        //PAUSED STATE
+        if (sw.gameState == sw.PAUSED_STATE) {
+            if (keyCode == KeyEvent.VK_W || keyCode == KeyEvent.VK_UP) {
+                sw.ui.optionNum--;
+                if (sw.ui.optionNum < 0)
+                {
+                    sw.ui.optionNum = 2;
+                }
+            }
+            if (keyCode == KeyEvent.VK_S || keyCode == KeyEvent.VK_DOWN) {
+                sw.ui.optionNum++;
+                if (sw.ui.optionNum > 2)
+                {
+                    sw.ui.optionNum = 0;
+                }
+            }
+            if (keyCode == KeyEvent.VK_SPACE) {
+                if (sw.ui.optionNum == 0)  //start game
+                {
+                    sw.gameState = sw.TITLE_SCREEN_STATE;
+                }
+                else if (sw.ui.optionNum == 1)  //load game
+                {
+                    /*Code for saving game*/
+                }
+                else {
+                    sw.gameState = sw.PLAY_STATE;
+                }
+            }
+        }
+
         if (keyCode == KeyEvent.VK_ESCAPE) {
             if (sw.gameState == sw.PLAY_STATE) {
                 sw.gameState = sw.PAUSED_STATE;
-                System.out.println(sw.gameState);
-            }
-            else if (sw.gameState == sw.PAUSED_STATE) {
-                sw.gameState = sw.PLAY_STATE;
             }
         }
     }

@@ -130,7 +130,40 @@ public class OnScreenUI {
         String displayText = "PAUSED";
         int length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();  //centers the text
         int x = sw.getSCREEN_WIDTH()/2 - length/2;
+        int y = sw.getSCREEN_HEIGHT()/3;
 
-        graphics2D.drawString(displayText, x, sw.getSCREEN_HEIGHT()/2);
+        graphics2D.drawString(displayText, x, y);
+
+        //OPTIONS MENU
+        graphics2D.setFont(new Font("Arial", font.getStyle(), 45));
+        displayText = "Return to Title Screen";
+        length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();  //centers the text
+        x = sw.getSCREEN_WIDTH()/2 - length/2;
+        y = sw.getSCREEN_HEIGHT()/2;
+        graphics2D.drawString(displayText, x, y);
+        if (optionNum == 0)
+        {
+            graphics2D.drawString(">", x-sw.getDISPLAYED_TILE_SIZE()/2, y);
+        }
+
+        displayText = "Save Game";
+        length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();  //centers the text
+        x = sw.getSCREEN_WIDTH()/2 - length/2;
+        y = sw.getSCREEN_HEIGHT()/2 + sw.getDISPLAYED_TILE_SIZE();
+        graphics2D.drawString(displayText, x, y);
+        if (optionNum == 1)
+        {
+            graphics2D.drawString(">", x-sw.getDISPLAYED_TILE_SIZE()/2, y);
+        }
+
+        displayText = "Resume";
+        length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();  //centers the text
+        x = sw.getSCREEN_WIDTH()/2 - length/2;
+        y = sw.getSCREEN_HEIGHT()/2 + sw.getDISPLAYED_TILE_SIZE()*2;
+        graphics2D.drawString(displayText, x, y);
+        if (optionNum == 2)
+        {
+            graphics2D.drawString(">", x-sw.getDISPLAYED_TILE_SIZE()/2, y);
+        }
     }
 }
