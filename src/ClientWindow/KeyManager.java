@@ -37,14 +37,14 @@ public class KeyManager implements KeyListener {
         //TITLE SCREEN STATE
         if (sw.gameState == sw.TITLE_SCREEN_STATE)
         {
-            if (keyCode == KeyEvent.VK_W || keyCode == KeyEvent.VK_UP) {
+            if (keyCode == KeyEvent.VK_A || keyCode == KeyEvent.VK_LEFT) {
                 sw.ui.optionNum--;
                 if (sw.ui.optionNum < 0)
                 {
                     sw.ui.optionNum = 2;
                 }
             }
-            if (keyCode == KeyEvent.VK_S || keyCode == KeyEvent.VK_DOWN) {
+            if (keyCode == KeyEvent.VK_D || keyCode == KeyEvent.VK_RIGHT) {
                 sw.ui.optionNum++;
                 if (sw.ui.optionNum > 2)
                 {
