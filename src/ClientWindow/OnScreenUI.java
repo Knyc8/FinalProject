@@ -3,6 +3,7 @@ package ClientWindow;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.awt.image.RescaleOp;
 import java.io.IOException;
 
 public class OnScreenUI {
@@ -54,8 +55,19 @@ public class OnScreenUI {
      */
     private void drawTitleScreen(Graphics2D graphics2D) {
         //Background
-        graphics2D.setColor(Color.darkGray);  //50% opacity
+        graphics2D.setColor(Color.black);
         graphics2D.fillRect(0,0, sw.SCREEN_WIDTH, sw.SCREEN_HEIGHT);
+
+        //Border
+        float thickness = sw.DISPLAYED_TILE_SIZE/4f;
+        Stroke oldStroke = graphics2D.getStroke();
+        graphics2D.setStroke(new BasicStroke(thickness));
+        graphics2D.setColor(Color.white);
+        graphics2D.drawRect(0, 0, sw.getSCREEN_WIDTH(), sw.SCREEN_HEIGHT);
+        graphics2D.setStroke(oldStroke);
+        graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
+
+        //Doors
         int door1X = sw.SCREEN_WIDTH/4 - (sw.getDISPLAYED_TILE_SIZE()*15)/4;
         int door1Y = (sw.getDISPLAYED_TILE_SIZE()*5)/2;
         graphics2D.drawImage(DFIcon, door1X, door1Y, sw.getDISPLAYED_TILE_SIZE()*5, sw.getDISPLAYED_TILE_SIZE()*5, null);  //1st door
@@ -66,6 +78,7 @@ public class OnScreenUI {
         int door3Y = (sw.getDISPLAYED_TILE_SIZE()*5)/2;
         graphics2D.drawImage(DFIcon, door3X, door3Y, sw.getDISPLAYED_TILE_SIZE()*5, sw.getDISPLAYED_TILE_SIZE()*5, null);  //3rd door
 
+        graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
         //TITLE
         graphics2D.setFont(new Font("Arial", font.getStyle(), 100));
         String displayText = "2D Dungeon Game";
@@ -84,10 +97,15 @@ public class OnScreenUI {
         x = sw.getSCREEN_WIDTH()/2 - length/2;
         x -= sw.getSCREEN_WIDTH()/3;
         y = sw.getDISPLAYED_TILE_SIZE()*8 - sw.getDISPLAYED_TILE_SIZE()/4;
+        graphics2D.setColor(new Color(255,255,255,127));
         graphics2D.drawString(displayText, x, y);
         if (optionNum == 0)
         {
            // graphics2D.drawString(">", x-sw.getDISPLAYED_TILE_SIZE()/2, y);
+            graphics2D.setColor(Color.white);
+            graphics2D.drawString(displayText, x, y);
+            graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+            graphics2D.drawImage(DFIcon, door1X, door1Y, sw.getDISPLAYED_TILE_SIZE()*5, sw.getDISPLAYED_TILE_SIZE()*5, null);  //1st door
             x = (door1X + sw.getDISPLAYED_TILE_SIZE()*5)/2 - (sw.getDISPLAYED_TILE_SIZE()*4)/3;
             y = (door1Y + sw.getDISPLAYED_TILE_SIZE()*5)/2;
             graphics2D.drawImage(sw.player.front3, x, y, sw.getDISPLAYED_TILE_SIZE()*3, sw.getDISPLAYED_TILE_SIZE()*3,null);
@@ -97,10 +115,15 @@ public class OnScreenUI {
         length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();  //centers the text
         x = sw.getSCREEN_WIDTH()/2 - length/2;
         y = sw.getDISPLAYED_TILE_SIZE()*8 - sw.getDISPLAYED_TILE_SIZE()/4;
+        graphics2D.setColor(new Color(255,255,255,127));
         graphics2D.drawString(displayText, x, y);
         if (optionNum == 1)
         {
             //graphics2D.drawString(">", x-sw.getDISPLAYED_TILE_SIZE()/2, y);
+            graphics2D.setColor(Color.white);
+            graphics2D.drawString(displayText, x, y);
+            graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+            graphics2D.drawImage(DFIcon, door2X, door2Y, sw.getDISPLAYED_TILE_SIZE()*5, sw.getDISPLAYED_TILE_SIZE()*5, null);  //2nd door
             x = sw.getSCREEN_WIDTH()/2 - (sw.DISPLAYED_TILE_SIZE*3)/2;
             y = (door2Y + sw.getDISPLAYED_TILE_SIZE()*5)/2;
             graphics2D.drawImage(sw.player.front3, x, y, sw.getDISPLAYED_TILE_SIZE()*3, sw.getDISPLAYED_TILE_SIZE()*3,null);
@@ -111,10 +134,15 @@ public class OnScreenUI {
         x = sw.getSCREEN_WIDTH()/2 - length/2;
         x += sw.getSCREEN_WIDTH()/3;
         y = sw.getDISPLAYED_TILE_SIZE()*8 - sw.getDISPLAYED_TILE_SIZE()/4;
+        graphics2D.setColor(new Color(255,255,255,127));
         graphics2D.drawString(displayText, x, y);
         if (optionNum == 2)
         {
             //graphics2D.drawString(">", x-sw.getDISPLAYED_TILE_SIZE()/2, y);
+            graphics2D.setColor(Color.white);
+            graphics2D.drawString(displayText, x, y);
+            graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+            graphics2D.drawImage(DFIcon, door3X, door3Y, sw.getDISPLAYED_TILE_SIZE()*5, sw.getDISPLAYED_TILE_SIZE()*5, null);  //3rd door
             x = door3X + (door1X + sw.getDISPLAYED_TILE_SIZE()*3)/2 - (sw.getDISPLAYED_TILE_SIZE()*7)/12;
             y = (door3Y + sw.getDISPLAYED_TILE_SIZE()*5)/2;
             graphics2D.drawImage(sw.player.front3, x, y, sw.getDISPLAYED_TILE_SIZE()*3, sw.getDISPLAYED_TILE_SIZE()*3,null);
@@ -155,39 +183,42 @@ public class OnScreenUI {
         length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();  //centers the text
         x = sw.getSCREEN_WIDTH()/2 - length/2;
         y = sw.getSCREEN_HEIGHT()/2;
+        graphics2D.setColor(new Color(255,255,255,127));
         graphics2D.drawString(displayText, x, y);
         if (optionNum == 0)
         {
-            graphics2D.setColor(new Color(255,255,255,127));
+            graphics2D.setColor(Color.white);
+            graphics2D.drawString(displayText, x, y);
             graphics2D.fillOval(x-sw.getDISPLAYED_TILE_SIZE()/2 - (45/4)-1, y-(40), 45, 45);
             graphics2D.drawImage(sw.player.front3, x-sw.getDISPLAYED_TILE_SIZE()/2 - (45/4), y-(39), 45, 45, null);
-            graphics2D.setColor(new Color(255,255,255));
         }
 
         displayText = "Save Game";
         length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();  //centers the text
         x = sw.getSCREEN_WIDTH()/2 - length/2;
         y = sw.getSCREEN_HEIGHT()/2 + sw.getDISPLAYED_TILE_SIZE();
+        graphics2D.setColor(new Color(255,255,255,127));
         graphics2D.drawString(displayText, x, y);
         if (optionNum == 1)
         {
-            graphics2D.setColor(new Color(255,255,255,127));
+            graphics2D.setColor(Color.white);
+            graphics2D.drawString(displayText, x, y);
             graphics2D.fillOval(x-sw.getDISPLAYED_TILE_SIZE()/2 - (45/4)-1, y-(40), 45, 45);
             graphics2D.drawImage(sw.player.front3, x-sw.getDISPLAYED_TILE_SIZE()/2 - (45/4), y-(39), 45, 45, null);
-            graphics2D.setColor(new Color(255,255,255));
         }
 
         displayText = "Resume";
         length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();  //centers the text
         x = sw.getSCREEN_WIDTH()/2 - length/2;
         y = sw.getSCREEN_HEIGHT()/2 + sw.getDISPLAYED_TILE_SIZE()*2;
+        graphics2D.setColor(new Color(255,255,255,127));
         graphics2D.drawString(displayText, x, y);
         if (optionNum == 2)
         {
-            graphics2D.setColor(new Color(255,255,255,127));
+            graphics2D.setColor(Color.white);
+            graphics2D.drawString(displayText, x, y);
             graphics2D.fillOval(x-sw.getDISPLAYED_TILE_SIZE()/2 - (45/4)-1, y-(40), 45, 45);
             graphics2D.drawImage(sw.player.front3, x-sw.getDISPLAYED_TILE_SIZE()/2 - (45/4), y-(39), 45, 45, null);
-            graphics2D.setColor(new Color(255,255,255));
         }
     }
 }
