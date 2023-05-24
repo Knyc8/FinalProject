@@ -42,6 +42,9 @@ public class Player extends Entity{
         yCoord = sw.getDISPLAYED_TILE_SIZE() * 4;
         speed = 25;
         direction = "front";
+
+        startHp = 3;
+        hp = startHp;
     }
 
     public void getPlayerSprite() {

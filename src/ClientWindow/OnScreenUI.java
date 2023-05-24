@@ -9,7 +9,7 @@ import java.io.IOException;
 public class OnScreenUI {
     SwingWindow sw;
     Font font;
-    BufferedImage DFIcon, Wall;
+    BufferedImage DFIcon, Wall, heart;
     int optionNum = 0;
 
     public OnScreenUI(SwingWindow sw)
@@ -20,6 +20,7 @@ public class OnScreenUI {
         try {
             DFIcon = ImageIO.read(getClass().getResource("/icons/Dungeon_Floor_Icon.png"));
             Wall = ImageIO.read(getClass().getResource("/icons/Wall.png"));
+            heart = ImageIO.read(getClass().getResource("/icons/heart.png"));
 
         } catch(IOException ex) {
             ex.printStackTrace();
@@ -160,6 +161,11 @@ public class OnScreenUI {
      * @param graphics2D
      */
     private void drawPlayUI(Graphics2D graphics2D) {
+        int xheart  = sw.DISPLAYED_TILE_SIZE/2;
+        for (int i = 0; i < sw.player.hp; i++) {
+            graphics2D.drawImage(heart, xheart, 15, sw.getDISPLAYED_TILE_SIZE(), sw.getDISPLAYED_TILE_SIZE(), null);
+            xheart += sw.DISPLAYED_TILE_SIZE;
+        }
         graphics2D.setFont(font);
         graphics2D.drawImage(DFIcon, sw.SCREEN_WIDTH-(sw.getDISPLAYED_TILE_SIZE() +15), 15, sw.getDISPLAYED_TILE_SIZE(), sw.getDISPLAYED_TILE_SIZE(), null);
         graphics2D.drawString("1", sw.SCREEN_WIDTH - 73, 80);
