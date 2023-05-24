@@ -51,7 +51,7 @@ public class KeyManager implements KeyListener {
                     sw.ui.optionNum = 0;
                 }
             }
-            if (keyCode == KeyEvent.VK_ENTER) {
+            if (keyCode == KeyEvent.VK_ENTER || keyCode == KeyEvent.VK_SPACE) {
                 if (sw.ui.optionNum == 0)  //start game
                 {
                     sw.gameState = sw.PLAY_STATE;
@@ -99,7 +99,7 @@ public class KeyManager implements KeyListener {
                     sw.ui.optionNum = 0;
                 }
             }
-            if (keyCode == KeyEvent.VK_ENTER) {
+            if (keyCode == KeyEvent.VK_ENTER || keyCode == KeyEvent.VK_SPACE) {
                 if (sw.ui.optionNum == 0)  //start game
                 {
                     sw.gameState = sw.TITLE_SCREEN_STATE;

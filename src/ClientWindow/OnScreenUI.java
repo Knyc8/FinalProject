@@ -9,7 +9,7 @@ import java.io.IOException;
 public class OnScreenUI {
     SwingWindow sw;
     Font font;
-    BufferedImage DFIcon;
+    BufferedImage DFIcon, Wall;
     int optionNum = 0;
 
     public OnScreenUI(SwingWindow sw)
@@ -19,6 +19,7 @@ public class OnScreenUI {
 
         try {
             DFIcon = ImageIO.read(getClass().getResource("/icons/Dungeon_Floor_Icon.png"));
+            Wall = ImageIO.read(getClass().getResource("/icons/Wall.png"));
 
         } catch(IOException ex) {
             ex.printStackTrace();
@@ -57,17 +58,21 @@ public class OnScreenUI {
         //Background
         graphics2D.setColor(Color.black);
         graphics2D.fillRect(0,0, sw.SCREEN_WIDTH, sw.SCREEN_HEIGHT);
+        graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.25f));  //25% opacity
+        graphics2D.drawImage(Wall, 0, 0, sw.SCREEN_WIDTH/2, sw.SCREEN_HEIGHT, null);
+        graphics2D.drawImage(Wall, sw.SCREEN_WIDTH/2, 0, sw.SCREEN_WIDTH/2, sw.SCREEN_HEIGHT, null);
 
         //Border
+        graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));  //100% opacity
         float thickness = sw.DISPLAYED_TILE_SIZE/4f;
         Stroke oldStroke = graphics2D.getStroke();
         graphics2D.setStroke(new BasicStroke(thickness));
         graphics2D.setColor(Color.white);
         graphics2D.drawRect(0, 0, sw.getSCREEN_WIDTH(), sw.SCREEN_HEIGHT);
         graphics2D.setStroke(oldStroke);
-        graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
 
         //Doors
+        graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));  //50% opacity
         int door1X = sw.SCREEN_WIDTH/4 - (sw.getDISPLAYED_TILE_SIZE()*15)/4;
         int door1Y = (sw.getDISPLAYED_TILE_SIZE()*5)/2;
         graphics2D.drawImage(DFIcon, door1X, door1Y, sw.getDISPLAYED_TILE_SIZE()*5, sw.getDISPLAYED_TILE_SIZE()*5, null);  //1st door
