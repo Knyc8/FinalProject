@@ -9,7 +9,7 @@ import java.io.IOException;
 public class OnScreenUI {
     SwingWindow sw;
     Font font;
-    BufferedImage DFIcon, wall, heart, emptyHeart, sadCat, tDown;
+    BufferedImage DFIcon, wall, heart, emptyHeart, sadCat, tDown, bCat, cBCat, arrow;
     int optionNum = 0;
 
     public OnScreenUI(SwingWindow sw)
@@ -24,6 +24,9 @@ public class OnScreenUI {
             emptyHeart = ImageIO.read(getClass().getResource("/icons/emptyHeart.png"));
             sadCat = ImageIO.read(getClass().getResource("/icons/sadCat.png"));
             tDown = ImageIO.read(getClass().getResource("/icons/thumbsdown.png"));
+            bCat = ImageIO.read(getClass().getResource("/icons/bananaCat.png"));
+            cBCat = ImageIO.read(getClass().getResource("/icons/cryingCatBanana.png"));
+            arrow = ImageIO.read(getClass().getResource("/icons/arrow.png"));
 
         } catch(IOException ex) {
             ex.printStackTrace();
@@ -268,5 +271,13 @@ public class OnScreenUI {
         x = sw.getSCREEN_WIDTH()-sw.getDISPLAYED_TILE_SIZE()*11/2;
         y = sw.getSCREEN_HEIGHT()/2- sw.getDISPLAYED_TILE_SIZE()*3;
         graphics2D.drawImage(sadCat, x, y, sw.getDISPLAYED_TILE_SIZE()*6,sw.getDISPLAYED_TILE_SIZE()*6, null );
+
+        x = sw.getSCREEN_WIDTH()/2 - sw.getDISPLAYED_TILE_SIZE();
+        y = sw.getSCREEN_HEIGHT()- sw.getDISPLAYED_TILE_SIZE()*3;
+        graphics2D.drawImage(arrow, x, y, sw.getDISPLAYED_TILE_SIZE()*2,sw.getDISPLAYED_TILE_SIZE()*2, null );
+        x = sw.getSCREEN_WIDTH()/3 - sw.getDISPLAYED_TILE_SIZE();
+        graphics2D.drawImage(bCat, x, y, sw.getDISPLAYED_TILE_SIZE()*4,sw.getDISPLAYED_TILE_SIZE()*2, null );
+        x = sw.getSCREEN_WIDTH()*2/3 - sw.getDISPLAYED_TILE_SIZE()*2;
+        graphics2D.drawImage(cBCat, x, y, sw.getDISPLAYED_TILE_SIZE()*2,sw.getDISPLAYED_TILE_SIZE()*2, null );
     }
 }
