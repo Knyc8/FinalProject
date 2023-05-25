@@ -90,16 +90,16 @@ public class Player extends Entity{
             sw.getCollisionDetector().detectTile(this);
             if (colliding)
             {
-                if (dmg < 1) {
+                if (dmgCount < 1) {
                     hp--;
                     if (hp < 0) {
                         hp = 0;
                     }
                 }
-                dmg++;
+                dmgCount++;
             }
             if (colliding == false) {
-                dmg = 0;
+                dmgCount = 0;
                 if (direction.equals("back")) {  //up speed units
                     yCoord -= speed;  //top left is (0, 0)
                 }

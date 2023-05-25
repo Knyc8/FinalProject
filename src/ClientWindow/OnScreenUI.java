@@ -9,7 +9,7 @@ import java.io.IOException;
 public class OnScreenUI {
     SwingWindow sw;
     Font font;
-    BufferedImage DFIcon, wall, heart, emptyHeart;
+    BufferedImage DFIcon, wall, heart, emptyHeart, sadCat, tDown;
     int optionNum = 0;
 
     public OnScreenUI(SwingWindow sw)
@@ -22,6 +22,8 @@ public class OnScreenUI {
             wall = ImageIO.read(getClass().getResource("/icons/Wall.png"));
             heart = ImageIO.read(getClass().getResource("/icons/heart.png"));
             emptyHeart = ImageIO.read(getClass().getResource("/icons/emptyHeart.png"));
+            sadCat = ImageIO.read(getClass().getResource("/icons/sadCat.png"));
+            tDown = ImageIO.read(getClass().getResource("/icons/thumbsdown.png"));
 
         } catch(IOException ex) {
             ex.printStackTrace();
@@ -259,5 +261,12 @@ public class OnScreenUI {
         x = sw.getSCREEN_WIDTH()/2 - length/2;
         y = sw.getSCREEN_HEIGHT()*3/5;
         graphics2D.drawString(displayText, x, y);
+
+        x = 0;
+        y = sw.getSCREEN_HEIGHT()/2- sw.getDISPLAYED_TILE_SIZE()*2;
+        graphics2D.drawImage(tDown, x, y, sw.getDISPLAYED_TILE_SIZE()*5,sw.getDISPLAYED_TILE_SIZE()*5, null );
+        x = sw.getSCREEN_WIDTH()-sw.getDISPLAYED_TILE_SIZE()*11/2;
+        y = sw.getSCREEN_HEIGHT()/2- sw.getDISPLAYED_TILE_SIZE()*3;
+        graphics2D.drawImage(sadCat, x, y, sw.getDISPLAYED_TILE_SIZE()*6,sw.getDISPLAYED_TILE_SIZE()*6, null );
     }
 }
