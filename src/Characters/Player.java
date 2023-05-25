@@ -14,6 +14,7 @@ public class Player extends Entity{
     KeyManager km;
     public final int SCREEN_X;
     public final int SCREEN_Y;
+    int dmgCount = 0;
 
     /***
      * Initializes the SwingWindow and KeyManager
@@ -43,7 +44,7 @@ public class Player extends Entity{
         speed = 25;
         direction = "front";
 
-        startHp = 3;
+        startHp = 5;
         hp = startHp;
     }
 
@@ -87,7 +88,18 @@ public class Player extends Entity{
             //check for collisions
             colliding = false;
             sw.getCollisionDetector().detectTile(this);
+            if (colliding)
+            {
+                if (dmg < 1) {
+                    hp--;
+                    if (hp < 0) {
+                        hp = 0;
+                    }
+                }
+                dmg++;
+            }
             if (colliding == false) {
+                dmg = 0;
                 if (direction.equals("back")) {  //up speed units
                     yCoord -= speed;  //top left is (0, 0)
                 }

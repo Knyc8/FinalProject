@@ -9,7 +9,7 @@ import java.io.IOException;
 public class OnScreenUI {
     SwingWindow sw;
     Font font;
-    BufferedImage DFIcon, Wall, heart;
+    BufferedImage DFIcon, wall, heart, emptyHeart;
     int optionNum = 0;
 
     public OnScreenUI(SwingWindow sw)
@@ -19,8 +19,9 @@ public class OnScreenUI {
 
         try {
             DFIcon = ImageIO.read(getClass().getResource("/icons/Dungeon_Floor_Icon.png"));
-            Wall = ImageIO.read(getClass().getResource("/icons/Wall.png"));
+            wall = ImageIO.read(getClass().getResource("/icons/Wall.png"));
             heart = ImageIO.read(getClass().getResource("/icons/heart.png"));
+            emptyHeart = ImageIO.read(getClass().getResource("/icons/emptyHeart.png"));
 
         } catch(IOException ex) {
             ex.printStackTrace();
@@ -48,6 +49,10 @@ public class OnScreenUI {
         else if (sw.gameState == sw.PAUSED_STATE) {
             drawPausedScreen(graphics2D);
         }
+        //LOSE STATE
+        else if (sw.gameState == sw.LOSE_STATE) {
+            drawLoseScreen(graphics2D);
+        }
     }
 
     /***
@@ -60,8 +65,8 @@ public class OnScreenUI {
         graphics2D.setColor(Color.black);
         graphics2D.fillRect(0,0, sw.SCREEN_WIDTH, sw.SCREEN_HEIGHT);
         graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.25f));  //25% opacity
-        graphics2D.drawImage(Wall, 0, 0, sw.SCREEN_WIDTH/2, sw.SCREEN_HEIGHT, null);
-        graphics2D.drawImage(Wall, sw.SCREEN_WIDTH/2, 0, sw.SCREEN_WIDTH/2, sw.SCREEN_HEIGHT, null);
+        graphics2D.drawImage(wall, 0, 0, sw.SCREEN_WIDTH/2, sw.SCREEN_HEIGHT, null);
+        graphics2D.drawImage(wall, sw.SCREEN_WIDTH/2, 0, sw.SCREEN_WIDTH/2, sw.SCREEN_HEIGHT, null);
 
         //Border
         graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));  //100% opacity
@@ -163,8 +168,12 @@ public class OnScreenUI {
     private void drawPlayUI(Graphics2D graphics2D) {
         int xheart  = sw.DISPLAYED_TILE_SIZE/2;
         for (int i = 0; i < sw.player.hp; i++) {
-            graphics2D.drawImage(heart, xheart, 15, sw.getDISPLAYED_TILE_SIZE(), sw.getDISPLAYED_TILE_SIZE(), null);
-            xheart += sw.DISPLAYED_TILE_SIZE;
+            graphics2D.drawImage(heart, xheart, 15, (sw.getDISPLAYED_TILE_SIZE()*3)/4, (sw.getDISPLAYED_TILE_SIZE()*3)/4, null);
+            xheart += (sw.getDISPLAYED_TILE_SIZE()*3)/4 + 10;
+        }
+        for (int i = 0; i < sw.player.startHp - sw.player.hp; i++) {
+            graphics2D.drawImage(emptyHeart, xheart, 15, (sw.getDISPLAYED_TILE_SIZE()*3)/4, (sw.getDISPLAYED_TILE_SIZE()*3)/4, null);
+            xheart += (sw.getDISPLAYED_TILE_SIZE()*3)/4 + 10;
         }
         graphics2D.setFont(font);
         graphics2D.drawImage(DFIcon, sw.SCREEN_WIDTH-(sw.getDISPLAYED_TILE_SIZE() +15), 15, sw.getDISPLAYED_TILE_SIZE(), sw.getDISPLAYED_TILE_SIZE(), null);
@@ -231,5 +240,24 @@ public class OnScreenUI {
             graphics2D.fillOval(x-sw.getDISPLAYED_TILE_SIZE()/2 - (45/4)-1, y-(40), 45, 45);
             graphics2D.drawImage(sw.player.front3, x-sw.getDISPLAYED_TILE_SIZE()/2 - (45/4), y-(39), 45, 45, null);
         }
+    }
+
+    public void drawLoseScreen(Graphics2D graphics2D) {
+        graphics2D.setColor(new Color(0,0,0));  //50% opacity
+        graphics2D.fillRect(0,0, sw.SCREEN_WIDTH, sw.SCREEN_HEIGHT);
+        graphics2D.setColor(Color.white);
+        graphics2D.setFont(new Font("Arial", font.BOLD, 100));
+        String displayText = "You Lose!";
+        int length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();  //centers the text
+        int x = sw.getSCREEN_WIDTH()/2 - length/2;
+        int y = sw.getSCREEN_HEIGHT()/2;
+        graphics2D.drawString(displayText, x, y);
+
+        graphics2D.setFont(new Font("Arial", font.getStyle(), 35));
+        displayText = "ESC to Return to Title Screen";
+        length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();  //centers the text
+        x = sw.getSCREEN_WIDTH()/2 - length/2;
+        y = sw.getSCREEN_HEIGHT()*3/5;
+        graphics2D.drawString(displayText, x, y);
     }
 }

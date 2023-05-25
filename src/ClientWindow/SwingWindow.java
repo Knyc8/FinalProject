@@ -41,6 +41,7 @@ public class SwingWindow extends JPanel implements Runnable {
     public final int TITLE_SCREEN_STATE = 0;
     public final int PLAY_STATE = 1;
     public final int PAUSED_STATE = 2;
+    public final int LOSE_STATE = 3;
 
     /***
      * Initializes the dimensions of the screen and client inputs
@@ -140,9 +141,17 @@ public class SwingWindow extends JPanel implements Runnable {
     }
 
     public void update() {
+        if (gameState == TITLE_SCREEN_STATE)
+        {
+            player.hp = player.startHp;
+        }
         if (gameState == PLAY_STATE) {
             //Character movement
             player.updateInfo();
+        }
+        if (player.hp == 0)
+        {
+            gameState = LOSE_STATE;
         }
     }
 
