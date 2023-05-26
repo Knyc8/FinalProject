@@ -44,7 +44,7 @@ public class Player extends Entity{
         speed = 25;
         direction = "front";
 
-        startHp = 5;
+        startHp = 3;
         hp = startHp;
     }
 

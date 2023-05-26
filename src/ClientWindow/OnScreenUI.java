@@ -9,7 +9,7 @@ import java.io.IOException;
 public class OnScreenUI {
     SwingWindow sw;
     Font font;
-    BufferedImage DFIcon, wall, heart, emptyHeart, sadCat, tDown, bCat, cBCat, arrow;
+    BufferedImage torch, DFIcon, wall, bacon, emptyBacon, sadCat, tDown, bCat, cBCat, arrow;
     int optionNum = 0;
 
     public OnScreenUI(SwingWindow sw)
@@ -18,10 +18,11 @@ public class OnScreenUI {
         font = new Font("Times New Roman", Font.BOLD, 40);
 
         try {
+            torch = ImageIO.read(getClass().getResource("/player_sprites/pigzard_torch.png"));
             DFIcon = ImageIO.read(getClass().getResource("/icons/Dungeon_Floor_Icon.png"));
             wall = ImageIO.read(getClass().getResource("/icons/Wall.png"));
-            heart = ImageIO.read(getClass().getResource("/icons/heart.png"));
-            emptyHeart = ImageIO.read(getClass().getResource("/icons/emptyHeart.png"));
+            bacon = ImageIO.read(getClass().getResource("/icons/fullBacon.png"));
+            emptyBacon = ImageIO.read(getClass().getResource("/icons/emptyBacon.png"));
             sadCat = ImageIO.read(getClass().getResource("/icons/sadCat.png"));
             tDown = ImageIO.read(getClass().getResource("/icons/thumbsdown.png"));
             bCat = ImageIO.read(getClass().getResource("/icons/bananaCat.png"));
@@ -124,7 +125,7 @@ public class OnScreenUI {
             graphics2D.drawImage(DFIcon, door1X, door1Y, sw.getDISPLAYED_TILE_SIZE()*5, sw.getDISPLAYED_TILE_SIZE()*5, null);  //1st door
             x = (door1X + sw.getDISPLAYED_TILE_SIZE()*5)/2 - (sw.getDISPLAYED_TILE_SIZE()*4)/3;
             y = (door1Y + sw.getDISPLAYED_TILE_SIZE()*5)/2;
-            graphics2D.drawImage(sw.player.front3, x, y, sw.getDISPLAYED_TILE_SIZE()*3, sw.getDISPLAYED_TILE_SIZE()*3,null);
+            graphics2D.drawImage(torch, x, y, sw.getDISPLAYED_TILE_SIZE()*3, sw.getDISPLAYED_TILE_SIZE()*3,null);
         }
 
         displayText = "Load Game";
@@ -142,7 +143,7 @@ public class OnScreenUI {
             graphics2D.drawImage(DFIcon, door2X, door2Y, sw.getDISPLAYED_TILE_SIZE()*5, sw.getDISPLAYED_TILE_SIZE()*5, null);  //2nd door
             x = sw.getSCREEN_WIDTH()/2 - (sw.DISPLAYED_TILE_SIZE*3)/2;
             y = (door2Y + sw.getDISPLAYED_TILE_SIZE()*5)/2;
-            graphics2D.drawImage(sw.player.front3, x, y, sw.getDISPLAYED_TILE_SIZE()*3, sw.getDISPLAYED_TILE_SIZE()*3,null);
+            graphics2D.drawImage(torch, x, y, sw.getDISPLAYED_TILE_SIZE()*3, sw.getDISPLAYED_TILE_SIZE()*3,null);
         }
 
         displayText = "Quit to Desktop";
@@ -161,7 +162,7 @@ public class OnScreenUI {
             graphics2D.drawImage(DFIcon, door3X, door3Y, sw.getDISPLAYED_TILE_SIZE()*5, sw.getDISPLAYED_TILE_SIZE()*5, null);  //3rd door
             x = door3X + (door1X + sw.getDISPLAYED_TILE_SIZE()*3)/2 - (sw.getDISPLAYED_TILE_SIZE()*7)/12;
             y = (door3Y + sw.getDISPLAYED_TILE_SIZE()*5)/2;
-            graphics2D.drawImage(sw.player.front3, x, y, sw.getDISPLAYED_TILE_SIZE()*3, sw.getDISPLAYED_TILE_SIZE()*3,null);
+            graphics2D.drawImage(torch, x, y, sw.getDISPLAYED_TILE_SIZE()*3, sw.getDISPLAYED_TILE_SIZE()*3,null);
         }
     }
 
@@ -173,12 +174,12 @@ public class OnScreenUI {
     private void drawPlayUI(Graphics2D graphics2D) {
         int xheart  = sw.DISPLAYED_TILE_SIZE/2;
         for (int i = 0; i < sw.player.hp; i++) {
-            graphics2D.drawImage(heart, xheart, 15, (sw.getDISPLAYED_TILE_SIZE()*3)/4, (sw.getDISPLAYED_TILE_SIZE()*3)/4, null);
-            xheart += (sw.getDISPLAYED_TILE_SIZE()*3)/4 + 10;
+            graphics2D.drawImage(bacon, xheart, 15, (sw.getDISPLAYED_TILE_SIZE()*3)/4, (sw.getDISPLAYED_TILE_SIZE()*3)/4, null);
+            xheart += sw.getDISPLAYED_TILE_SIZE()/2;
         }
         for (int i = 0; i < sw.player.startHp - sw.player.hp; i++) {
-            graphics2D.drawImage(emptyHeart, xheart, 15, (sw.getDISPLAYED_TILE_SIZE()*3)/4, (sw.getDISPLAYED_TILE_SIZE()*3)/4, null);
-            xheart += (sw.getDISPLAYED_TILE_SIZE()*3)/4 + 10;
+            graphics2D.drawImage(emptyBacon, xheart, 15, (sw.getDISPLAYED_TILE_SIZE()*3)/4, (sw.getDISPLAYED_TILE_SIZE()*3)/4, null);
+            xheart += sw.getDISPLAYED_TILE_SIZE()/2;
         }
         graphics2D.setFont(font);
         graphics2D.drawImage(DFIcon, sw.SCREEN_WIDTH-(sw.getDISPLAYED_TILE_SIZE() +15), 15, sw.getDISPLAYED_TILE_SIZE(), sw.getDISPLAYED_TILE_SIZE(), null);

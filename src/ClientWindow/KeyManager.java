@@ -119,11 +119,9 @@ public class KeyManager implements KeyListener {
                 sw.gameState = sw.PAUSED_STATE;
                 sw.ui.optionNum = 0;
             }
-            System.out.println("pressed!");
             if (sw.gameState == sw.LOSE_STATE) {
-                System.out.println("changed!");
                 sw.gameState = sw.TITLE_SCREEN_STATE;
-                System.out.println(sw.gameState);
+                sw.ui.optionNum = 0;
             }
         }
     }
