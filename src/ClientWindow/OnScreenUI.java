@@ -1,21 +1,32 @@
 package ClientWindow;
 
+import Characters.Entity;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.RescaleOp;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class OnScreenUI {
     SwingWindow sw;
-    Font font;
+    Font dungeonFont;
     BufferedImage torch, DFIcon, wall, bacon, emptyBacon, sadCat, tDown, bCat, cBCat, arrow;
     int optionNum = 0;
 
     public OnScreenUI(SwingWindow sw)
     {
         this.sw = sw;
-        font = new Font("Times New Roman", Font.BOLD, 40);
+
+        try {
+            InputStream inputStream = getClass().getResourceAsStream("/fonts/DungeonFont.TTF");
+            dungeonFont = Font.createFont(Font.TRUETYPE_FONT, inputStream);
+        } catch (FontFormatException ffe) {
+            ffe.printStackTrace();
+        } catch (IOException ioe) {
+            ioe.printStackTrace();
+        }
 
         try {
             torch = ImageIO.read(getClass().getResource("/player_sprites/pigzard_torch.png"));
@@ -40,7 +51,7 @@ public class OnScreenUI {
      * @param graphics2D
      */
     public void draw(Graphics2D graphics2D) {
-        graphics2D.setFont(font);
+        graphics2D.setFont(dungeonFont);
         graphics2D.setColor(Color.white);
 
         //TITLE SCREEN STATE
@@ -97,7 +108,7 @@ public class OnScreenUI {
 
         graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
         //TITLE
-        graphics2D.setFont(new Font("Arial", font.getStyle(), 100));
+        graphics2D.setFont(graphics2D.getFont().deriveFont(Font.BOLD, 150f));
         String displayText = "2D Dungeon Game";
         int length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();  //centers the text
         int x = sw.getSCREEN_WIDTH()/2 - length/2;
@@ -108,7 +119,7 @@ public class OnScreenUI {
         graphics2D.drawString(displayText, x, y);
 
         //OPTIONS MENU
-        graphics2D.setFont(new Font("Arial", font.getStyle(), 55));
+        graphics2D.setFont(graphics2D.getFont().deriveFont(Font.BOLD, 55f));
         displayText = "Start Game";
         length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();  //centers the text
         x = sw.getSCREEN_WIDTH()/2 - length/2;
@@ -118,14 +129,13 @@ public class OnScreenUI {
         graphics2D.drawString(displayText, x, y);
         if (optionNum == 0)
         {
-           // graphics2D.drawString(">", x-sw.getDISPLAYED_TILE_SIZE()/2, y);
             graphics2D.setColor(Color.white);
             graphics2D.drawString(displayText, x, y);
             graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
             graphics2D.drawImage(DFIcon, door1X, door1Y, sw.getDISPLAYED_TILE_SIZE()*5, sw.getDISPLAYED_TILE_SIZE()*5, null);  //1st door
             x = (door1X + sw.getDISPLAYED_TILE_SIZE()*5)/2 - (sw.getDISPLAYED_TILE_SIZE()*4)/3;
             y = (door1Y + sw.getDISPLAYED_TILE_SIZE()*5)/2;
-            graphics2D.drawImage(torch, x, y, sw.getDISPLAYED_TILE_SIZE()*3, sw.getDISPLAYED_TILE_SIZE()*3,null);
+            graphics2D.drawImage(torch, x, y, sw.getDISPLAYED_TILE_SIZE() * 3, sw.getDISPLAYED_TILE_SIZE() * 3, null);
         }
 
         displayText = "Load Game";
@@ -143,7 +153,7 @@ public class OnScreenUI {
             graphics2D.drawImage(DFIcon, door2X, door2Y, sw.getDISPLAYED_TILE_SIZE()*5, sw.getDISPLAYED_TILE_SIZE()*5, null);  //2nd door
             x = sw.getSCREEN_WIDTH()/2 - (sw.DISPLAYED_TILE_SIZE*3)/2;
             y = (door2Y + sw.getDISPLAYED_TILE_SIZE()*5)/2;
-            graphics2D.drawImage(torch, x, y, sw.getDISPLAYED_TILE_SIZE()*3, sw.getDISPLAYED_TILE_SIZE()*3,null);
+            graphics2D.drawImage(torch, x, y, sw.getDISPLAYED_TILE_SIZE() * 3, sw.getDISPLAYED_TILE_SIZE() * 3, null);
         }
 
         displayText = "Quit to Desktop";
@@ -162,7 +172,7 @@ public class OnScreenUI {
             graphics2D.drawImage(DFIcon, door3X, door3Y, sw.getDISPLAYED_TILE_SIZE()*5, sw.getDISPLAYED_TILE_SIZE()*5, null);  //3rd door
             x = door3X + (door1X + sw.getDISPLAYED_TILE_SIZE()*3)/2 - (sw.getDISPLAYED_TILE_SIZE()*7)/12;
             y = (door3Y + sw.getDISPLAYED_TILE_SIZE()*5)/2;
-            graphics2D.drawImage(torch, x, y, sw.getDISPLAYED_TILE_SIZE()*3, sw.getDISPLAYED_TILE_SIZE()*3,null);
+            graphics2D.drawImage(torch, x, y, sw.getDISPLAYED_TILE_SIZE() * 3, sw.getDISPLAYED_TILE_SIZE() * 3, null);
         }
     }
 
@@ -181,7 +191,7 @@ public class OnScreenUI {
             graphics2D.drawImage(emptyBacon, xheart, 15, (sw.getDISPLAYED_TILE_SIZE()*3)/4, (sw.getDISPLAYED_TILE_SIZE()*3)/4, null);
             xheart += sw.getDISPLAYED_TILE_SIZE()/2;
         }
-        graphics2D.setFont(font);
+        graphics2D.setFont(dungeonFont);
         graphics2D.drawImage(DFIcon, sw.SCREEN_WIDTH-(sw.getDISPLAYED_TILE_SIZE() +15), 15, sw.getDISPLAYED_TILE_SIZE(), sw.getDISPLAYED_TILE_SIZE(), null);
         graphics2D.drawString("1", sw.SCREEN_WIDTH - 73, 80);
     }
@@ -195,7 +205,7 @@ public class OnScreenUI {
         graphics2D.setColor(new Color(0,0,0,127));  //50% opacity
         graphics2D.fillRect(0,0, sw.SCREEN_WIDTH, sw.SCREEN_HEIGHT);
         graphics2D.setColor(Color.white);
-        graphics2D.setFont(font.deriveFont(font.BOLD, 100F));
+        graphics2D.setFont(graphics2D.getFont().deriveFont(Font.BOLD, 150f));
         String displayText = "PAUSED";
         int length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();  //centers the text
         int x = sw.getSCREEN_WIDTH()/2 - length/2;
@@ -204,7 +214,7 @@ public class OnScreenUI {
         graphics2D.drawString(displayText, x, y);
 
         //OPTIONS MENU
-        graphics2D.setFont(new Font("Arial", font.getStyle(), 45));
+        graphics2D.setFont(graphics2D.getFont().deriveFont(Font.BOLD, 45f));
         displayText = "Return to Title Screen";
         length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();  //centers the text
         x = sw.getSCREEN_WIDTH()/2 - length/2;
@@ -252,14 +262,14 @@ public class OnScreenUI {
         graphics2D.setColor(new Color(0,0,0));  //50% opacity
         graphics2D.fillRect(0,0, sw.SCREEN_WIDTH, sw.SCREEN_HEIGHT);
         graphics2D.setColor(Color.white);
-        graphics2D.setFont(new Font("Arial", font.BOLD, 100));
+        graphics2D.setFont(graphics2D.getFont().deriveFont(Font.BOLD, 150f));
         String displayText = "You Lose!";
         int length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();  //centers the text
         int x = sw.getSCREEN_WIDTH()/2 - length/2;
         int y = sw.getSCREEN_HEIGHT()/2;
         graphics2D.drawString(displayText, x, y);
 
-        graphics2D.setFont(new Font("Arial", font.getStyle(), 35));
+        graphics2D.setFont(graphics2D.getFont().deriveFont(Font.BOLD, 35f));
         displayText = "ESC to Return to Title Screen";
         length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();  //centers the text
         x = sw.getSCREEN_WIDTH()/2 - length/2;
