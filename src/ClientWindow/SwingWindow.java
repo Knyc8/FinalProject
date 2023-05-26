@@ -143,7 +143,7 @@ public class SwingWindow extends JPanel implements Runnable {
     public void update() {
         if (gameState == TITLE_SCREEN_STATE)
         {
-            player.hp = player.startHp;
+            player.hp = player.maxHp;
         }
         if (gameState == PLAY_STATE) {
             //Character movement

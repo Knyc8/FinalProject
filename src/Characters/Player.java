@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.IOException;
 
 public class Player extends Entity{
-    SwingWindow sw;
     KeyManager km;
     public final int SCREEN_X;
     public final int SCREEN_Y;
@@ -23,7 +22,7 @@ public class Player extends Entity{
      * @param km represents the key manager
      */
     public Player (SwingWindow sw, KeyManager km) {
-        this.sw = sw;
+        super(sw);
         this.km = km;
 
         SCREEN_X = sw.getSCREEN_WIDTH()/2 - (sw.getDISPLAYED_TILE_SIZE()/2);
@@ -39,13 +38,15 @@ public class Player extends Entity{
      * Sets the players intial location, speed, and direction
      */
     public void setDefaultValues() {
+        name = "Player";
         xCoord = sw.getDISPLAYED_TILE_SIZE() * 7;
         yCoord = sw.getDISPLAYED_TILE_SIZE() * 4;
         speed = 25;
         direction = "front";
 
-        startHp = 3;
-        hp = startHp;
+        maxHp = 3;
+        hp = maxHp;
+        projectile = new Projectile(sw);
     }
 
     public void getPlayerSprite() {
@@ -123,6 +124,11 @@ public class Player extends Entity{
                 }
                 spriteCount = 0;
             }
+        }
+
+        if (km.isShootPressed() == true)
+        {
+            projectile.set(xCoord, yCoord, direction, true,this);
         }
     }
 

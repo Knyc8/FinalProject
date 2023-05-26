@@ -112,7 +112,7 @@ public class OnScreenUI {
         String displayText = "2D Dungeon Game";
         int length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();  //centers the text
         int x = sw.getSCREEN_WIDTH()/2 - length/2;
-        int y = (sw.getDISPLAYED_TILE_SIZE()*3)/2;
+        int y = sw.getDISPLAYED_TILE_SIZE()*2;
         graphics2D.setColor(new Color(27, 27, 27));
         graphics2D.drawString(displayText, x+5, y+5);  //shadow
         graphics2D.setColor(Color.WHITE);
@@ -187,13 +187,13 @@ public class OnScreenUI {
             graphics2D.drawImage(bacon, xheart, 15, (sw.getDISPLAYED_TILE_SIZE()*3)/4, (sw.getDISPLAYED_TILE_SIZE()*3)/4, null);
             xheart += sw.getDISPLAYED_TILE_SIZE()/2;
         }
-        for (int i = 0; i < sw.player.startHp - sw.player.hp; i++) {
+        for (int i = 0; i < sw.player.maxHp - sw.player.hp; i++) {
             graphics2D.drawImage(emptyBacon, xheart, 15, (sw.getDISPLAYED_TILE_SIZE()*3)/4, (sw.getDISPLAYED_TILE_SIZE()*3)/4, null);
             xheart += sw.getDISPLAYED_TILE_SIZE()/2;
         }
-        graphics2D.setFont(dungeonFont);
+        graphics2D.setFont(graphics2D.getFont().deriveFont(Font.BOLD, 75f));
         graphics2D.drawImage(DFIcon, sw.SCREEN_WIDTH-(sw.getDISPLAYED_TILE_SIZE() +15), 15, sw.getDISPLAYED_TILE_SIZE(), sw.getDISPLAYED_TILE_SIZE(), null);
-        graphics2D.drawString("1", sw.SCREEN_WIDTH - 73, 80);
+        graphics2D.drawString("1", sw.SCREEN_WIDTH - 73, 100);
     }
 
     /***

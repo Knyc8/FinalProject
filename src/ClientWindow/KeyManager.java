@@ -5,7 +5,7 @@ import java.awt.event.KeyListener;
 
 public class KeyManager implements KeyListener {
     SwingWindow sw;
-    private boolean wPressed, sPressed, aPressed, dPressed;
+    private boolean wPressed, sPressed, aPressed, dPressed, shootPressed;
     public KeyManager(SwingWindow sw)
     {
         this.sw = sw;
@@ -26,6 +26,7 @@ public class KeyManager implements KeyListener {
     public boolean isDPressed() {
         return dPressed;
     }
+    public boolean isShootPressed(){return shootPressed;}
 
     @Override
     public void keyTyped(KeyEvent e) {/*unused*/}
@@ -80,6 +81,11 @@ public class KeyManager implements KeyListener {
             }
             if (keyCode == KeyEvent.VK_D) {
                 dPressed = true;
+            }
+        }
+        if (sw.gameState == sw.PLAY_STATE) {
+            if (keyCode == KeyEvent.VK_J) {
+                shootPressed = true;
             }
         }
 
@@ -140,6 +146,9 @@ public class KeyManager implements KeyListener {
         }
         if (keyCode == KeyEvent.VK_D) {
             dPressed = false;
+        }
+        if (keyCode == KeyEvent.VK_J) {
+            shootPressed = false;
         }
     }
 }
