@@ -83,17 +83,21 @@ public class Entity {
     }
 
     public void update() {
-        if (direction.equals("back")) {  //up speed units
-            yCoord -= speed;  //top left is (0, 0)
-        }
-        if (direction.equals("front")) {  //down speed units
-            yCoord += speed;
-        }
-        if (direction.equals("left")) {  //left speed units
-            xCoord -= speed;
-        }
-        if (direction.equals("right")) {  //right speed units
-            xCoord += speed;
+        colliding = false;
+        sw.getCollisionDetector().detectTile(this);
+        if (colliding == false) {
+            if (direction.equals("back")) {  //up speed units
+                yCoord -= speed;  //top left is (0, 0)
+            }
+            if (direction.equals("front")) {  //down speed units
+                yCoord += speed;
+            }
+            if (direction.equals("left")) {  //left speed units
+                xCoord -= speed;
+            }
+            if (direction.equals("right")) {  //right speed units
+                xCoord += speed;
+            }
         }
     }
 }

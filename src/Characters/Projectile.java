@@ -13,8 +13,9 @@ public class Projectile extends Entity{
     public Projectile(SwingWindow sw) {
         super(sw);
 
+        hitbox = new Rectangle(24, 60, 45, 30);
         name = "fireball";
-        speed = 20;
+        speed = 15;
         maxHp = 30;
         hp = maxHp;
         dmg = 1;
@@ -28,6 +29,7 @@ public class Projectile extends Entity{
              front1 = ImageIO.read(getClass().getResource("/projectiles/fball_down.png"));
              left1 = ImageIO.read(getClass().getResource("/projectiles/fball_left.png"));
              right1 = ImageIO.read(getClass().getResource("/projectiles/fball_right.png"));
+             front3 = ImageIO.read(getClass().getResource("/projectiles/explosion.png"));
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
@@ -50,18 +52,7 @@ public class Projectile extends Entity{
 //
 //        }
 
-        if (direction.equals("back")) {  //up speed units
-            yCoord -= speed;  //top left is (0, 0)
-        }
-        if (direction.equals("front")) {  //down speed units
-            yCoord += speed;
-        }
-        if (direction.equals("left")) {  //left speed units
-            xCoord -= speed;
-        }
-        if (direction.equals("right")) {  //right speed units
-            xCoord += speed;
-        }
+        super.update();
 
         hp--;
         if (hp <= 0) {
@@ -72,6 +63,7 @@ public class Projectile extends Entity{
     public void draw(Graphics2D graphics2D) {
         int screenX = xCoord - sw.getPlayer().xCoord + sw.getPlayer().SCREEN_X + sw.getDISPLAYED_TILE_SIZE()/4;
         int screenY = yCoord - sw.getPlayer().yCoord + sw.getPlayer().SCREEN_Y + sw.getDISPLAYED_TILE_SIZE()/3;
+        int size = sw.getDISPLAYED_TILE_SIZE() / 2;
 
         if (xCoord + sw.getDISPLAYED_TILE_SIZE() > sw.getPlayer().xCoord - sw.getPlayer().SCREEN_X &&
                 xCoord - sw.getDISPLAYED_TILE_SIZE() < sw.getPlayer().xCoord + sw.getPlayer().SCREEN_X &&
@@ -80,22 +72,31 @@ public class Projectile extends Entity{
 
             BufferedImage image = null;
 
-            switch (direction) {
-                case "back":
-                    image = back1;
-                    break;
-                case "front":
-                    image = front1;
-                    break;
-                case "left":
-                    image = left1;
-                    break;
-                case "right":
-                    image = right1;
-                    break;
+            if (colliding == true)
+            {
+                image = front3;
+                size = sw.getDISPLAYED_TILE_SIZE();
+                screenX -= sw.getDISPLAYED_TILE_SIZE()/4;
+                screenY -= sw.getDISPLAYED_TILE_SIZE()/4;
+            }
+            else {
+                switch (direction) {
+                    case "back":
+                        image = back1;
+                        break;
+                    case "front":
+                        image = front1;
+                        break;
+                    case "left":
+                        image = left1;
+                        break;
+                    case "right":
+                        image = right1;
+                        break;
+                }
             }
 
-            graphics2D.drawImage(image, screenX, screenY, sw.getDISPLAYED_TILE_SIZE() / 2, sw.getDISPLAYED_TILE_SIZE() / 2, null);
+            graphics2D.drawImage(image, screenX, screenY, size, size, null);
         }
     }
 }

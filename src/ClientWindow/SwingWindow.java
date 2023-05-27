@@ -187,15 +187,15 @@ public class SwingWindow extends JPanel implements Runnable {
             //Dungeon map
             tileMapper.drawTiles(graphic2D);  //draws background before player so it's behind the player
 
-            //Player
-            player.drawPlayer((Graphics2D) graphic);  //draws player on the screen
-
             //Projectiles
             for (int i = 0; i < projectiles.size(); i++) {
                 if (projectiles.get(i) != null) {
                     projectiles.get(i).draw(graphic2D);
                 }
             }
+
+            //Player
+            player.drawPlayer((Graphics2D) graphic);  //draws player on the screen
 
             //Player ui
             ui.draw(graphic2D);
