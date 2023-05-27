@@ -53,6 +53,12 @@ public class Projectile extends Entity{
 //        }
 
         super.update();
+        if (colliding == true || hp < 5) {
+            speed = 0;
+        }
+        else {
+            speed = 15;
+        }
 
         hp--;
         if (hp <= 0) {
@@ -72,7 +78,7 @@ public class Projectile extends Entity{
 
             BufferedImage image = null;
 
-            if (colliding == true)
+            if (colliding == true || hp < 5)
             {
                 image = front3;
                 size = sw.getDISPLAYED_TILE_SIZE();
