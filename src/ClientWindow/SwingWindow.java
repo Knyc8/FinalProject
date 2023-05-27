@@ -1,13 +1,16 @@
 package ClientWindow;
 
 import Characters.CollisionDetector;
+import Characters.Entity;
 import Characters.Player;
+import Characters.Projectile;
 import Dungeon.TileMapper;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 public class SwingWindow extends JPanel implements Runnable {
     //Screen dimensions
@@ -35,6 +38,7 @@ public class SwingWindow extends JPanel implements Runnable {
 
     //Entity settings
     Player player = new Player(this, keyManager);
+    public ArrayList<Entity> projectiles = new ArrayList<>();
 
     //Game Running State
     public int gameState;
@@ -62,6 +66,7 @@ public class SwingWindow extends JPanel implements Runnable {
     public void setUp() {
         gameState = TITLE_SCREEN_STATE;
     }
+
     public int getDISPLAYED_TILE_SIZE() {
         return DISPLAYED_TILE_SIZE;
     }
@@ -116,7 +121,7 @@ public class SwingWindow extends JPanel implements Runnable {
      */
     @Override
     public void run() {
-        double refreshRate = 1000000000/framesPerSecond;  //program runs in nanoseconds, and 1E9 nanoseconds equals 1 second (1 second/ 60 frames).
+        double refreshRate = 1000000000 / framesPerSecond;  //program runs in nanoseconds, and 1E9 nanoseconds equals 1 second (1 second/ 60 frames).
         double refreshInterval = System.nanoTime() + refreshRate;  //every refresh will occur 0.0167 seconds later than opposed to 1 nanosecond later.
         while (gameThread != null) {
             update();  //updates the information about a character (positions) based on the fps
@@ -125,13 +130,12 @@ public class SwingWindow extends JPanel implements Runnable {
 
             try {
                 double remainingRTime = refreshInterval - System.nanoTime();  //how much time left of one loop until the next refresh
-                remainingRTime = remainingRTime/1000000;  //sleep method only accepts ms rather than ns
-                if (remainingRTime < 0)
-                {
+                remainingRTime = remainingRTime / 1000000;  //sleep method only accepts ms rather than ns
+                if (remainingRTime < 0) {
                     remainingRTime = 0;  //prevents negative time and tells the thread to stop sleeping
                 }
 
-                Thread.sleep((long)remainingRTime);  //delays/stops the loops by the remaining refresh time so the program doesn't update instantly
+                Thread.sleep((long) remainingRTime);  //delays/stops the loops by the remaining refresh time so the program doesn't update instantly
                 refreshInterval += refreshRate;  //sets the next refresh time
 
             } catch (InterruptedException e) {
@@ -141,14 +145,25 @@ public class SwingWindow extends JPanel implements Runnable {
     }
 
     public void update() {
-        if (gameState == TITLE_SCREEN_STATE)
-        {
+        if (gameState == TITLE_SCREEN_STATE) {
             player.hp = player.maxHp;
         }
         if (gameState == PLAY_STATE) {
             //Character movement
             player.updateInfo();
+
+            for (int i = 0; i < projectiles.size(); i++) {
+                if (projectiles.get(i) != null) {
+                    if(projectiles.get(i).alive == true) {
+                        projectiles.get(i).update();
+                    }
+                    if (projectiles.get(i).alive == false) {
+                        projectiles.remove(i);
+                    }
+                }
+            }
         }
+
         if (player.hp == 0)
         {
             gameState = LOSE_STATE;
@@ -174,6 +189,13 @@ public class SwingWindow extends JPanel implements Runnable {
 
             //Player
             player.drawPlayer((Graphics2D) graphic);  //draws player on the screen
+
+            //Projectiles
+            for (int i = 0; i < projectiles.size(); i++) {
+                if (projectiles.get(i) != null) {
+                    projectiles.get(i).draw(graphic2D);
+                }
+            }
 
             //Player ui
             ui.draw(graphic2D);

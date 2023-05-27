@@ -41,7 +41,7 @@ public class Player extends Entity{
         name = "Player";
         xCoord = sw.getDISPLAYED_TILE_SIZE() * 7;
         yCoord = sw.getDISPLAYED_TILE_SIZE() * 4;
-        speed = 25;
+        speed = 7;
         direction = "front";
 
         maxHp = 3;
@@ -89,16 +89,16 @@ public class Player extends Entity{
             //check for collisions
             colliding = false;
             sw.getCollisionDetector().detectTile(this);
-            if (colliding)
-            {
-                if (dmgCount < 1) {
-                    hp--;
-                    if (hp < 0) {
-                        hp = 0;
-                    }
-                }
-                dmgCount++;
-            }
+//            if (colliding)
+//            {
+//                if (dmgCount < 1) {
+//                    hp--;
+//                    if (hp < 0) {
+//                        hp = 0;
+//                    }
+//                }
+//                dmgCount++;
+//            }
             if (colliding == false) {
                 dmgCount = 0;
                 if (direction.equals("back")) {  //up speed units
@@ -126,9 +126,11 @@ public class Player extends Entity{
             }
         }
 
-        if (km.isShootPressed() == true)
+        if (km.isShootPressed() == true && projectile.alive == false)
         {
             projectile.set(xCoord, yCoord, direction, true,this);
+
+            sw.projectiles.add(projectile);
         }
     }
 
