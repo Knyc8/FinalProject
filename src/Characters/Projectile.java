@@ -9,13 +9,16 @@ import java.io.IOException;
 
 public class Projectile extends Entity{
     Entity user;
+    BufferedImage explosion1, explosion2;
+    int spriteCount = 0;
+    int spriteNum = 1;
 
     public Projectile(SwingWindow sw) {
         super(sw);
 
         hitbox = new Rectangle(24, 60, 45, 30);
         name = "fireball";
-        speed = 10;
+        speed = 15;
         maxHp = 45;
         hp = maxHp;
         dmg = 1;
@@ -33,7 +36,8 @@ public class Projectile extends Entity{
             left2 = ImageIO.read(getClass().getResource("/projectiles/pigball_left_2.png"));
             right1 = ImageIO.read(getClass().getResource("/projectiles/pigball_right_1.png"));
             right2 = ImageIO.read(getClass().getResource("/projectiles/pigball_right_2.png"));
-            front3 = ImageIO.read(getClass().getResource("/projectiles/explosion.png"));
+            explosion1 = ImageIO.read(getClass().getResource("/projectiles/explosion.png"));
+            explosion2 = ImageIO.read(getClass().getResource("/projectiles/explosion2.png"));
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
@@ -58,21 +62,14 @@ public class Projectile extends Entity{
 
         super.update();
 
-        spriteCount++;
-        if (spriteCount > 5) {
-            if (spriteNum == 1) {
-                spriteNum = 2;
-            } else if (spriteNum == 2) {
-                spriteNum = 1;
+        this.spriteCount++;
+        if (this.spriteCount > 3) {
+            if (this.spriteNum == 1) {
+                this.spriteNum = 2;
+            } else if (this.spriteNum == 2) {
+                this.spriteNum = 1;
             }
-            spriteCount = 0;
-        }
-
-        if (colliding == true || hp < 5) {
-            speed = 0;
-        }
-        else {
-            speed = 15;
+            this.spriteCount = 0;
         }
 
         hp--;
@@ -93,41 +90,51 @@ public class Projectile extends Entity{
 
             BufferedImage image = null;
 
-            if (colliding == true || hp < 5)
+            if (colliding == true || hp < 10)
             {
-                image = front3;
+                if (this.spriteNum == 1) {
+                    image = explosion1;
+                }
+                if (this.spriteNum == 2) {
+                    image = explosion2;
+                }
+                size = sw.getDISPLAYED_TILE_SIZE()*3/2;
+                screenX -= sw.getDISPLAYED_TILE_SIZE()/4;
+                screenY -= sw.getDISPLAYED_TILE_SIZE()/4;
+                speed = 0;
             }
             else {
+                speed = 15;
                 switch(direction) {
                     case "back":
-                        if (spriteNum == 1) {
+                        if (this.spriteNum == 1) {
                             image = back1;
                         }
-                        if (spriteNum == 2) {
+                        if (this.spriteNum == 2) {
                             image = back2;
                         }
                         break;
                     case "front":
-                        if (spriteNum == 1) {
+                        if (this.spriteNum == 1) {
                             image = front1;
                         }
-                        if (spriteNum == 2) {
+                        if (this.spriteNum == 2) {
                             image = front2;
                         }
                         break;
                     case "left":
-                        if (spriteNum == 1) {
+                        if (this.spriteNum == 1) {
                             image = left1;
                         }
-                        if (spriteNum == 2) {
+                        if (this.spriteNum == 2) {
                             image = left2;
                         }
                         break;
                         case "right":
-                            if (spriteNum == 1) {
+                            if (this.spriteNum == 1) {
                                 image = right1;
                             }
-                            if (spriteNum == 2) {
+                            if (this.spriteNum == 2) {
                                 image = right2;
                             }
                 }

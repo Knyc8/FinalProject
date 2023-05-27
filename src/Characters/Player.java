@@ -128,7 +128,7 @@ public class Player extends Entity{
 
         if (km.isShootPressed() == true)
         {
-//            speed = 10/2;
+            speed = 10/2;
             if (projectile.alive == false){
             projectile.set(xCoord, yCoord, direction, true, this);
 
