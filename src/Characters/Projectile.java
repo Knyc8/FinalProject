@@ -15,8 +15,8 @@ public class Projectile extends Entity{
 
         hitbox = new Rectangle(24, 60, 45, 30);
         name = "fireball";
-        speed = 15;
-        maxHp = 30;
+        speed = 10;
+        maxHp = 45;
         hp = maxHp;
         dmg = 1;
         alive = false;
@@ -25,11 +25,15 @@ public class Projectile extends Entity{
 
     public void getImg() {
         try {
-             back1 = ImageIO.read(getClass().getResource("/projectiles/fball_up.png"));
-             front1 = ImageIO.read(getClass().getResource("/projectiles/fball_down.png"));
-             left1 = ImageIO.read(getClass().getResource("/projectiles/fball_left.png"));
-             right1 = ImageIO.read(getClass().getResource("/projectiles/fball_right.png"));
-             front3 = ImageIO.read(getClass().getResource("/projectiles/explosion.png"));
+            back1 = ImageIO.read(getClass().getResource("/projectiles/pigball_up_1.png"));
+            back2 = ImageIO.read(getClass().getResource("/projectiles/pigball_up_2.png"));
+            front1 = ImageIO.read(getClass().getResource("/projectiles/pigball_down_1.png"));
+            front2 = ImageIO.read(getClass().getResource("/projectiles/pigball_down_2.png"));
+            left1 = ImageIO.read(getClass().getResource("/projectiles/pigball_left_1.png"));
+            left2 = ImageIO.read(getClass().getResource("/projectiles/pigball_left_2.png"));
+            right1 = ImageIO.read(getClass().getResource("/projectiles/pigball_right_1.png"));
+            right2 = ImageIO.read(getClass().getResource("/projectiles/pigball_right_2.png"));
+            front3 = ImageIO.read(getClass().getResource("/projectiles/explosion.png"));
         } catch (IOException ioe) {
             ioe.printStackTrace();
         }
@@ -53,6 +57,17 @@ public class Projectile extends Entity{
 //        }
 
         super.update();
+
+        spriteCount++;
+        if (spriteCount > 5) {
+            if (spriteNum == 1) {
+                spriteNum = 2;
+            } else if (spriteNum == 2) {
+                spriteNum = 1;
+            }
+            spriteCount = 0;
+        }
+
         if (colliding == true || hp < 5) {
             speed = 0;
         }
@@ -67,9 +82,9 @@ public class Projectile extends Entity{
     }
 
     public void draw(Graphics2D graphics2D) {
-        int screenX = xCoord - sw.getPlayer().xCoord + sw.getPlayer().SCREEN_X + sw.getDISPLAYED_TILE_SIZE()/4;
-        int screenY = yCoord - sw.getPlayer().yCoord + sw.getPlayer().SCREEN_Y + sw.getDISPLAYED_TILE_SIZE()/3;
-        int size = sw.getDISPLAYED_TILE_SIZE() / 2;
+        int screenX = xCoord - sw.getPlayer().xCoord + sw.getPlayer().SCREEN_X;
+        int screenY = yCoord - sw.getPlayer().yCoord + sw.getPlayer().SCREEN_Y + sw.getDISPLAYED_TILE_SIZE()/5;
+        int size = sw.getDISPLAYED_TILE_SIZE();
 
         if (xCoord + sw.getDISPLAYED_TILE_SIZE() > sw.getPlayer().xCoord - sw.getPlayer().SCREEN_X &&
                 xCoord - sw.getDISPLAYED_TILE_SIZE() < sw.getPlayer().xCoord + sw.getPlayer().SCREEN_X &&
@@ -81,24 +96,40 @@ public class Projectile extends Entity{
             if (colliding == true || hp < 5)
             {
                 image = front3;
-                size = sw.getDISPLAYED_TILE_SIZE();
-                screenX -= sw.getDISPLAYED_TILE_SIZE()/4;
-                screenY -= sw.getDISPLAYED_TILE_SIZE()/4;
             }
             else {
-                switch (direction) {
+                switch(direction) {
                     case "back":
-                        image = back1;
+                        if (spriteNum == 1) {
+                            image = back1;
+                        }
+                        if (spriteNum == 2) {
+                            image = back2;
+                        }
                         break;
                     case "front":
-                        image = front1;
+                        if (spriteNum == 1) {
+                            image = front1;
+                        }
+                        if (spriteNum == 2) {
+                            image = front2;
+                        }
                         break;
                     case "left":
-                        image = left1;
+                        if (spriteNum == 1) {
+                            image = left1;
+                        }
+                        if (spriteNum == 2) {
+                            image = left2;
+                        }
                         break;
-                    case "right":
-                        image = right1;
-                        break;
+                        case "right":
+                            if (spriteNum == 1) {
+                                image = right1;
+                            }
+                            if (spriteNum == 2) {
+                                image = right2;
+                            }
                 }
             }
 
