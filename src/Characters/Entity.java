@@ -10,7 +10,7 @@ public class Entity {
     SwingWindow sw;
     public int xCoord, yCoord;  //represents the coordinates of the world as the player stays in the center
 
-    public BufferedImage back1, back2, back3, front1, front2, front3,  left1, left2, right1, right2;
+    public BufferedImage back1, back2, back3, front1, front2, front3,  left1, left2, left3, right1, right2, right3;
     public String direction;
     public static int spriteCount = 0;
     public static int spriteNum = 1;
