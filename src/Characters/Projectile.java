@@ -27,20 +27,16 @@ public class Projectile extends Entity{
     }
 
     public void getImg() {
-        try {
-            back1 = ImageIO.read(getClass().getResource("/projectiles/pigball_up_1.png"));
-            back2 = ImageIO.read(getClass().getResource("/projectiles/pigball_up_2.png"));
-            front1 = ImageIO.read(getClass().getResource("/projectiles/pigball_down_1.png"));
-            front2 = ImageIO.read(getClass().getResource("/projectiles/pigball_down_2.png"));
-            left1 = ImageIO.read(getClass().getResource("/projectiles/pigball_left_1.png"));
-            left2 = ImageIO.read(getClass().getResource("/projectiles/pigball_left_2.png"));
-            right1 = ImageIO.read(getClass().getResource("/projectiles/pigball_right_1.png"));
-            right2 = ImageIO.read(getClass().getResource("/projectiles/pigball_right_2.png"));
-            explosion1 = ImageIO.read(getClass().getResource("/projectiles/explosion.png"));
-            explosion2 = ImageIO.read(getClass().getResource("/projectiles/explosion2.png"));
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
+        back1 = setImage("/projectiles/pigball_up_1.png");
+        back2 = setImage("/projectiles/pigball_up_2.png");
+        front1 = setImage("/projectiles/pigball_down_1.png");
+        front2 = setImage("/projectiles/pigball_down_2.png");
+        left1 = setImage("/projectiles/pigball_left_1.png");
+        left2 = setImage("/projectiles/pigball_left_2.png");
+        right1 = setImage("/projectiles/pigball_right_1.png");
+        right2 = setImage("/projectiles/pigball_right_2.png");
+        explosion1 = setImage("/projectiles/explosion.png");
+        explosion2 = setImage("/projectiles/explosion2.png");
     }
 
     public void set(int xCoord, int yCoord, String dir, Boolean alive, Entity user){

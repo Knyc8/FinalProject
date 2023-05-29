@@ -50,35 +50,31 @@ public class Player extends Entity{
     }
 
     public void getPlayerSprite() {
-        try{
-//            back1 = ImageIO.read(getClass().getResource("/player_sprites/pigzard_b1.png"));
-//            back2 = ImageIO.read(getClass().getResource("/player_sprites/pigzard_b2.png"));
-//            back3 = ImageIO.read(getClass().getResource("/player_sprites/pigzard_b3.png"));
-//            front1 = ImageIO.read(getClass().getResource("/player_sprites/pigzard_f1.png"));
-//            front2 = ImageIO.read(getClass().getResource("/player_sprites/pigzard_f2.png"));
-//            front3 = ImageIO.read(getClass().getResource("/player_sprites/pigzard_f3.png"));
-//            left1 = ImageIO.read(getClass().getResource("/player_sprites/pigzard_l1.png"));
-//            left2 = ImageIO.read(getClass().getResource("/player_sprites/pigzard_l2.png"));
-//            left3 = ImageIO.read(getClass().getResource("/player_sprites/pigzard_l1.png"));
-//            right1 = ImageIO.read(getClass().getResource("/player_sprites/pigzard_r1.png"));
-//            right2 = ImageIO.read(getClass().getResource("/player_sprites/pigzard_r2.png"));
-//            right3 = ImageIO.read(getClass().getResource("/player_sprites/pigzard_r1.png"));
+//            back1 = setImage("/player_sprites/pigzard_b1.png");
+//            back2 = setImage("/player_sprites/pigzard_b2.png");
+//            back3 = setImage("/player_sprites/pigzard_b3.png");
+//            front1 = setImage("/player_sprites/pigzard_f1.png");
+//            front2 = setImage("/player_sprites/pigzard_f2.png");
+//            front3 = setImage("/player_sprites/pigzard_f3.png");
+//            left1 = setImage("/player_sprites/pigzard_l1.png");
+//            left2 = setImage("/player_sprites/pigzard_l2.png");
+//            left3 = setImage("/player_sprites/pigzard_l1.png");
+//            right1 = setImage("/player_sprites/pigzard_r1.png");
+//            right2 = setImage("/player_sprites/pigzard_r2.png");
+//            right3 = setImage("/player_sprites/pigzard_r1.png");
 
-            back1 = ImageIO.read(getClass().getResource("/enemy_sprites/MMM_b1.png"));
-            back2 = ImageIO.read(getClass().getResource("/enemy_sprites/MMM_b2.png"));
-            back3 = ImageIO.read(getClass().getResource("/enemy_sprites/MMM_b3.png"));
-            front1 = ImageIO.read(getClass().getResource("/enemy_sprites/MMM_f1.png"));
-            front2 = ImageIO.read(getClass().getResource("/enemy_sprites/MMM_f2.png"));
-            front3 = ImageIO.read(getClass().getResource("/enemy_sprites/MMM_f3.png"));
-            left1 = ImageIO.read(getClass().getResource("/enemy_sprites/MMM_l1.png"));
-            left2 = ImageIO.read(getClass().getResource("/enemy_sprites/MMM_l2.png"));
-            left3 = ImageIO.read(getClass().getResource("/enemy_sprites/MMM_l3.png"));
-            right1 = ImageIO.read(getClass().getResource("/enemy_sprites/MMM_r1.png"));
-            right2 = ImageIO.read(getClass().getResource("/enemy_sprites/MMM_r2.png"));
-            right3 = ImageIO.read(getClass().getResource("/enemy_sprites/MMM_r3.png"));
-        } catch (IOException ex) {
-            ex.printStackTrace();;
-        }
+            back1 = setImage("/enemy_sprites/MMM_b1.png");
+            back2 = setImage("/enemy_sprites/MMM_b2.png");
+            back3 = setImage("/enemy_sprites/MMM_b3.png");
+            front1 = setImage("/enemy_sprites/MMM_f1.png");
+            front2 = setImage("/enemy_sprites/MMM_f2.png");
+            front3 = setImage("/enemy_sprites/MMM_f3.png");
+            left1 = setImage("/enemy_sprites/MMM_l1.png");
+            left2 = setImage("/enemy_sprites/MMM_l2.png");
+            left3 = setImage("/enemy_sprites/MMM_l3.png");
+            right1 = setImage("/enemy_sprites/MMM_r1.png");
+            right2 = setImage("/enemy_sprites/MMM_r2.png");
+            right3 = setImage("/enemy_sprites/MMM_r3.png");
     }
 
     public void updateInfo() {

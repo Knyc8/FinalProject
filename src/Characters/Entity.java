@@ -2,8 +2,10 @@ package Characters;
 
 import ClientWindow.SwingWindow;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class Entity {
     //setup
@@ -26,6 +28,16 @@ public class Entity {
     public int maxHp;
     public int hp;
     public int dmg;
+
+    public BufferedImage setImage(String pathname) {
+        BufferedImage image = null;
+        try{
+            image = ImageIO.read(getClass().getResource(pathname));
+        } catch (IOException ex) {
+            ex.printStackTrace();;
+        }
+        return image;
+    }
 
     public Entity (SwingWindow sw) {
         this.sw = sw;
