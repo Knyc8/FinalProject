@@ -4,6 +4,7 @@ import Characters.CollisionDetector;
 import Characters.Entity;
 import Characters.Player;
 import Characters.Projectile;
+import Characters.enemies.MilesMM;
 import Dungeon.TileMapper;
 
 import javax.swing.*;
@@ -38,6 +39,7 @@ public class SwingWindow extends JPanel implements Runnable {
 
     //Entity settings
     Player player = new Player(this, keyManager);
+    public Entity monsters[] = new Entity[10];  //Can display up to 10 enemies at once
     public ArrayList<Entity> projectiles = new ArrayList<>();
 
     //Game Running State
@@ -65,6 +67,13 @@ public class SwingWindow extends JPanel implements Runnable {
      */
     public void setUp() {
         gameState = TITLE_SCREEN_STATE;
+
+        //set up monsters
+        for (int i = 0; i < 3; i++) {
+            monsters[i] = new MilesMM(this);
+            monsters[i].xCoord = getDISPLAYED_TILE_SIZE() * 7;
+            monsters[i].yCoord = getDISPLAYED_TILE_SIZE() * 4;
+        }
     }
 
     public int getDISPLAYED_TILE_SIZE() {
@@ -152,6 +161,12 @@ public class SwingWindow extends JPanel implements Runnable {
             //Character movement
             player.updateInfo();
 
+            for (int i = 0; i < monsters.length; i++) {
+                if (monsters[i] != null) {
+                    monsters[i].update();
+                }
+            }
+
             for (int i = 0; i < projectiles.size(); i++) {
                 if (projectiles.get(i) != null) {
                     if(projectiles.get(i).alive == true) {
@@ -186,6 +201,13 @@ public class SwingWindow extends JPanel implements Runnable {
         else {
             //Dungeon map
             tileMapper.drawTiles(graphic2D);  //draws background before player so it's behind the player
+
+            //Enemies
+            for (int i = 0; i < monsters.length; i++) {
+                if (monsters[i] != null) {
+                    monsters[i].draw(graphic2D);
+                }
+            }
 
             //Projectiles
             for (int i = 0; i < projectiles.size(); i++) {

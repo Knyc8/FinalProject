@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class Entity {
     //setup
-    SwingWindow sw;
+    public SwingWindow sw;
     public int xCoord, yCoord;  //represents the coordinates of the world as the player stays in the center
 
     public BufferedImage back1, back2, back3, front1, front2, front3,  left1, left2, left3, right1, right2, right3;
@@ -21,6 +21,7 @@ public class Entity {
     public boolean alive;
     public boolean dying;
     public Projectile projectile;
+    public int actionCount;
 
     //stats
     public String name;
@@ -94,7 +95,11 @@ public class Entity {
         }
     }
 
+    public void action() {}
+
     public void update() {
+        this.action();
+
         colliding = false;
         sw.getCollisionDetector().detectTile(this);
         if (colliding == false) {
