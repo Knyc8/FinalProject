@@ -69,10 +69,12 @@ public class SwingWindow extends JPanel implements Runnable {
         gameState = TITLE_SCREEN_STATE;
 
         //set up monsters
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 5; i++) {
             monsters[i] = new MilesMM(this);
-            monsters[i].xCoord = getDISPLAYED_TILE_SIZE() * 7;
-            monsters[i].yCoord = getDISPLAYED_TILE_SIZE() * 4;
+            int randX = (int)(Math.random()*13) + 1;
+            int randY = (int)(Math.random()*7) + 1;
+            monsters[i].xCoord = getDISPLAYED_TILE_SIZE() * randX;
+            monsters[i].yCoord = getDISPLAYED_TILE_SIZE() * randY;
         }
     }
 

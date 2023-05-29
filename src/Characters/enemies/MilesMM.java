@@ -15,7 +15,20 @@ public class MilesMM extends Entity {
         maxHp = 1;
         hp = maxHp;
 
-        direction = "front";
+        int rand = (int) (Math.random()*4) + 1;  //random number from 1-4
+        if (rand == 1) {
+            direction = "back";
+        }
+        if (rand == 2) {
+            direction = "front";
+        }
+        if (rand == 3) {
+            direction = "left";
+        }
+        if (rand == 4) {
+            direction = "right";
+        }
+
         hitbox = new Rectangle();
         hitbox.x = 30;
         hitbox.y = 36;
