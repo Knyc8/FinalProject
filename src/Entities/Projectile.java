@@ -47,6 +47,11 @@ public class Projectile extends Entity{
     }
 
     public void update() {
+//        int enemyIdx = sw.getCollisionDetector().detectEntity(sw.monsters, this);
+//            if (enemyIdx != -1) {
+//                sw.getPlayer().damageEnemy(enemyIdx);
+//                alive = false;
+//            }
 
         super.update();
 

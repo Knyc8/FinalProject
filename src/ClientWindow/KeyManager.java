@@ -61,7 +61,7 @@ public class KeyManager implements KeyListener {
                     sw.gameState = sw.PLAY_STATE;
                     sw.player.setDefaultValues();
 
-                    for (int i = 0; i < 1; i++) {
+                    for (int i = 0; i < 5; i++) {
                         sw.monsters[i] = new MilesMM(sw);
                         int randX = (int) (Math.random() * 13) + 1;
                         int randY = (int) (Math.random() * 7) + 1;
