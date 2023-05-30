@@ -74,4 +74,15 @@ public class MilesMM extends Entity {
             actionCount = 0;
         }
     }
+
+    public void update() {
+        super.update();
+
+        if (xCoord > sw.getDISPLAYED_TILE_SIZE()*13) {
+            xCoord = sw.getDISPLAYED_TILE_SIZE()*13;
+        }
+        if (yCoord > sw.getDISPLAYED_TILE_SIZE()*7) {
+            yCoord = sw.getDISPLAYED_TILE_SIZE()*7;
+        }
+    }
 }
