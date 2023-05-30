@@ -1,11 +1,9 @@
-package Characters;
+package Entities;
 
 import ClientWindow.SwingWindow;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 
 public class Projectile extends Entity{
     Entity user;

@@ -1,10 +1,9 @@
-package Characters.enemies;
+package Entities.enemies;
 
-import Characters.Entity;
+import Entities.Entity;
 import ClientWindow.SwingWindow;
 
 import java.awt.*;
-import java.util.Random;
 
 public class MilesMM extends Entity {
     public MilesMM(SwingWindow sw) {
@@ -14,6 +13,7 @@ public class MilesMM extends Entity {
         speed = 5;
         maxHp = 1;
         hp = maxHp;
+        collidable = true;
 
         int rand = (int) (Math.random()*4) + 1;  //random number from 1-4
         if (rand == 1) {
@@ -34,6 +34,8 @@ public class MilesMM extends Entity {
         hitbox.y = 36;
         hitbox.width = 36;
         hitbox.height =30;
+        hitboxDefaultX = 30;
+        hitboxDefaultY = 36;
 
         getImg();
     }

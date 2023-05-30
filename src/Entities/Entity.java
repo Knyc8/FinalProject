@@ -1,4 +1,4 @@
-package Characters;
+package Entities;
 
 import ClientWindow.SwingWindow;
 
@@ -17,6 +17,9 @@ public class Entity {
     public static int spriteCount = 0;
     public static int spriteNum = 1;
     public Rectangle hitbox;
+    public int hitboxDefaultX;
+    public int hitboxDefaultY;
+    public boolean collidable;
     public boolean colliding = false;
     public boolean alive;
     public boolean dying;
@@ -102,6 +105,8 @@ public class Entity {
 
         colliding = false;
         sw.getCollisionDetector().detectTile(this);
+        sw.getCollisionDetector().detectPlayer(this);
+
         if (colliding == false) {
             if (direction.equals("back")) {  //up speed units
                 yCoord -= speed;  //top left is (0, 0)

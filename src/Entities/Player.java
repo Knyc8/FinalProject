@@ -1,13 +1,10 @@
-package Characters;
+package Entities;
 
 import ClientWindow.KeyManager;
 import ClientWindow.SwingWindow;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 public class Player extends Entity{
     KeyManager km;
@@ -29,6 +26,8 @@ public class Player extends Entity{
         SCREEN_Y = sw.getSCREEN_HEIGHT()/2 - (sw.getDISPLAYED_TILE_SIZE()/2);
 
         hitbox = new Rectangle(24, 60, 45, 30);
+        hitboxDefaultX = 24;
+        hitboxDefaultY = 60;
 
         setDefaultValues();
         getPlayerSprite();
@@ -43,6 +42,7 @@ public class Player extends Entity{
         yCoord = sw.getDISPLAYED_TILE_SIZE() * 4;
         speed = 10;
         direction = "front";
+        collidable = true;
 
         maxHp = 3;
         hp = maxHp;
@@ -97,19 +97,25 @@ public class Player extends Entity{
                 direction = "right";
             }
 
-            //check for collisions
+            //check for tiles collisions
             colliding = false;
             sw.getCollisionDetector().detectTile(this);
-//            if (colliding)
-//            {
-//                if (dmgCount < 1) {
+
+            //check for enemy collisions
+            int enemyIdx = sw.getCollisionDetector().detectEntity(sw.monsters, this);
+            if (enemyIdx != -1)
+            {
+                System.out.println("You took damage!");
+                if (dmgCount < 1) {
+                    System.out.println("You took damage!");
 //                    hp--;
-//                    if (hp < 0) {
-//                        hp = 0;
-//                    }
-//                }
-//                dmgCount++;
-//            }
+                    dmgCount++;
+                }
+            }
+            else {
+                dmgCount = 0;
+            }
+
             if (colliding == false) {
                 //dmgCount = 0;
                 if (direction.equals("back")) {  //up speed units

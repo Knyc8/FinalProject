@@ -1,16 +1,13 @@
 package ClientWindow;
 
-import Characters.CollisionDetector;
-import Characters.Entity;
-import Characters.Player;
-import Characters.Projectile;
-import Characters.enemies.MilesMM;
+import Entities.CollisionDetector;
+import Entities.Entity;
+import Entities.Player;
+import Entities.enemies.MilesMM;
 import Dungeon.TileMapper;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
 
 public class SwingWindow extends JPanel implements Runnable {
@@ -69,7 +66,7 @@ public class SwingWindow extends JPanel implements Runnable {
         gameState = TITLE_SCREEN_STATE;
 
         //set up monsters
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 1; i++) {
             monsters[i] = new MilesMM(this);
             int randX = (int)(Math.random()*13) + 1;
             int randY = (int)(Math.random()*7) + 1;
