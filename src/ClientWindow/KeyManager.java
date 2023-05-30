@@ -1,5 +1,8 @@
 package ClientWindow;
 
+import Entities.Entity;
+import Entities.enemies.MilesMM;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -57,6 +60,14 @@ public class KeyManager implements KeyListener {
                 {
                     sw.gameState = sw.PLAY_STATE;
                     sw.player.setDefaultValues();
+
+                    for (int i = 0; i < 1; i++) {
+                        sw.monsters[i] = new MilesMM(sw);
+                        int randX = (int) (Math.random() * 13) + 1;
+                        int randY = (int) (Math.random() * 7) + 1;
+                        sw.monsters[i].xCoord = sw.getDISPLAYED_TILE_SIZE() * randX;
+                        sw.monsters[i].yCoord = sw.getDISPLAYED_TILE_SIZE() * randY;
+                    }
                 }
                 else if (sw.ui.optionNum == 1)  //load game
                 {

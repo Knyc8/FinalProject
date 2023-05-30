@@ -2,6 +2,7 @@ package Entities.enemies;
 
 import Entities.Entity;
 import ClientWindow.SwingWindow;
+import Entities.Projectile;
 
 import java.awt.*;
 
@@ -9,6 +10,21 @@ public class MilesMM extends Entity {
     public MilesMM(SwingWindow sw) {
         super(sw);
 
+        setDefaultValues();
+
+        getImg();
+    }
+
+//    public void setEnemies() {
+//        for (int i = 0; i < 1; i++) {
+//            sw.monsters[i] = new MilesMM(sw);
+//            int randX = (int) (Math.random() * 13) + 1;
+//            int randY = (int) (Math.random() * 7) + 1;
+//            sw.monsters[i].xCoord = sw.getDISPLAYED_TILE_SIZE() * randX;
+//            sw.monsters[i].yCoord = sw.getDISPLAYED_TILE_SIZE() * randY;
+//        }
+//    }
+    public void setDefaultValues() {
         name = "Miles the Magical Mouse";
         speed = 5;
         maxHp = 1;
@@ -36,8 +52,6 @@ public class MilesMM extends Entity {
         hitbox.height =30;
         hitboxDefaultX = 30;
         hitboxDefaultY = 36;
-
-        getImg();
     }
 
     public void getImg() {

@@ -25,6 +25,8 @@ public class Entity {
     public boolean dying;
     public Projectile projectile;
     public int actionCount;
+    public boolean iFrame = false;
+    public int iCount = 0;
 
     //stats
     public String name;
@@ -100,12 +102,26 @@ public class Entity {
 
     public void action() {}
 
+    public void setDefaultValues() {
+    }
+
     public void update() {
         this.action();
 
         colliding = false;
         sw.getCollisionDetector().detectTile(this);
-        sw.getCollisionDetector().detectPlayer(this);
+        Boolean detected = false;
+        if (!(this instanceof Projectile))
+        {
+            detected = sw.getCollisionDetector().detectPlayer(this);
+        }
+
+        if (detected) {  //deals dmg to player
+            if (!sw.getPlayer().iFrame) {
+                sw.getPlayer().hp--;
+                sw.getPlayer().iFrame = true;
+            }
+        }
 
         if (colliding == false) {
             if (direction.equals("back")) {  //up speed units

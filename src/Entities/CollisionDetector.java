@@ -117,7 +117,8 @@ public class CollisionDetector {
         return idx;
     }
 
-    public void detectPlayer(Entity entity) {
+    public boolean detectPlayer(Entity entity) {
+        Boolean detected = false;
         //Get entity hitbox
         entity.hitbox.x = entity.xCoord + entity.hitbox.x;
         entity.hitbox.y = entity.yCoord + entity.hitbox.y;
@@ -131,24 +132,28 @@ public class CollisionDetector {
                 entity.hitbox.y -= entity.speed;
                 if (entity.hitbox.intersects(sw.getPlayer().hitbox)) {  //checks if the hitboxes are overlapping
                     entity.colliding = true;
+                    detected = true;
                 }
                 break;
             case "front":
                 entity.hitbox.y += entity.speed;
                 if (entity.hitbox.intersects(sw.getPlayer().hitbox)) {  //checks if the hitboxes are overlapping
                     entity.colliding = true;
+                    detected = true;
                 }
                 break;
             case "left":
                 entity.hitbox.x -= entity.speed;
                 if (entity.hitbox.intersects(sw.getPlayer().hitbox)) {  //checks if the hitboxes are overlapping
                     entity.colliding = true;
+                    detected = true;
                 }
                 break;
             case "right":
                 entity.hitbox.x += entity.speed;
                 if (entity.hitbox.intersects(sw.getPlayer().hitbox)) {  //checks if the hitboxes are overlapping
                     entity.colliding = true;
+                    detected = true;
                 }
                 break;
         }
@@ -156,5 +161,7 @@ public class CollisionDetector {
         entity.hitbox.y = entity.hitboxDefaultY;
         sw.getPlayer().hitbox.x = sw.getPlayer().hitboxDefaultX;
         sw.getPlayer().hitbox.y = sw.getPlayer().hitboxDefaultY;
+
+        return detected;
     }
 }

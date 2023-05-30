@@ -43,6 +43,7 @@ public class Player extends Entity{
         speed = 10;
         direction = "front";
         collidable = true;
+        iFrame = false;
 
         maxHp = 3;
         hp = maxHp;
@@ -103,18 +104,7 @@ public class Player extends Entity{
 
             //check for enemy collisions
             int enemyIdx = sw.getCollisionDetector().detectEntity(sw.monsters, this);
-            if (enemyIdx != -1)
-            {
-                System.out.println("You took damage!");
-                if (dmgCount < 1) {
-                    System.out.println("You took damage!");
-//                    hp--;
-                    dmgCount++;
-                }
-            }
-            else {
-                dmgCount = 0;
-            }
+            takeDamage(enemyIdx);
 
             if (colliding == false) {
                 //dmgCount = 0;
@@ -154,6 +144,29 @@ public class Player extends Entity{
         }
         else {
             speed = 10;
+        }
+
+        if (iFrame) {  //Invincibility loop
+            iCount++;
+            if (iCount > 60)  //1 second invincibility
+            {
+                iFrame = false;
+                iCount = 0;
+            }
+        }
+    }
+
+    /***
+     * takes damage if the player is not invincible
+     *
+     * @param entityIdx
+     */
+    public void takeDamage(int entityIdx) {
+        if (entityIdx != -1) {
+            if (!iFrame) {
+                hp--;
+            }
+            iFrame = true;
         }
     }
 
@@ -219,7 +232,13 @@ public class Player extends Entity{
                 }
                 break;
         }
-        graphic2D.drawImage(image, SCREEN_X, SCREEN_Y, sw.getDISPLAYED_TILE_SIZE(), sw.getDISPLAYED_TILE_SIZE(), null);  //draws sprite on the screen
 
+        if (iFrame)
+        {
+            graphic2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
+        }
+
+        graphic2D.drawImage(image, SCREEN_X, SCREEN_Y, sw.getDISPLAYED_TILE_SIZE(), sw.getDISPLAYED_TILE_SIZE(), null);  //draws sprite on the screen
+        graphic2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
     }
 }

@@ -68,8 +68,8 @@ public class SwingWindow extends JPanel implements Runnable {
         //set up monsters
         for (int i = 0; i < 1; i++) {
             monsters[i] = new MilesMM(this);
-            int randX = (int)(Math.random()*13) + 1;
-            int randY = (int)(Math.random()*7) + 1;
+            int randX = (int) (Math.random() * 13) + 1;
+            int randY = (int) (Math.random() * 7) + 1;
             monsters[i].xCoord = getDISPLAYED_TILE_SIZE() * randX;
             monsters[i].yCoord = getDISPLAYED_TILE_SIZE() * randY;
         }
@@ -132,6 +132,7 @@ public class SwingWindow extends JPanel implements Runnable {
         double refreshRate = 1000000000 / framesPerSecond;  //program runs in nanoseconds, and 1E9 nanoseconds equals 1 second (1 second/ 60 frames).
         double refreshInterval = System.nanoTime() + refreshRate;  //every refresh will occur 0.0167 seconds later than opposed to 1 nanosecond later.
         while (gameThread != null) {
+
             update();  //updates the information about a character (positions) based on the fps
 
             repaint();  //redraws the sprite onto the screen however many times the fps is

@@ -47,12 +47,6 @@ public class Projectile extends Entity{
     }
 
     public void update() {
-        if (user == sw.getPlayer()) {
-
-        }
-//        if (user != sw.getPlayer()) { for enemies with projectiles in the future
-//
-//        }
 
         super.update();
 
