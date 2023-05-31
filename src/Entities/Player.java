@@ -13,6 +13,7 @@ public class Player extends Entity{
     int dmgCount = 0;
     public int level;
     public int exp;
+    public int enemiesKilled = 0;
 
     /***
      * Initializes the SwingWindow and KeyManager
@@ -46,6 +47,7 @@ public class Player extends Entity{
         direction = "front";
         collidable = true;
         iFrame = false;
+        enemiesKilled = 0;
 
         level = 1;
         exp = 0;
@@ -184,6 +186,7 @@ public class Player extends Entity{
                 {
                     sw.monsters[entityIdx] = null;
                     exp++;
+                    enemiesKilled++;
                     levelUp();
                 }
             }

@@ -188,12 +188,23 @@ public class OnScreenUI {
             graphics2D.drawImage(emptyBacon, xheart, 15, (sw.getDISPLAYED_TILE_SIZE()*3)/4, (sw.getDISPLAYED_TILE_SIZE()*3)/4, null);
             xheart += sw.getDISPLAYED_TILE_SIZE()/2;
         }
-        graphics2D.setFont(graphics2D.getFont().deriveFont(Font.BOLD, 75f));
         graphics2D.drawImage(DFIcon, sw.SCREEN_WIDTH-(sw.getDISPLAYED_TILE_SIZE() +15), 15, sw.getDISPLAYED_TILE_SIZE(), sw.getDISPLAYED_TILE_SIZE(), null);
 
-        String level = Integer.toString(sw.getPlayer().level);
-        int length = (int)graphics2D.getFontMetrics().getStringBounds(level, graphics2D).getWidth();
-        graphics2D.drawString(level, sw.SCREEN_WIDTH - 64 - length/2, 100);
+        graphics2D.setFont(graphics2D.getFont().deriveFont(Font.BOLD, 75f));
+        String displayText = Integer.toString(sw.getPlayer().level);
+        int length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();
+        graphics2D.drawString(displayText, sw.SCREEN_WIDTH - 64 - length/2, 100);
+
+        graphics2D.setFont(graphics2D.getFont().deriveFont(Font.BOLD, 35f));
+        displayText = Integer.toString(sw.getPlayer().enemiesKilled);
+        displayText = "Enemies Killed:  " + displayText;
+        length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();
+        graphics2D.drawString(displayText, sw.SCREEN_WIDTH - length - 15, 100 + sw.getDISPLAYED_TILE_SIZE()*2/3);
+
+        displayText = Integer.toString((sw.getPlayer().level*5) - sw.getPlayer().exp);
+        displayText = "Exp til level up:  " + displayText;
+        length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();
+        graphics2D.drawString(displayText, sw.SCREEN_WIDTH - length - 15, 100 + sw.getDISPLAYED_TILE_SIZE()*3/3);
     }
 
     /***
