@@ -49,7 +49,7 @@ public class Player extends Entity{
 
         level = 1;
         exp = 0;
-        maxHp = 10;
+        maxHp = 3;
         hp = maxHp;
         projectile = new Projectile(sw);
     }
@@ -195,6 +195,9 @@ public class Player extends Entity{
         if (exp == level*5)
         {
             level++;
+            maxHp++;
+            hp++;
+            exp = 0;
         }
     }
 

@@ -38,7 +38,7 @@ public class SwingWindow extends JPanel implements Runnable {
 
     //Entity settings
     Player player = new Player(this, keyManager);
-    public Entity monsters[] = new Entity[99];  //Can display up to 10 enemies at once
+    public Entity monsters[] = new Entity[1000];  //Can display up to 10 enemies at once
     public ArrayList<Entity> projectiles = new ArrayList<>();
 
     //Game Running State

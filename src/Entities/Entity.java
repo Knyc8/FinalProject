@@ -25,7 +25,7 @@ public class Entity {
     public boolean alive;
     public boolean dying;
     public Projectile projectile;
-    public int actionCount;
+//    public int actionCount;
     public boolean iFrame = false;
     public int iCount = 0;
 
@@ -129,18 +129,19 @@ public class Entity {
             }
         }
 
-        if (colliding == false) {
+
+        if (!colliding) {
             if (direction.equals("back")) {  //up speed units
-                yCoord -= speed;  //top left is (0, 0)
+                yCoord -= (int)(speed * Math.random()*2 + 1);  //top left is (0, 0)
             }
             if (direction.equals("front")) {  //down speed units
-                yCoord += speed;
+                yCoord += (int)(speed * Math.random()*2 + 1);
             }
             if (direction.equals("left")) {  //left speed units
-                xCoord -= speed;
+                xCoord -= (int)(speed * Math.random()*2 + 1);
             }
             if (direction.equals("right")) {  //right speed units
-                xCoord += speed;
+                xCoord += (int)(speed * Math.random()*2 + 1);
             }
         }
 

@@ -9,6 +9,7 @@ import java.awt.*;
 
 public class MilesMM extends Entity {
     public int room;
+    int actionCount;
     public MilesMM(SwingWindow sw, int r) {
         super(sw);
 
@@ -20,10 +21,11 @@ public class MilesMM extends Entity {
 
     public void setDefaultValues() {
         name = "Miles the Magical Mouse";
-        speed = 5;
-        maxHp = 2;
+        speed = 10;
+        maxHp = 1;
         hp = maxHp;
         collidable = true;
+        actionCount = 0;
 
         int rand = (int) (Math.random()*4) + 1;  //random number from 1-4
         if (rand == 1) {
@@ -64,9 +66,12 @@ public class MilesMM extends Entity {
     }
 
     public void action() {
+
+
         actionCount++;
 
-        if (actionCount == 120) {
+        int time = (int)(Math.random()*20) + 30;
+        if (actionCount == 30) {
             int rand = (int) (Math.random()*4) + 1;  //random number from 1-4
 
             if (rand == 1) {
@@ -86,23 +91,23 @@ public class MilesMM extends Entity {
     }
 
     public void update() {
-//        super.update();
+        super.update();
 
         restrainBounds();
     }
 
     public void restrainBounds(){
-//        if (xCoord < sw.getDISPLAYED_TILE_SIZE() * sw.dungeonPlacer.roomInfo[room-1][0]) {
-//            xCoord = sw.getDISPLAYED_TILE_SIZE() * sw.dungeonPlacer.roomInfo[room-1][0];
-//        }
-//        if (xCoord > sw.getDISPLAYED_TILE_SIZE() * sw.dungeonPlacer.roomInfo[room-1][1]) {
-//            xCoord = sw.getDISPLAYED_TILE_SIZE() * sw.dungeonPlacer.roomInfo[room-1][1];
-//        }
-//        if (yCoord < sw.getDISPLAYED_TILE_SIZE() * sw.dungeonPlacer.roomInfo[room-1][2]) {
-//            yCoord = sw.getDISPLAYED_TILE_SIZE() * sw.dungeonPlacer.roomInfo[room-1][2];
-//        }
-//        if (yCoord > sw.getDISPLAYED_TILE_SIZE() * sw.dungeonPlacer.roomInfo[room-1][3]) {
-//            yCoord = sw.getDISPLAYED_TILE_SIZE() * sw.dungeonPlacer.roomInfo[room-1][3];
-//        }
+        if (yCoord < sw.getDISPLAYED_TILE_SIZE() * 6)
+        {
+            if (xCoord < sw.getDISPLAYED_TILE_SIZE() * 17)
+            {
+                xCoord = sw.getDISPLAYED_TILE_SIZE() * 17;
+            }
+        }
+        if (xCoord < sw.getDISPLAYED_TILE_SIZE() * 13)
+            if (yCoord < sw.getDISPLAYED_TILE_SIZE() * 8)
+            {
+                yCoord = sw.getDISPLAYED_TILE_SIZE() * 8;
+            }
     }
 }
