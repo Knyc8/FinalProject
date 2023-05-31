@@ -61,13 +61,7 @@ public class KeyManager implements KeyListener {
                     sw.gameState = sw.PLAY_STATE;
                     sw.player.setDefaultValues();
 
-                    for (int i = 0; i < 5; i++) {
-                        sw.monsters[i] = new MilesMM(sw);
-                        int randX = (int) (Math.random() * 13) + 1;
-                        int randY = (int) (Math.random() * 7) + 1;
-                        sw.monsters[i].xCoord = sw.getDISPLAYED_TILE_SIZE() * randX;
-                        sw.monsters[i].yCoord = sw.getDISPLAYED_TILE_SIZE() * randY;
-                    }
+                    sw.dungeonPlacer.placeMonsters();
                 }
                 else if (sw.ui.optionNum == 1)  //load game
                 {

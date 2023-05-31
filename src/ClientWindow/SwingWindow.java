@@ -1,5 +1,6 @@
 package ClientWindow;
 
+import Dungeon.DungeonPlacer;
 import Entities.CollisionDetector;
 import Entities.Entity;
 import Entities.Player;
@@ -33,10 +34,11 @@ public class SwingWindow extends JPanel implements Runnable {
     KeyManager keyManager = new KeyManager(this);  //allows the program to take key inputs
     TileMapper tileMapper = new TileMapper(this);
     CollisionDetector collisionDetector = new CollisionDetector(this);
+    public DungeonPlacer dungeonPlacer = new DungeonPlacer(this);
 
     //Entity settings
     Player player = new Player(this, keyManager);
-    public Entity monsters[] = new Entity[10];  //Can display up to 10 enemies at once
+    public Entity monsters[] = new Entity[99];  //Can display up to 10 enemies at once
     public ArrayList<Entity> projectiles = new ArrayList<>();
 
     //Game Running State
@@ -66,13 +68,7 @@ public class SwingWindow extends JPanel implements Runnable {
         gameState = TITLE_SCREEN_STATE;
 
         //set up monsters
-        for (int i = 0; i < 5; i++) {
-            monsters[i] = new MilesMM(this);
-            int randX = (int) (Math.random() * 13) + 1;
-            int randY = (int) (Math.random() * 7) + 1;
-            monsters[i].xCoord = getDISPLAYED_TILE_SIZE() * randX;
-            monsters[i].yCoord = getDISPLAYED_TILE_SIZE() * randY;
-        }
+        dungeonPlacer.placeMonsters();
     }
 
     public int getDISPLAYED_TILE_SIZE() {
@@ -205,7 +201,13 @@ public class SwingWindow extends JPanel implements Runnable {
             //Enemies
             for (int i = 0; i < monsters.length; i++) {
                 if (monsters[i] != null) {
-                    monsters[i].draw(graphic2D);
+                    if (monsters[i].dying)
+                    {
+                        monsters[i] = null;
+                    }
+                    else {
+                        monsters[i].draw(graphic2D);
+                    }
                 }
             }
 

@@ -21,6 +21,7 @@ public class Entity {
     public int hitboxDefaultY;
     public boolean collidable;
     public boolean colliding = false;
+    public boolean shooting = false;
     public boolean alive;
     public boolean dying;
     public Projectile projectile;
@@ -96,7 +97,12 @@ public class Entity {
                     break;
             }
 
+            if (iFrame)
+            {
+                graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
+            }
             graphics2D.drawImage(image, screenX, screenY, sw.getDISPLAYED_TILE_SIZE(), sw.getDISPLAYED_TILE_SIZE(), null);
+            graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
         }
     }
 
@@ -135,6 +141,24 @@ public class Entity {
             }
             if (direction.equals("right")) {  //right speed units
                 xCoord += speed;
+            }
+        }
+
+        this.spriteCount++;
+        if (this.spriteCount > 60) {
+            if (this.spriteNum == 1) {
+                this.spriteNum = 2;
+            } else if (this.spriteNum == 2) {
+                this.spriteNum = 1;
+            }
+            this.spriteCount = 0;
+        }
+
+        if (iFrame) {
+            iCount++;
+            if (iCount > 60) {
+                iFrame = false;
+                iCount = 0;
             }
         }
     }

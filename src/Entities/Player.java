@@ -11,6 +11,8 @@ public class Player extends Entity{
     public final int SCREEN_X;
     public final int SCREEN_Y;
     int dmgCount = 0;
+    public int level;
+    public int exp;
 
     /***
      * Initializes the SwingWindow and KeyManager
@@ -45,7 +47,9 @@ public class Player extends Entity{
         collidable = true;
         iFrame = false;
 
-        maxHp = 3;
+        level = 1;
+        exp = 0;
+        maxHp = 10;
         hp = maxHp;
         projectile = new Projectile(sw);
     }
@@ -122,15 +126,15 @@ public class Player extends Entity{
                 }
             }
 
-            spriteCount++;
-            if (spriteCount > 10) {
-                if (spriteNum == 1) {
-                    spriteNum = 2;
-                } else if (spriteNum == 2) {
-                    spriteNum = 1;
-                }
-                spriteCount = 0;
-            }
+//            spriteCount++;
+//            if (spriteCount > 10) {
+//                if (spriteNum == 1) {
+//                    spriteNum = 2;
+//                } else if (spriteNum == 2) {
+//                    spriteNum = 1;
+//                }
+//                spriteCount = 0;
+//            }
         }
 
         if (km.isShootPressed() == true)
@@ -167,6 +171,30 @@ public class Player extends Entity{
                 hp--;
             }
             iFrame = true;
+        }
+    }
+
+    public void damage(int entityIdx) {
+        if (entityIdx != -1) {
+            if (sw.monsters[entityIdx].iFrame == false) {
+                sw.monsters[entityIdx].hp--;
+                sw.monsters[entityIdx].iFrame = true;
+
+                if (sw.monsters[entityIdx].hp <= 0)
+                {
+                    sw.monsters[entityIdx] = null;
+                    exp++;
+                    levelUp();
+                }
+            }
+        }
+    }
+
+    public void levelUp()
+    {
+        if (exp == level*5)
+        {
+            level++;
         }
     }
 

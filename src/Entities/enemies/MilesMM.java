@@ -1,5 +1,6 @@
 package Entities.enemies;
 
+import Dungeon.DungeonPlacer;
 import Entities.Entity;
 import ClientWindow.SwingWindow;
 import Entities.Projectile;
@@ -7,27 +8,20 @@ import Entities.Projectile;
 import java.awt.*;
 
 public class MilesMM extends Entity {
-    public MilesMM(SwingWindow sw) {
+    public int room;
+    public MilesMM(SwingWindow sw, int r) {
         super(sw);
 
+        room = r;
         setDefaultValues();
 
         getImg();
     }
 
-//    public void setEnemies() {
-//        for (int i = 0; i < 1; i++) {
-//            sw.monsters[i] = new MilesMM(sw);
-//            int randX = (int) (Math.random() * 13) + 1;
-//            int randY = (int) (Math.random() * 7) + 1;
-//            sw.monsters[i].xCoord = sw.getDISPLAYED_TILE_SIZE() * randX;
-//            sw.monsters[i].yCoord = sw.getDISPLAYED_TILE_SIZE() * randY;
-//        }
-//    }
     public void setDefaultValues() {
         name = "Miles the Magical Mouse";
         speed = 5;
-        maxHp = 1;
+        maxHp = 2;
         hp = maxHp;
         collidable = true;
 
@@ -94,11 +88,21 @@ public class MilesMM extends Entity {
     public void update() {
         super.update();
 
-        if (xCoord > sw.getDISPLAYED_TILE_SIZE()*13) {
-            xCoord = sw.getDISPLAYED_TILE_SIZE()*13;
+        restrainBounds();
+    }
+
+    public void restrainBounds(){
+        if (xCoord < sw.getDISPLAYED_TILE_SIZE() * sw.dungeonPlacer.roomInfo[room-1][0]) {
+            xCoord = sw.getDISPLAYED_TILE_SIZE() * sw.dungeonPlacer.roomInfo[room-1][0];
         }
-        if (yCoord > sw.getDISPLAYED_TILE_SIZE()*7) {
-            yCoord = sw.getDISPLAYED_TILE_SIZE()*7;
+        if (xCoord > sw.getDISPLAYED_TILE_SIZE() * sw.dungeonPlacer.roomInfo[room-1][1]) {
+            xCoord = sw.getDISPLAYED_TILE_SIZE() * sw.dungeonPlacer.roomInfo[room-1][1];
+        }
+        if (yCoord < sw.getDISPLAYED_TILE_SIZE() * sw.dungeonPlacer.roomInfo[room-1][2]) {
+            yCoord = sw.getDISPLAYED_TILE_SIZE() * sw.dungeonPlacer.roomInfo[room-1][2];
+        }
+        if (yCoord > sw.getDISPLAYED_TILE_SIZE() * sw.dungeonPlacer.roomInfo[room-1][3]) {
+            yCoord = sw.getDISPLAYED_TILE_SIZE() * sw.dungeonPlacer.roomInfo[room-1][3];
         }
     }
 }

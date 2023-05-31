@@ -14,13 +14,14 @@ public class Projectile extends Entity{
     public Projectile(SwingWindow sw) {
         super(sw);
 
-        hitbox = new Rectangle(24, 60, 45, 30);
+        hitbox = new Rectangle(15, 21, 66, 60);
         name = "fireball";
         speed = 15;
         maxHp = 45;
         hp = maxHp;
         dmg = 1;
         alive = false;
+        collidable = true;
         getImg();
     }
 
@@ -47,22 +48,11 @@ public class Projectile extends Entity{
     }
 
     public void update() {
-//        int enemyIdx = sw.getCollisionDetector().detectEntity(sw.monsters, this);
-//            if (enemyIdx != -1) {
-//                sw.getPlayer().damageEnemy(enemyIdx);
-//                alive = false;
-//            }
 
         super.update();
-
-        this.spriteCount++;
-        if (this.spriteCount > 3) {
-            if (this.spriteNum == 1) {
-                this.spriteNum = 2;
-            } else if (this.spriteNum == 2) {
-                this.spriteNum = 1;
-            }
-            this.spriteCount = 0;
+        int enemyIdx = sw.getCollisionDetector().detectEntity(sw.monsters, this);
+        if (enemyIdx != -1) {
+            sw.getPlayer().damage(enemyIdx);
         }
 
         hp--;
@@ -73,7 +63,7 @@ public class Projectile extends Entity{
 
     public void draw(Graphics2D graphics2D) {
         int screenX = xCoord - sw.getPlayer().xCoord + sw.getPlayer().SCREEN_X;
-        int screenY = yCoord - sw.getPlayer().yCoord + sw.getPlayer().SCREEN_Y + sw.getDISPLAYED_TILE_SIZE()/5;
+        int screenY = yCoord - sw.getPlayer().yCoord + sw.getPlayer().SCREEN_Y;// + sw.getDISPLAYED_TILE_SIZE()/5;
         int size = sw.getDISPLAYED_TILE_SIZE();
 
         if (xCoord + sw.getDISPLAYED_TILE_SIZE() > sw.getPlayer().xCoord - sw.getPlayer().SCREEN_X &&
@@ -91,9 +81,9 @@ public class Projectile extends Entity{
                 if (this.spriteNum == 2) {
                     image = explosion2;
                 }
-                size = sw.getDISPLAYED_TILE_SIZE()*3/2;
-                screenX -= sw.getDISPLAYED_TILE_SIZE()/4;
-                screenY -= sw.getDISPLAYED_TILE_SIZE()/4;
+//                size = sw.getDISPLAYED_TILE_SIZE()*3/2;
+//                screenX -= sw.getDISPLAYED_TILE_SIZE()/2;
+//                screenY -= sw.getDISPLAYED_TILE_SIZE()/2;
                 speed = 0;
             }
             else {
@@ -134,6 +124,7 @@ public class Projectile extends Entity{
             }
 
             graphics2D.drawImage(image, screenX, screenY, size, size, null);
+            graphics2D.draw(hitbox);
         }
     }
 }

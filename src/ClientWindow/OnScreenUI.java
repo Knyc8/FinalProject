@@ -190,7 +190,10 @@ public class OnScreenUI {
         }
         graphics2D.setFont(graphics2D.getFont().deriveFont(Font.BOLD, 75f));
         graphics2D.drawImage(DFIcon, sw.SCREEN_WIDTH-(sw.getDISPLAYED_TILE_SIZE() +15), 15, sw.getDISPLAYED_TILE_SIZE(), sw.getDISPLAYED_TILE_SIZE(), null);
-        graphics2D.drawString("1", sw.SCREEN_WIDTH - 73, 100);
+
+        String level = Integer.toString(sw.getPlayer().level);
+        int length = (int)graphics2D.getFontMetrics().getStringBounds(level, graphics2D).getWidth();
+        graphics2D.drawString(level, sw.SCREEN_WIDTH - 64 - length/2, 100);
     }
 
     /***
