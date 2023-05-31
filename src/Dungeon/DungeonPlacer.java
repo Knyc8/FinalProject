@@ -9,6 +9,7 @@ import Entities.enemies.MilesMM;
 public class DungeonPlacer {
     SwingWindow sw;
     public int[][] roomInfo;
+    private int enemyCount = 0;
     public DungeonPlacer(SwingWindow sw)
     {
         this.sw = sw;
@@ -32,7 +33,7 @@ public class DungeonPlacer {
     }
 
     public void placeMonsters() {
-        for (int room = 1; room <= 2; room++) {  //8 total rooms
+        for (int room = 0; room <= 1; room++) {  //8 total rooms
             int startX = 0;
             int endX = 0;
             int startY = 0;
@@ -45,7 +46,7 @@ public class DungeonPlacer {
             amount = (int) (Math.random()*(roomInfo[room][5] - roomInfo[room][4] + 1)) + roomInfo[room][4];
 
             for (int i = 0; i < 5; i++) {
-                    sw.monsters[i] = new MilesMM(sw, room);
+                    sw.monsters[enemyCount + i] = new MilesMM(sw, room);
                     int randX = (int) (Math.random() * (endX - startX + 1)) + startX;
                     int randY = (int) (Math.random() * (endY - startY + 1)) + startY;
                     System.out.println(randX);

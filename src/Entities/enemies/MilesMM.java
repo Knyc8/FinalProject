@@ -86,23 +86,23 @@ public class MilesMM extends Entity {
     }
 
     public void update() {
-        super.update();
+//        super.update();
 
         restrainBounds();
     }
 
     public void restrainBounds(){
-        if (xCoord < sw.getDISPLAYED_TILE_SIZE() * sw.dungeonPlacer.roomInfo[room-1][0]) {
-            xCoord = sw.getDISPLAYED_TILE_SIZE() * sw.dungeonPlacer.roomInfo[room-1][0];
-        }
-        if (xCoord > sw.getDISPLAYED_TILE_SIZE() * sw.dungeonPlacer.roomInfo[room-1][1]) {
-            xCoord = sw.getDISPLAYED_TILE_SIZE() * sw.dungeonPlacer.roomInfo[room-1][1];
-        }
-        if (yCoord < sw.getDISPLAYED_TILE_SIZE() * sw.dungeonPlacer.roomInfo[room-1][2]) {
-            yCoord = sw.getDISPLAYED_TILE_SIZE() * sw.dungeonPlacer.roomInfo[room-1][2];
-        }
-        if (yCoord > sw.getDISPLAYED_TILE_SIZE() * sw.dungeonPlacer.roomInfo[room-1][3]) {
-            yCoord = sw.getDISPLAYED_TILE_SIZE() * sw.dungeonPlacer.roomInfo[room-1][3];
-        }
+//        if (xCoord < sw.getDISPLAYED_TILE_SIZE() * sw.dungeonPlacer.roomInfo[room-1][0]) {
+//            xCoord = sw.getDISPLAYED_TILE_SIZE() * sw.dungeonPlacer.roomInfo[room-1][0];
+//        }
+//        if (xCoord > sw.getDISPLAYED_TILE_SIZE() * sw.dungeonPlacer.roomInfo[room-1][1]) {
+//            xCoord = sw.getDISPLAYED_TILE_SIZE() * sw.dungeonPlacer.roomInfo[room-1][1];
+//        }
+//        if (yCoord < sw.getDISPLAYED_TILE_SIZE() * sw.dungeonPlacer.roomInfo[room-1][2]) {
+//            yCoord = sw.getDISPLAYED_TILE_SIZE() * sw.dungeonPlacer.roomInfo[room-1][2];
+//        }
+//        if (yCoord > sw.getDISPLAYED_TILE_SIZE() * sw.dungeonPlacer.roomInfo[room-1][3]) {
+//            yCoord = sw.getDISPLAYED_TILE_SIZE() * sw.dungeonPlacer.roomInfo[room-1][3];
+//        }
     }
 }
