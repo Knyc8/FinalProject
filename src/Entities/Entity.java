@@ -21,12 +21,10 @@ public class Entity {
     public int hitboxDefaultY;
     public boolean collidable;
     public boolean colliding = false;
-    public boolean shooting = false;
     public boolean alive;
     public boolean dying;
     public Projectile projectile;
-//    public int actionCount;
-    public boolean iFrame = false;
+    public boolean immunity = false;
     public int iCount = 0;
 
     //stats
@@ -97,7 +95,7 @@ public class Entity {
                     break;
             }
 
-            if (iFrame)
+            if (immunity)
             {
                 graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
             }
@@ -123,9 +121,9 @@ public class Entity {
         }
 
         if (detected) {  //deals dmg to player
-            if (!sw.getPlayer().iFrame) {
+            if (!sw.getPlayer().immunity) {
                 sw.getPlayer().hp--;
-                sw.getPlayer().iFrame = true;
+                sw.getPlayer().immunity = true;
             }
         }
 
@@ -146,7 +144,7 @@ public class Entity {
         }
 
         this.spriteCount++;
-        if (this.spriteCount > 60) {
+        if (this.spriteCount > 10) {
             if (this.spriteNum == 1) {
                 this.spriteNum = 2;
             } else if (this.spriteNum == 2) {
@@ -155,10 +153,10 @@ public class Entity {
             this.spriteCount = 0;
         }
 
-        if (iFrame) {
+        if (immunity) {
             iCount++;
             if (iCount > 60) {
-                iFrame = false;
+                immunity = false;
                 iCount = 0;
             }
         }

@@ -205,6 +205,16 @@ public class OnScreenUI {
         displayText = "Exp til level up:  " + displayText;
         length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();
         graphics2D.drawString(displayText, sw.SCREEN_WIDTH - length - 15, 100 + sw.getDISPLAYED_TILE_SIZE()*3/3);
+
+        graphics2D.setColor(Color.gray);
+        graphics2D.fillRect(sw.SCREEN_WIDTH - sw.DISPLAYED_TILE_SIZE*2 - 10, 100+ sw.getDISPLAYED_TILE_SIZE()+10, sw.getDISPLAYED_TILE_SIZE()*2, sw.getDISPLAYED_TILE_SIZE()/10 + 10);
+        graphics2D.setColor(Color.darkGray);
+        graphics2D.fillRect(sw.SCREEN_WIDTH - sw.DISPLAYED_TILE_SIZE*2 - 7, 100+ sw.getDISPLAYED_TILE_SIZE()+13, (sw.getDISPLAYED_TILE_SIZE()*2 - 6), sw.getDISPLAYED_TILE_SIZE()/10 + 4 );
+        graphics2D.setColor(Color.green);
+        double xpProgress = (double) sw.getPlayer().exp/(sw.getPlayer().level*5);
+        int progressWidth = (int) ((sw.getDISPLAYED_TILE_SIZE()*2 - 6) * xpProgress);
+        System.out.println(xpProgress);
+        graphics2D.fillRect(sw.SCREEN_WIDTH - sw.DISPLAYED_TILE_SIZE*2 - 7, 100+ sw.getDISPLAYED_TILE_SIZE()+13, progressWidth, sw.getDISPLAYED_TILE_SIZE()/10 + 4 );
     }
 
     /***

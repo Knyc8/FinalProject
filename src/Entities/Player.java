@@ -13,7 +13,7 @@ public class Player extends Entity{
     int dmgCount = 0;
     public int level;
     public int exp;
-    public int enemiesKilled = 0;
+    public int enemiesKilled;
 
     /***
      * Initializes the SwingWindow and KeyManager
@@ -46,7 +46,7 @@ public class Player extends Entity{
         speed = 10;
         direction = "front";
         collidable = true;
-        iFrame = false;
+        immunity = false;
         enemiesKilled = 0;
 
         level = 1;
@@ -128,15 +128,15 @@ public class Player extends Entity{
                 }
             }
 
-//            spriteCount++;
-//            if (spriteCount > 10) {
-//                if (spriteNum == 1) {
-//                    spriteNum = 2;
-//                } else if (spriteNum == 2) {
-//                    spriteNum = 1;
-//                }
-//                spriteCount = 0;
-//            }
+            spriteCount++;
+            if (spriteCount > 10) {
+                if (spriteNum == 1) {
+                    spriteNum = 2;
+                } else if (spriteNum == 2) {
+                    spriteNum = 1;
+                }
+                spriteCount = 0;
+            }
         }
 
         if (km.isShootPressed() == true)
@@ -152,11 +152,11 @@ public class Player extends Entity{
             speed = 10;
         }
 
-        if (iFrame) {  //Invincibility loop
+        if (immunity) {  //Invincibility loop
             iCount++;
             if (iCount > 60)  //1 second invincibility
             {
-                iFrame = false;
+                immunity = false;
                 iCount = 0;
             }
         }
@@ -169,18 +169,18 @@ public class Player extends Entity{
      */
     public void takeDamage(int entityIdx) {
         if (entityIdx != -1) {
-            if (!iFrame) {
+            if (!immunity) {
                 hp--;
             }
-            iFrame = true;
+            immunity = true;
         }
     }
 
     public void damage(int entityIdx) {
         if (entityIdx != -1) {
-            if (sw.monsters[entityIdx].iFrame == false) {
+            if (sw.monsters[entityIdx].immunity == false) {
                 sw.monsters[entityIdx].hp--;
-                sw.monsters[entityIdx].iFrame = true;
+                sw.monsters[entityIdx].immunity = true;
 
                 if (sw.monsters[entityIdx].hp <= 0)
                 {
@@ -267,7 +267,7 @@ public class Player extends Entity{
                 break;
         }
 
-        if (iFrame)
+        if (immunity)
         {
             graphic2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
         }
