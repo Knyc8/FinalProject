@@ -3,6 +3,7 @@ package ClientWindow;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -11,6 +12,8 @@ public class OnScreenUI {
     Font dungeonFont;
     BufferedImage torch, DFIcon, wall, bacon, emptyBacon, sadCat, tDown, bCat, cBCat, arrow;
     int optionNum = 0;
+    int messageCount = 0;
+    String displayText = "";
 
     public OnScreenUI(SwingWindow sw)
     {
@@ -106,7 +109,7 @@ public class OnScreenUI {
         graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
         //TITLE
         graphics2D.setFont(graphics2D.getFont().deriveFont(Font.BOLD, 150f));
-        String displayText = "2D Dungeon Game";
+        displayText = "2D Dungeon Game";
         int length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();  //centers the text
         int x = sw.getSCREEN_WIDTH()/2 - length/2;
         int y = sw.getDISPLAYED_TILE_SIZE()*2;
@@ -193,7 +196,7 @@ public class OnScreenUI {
 
         //Display Level
         graphics2D.setFont(graphics2D.getFont().deriveFont(Font.BOLD, 75f));
-        String displayText = Integer.toString(sw.getPlayer().level);
+        displayText = Integer.toString(sw.getPlayer().level);
         int length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();
         graphics2D.drawString(displayText, sw.SCREEN_WIDTH - 64 - length/2, 100);
 
@@ -238,7 +241,7 @@ public class OnScreenUI {
         graphics2D.fillRect(0,0, sw.SCREEN_WIDTH, sw.SCREEN_HEIGHT);
         graphics2D.setColor(Color.white);
         graphics2D.setFont(graphics2D.getFont().deriveFont(Font.BOLD, 150f));
-        String displayText = "PAUSED";
+        displayText = "PAUSED";
         int length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();  //centers the text
         int x = sw.getSCREEN_WIDTH()/2 - length/2;
         int y = sw.getSCREEN_HEIGHT()/3;
@@ -261,7 +264,19 @@ public class OnScreenUI {
             graphics2D.drawImage(sw.player.front3, x-sw.getDISPLAYED_TILE_SIZE()/2 - (45/4), y-(39), 45, 45, null);
         }
 
-        displayText = "Save Game";
+        if (sw.fileManager.alreadySaved == true) {
+            displayText = "Progress Saved";
+            messageCount++;
+        }
+        else {
+            displayText = "Save Game";
+        }
+
+        if (messageCount >= 120) {
+            displayText = "Save Game";
+            messageCount = 0;
+            sw.fileManager.alreadySaved = false;
+        }
         length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();  //centers the text
         x = sw.getSCREEN_WIDTH()/2 - length/2;
         y = sw.getSCREEN_HEIGHT()/2 + sw.getDISPLAYED_TILE_SIZE();
@@ -295,7 +310,7 @@ public class OnScreenUI {
         graphics2D.fillRect(0,0, sw.SCREEN_WIDTH, sw.SCREEN_HEIGHT);
         graphics2D.setColor(Color.white);
         graphics2D.setFont(graphics2D.getFont().deriveFont(Font.BOLD, 150f));
-        String displayText = "You Lose!";
+        displayText = "You Lose!";
         int length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();  //centers the text
         int x = sw.getSCREEN_WIDTH()/2 - length/2;
         int y = sw.getSCREEN_HEIGHT()/2;
@@ -322,5 +337,10 @@ public class OnScreenUI {
         graphics2D.drawImage(bCat, x, y, sw.getDISPLAYED_TILE_SIZE()*4,sw.getDISPLAYED_TILE_SIZE()*2, null );
         x = sw.getSCREEN_WIDTH()*2/3 - sw.getDISPLAYED_TILE_SIZE()*2;
         graphics2D.drawImage(cBCat, x, y, sw.getDISPLAYED_TILE_SIZE()*2,sw.getDISPLAYED_TILE_SIZE()*2, null );
+    }
+
+    public void addToDisplayText(String text)
+    {
+        displayText = text;
     }
 }

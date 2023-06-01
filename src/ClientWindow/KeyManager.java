@@ -123,9 +123,10 @@ public class KeyManager implements KeyListener {
                 {
                     sw.gameState = sw.TITLE_SCREEN_STATE;
                 }
-                else if (sw.ui.optionNum == 1)  //load game
+                else if (sw.ui.optionNum == 1)  //save game
                 {
                     sw.fileManager.save();
+                    sw.fileManager.alreadySaved = true;
                 }
                 else {
                     sw.gameState = sw.PLAY_STATE;

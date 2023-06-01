@@ -8,6 +8,8 @@ import java.io.*;
 public class FileManager {
     SwingWindow sw;
     File save = new File("Save File.dat");
+    boolean alreadySaved = false;
+    boolean alreadyLoaded = false;
 
     public FileManager(SwingWindow sw) {
         this.sw = sw;
