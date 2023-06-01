@@ -381,7 +381,6 @@ public class OnScreenUI {
         }
         graphics2D.setStroke(oldStroke);
 
-        System.out.println(sw.fileManager.save == null);
         //Save File Data
         if (sw.fileManager.save != null) {
             x = sw.getDISPLAYED_TILE_SIZE() * 2 - 7;
