@@ -9,6 +9,7 @@ import Dungeon.TileMapper;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 import java.util.ArrayList;
 
 public class SwingWindow extends JPanel implements Runnable {
@@ -35,11 +36,14 @@ public class SwingWindow extends JPanel implements Runnable {
     TileMapper tileMapper = new TileMapper(this);
     CollisionDetector collisionDetector = new CollisionDetector(this);
     public DungeonPlacer dungeonPlacer = new DungeonPlacer(this);
+    public FileManager fileManager = new FileManager(this);
 
     //Entity settings
     Player player = new Player(this, keyManager);
-    public Entity monsters[] = new Entity[1000];  //Can display up to 10 enemies at once
+    public Entity monsters[] = new Entity[150];  //Can display up to 10 enemies at once
     public ArrayList<Entity> projectiles = new ArrayList<>();
+    public boolean[] monsterAlive;
+    public int[][] monsterPos;
 
     //Game Running State
     public int gameState;
@@ -66,9 +70,6 @@ public class SwingWindow extends JPanel implements Runnable {
      */
     public void setUp() {
         gameState = TITLE_SCREEN_STATE;
-
-        //set up monsters
-        dungeonPlacer.placeMonsters();
     }
 
     public int getDISPLAYED_TILE_SIZE() {
@@ -109,6 +110,9 @@ public class SwingWindow extends JPanel implements Runnable {
 
     public Player getPlayer() {
         return player;
+    }
+    public void setPlayer(Player playerFile) {
+        player = playerFile;
     }
 
     /***

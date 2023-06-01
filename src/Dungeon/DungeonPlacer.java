@@ -50,13 +50,27 @@ public class DungeonPlacer {
             startY = roomInfo[room][2];
             endY = roomInfo[room][3];
 
-            sw.monsters[i] = new MilesMM(sw, room);
+            sw.monsters[i] = new MilesMM(sw);
             int randX = (int) (Math.random() * (endX - startX + 1)) + startX;
             int randY = (int) (Math.random() * (endY - startY + 1)) + startY;
-            System.out.println(randX);
-            System.out.println(randY);
             sw.monsters[i].xCoord = sw.getDISPLAYED_TILE_SIZE() * randX;
             sw.monsters[i].yCoord = sw.getDISPLAYED_TILE_SIZE() * randY;
+        }
+    }
+
+    public void loadMonsters() {
+        for (int i = 0; i < sw.monsters.length; i++)
+        {
+            if (sw.monsterAlive[i] == true)
+            {
+                sw.monsters[i] = new MilesMM(sw);
+                sw.monsters[i].xCoord = sw.monsterPos[i][0];
+                sw.monsters[i].yCoord = sw.monsterPos[i][1];
+            }
+            else
+            {
+                sw.monsters[i] = null;
+            }
         }
     }
 }

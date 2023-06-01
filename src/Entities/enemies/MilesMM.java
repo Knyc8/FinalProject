@@ -8,12 +8,12 @@ import Entities.Projectile;
 import java.awt.*;
 
 public class MilesMM extends Entity {
-    public int room;
+//    public int room;  //future implementation
     int actionCount;
-    public MilesMM(SwingWindow sw, int r) {
+    public MilesMM(SwingWindow sw) {
         super(sw);
 
-        room = r;
+//        room = r;  //future implementation
         setDefaultValues();
 
         getImg();

@@ -61,11 +61,19 @@ public class KeyManager implements KeyListener {
                     sw.gameState = sw.PLAY_STATE;
                     sw.player.setDefaultValues();
 
+                    //Set up enemies
                     sw.dungeonPlacer.placeMonsters();
                 }
                 else if (sw.ui.optionNum == 1)  //load game
                 {
-                    System.out.println("Load games placeholder");  //for testing
+                    if (sw.fileManager.load()) {
+                        System.out.println("Load Successful");
+                        sw.gameState = sw.PLAY_STATE;
+                        sw.dungeonPlacer.loadMonsters();
+                    }
+                    else {
+                        System.out.println("Load Failed");
+                    }
                 }
                 else {
                     System.exit(0);  //exit game
@@ -117,7 +125,7 @@ public class KeyManager implements KeyListener {
                 }
                 else if (sw.ui.optionNum == 1)  //load game
                 {
-                    /*Code for saving game*/
+                    sw.fileManager.save();
                 }
                 else {
                     sw.gameState = sw.PLAY_STATE;
