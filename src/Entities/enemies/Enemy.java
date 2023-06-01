@@ -1,16 +1,14 @@
 package Entities.enemies;
 
-import Dungeon.DungeonPlacer;
 import Entities.Entity;
 import ClientWindow.SwingWindow;
-import Entities.Projectile;
 
 import java.awt.*;
 
-public class MilesMM extends Entity {
+public class Enemy extends Entity {
 //    public int room;  //future implementation
     int actionCount;
-    public MilesMM(SwingWindow sw) {
+    public Enemy(SwingWindow sw) {
         super(sw);
 
 //        room = r;  //future implementation
@@ -94,6 +92,15 @@ public class MilesMM extends Entity {
         super.update();
 
         restrainBounds();
+        this.spriteCount++;
+        if (this.spriteCount > 1500) {
+            if (this.spriteNum == 1) {
+                this.spriteNum = 2;
+            } else if (this.spriteNum == 2) {
+                this.spriteNum = 1;
+            }
+            this.spriteCount = 0;
+        }
     }
 
     public void restrainBounds(){

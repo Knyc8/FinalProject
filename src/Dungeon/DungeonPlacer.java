@@ -1,7 +1,7 @@
 package Dungeon;
 
 import ClientWindow.SwingWindow;
-import Entities.enemies.MilesMM;
+import Entities.enemies.Enemy;
 
 /***
  * places entities in a specific location in the dungeon
@@ -50,7 +50,7 @@ public class DungeonPlacer {
             startY = roomInfo[room][2];
             endY = roomInfo[room][3];
 
-            sw.monsters[i] = new MilesMM(sw);
+            sw.monsters[i] = new Enemy(sw);
             int randX = (int) (Math.random() * (endX - startX + 1)) + startX;
             int randY = (int) (Math.random() * (endY - startY + 1)) + startY;
             sw.monsters[i].xCoord = sw.getDISPLAYED_TILE_SIZE() * randX;
@@ -63,7 +63,7 @@ public class DungeonPlacer {
         {
             if (sw.monsterAlive[i] == true)
             {
-                sw.monsters[i] = new MilesMM(sw);
+                sw.monsters[i] = new Enemy(sw);
                 sw.monsters[i].xCoord = sw.monsterPos[i][0];
                 sw.monsters[i].yCoord = sw.monsterPos[i][1];
             }

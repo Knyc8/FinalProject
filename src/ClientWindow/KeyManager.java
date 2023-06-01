@@ -1,8 +1,5 @@
 package ClientWindow;
 
-import Entities.Entity;
-import Entities.enemies.MilesMM;
-
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 

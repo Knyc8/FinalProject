@@ -7,7 +7,7 @@ public class ClientRunner {
         JFrame gameWindow = new JFrame();
         gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameWindow.setResizable(false);
-        gameWindow.setTitle("2D Dungeon.Dungeon Game");
+        gameWindow.setTitle("Wilboar's Crypt");
 
         SwingWindow gamePanel = new SwingWindow();
         gameWindow.add(gamePanel);

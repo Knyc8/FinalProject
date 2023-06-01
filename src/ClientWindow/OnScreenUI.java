@@ -113,7 +113,7 @@ public class OnScreenUI {
         graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
         //TITLE
         graphics2D.setFont(graphics2D.getFont().deriveFont(Font.BOLD, 150f));
-        displayText = "2D Dungeon Game";
+        displayText = "Wilboar's Crypt";
         int length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();  //centers the text
         int x = sw.getSCREEN_WIDTH()/2 - length/2;
         int y = sw.getDISPLAYED_TILE_SIZE()*2;

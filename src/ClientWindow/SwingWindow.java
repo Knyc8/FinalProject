@@ -4,12 +4,10 @@ import Dungeon.DungeonPlacer;
 import Entities.CollisionDetector;
 import Entities.Entity;
 import Entities.Player;
-import Entities.enemies.MilesMM;
 import Dungeon.TileMapper;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.File;
 import java.util.ArrayList;
 
 public class SwingWindow extends JPanel implements Runnable {

@@ -59,6 +59,16 @@ public class Projectile extends Entity{
         if (hp <= 0) {
             alive = false;
         }
+
+        this.spriteCount++;
+        if (this.spriteCount > 2) {
+            if (this.spriteNum == 1) {
+                this.spriteNum = 2;
+            } else if (this.spriteNum == 2) {
+                this.spriteNum = 1;
+            }
+            this.spriteCount = 0;
+        }
     }
 
     public void draw(Graphics2D graphics2D) {

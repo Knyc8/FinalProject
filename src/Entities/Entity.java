@@ -144,15 +144,6 @@ public class Entity {
             }
         }
 
-        this.spriteCount++;
-        if (this.spriteCount > 10) {
-            if (this.spriteNum == 1) {
-                this.spriteNum = 2;
-            } else if (this.spriteNum == 2) {
-                this.spriteNum = 1;
-            }
-            this.spriteCount = 0;
-        }
 
         if (immunity) {
             iCount++;
