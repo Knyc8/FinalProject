@@ -7,6 +7,7 @@ import java.io.*;
 
 public class FileManager {
     SwingWindow sw;
+    File save = new File("Save File.dat");
 
     public FileManager(SwingWindow sw) {
         this.sw = sw;
@@ -14,7 +15,8 @@ public class FileManager {
 
     public boolean save() {
         try {
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(new File("Save File.dat")));
+            save = new File("Save File.dat");
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(save));
 
             DataLibrary dl = new DataLibrary();
             dl.maxHp = sw.getPlayer().maxHp;
@@ -53,7 +55,8 @@ public class FileManager {
 
     public boolean load() {
         try {
-            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(new File("Save File.dat")));
+            save = new File("Save File.dat");
+            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(save));
 
             DataLibrary dl = (DataLibrary) objectInputStream.readObject();
             sw.getPlayer().maxHp = dl.maxHp;
@@ -72,6 +75,15 @@ public class FileManager {
 
         } catch (Exception e) {
             return false;
+        }
+    }
+
+    public void deleteSaveFile()
+    {
+        if (save != null) {
+            save.delete();
+            save = null;
+            System.out.println("File was deleted");
         }
     }
 }

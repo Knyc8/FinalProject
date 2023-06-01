@@ -182,6 +182,7 @@ public class SwingWindow extends JPanel implements Runnable {
         if (player.hp == 0)
         {
             gameState = LOSE_STATE;
+            fileManager.deleteSaveFile();
         }
     }
 
