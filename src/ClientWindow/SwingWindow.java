@@ -23,8 +23,6 @@ public class SwingWindow extends JPanel implements Runnable {
     //Dungeon setting
     final int DUNGEON_COL = 50;
     final int DUNGEON_ROW = 50;
-    final int DUNGEON_WIDTH = DISPLAYED_TILE_SIZE * DUNGEON_COL;
-    final int DUNGEON_HEIGHT = DISPLAYED_TILE_SIZE * DUNGEON_ROW;
 
     //Game Setup
     int framesPerSecond = 60;  //screen refreshes 60 times every second
