@@ -61,7 +61,7 @@ public class Entity {
 
             switch(direction)
             {
-                case "back":
+                case "north":
                     if (spriteNum == 1) {
                         image = back1;
                     }
@@ -69,7 +69,7 @@ public class Entity {
                         image = back2;
                     }
                     break;
-                case "front":
+                case "south":
                     if (spriteNum == 1) {
                         image = front1;
                     }
@@ -77,7 +77,7 @@ public class Entity {
                         image = front2;
                     }
                     break;
-                case "left":
+                case "west":
                     if (spriteNum == 1) {
                         image = left1;
                     }
@@ -85,7 +85,7 @@ public class Entity {
                         image = left2;
                     }
                     break;
-                case "right":
+                case "east":
                     if (spriteNum == 1) {
                         image = right1;
                     }
@@ -130,16 +130,16 @@ public class Entity {
 
 
         if (!colliding) {
-            if (direction.equals("back")) {  //up speed units
+            if (direction.equals("north")) {  //up speed units
                 yCoord -= (int)(speed * Math.random()*2 + 1);  //top left is (0, 0)
             }
-            if (direction.equals("front")) {  //down speed units
+            if (direction.equals("south")) {  //down speed units
                 yCoord += (int)(speed * Math.random()*2 + 1);
             }
-            if (direction.equals("left")) {  //left speed units
+            if (direction.equals("west")) {  //left speed units
                 xCoord -= (int)(speed * Math.random()*2 + 1);
             }
-            if (direction.equals("right")) {  //right speed units
+            if (direction.equals("east")) {  //right speed units
                 xCoord += (int)(speed * Math.random()*2 + 1);
             }
         }

@@ -29,16 +29,16 @@ public class MilesMM extends Entity {
 
         int rand = (int) (Math.random()*4) + 1;  //random number from 1-4
         if (rand == 1) {
-            direction = "back";
+            direction = "north";
         }
         if (rand == 2) {
-            direction = "front";
+            direction = "south";
         }
         if (rand == 3) {
-            direction = "left";
+            direction = "west";
         }
         if (rand == 4) {
-            direction = "right";
+            direction = "east";
         }
 
         hitbox = new Rectangle();
@@ -75,16 +75,16 @@ public class MilesMM extends Entity {
             int rand = (int) (Math.random()*4) + 1;  //random number from 1-4
 
             if (rand == 1) {
-                direction = "back";
+                direction = "north";
             }
             if (rand == 2) {
-                direction = "front";
+                direction = "south";
             }
             if (rand == 3) {
-                direction = "left";
+                direction = "west";
             }
             if (rand == 4) {
-                direction = "right";
+                direction = "east";
             }
             actionCount = 0;
         }

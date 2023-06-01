@@ -66,14 +66,11 @@ public class KeyManager implements KeyListener {
                 }
                 else if (sw.ui.optionNum == 1)  //load game
                 {
-                    if (sw.fileManager.load()) {
-                        System.out.println("Load Successful");
-                        sw.gameState = sw.PLAY_STATE;
-                        sw.dungeonPlacer.loadMonsters();
-                    }
-                    else {
-                        System.out.println("Load Failed");
-                    }
+                    sw.fileManager.alreadyLoaded = sw.fileManager.load();
+                    sw.gameState = sw.LOAD_MENU_STATE;
+                    System.out.println(sw.gameState);
+                    keyCode = -1;
+                    sw.ui.optionNum = 0;
                 }
                 else {
                     System.exit(0);  //exit game
@@ -125,11 +122,42 @@ public class KeyManager implements KeyListener {
                 }
                 else if (sw.ui.optionNum == 1)  //save game
                 {
-                    sw.fileManager.save();
-                    sw.fileManager.alreadySaved = true;
+                    sw.fileManager.alreadySaved = sw.fileManager.save();
                 }
                 else {
                     sw.gameState = sw.PLAY_STATE;
+                }
+            }
+        }
+
+        //Load Game Menu State
+        if (sw.gameState == sw.LOAD_MENU_STATE) {
+            if (keyCode == KeyEvent.VK_W || keyCode == KeyEvent.VK_UP) {
+                sw.ui.optionNum--;
+                if (sw.ui.optionNum < 0)
+                {
+                    sw.ui.optionNum = 1;
+                }
+            }
+            if (keyCode == KeyEvent.VK_S || keyCode == KeyEvent.VK_DOWN) {
+                sw.ui.optionNum++;
+                if (sw.ui.optionNum > 1)
+                {
+                    sw.ui.optionNum = 0;
+                }
+            }
+            if (keyCode == KeyEvent.VK_ENTER || keyCode == KeyEvent.VK_SPACE) {
+                if (sw.ui.optionNum == 0)  //Load game
+                {
+                    if (sw.fileManager.alreadyLoaded == true) {
+                        System.out.println("Load Successful");
+                        sw.gameState = sw.PLAY_STATE;
+                        sw.dungeonPlacer.loadMonsters();
+                    }
+                }
+                else {  //Return to TTS
+                    sw.gameState = sw.TITLE_SCREEN_STATE;
+                    sw.ui.optionNum = 0;
                 }
             }
         }

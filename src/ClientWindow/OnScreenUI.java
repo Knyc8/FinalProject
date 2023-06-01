@@ -70,6 +70,10 @@ public class OnScreenUI {
         else if (sw.gameState == sw.LOSE_STATE) {
             drawLoseScreen(graphics2D);
         }
+        //LOAD MENU STATE
+        else if (sw.gameState == sw.LOAD_MENU_STATE){
+            drawLoadScreen(graphics2D);
+        }
     }
 
     /***
@@ -339,8 +343,91 @@ public class OnScreenUI {
         graphics2D.drawImage(cBCat, x, y, sw.getDISPLAYED_TILE_SIZE()*2,sw.getDISPLAYED_TILE_SIZE()*2, null );
     }
 
-    public void addToDisplayText(String text)
-    {
-        displayText = text;
+    public void drawLoadScreen(Graphics2D graphics2D) {
+        //Background
+        graphics2D.setColor(Color.black);
+        graphics2D.fillRect(0,0, sw.SCREEN_WIDTH, sw.SCREEN_HEIGHT);
+        graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.25f));  //25% opacity
+        graphics2D.drawImage(wall, 0, 0, sw.SCREEN_WIDTH/2, sw.SCREEN_HEIGHT, null);
+        graphics2D.drawImage(wall, sw.SCREEN_WIDTH/2, 0, sw.SCREEN_WIDTH/2, sw.SCREEN_HEIGHT, null);
+
+        //Load Box
+        graphics2D.setFont(graphics2D.getFont().deriveFont(Font.BOLD, 50f));
+        graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+        graphics2D.setColor(Color.white);
+        displayText = "Load Recent Save: ";
+        int length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();  //centers the text
+        int x = sw.getDISPLAYED_TILE_SIZE()*7/2-length/2;
+        int y = sw.getDISPLAYED_TILE_SIZE()*2 - 5;
+        graphics2D.drawString(displayText, x, y);
+
+        x = sw.getDISPLAYED_TILE_SIZE()*2;
+        y = sw.getDISPLAYED_TILE_SIZE()*2;
+        graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
+        graphics2D.setColor(Color.darkGray);
+        graphics2D.fillRect(x, y, sw.SCREEN_WIDTH-sw.DISPLAYED_TILE_SIZE*4, sw.getDISPLAYED_TILE_SIZE()*3);
+        graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
+        float thickness = sw.DISPLAYED_TILE_SIZE/10f;
+        Stroke oldStroke = graphics2D.getStroke();
+        graphics2D.setStroke(new BasicStroke(thickness));
+        graphics2D.setColor(new Color(255,255,255,127));
+        graphics2D.drawRect(x, y, sw.SCREEN_WIDTH-sw.DISPLAYED_TILE_SIZE*4, sw.getDISPLAYED_TILE_SIZE()*3);
+        if (optionNum == 0)
+        {
+            graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+            graphics2D.setColor(Color.white);
+            graphics2D.drawRect(x, y, sw.SCREEN_WIDTH-sw.DISPLAYED_TILE_SIZE*4, sw.getDISPLAYED_TILE_SIZE()*3);
+            graphics2D.setStroke(oldStroke);
+        }
+        graphics2D.setStroke(oldStroke);
+
+        System.out.println(sw.fileManager.save == null);
+        //Save File Data
+        if (sw.fileManager.save != null) {
+            x = sw.getDISPLAYED_TILE_SIZE() * 2 - 7;
+            y = sw.getDISPLAYED_TILE_SIZE() * 2 + 17;
+            graphics2D.drawImage(torch, x, y, sw.getDISPLAYED_TILE_SIZE() * 5 / 2, sw.getDISPLAYED_TILE_SIZE() * 5 / 2, null);
+
+            displayText = "Hitpoints: " + sw.getPlayer().hp + "/" + sw.getPlayer().maxHp;
+            displayText += " - - - - - Current Level: " + sw.getPlayer().level;
+            displayText += " - - - - - Exp: " + sw.getPlayer().exp + "/" + sw.getPlayer().level * 8;
+            x = sw.getDISPLAYED_TILE_SIZE() * 5;
+            y = sw.getDISPLAYED_TILE_SIZE() * 3;
+            graphics2D.drawString(displayText, x, y);
+            displayText = "Enemies Killed: " + sw.getPlayer().enemiesKilled + "/" + sw.monsters.length;
+            x = sw.getDISPLAYED_TILE_SIZE() * 7;
+            y = sw.getDISPLAYED_TILE_SIZE() * 11 / 3;
+            graphics2D.drawString(displayText, x, y);
+            displayText = "X Position: " + sw.getPlayer().xCoord + " - - - - - ";
+            displayText += "Y Position: " + sw.getPlayer().yCoord + " - - - - - ";
+            displayText += "Facing :" + sw.getPlayer().direction;
+            x = sw.getDISPLAYED_TILE_SIZE() * 5 - 25;
+            y = sw.getDISPLAYED_TILE_SIZE() * 13 / 3;
+            graphics2D.drawString(displayText, x, y);
+        }
+        else {
+            graphics2D.setFont(graphics2D.getFont().deriveFont(Font.BOLD, 80f));
+            displayText = "No Files Saved";
+            length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();  //centers the text
+            x = sw.getSCREEN_WIDTH()/2 - length/2;
+            y = sw.getDISPLAYED_TILE_SIZE() * 4;
+            graphics2D.drawString(displayText, x, y);
+        }
+
+        //Return to title screen
+        graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+        graphics2D.setFont(graphics2D.getFont().deriveFont(Font.BOLD, 50f));
+        displayText = "Return to Title Screen";
+        length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();  //centers the text
+        x = sw.getSCREEN_WIDTH()/2 - length/2;
+        y = sw.getSCREEN_HEIGHT()/2 + sw.DISPLAYED_TILE_SIZE*3/2;
+        graphics2D.setColor(new Color(255,255,255,127));
+        graphics2D.drawString(displayText, x, y);
+        if (optionNum == 1)
+        {
+            graphics2D.setColor(Color.white);
+            graphics2D.drawString(displayText, x, y);
+        }
     }
+
 }

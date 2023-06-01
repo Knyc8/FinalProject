@@ -7,7 +7,7 @@ import java.io.*;
 
 public class FileManager {
     SwingWindow sw;
-    File save = new File("Save File.dat");
+    File save = null;
     boolean alreadySaved = false;
     boolean alreadyLoaded = false;
 
@@ -57,8 +57,7 @@ public class FileManager {
 
     public boolean load() {
         try {
-            save = new File("Save File.dat");
-            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(save));
+            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(new File("Save File.dat")));
 
             DataLibrary dl = (DataLibrary) objectInputStream.readObject();
             sw.getPlayer().maxHp = dl.maxHp;

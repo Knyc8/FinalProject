@@ -81,15 +81,12 @@ public class Projectile extends Entity{
                 if (this.spriteNum == 2) {
                     image = explosion2;
                 }
-//                size = sw.getDISPLAYED_TILE_SIZE()*3/2;
-//                screenX -= sw.getDISPLAYED_TILE_SIZE()/2;
-//                screenY -= sw.getDISPLAYED_TILE_SIZE()/2;
                 speed = 0;
             }
             else {
                 speed = 15;
                 switch(direction) {
-                    case "back":
+                    case "north":
                         if (this.spriteNum == 1) {
                             image = back1;
                         }
@@ -97,7 +94,7 @@ public class Projectile extends Entity{
                             image = back2;
                         }
                         break;
-                    case "front":
+                    case "south":
                         if (this.spriteNum == 1) {
                             image = front1;
                         }
@@ -105,7 +102,7 @@ public class Projectile extends Entity{
                             image = front2;
                         }
                         break;
-                    case "left":
+                    case "west":
                         if (this.spriteNum == 1) {
                             image = left1;
                         }
@@ -113,7 +110,7 @@ public class Projectile extends Entity{
                             image = left2;
                         }
                         break;
-                        case "right":
+                        case "east":
                             if (this.spriteNum == 1) {
                                 image = right1;
                             }

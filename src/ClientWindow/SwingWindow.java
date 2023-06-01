@@ -51,6 +51,7 @@ public class SwingWindow extends JPanel implements Runnable {
     public final int PLAY_STATE = 1;
     public final int PAUSED_STATE = 2;
     public final int LOSE_STATE = 3;
+    public final int LOAD_MENU_STATE = 4;
 
     /***
      * Initializes the dimensions of the screen and client inputs

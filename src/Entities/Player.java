@@ -44,7 +44,7 @@ public class Player extends Entity{
         xCoord = sw.getDISPLAYED_TILE_SIZE() * 7;
         yCoord = sw.getDISPLAYED_TILE_SIZE() * 4;
         speed = 10;
-        direction = "front";
+        direction = "south";
         collidable = true;
         immunity = false;
         enemiesKilled = 0;
@@ -76,19 +76,19 @@ public class Player extends Entity{
             //Character orientation
             if (km.isWPressed())
             {
-                direction = "back";
+                direction = "north";
             }
             if (km.isSPressed())
             {
-                direction = "front";
+                direction = "south";
             }
             if (km.isAPressed())
             {
-                direction = "left";
+                direction = "west";
             }
             if (km.isDPressed())
             {
-                direction = "right";
+                direction = "east";
             }
 
             //check for tiles collisions
@@ -101,16 +101,16 @@ public class Player extends Entity{
 
             if (colliding == false) {
                 //dmgCount = 0;
-                if (direction.equals("back")) {  //up speed units
+                if (direction.equals("north")) {  //up speed units
                     yCoord -= speed;  //top left is (0, 0)
                 }
-                if (direction.equals("front")) {  //down speed units
+                if (direction.equals("south")) {  //down speed units
                     yCoord += speed;
                 }
-                if (direction.equals("left")) {  //left speed units
+                if (direction.equals("west")) {  //left speed units
                     xCoord -= speed;
                 }
-                if (direction.equals("right")) {  //right speed units
+                if (direction.equals("east")) {  //right speed units
                     xCoord += speed;
                 }
             }
@@ -204,7 +204,7 @@ public class Player extends Entity{
 
         switch(direction)
         {
-            case "back":
+            case "north":
                 if (!km.isWPressed() && !km.isAPressed() && !km.isSPressed() && !km.isDPressed())
                 {
                     image = back3;
@@ -218,7 +218,7 @@ public class Player extends Entity{
                     }
                 }
                 break;
-            case "front":
+            case "south":
                 if (!km.isWPressed() && !km.isAPressed() && !km.isSPressed() && !km.isDPressed())
                 {
                     image = front3;
@@ -232,7 +232,7 @@ public class Player extends Entity{
                     }
                 }
                 break;
-            case "left":
+            case "west":
                 if (!km.isWPressed() && !km.isAPressed() && !km.isSPressed() && !km.isDPressed())
                 {
                     image = left3;
@@ -246,7 +246,7 @@ public class Player extends Entity{
                     }
                 }
                 break;
-            case "right":
+            case "east":
                 if (!km.isWPressed() && !km.isAPressed() && !km.isSPressed() && !km.isDPressed())
                 {
                     image = right3;
