@@ -91,7 +91,7 @@ public class MilesMM extends Entity {
     }
 
     public void update() {
-        super.update();
+//        super.update();
 
         restrainBounds();
     }
