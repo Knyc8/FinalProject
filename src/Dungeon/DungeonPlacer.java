@@ -9,7 +9,6 @@ import Entities.enemies.Enemy;
 public class DungeonPlacer {
     SwingWindow sw;
     public int[][] roomInfo;
-    private int enemyCount = 0;
     public DungeonPlacer(SwingWindow sw)
     {
         this.sw = sw;

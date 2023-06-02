@@ -74,6 +74,10 @@ public class OnScreenUI {
         else if (sw.gameState == sw.LOAD_MENU_STATE){
             drawLoadScreen(graphics2D);
         }
+        //LOADING STATE
+        else if (sw.gameState == sw.LOADING_STATE) {
+            drawLoadingScreen(graphics2D);
+        }
     }
 
     /***
@@ -382,7 +386,7 @@ public class OnScreenUI {
         graphics2D.setStroke(oldStroke);
 
         //Save File Data
-        if (sw.fileManager.save != null) {
+        if (sw.fileManager.alreadyLoaded) {
             x = sw.getDISPLAYED_TILE_SIZE() * 2 - 7;
             y = sw.getDISPLAYED_TILE_SIZE() * 2 + 17;
             graphics2D.drawImage(torch, x, y, sw.getDISPLAYED_TILE_SIZE() * 5 / 2, sw.getDISPLAYED_TILE_SIZE() * 5 / 2, null);
@@ -427,6 +431,19 @@ public class OnScreenUI {
             graphics2D.setColor(Color.white);
             graphics2D.drawString(displayText, x, y);
         }
+    }
+
+    public void drawLoadingScreen(Graphics2D graphics2D) {
+        graphics2D.setColor(Color.black);
+        graphics2D.fillRect(0,0, sw.SCREEN_WIDTH, sw.SCREEN_HEIGHT);
+
+        graphics2D.setFont(graphics2D.getFont().deriveFont(Font.BOLD, 100f));
+        graphics2D.setColor(Color.white);
+        displayText = "LOADING...";
+        int length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();  //centers the text
+        int x = sw.getSCREEN_WIDTH()/2 - length/2;
+        int y = sw.getSCREEN_HEIGHT()/2;
+        graphics2D.drawString(displayText, x, y);
     }
 
 }

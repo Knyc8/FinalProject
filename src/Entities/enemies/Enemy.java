@@ -6,7 +6,7 @@ import ClientWindow.SwingWindow;
 import java.awt.*;
 
 public class Enemy extends Entity {
-//    public int room;  //future implementation
+//    private int room;  //future implementation
     int actionCount;
     public Enemy(SwingWindow sw) {
         super(sw);

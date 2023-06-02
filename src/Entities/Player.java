@@ -140,10 +140,20 @@ public class Player extends Entity{
 
         if (immunity) {  //Invincibility loop
             iCount++;
-            if (iCount > 60)  //1 second invincibility
+            if (sw.fileManager.alreadyLoaded == true)
             {
-                immunity = false;
-                iCount = 0;
+                if (iCount > 240)  //4 second invincibility
+                {
+                    immunity = false;
+                    iCount = 0;
+                }
+            }
+            else {
+                if (iCount > 60)  //1 second invincibility
+                {
+                    immunity = false;
+                    iCount = 0;
+                }
             }
         }
     }

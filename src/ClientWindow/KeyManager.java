@@ -1,5 +1,6 @@
 package ClientWindow;
 
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -55,11 +56,8 @@ public class KeyManager implements KeyListener {
             if (keyCode == KeyEvent.VK_ENTER || keyCode == KeyEvent.VK_SPACE) {
                 if (sw.ui.optionNum == 0)  //start game
                 {
-                    sw.gameState = sw.PLAY_STATE;
-                    sw.player.setDefaultValues();
-
+                    sw.gameState = sw.LOADING_STATE;
                     //Set up enemies
-                    sw.dungeonPlacer.placeMonsters();
                 }
                 else if (sw.ui.optionNum == 1)  //load game
                 {
@@ -146,15 +144,14 @@ public class KeyManager implements KeyListener {
             if (keyCode == KeyEvent.VK_ENTER || keyCode == KeyEvent.VK_SPACE) {
                 if (sw.ui.optionNum == 0)  //Load game
                 {
-                    if (sw.fileManager.alreadyLoaded == true) {
-                        System.out.println("Load Successful");
-                        sw.gameState = sw.PLAY_STATE;
-                        sw.dungeonPlacer.loadMonsters();
+                    if (sw.fileManager.alreadyLoaded) {
+                        sw.gameState = sw.LOADING_STATE;
                     }
                 }
                 else {  //Return to TTS
                     sw.gameState = sw.TITLE_SCREEN_STATE;
                     sw.ui.optionNum = 0;
+                    sw.fileManager.alreadyLoaded = false;
                 }
             }
         }

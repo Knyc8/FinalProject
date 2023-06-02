@@ -48,6 +48,7 @@ public class SwingWindow extends JPanel implements Runnable {
     public final int PAUSED_STATE = 2;
     public final int LOSE_STATE = 3;
     public final int LOAD_MENU_STATE = 4;
+    public final int LOADING_STATE = 5;
 
     /***
      * Initializes the dimensions of the screen and client inputs
@@ -180,6 +181,20 @@ public class SwingWindow extends JPanel implements Runnable {
         {
             gameState = LOSE_STATE;
             fileManager.deleteSaveFile();
+        }
+
+        if (gameState == LOADING_STATE)
+        {
+            if (fileManager.alreadyLoaded == true) {
+                gameState = PLAY_STATE;
+                dungeonPlacer.loadMonsters();
+                getPlayer().immunity = true;
+            }
+            else {
+                dungeonPlacer.placeMonsters();
+                gameState = PLAY_STATE;
+                player.setDefaultValues();
+            }
         }
     }
 

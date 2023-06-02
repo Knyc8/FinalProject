@@ -7,13 +7,14 @@ import java.io.*;
 
 public class FileManager {
     SwingWindow sw;
-    File save = null;
-    boolean alreadySaved = false;
-    boolean alreadyLoaded = false;
+    File save = new File("Save_File.dat");
+    public boolean alreadySaved = false;
+    public boolean alreadyLoaded = false;
 
     public FileManager(SwingWindow sw) {
         this.sw = sw;
     }
+
 
     public boolean save() {
         try {
