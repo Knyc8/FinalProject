@@ -221,7 +221,7 @@ public class SwingWindow extends JPanel implements Runnable {
             }
 
             //Player
-            player.drawPlayer((Graphics2D) graphic);  //draws player on the screen
+            player.draw((Graphics2D) graphic);  //draws player on the screen
 
             //Player ui
             ui.draw(graphic2D);

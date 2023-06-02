@@ -198,7 +198,7 @@ public class Player extends Entity{
         }
     }
 
-    public void drawPlayer(Graphics2D graphic2D) {
+    public void draw(Graphics2D graphic2D) {
         BufferedImage image = null;
 
         switch(direction)
