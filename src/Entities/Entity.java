@@ -35,6 +35,10 @@ public class Entity {
     public int hp;
     public int dmg;
 
+
+    public Entity (SwingWindow sw) {
+        this.sw = sw;
+    }
     public BufferedImage setImage(String pathname) {
         BufferedImage image = null;
         try{
@@ -43,10 +47,6 @@ public class Entity {
             ex.printStackTrace();;
         }
         return image;
-    }
-
-    public Entity (SwingWindow sw) {
-        this.sw = sw;
     }
     public void draw(Graphics2D graphics2D) {
         int screenX = xCoord - sw.getPlayer().xCoord + sw.getPlayer().SCREEN_X;

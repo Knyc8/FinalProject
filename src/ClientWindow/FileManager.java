@@ -17,7 +17,7 @@ public class FileManager {
 
     public boolean save() {
         try {
-            save = new File("Save File.dat");
+            save = new File("Save_File.dat");
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(save));
 
             DataLibrary dl = new DataLibrary();
@@ -57,7 +57,7 @@ public class FileManager {
 
     public boolean load() {
         try {
-            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(new File("Save File.dat")));
+            ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(new File("Save_File.dat")));
 
             DataLibrary dl = (DataLibrary) objectInputStream.readObject();
             sw.getPlayer().maxHp = dl.maxHp;
