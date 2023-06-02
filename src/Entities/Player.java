@@ -48,11 +48,13 @@ public class Player extends Entity{
         immunity = false;
         enemiesKilled = 0;
 
-        level = 1;
+        level = 5;
         exp = 0;
         maxHp = 3;
         hp = maxHp;
         projectile = new Projectile(sw);
+        projectile2 = new Projectile(sw);
+        projectile3 = new Projectile(sw);
     }
 
     public void getPlayerSprite() {
@@ -125,14 +127,46 @@ public class Player extends Entity{
             }
         }
 
-        if (km.isShootPressed() == true)
-        {
-            speed = 10/2;
-            if (projectile.alive == false){
-            projectile.set(xCoord, yCoord, direction, true, this);
+        if (km.isShootPressed() == true) {
+            speed = 10 / 2;
 
-            sw.projectiles.add(projectile);
-        }
+            if (level < 3) {
+                if (projectile.alive == false) {
+                    projectile.set(xCoord, yCoord, direction, true, this);
+                    sw.projectiles.add(projectile);
+                }
+            }
+            if (level >= 3 && level < 5) {
+                if (projectile.alive == false && projectile2.alive == false) {
+                    if (direction.equals("north") || direction.equals("south")) {
+                        projectile.set(xCoord - 25, yCoord, direction, true, this);
+                        projectile2.set(xCoord  +25, yCoord, direction, true, this);
+                    }
+                    if (direction.equals("east") || direction.equals("west")) {
+                        projectile.set(xCoord, yCoord - 25, direction, true, this);
+                        projectile2.set(xCoord, yCoord + 25, direction, true, this);
+                    }
+                    sw.projectiles.add(projectile);
+                    sw.projectiles.add(projectile2);
+                }
+            }
+            if (level >= 5) {
+                if (projectile.alive == false && projectile2.alive == false && projectile3.alive == false) {
+                    if (direction.equals("north") || direction.equals("south")) {
+                        projectile.set(xCoord - 50, yCoord, direction, true, this);
+                        projectile2.set(xCoord, yCoord, direction, true, this);
+                        projectile3.set(xCoord + 50, yCoord, direction, true, this);
+                    }
+                    if (direction.equals("east") || direction.equals("west")) {
+                        projectile.set(xCoord, yCoord - 50, direction, true, this);
+                        projectile2.set(xCoord, yCoord, direction, true, this);
+                        projectile3.set(xCoord, yCoord + 50, direction, true, this);
+                    }
+                    sw.projectiles.add(projectile);
+                    sw.projectiles.add(projectile2);
+                    sw.projectiles.add(projectile3);
+                }
+            }
         }
         else {
             speed = 10;
