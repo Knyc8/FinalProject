@@ -26,7 +26,4 @@ public class Tile {
     public BufferedImage getImg() {
         return img;
     }
-    public String getPathName() {
-        return pathName;
-    }
 }
