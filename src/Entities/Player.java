@@ -10,7 +10,6 @@ public class Player extends Entity{
     KeyManager km;
     public final int SCREEN_X;
     public final int SCREEN_Y;
-    int dmgCount = 0;
     public int level;
     public int exp;
     public int enemiesKilled;
@@ -71,7 +70,7 @@ public class Player extends Entity{
             right3 = setImage("/player_sprites/pigzard_r1.png");
     }
 
-    public void updateInfo() {
+    public void update() {
         if (km.isWPressed() || km.isSPressed() || km.isAPressed() || km.isDPressed()) {
             //Character orientation
             if (km.isWPressed())

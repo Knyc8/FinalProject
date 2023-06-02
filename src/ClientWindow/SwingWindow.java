@@ -156,7 +156,7 @@ public class SwingWindow extends JPanel implements Runnable {
         }
         if (gameState == PLAY_STATE) {
             //Character movement
-            player.updateInfo();
+            player.update();
 
             for (int i = 0; i < monsters.length; i++) {
                 if (monsters[i] != null) {
