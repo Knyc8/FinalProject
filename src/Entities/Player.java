@@ -142,10 +142,11 @@ public class Player extends Entity{
             iCount++;
             if (sw.fileManager.alreadyLoaded == true)
             {
-                if (iCount > 240)  //4 second invincibility
+                if (iCount > 300)  //4 second invincibility
                 {
                     immunity = false;
                     iCount = 0;
+                    sw.fileManager.alreadyLoaded = false;
                 }
             }
             else {
@@ -191,7 +192,7 @@ public class Player extends Entity{
 
     public void levelUp()
     {
-        if (exp == level*8)
+        if (exp == level*5)
         {
             level++;
             hp++;

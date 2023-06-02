@@ -223,7 +223,7 @@ public class OnScreenUI {
         graphics2D.drawString(displayText, sw.SCREEN_WIDTH - length - 15, 100 + sw.getDISPLAYED_TILE_SIZE()*2/3);
 
         //Display XP
-        displayText = Integer.toString((sw.getPlayer().level*8) - sw.getPlayer().exp);
+        displayText = Integer.toString((sw.getPlayer().level*5) - sw.getPlayer().exp);
         displayText = "Exp til level up:  " + displayText;
         length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();
         graphics2D.drawString(displayText, sw.SCREEN_WIDTH - length - 15, 100 + sw.getDISPLAYED_TILE_SIZE()*3/3);
@@ -234,7 +234,7 @@ public class OnScreenUI {
         graphics2D.setColor(Color.darkGray);
         graphics2D.fillRect(sw.SCREEN_WIDTH - sw.DISPLAYED_TILE_SIZE*2 - 12, 100+ sw.getDISPLAYED_TILE_SIZE()+10, (sw.getDISPLAYED_TILE_SIZE()*2 - 6), sw.getDISPLAYED_TILE_SIZE()/10 + 4 );
         graphics2D.setColor(Color.green);
-        double xpProgress = (double) sw.getPlayer().exp/(sw.getPlayer().level*8);
+        double xpProgress = (double) sw.getPlayer().exp/(sw.getPlayer().level*5);
         int progressWidth = (int) ((sw.getDISPLAYED_TILE_SIZE()*2 - 6) * xpProgress);
         graphics2D.fillRect(sw.SCREEN_WIDTH - sw.DISPLAYED_TILE_SIZE*2 - 12, 100+ sw.getDISPLAYED_TILE_SIZE()+10, progressWidth, sw.getDISPLAYED_TILE_SIZE()/10 + 4 );
     }
@@ -393,7 +393,7 @@ public class OnScreenUI {
 
             displayText = "Hitpoints: " + sw.getPlayer().hp + "/" + sw.getPlayer().maxHp;
             displayText += " - - - - - Current Level: " + sw.getPlayer().level;
-            displayText += " - - - - - Exp: " + sw.getPlayer().exp + "/" + sw.getPlayer().level * 8;
+            displayText += " - - - - - Exp: " + sw.getPlayer().exp + "/" + sw.getPlayer().level * 5;
             x = sw.getDISPLAYED_TILE_SIZE() * 5;
             y = sw.getDISPLAYED_TILE_SIZE() * 3;
             graphics2D.drawString(displayText, x, y);

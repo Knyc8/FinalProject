@@ -33,6 +33,7 @@ public class SwingWindow extends JPanel implements Runnable {
     CollisionDetector collisionDetector = new CollisionDetector(this);
     public DungeonPlacer dungeonPlacer = new DungeonPlacer(this);
     public FileManager fileManager = new FileManager(this);
+    int loadingCount = 0;
 
     //Entity settings
     Player player = new Player(this, keyManager);
@@ -185,15 +186,18 @@ public class SwingWindow extends JPanel implements Runnable {
 
         if (gameState == LOADING_STATE)
         {
-            if (fileManager.alreadyLoaded == true) {
-                gameState = PLAY_STATE;
-                dungeonPlacer.loadMonsters();
-                getPlayer().immunity = true;
-            }
-            else {
-                dungeonPlacer.placeMonsters();
-                gameState = PLAY_STATE;
-                player.setDefaultValues();
+            loadingCount++;
+            if (loadingCount >= 30) {
+                if (fileManager.alreadyLoaded == true) {
+                    gameState = PLAY_STATE;
+                    dungeonPlacer.loadMonsters();
+                    getPlayer().immunity = true;
+                } else {
+                    dungeonPlacer.placeMonsters();
+                    gameState = PLAY_STATE;
+                    player.setDefaultValues();
+                }
+                loadingCount = 0;
             }
         }
     }
