@@ -181,7 +181,7 @@ public class SwingWindow extends JPanel implements Runnable {
                 if (fileManager.initiallyLoaded) {
                     gameState = PLAY_STATE;
                     dungeonPlacer.loadMonsters();
-                    getPlayer().immunity = true;
+                    getPlayer().setImmune(true);
                 } else {
                     dungeonPlacer.placeMonsters();
                     gameState = PLAY_STATE;

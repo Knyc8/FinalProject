@@ -26,8 +26,8 @@ public class Entity {
     public Projectile projectile;
     Projectile projectile2;
     Projectile projectile3;
-    public boolean immunity = false;
-    public int iCount = 0;
+    private boolean immune;
+    private int iCount;
 
     //stats
     private String name;  //future purposes
@@ -41,7 +41,8 @@ public class Entity {
         this.sw = sw;
 
         colliding = false;
-        immunity = false;
+        immune = false;
+        iCount = 0;
     }
 
 
@@ -75,6 +76,12 @@ public class Entity {
     }
     public boolean isDying() {
         return dying;
+    }
+    public boolean isImmune() {
+        return immune;
+    }
+    public int getICount() {
+        return iCount;
     }
     public int getSpeed() {
         return speed;
@@ -111,6 +118,12 @@ public class Entity {
     }
     public void setAlive(boolean alive) {
         this.alive = alive;
+    }
+    public void setImmune(boolean immune) {
+        this.immune = immune;
+    }
+    public void setICount(int iCount) {
+        this.iCount = iCount;
     }
     public void setName(String name) {
         this.name = name;
@@ -188,7 +201,7 @@ public class Entity {
                 }
             }
 
-            if (immunity)
+            if (immune)
             {
                 graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
             }
@@ -211,9 +224,9 @@ public class Entity {
         }
 
         if (detected) {  //deals dmg to player
-            if (!sw.getPlayer().immunity) {
+            if (!sw.getPlayer().isImmune()) {
                 sw.getPlayer().setHp(sw.getPlayer().getHp()-1);
-                sw.getPlayer().immunity = true;
+                sw.getPlayer().setImmune(true);
             }
         }
 
@@ -233,10 +246,10 @@ public class Entity {
         }
 
 
-        if (immunity) {
+        if (immune) {
             iCount++;
             if (iCount > 60) {
-                immunity = false;
+                immune = false;
                 iCount = 0;
             }
         }

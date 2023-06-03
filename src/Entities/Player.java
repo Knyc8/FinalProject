@@ -87,7 +87,7 @@ public class Player extends Entity{
         setYCoord(getSw().getDISPLAYED_TILE_SIZE() * 4);
         setSpeed(10);
         setDirection("south");
-        immunity = false;
+        setImmune(false);
         enemiesKilled = 0;
 
         level = 1;
@@ -202,22 +202,22 @@ public class Player extends Entity{
             setSpeed(10);
         }
 
-        if (immunity) {  //Invincibility loop
-            iCount++;
+        if (isImmune()) {  //Invincibility loop
+            setICount(getICount()+1);
             if (getSw().fileManager.initiallyLoaded)
             {
-                if (iCount > 300)  //4 second invincibility
+                if (getICount() > 300)  //4 second invincibility
                 {
-                    immunity = false;
-                    iCount = 0;
+                    setImmune(false);
+                    setICount(0);
                     getSw().fileManager.initiallyLoaded = false;
                 }
             }
             else {
-                if (iCount > 60)  //1 second invincibility
+                if (getICount() > 60)  //1 second invincibility
                 {
-                    immunity = false;
-                    iCount = 0;
+                    setImmune(false);
+                    setICount(0);
                 }
             }
         }
@@ -230,18 +230,19 @@ public class Player extends Entity{
      */
     public void takeDamage(int entityIdx) {
         if (entityIdx != -1) {
-            if (!immunity) {
+            if (!isImmune()) {
                 setHp(getHp()-1);
             }
-            immunity = true;
+            setImmune(true);
         }
     }
 
     public void damage(int entityIdx) {
         if (entityIdx != -1) {
-            if (!getSw().monsters[entityIdx].immunity) {
+            if (!getSw().monsters[entityIdx].isImmune()) {
                 getSw().monsters[entityIdx].setHp(getSw().monsters[entityIdx].getHp()-1);
-                getSw().monsters[entityIdx].immunity = true;
+                getSw().monsters[entityIdx].setImmune(true);
+
 
                 if (getSw().monsters[entityIdx].getHp() <= 0)
                 {
@@ -336,7 +337,7 @@ public class Player extends Entity{
                 break;
         }
 
-        if (immunity)
+        if (isImmune())
         {
             graphic2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
         }
