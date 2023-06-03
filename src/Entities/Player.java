@@ -29,9 +29,9 @@ public class Player extends Entity{
         SCREEN_X = sw.getSCREEN_WIDTH()/2 - (sw.getDISPLAYED_TILE_SIZE()/2);
         SCREEN_Y = sw.getSCREEN_HEIGHT()/2 - (sw.getDISPLAYED_TILE_SIZE()/2);
 
-        hitbox = new Rectangle(24, 60, 45, 30);
-        hitboxDefaultX = 24;
-        hitboxDefaultY = 60;
+        setHitbox(new Rectangle(24, 60, 45, 30));
+        setHitboxDefaultX(24);
+        setHitboxDefaultY(60);
 
         setDefaultValues();
         getPlayerSprite();

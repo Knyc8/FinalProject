@@ -14,7 +14,7 @@ public class Projectile extends Entity{
     public Projectile(SwingWindow sw) {
         super(sw);
 
-        hitbox = new Rectangle(15, 21, 66, 60);
+        setHitbox(new Rectangle(15, 21, 66, 60));
         setName("fireball");
         setSpeed(15);
         setMaxHp(45);
@@ -133,7 +133,6 @@ public class Projectile extends Entity{
             }
 
             graphics2D.drawImage(image, screenX, screenY, size, size, null);
-            graphics2D.draw(hitbox);
         }
     }
 }

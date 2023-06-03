@@ -13,10 +13,10 @@ public class CollisionDetector {
     }
 
     public void detectTile(Entity entity) {
-        int hitBoxLeftX = entity.getXCoord() + entity.hitbox.x;
-        int hitBoxRightX = entity.getXCoord() + entity.hitbox.x + entity.hitbox.width;
-        int hitBoxTopY = entity.getYCoord() + entity.hitbox.y;
-        int hitBoxBottomY = entity.getYCoord() + entity.hitbox.y + entity.hitbox.height;
+        int hitBoxLeftX = entity.getXCoord() + entity.getHitbox().x;
+        int hitBoxRightX = entity.getXCoord() + entity.getHitbox().x + entity.getHitbox().width;
+        int hitBoxTopY = entity.getYCoord() + entity.getHitbox().y;
+        int hitBoxBottomY = entity.getYCoord() + entity.getHitbox().y + entity.getHitbox().height;
 
         int hitBoxLeftSide = hitBoxLeftX/sw.getDISPLAYED_TILE_SIZE();
         int hitBoxRightSide = hitBoxRightX/sw.getDISPLAYED_TILE_SIZE();
@@ -67,47 +67,47 @@ public class CollisionDetector {
         for (int i = 0; i < recipients.length; i++) {
             if (recipients[i] != null) {
                 //Get entity hitbox
-                entity.hitbox.x = entity.getXCoord() + entity.hitbox.x;
-                entity.hitbox.y = entity.getYCoord() + entity.hitbox.y;
+                entity.getHitbox().x = entity.getXCoord() + entity.getHitbox().x;
+                entity.getHitbox().y = entity.getYCoord() + entity.getHitbox().y;
 
                 //Get recipient hitbox
-                recipients[i].hitbox.x = recipients[i].getXCoord() + recipients[i].hitbox.x;
-                recipients[i].hitbox.y = recipients[i].getYCoord() + recipients[i].hitbox.y;
+                recipients[i].getHitbox().x = recipients[i].getXCoord() + recipients[i].getHitbox().x;
+                recipients[i].getHitbox().y = recipients[i].getYCoord() + recipients[i].getHitbox().y;
 
                 switch (entity.getDirection()) {
                     case "north" -> {
-                        entity.hitbox.y -= entity.getSpeed();
-                        if (entity.hitbox.intersects(recipients[i].hitbox)) {  //checks if the hitboxes are overlapping
+                        entity.getHitbox().y -= entity.getSpeed();
+                        if (entity.getHitbox().intersects(recipients[i].getHitbox())) {  //checks if the hitboxes are overlapping
                             entity.colliding = true;
                             idx = i;
                         }
                     }
                     case "south" -> {
-                        entity.hitbox.y += entity.getSpeed();
-                        if (entity.hitbox.intersects(recipients[i].hitbox)) {  //checks if the hitboxes are overlapping
+                        entity.getHitbox().y += entity.getSpeed();
+                        if (entity.getHitbox().intersects(recipients[i].getHitbox())) {  //checks if the hitboxes are overlapping
                             entity.colliding = true;
                             idx = i;
                         }
                     }
                     case "west" -> {
-                        entity.hitbox.x -= entity.getSpeed();
-                        if (entity.hitbox.intersects(recipients[i].hitbox)) {  //checks if the hitboxes are overlapping
+                        entity.getHitbox().x -= entity.getSpeed();
+                        if (entity.getHitbox().intersects(recipients[i].getHitbox())) {  //checks if the hitboxes are overlapping
                             entity.colliding = true;
                             idx = i;
                         }
                     }
                     case "east" -> {
-                        entity.hitbox.x += entity.getSpeed();
-                        if (entity.hitbox.intersects(recipients[i].hitbox)) {  //checks if the hitboxes are overlapping
+                        entity.getHitbox().x += entity.getSpeed();
+                        if (entity.getHitbox().intersects(recipients[i].getHitbox())) {  //checks if the hitboxes are overlapping
                             entity.colliding = true;
                             idx = i;
                         }
                     }
                 }
-                entity.hitbox.x = entity.hitboxDefaultX;
-                entity.hitbox.y = entity.hitboxDefaultY;
-                recipients[i].hitbox.x = recipients[i].hitboxDefaultX;
-                recipients[i].hitbox.y = recipients[i].hitboxDefaultY;
+                entity.getHitbox().x = entity.getHitboxDefaultX();
+                entity.getHitbox().y = entity.getHitboxDefaultY();
+                recipients[i].getHitbox().x = recipients[i].getHitboxDefaultX();
+                recipients[i].getHitbox().y = recipients[i].getHitboxDefaultY();
             }
         }
         return idx;
@@ -116,47 +116,47 @@ public class CollisionDetector {
     public boolean detectPlayer(Entity entity) {
         boolean detected = false;
         //Get entity hitbox
-        entity.hitbox.x = entity.getXCoord() + entity.hitbox.x;
-        entity.hitbox.y = entity.getYCoord() + entity.hitbox.y;
+        entity.getHitbox().x = entity.getXCoord() + entity.getHitbox().x;
+        entity.getHitbox().y = entity.getYCoord() + entity.getHitbox().y;
 
         //Get player hitbox
-        sw.getPlayer().hitbox.x = sw.getPlayer().getXCoord() + sw.getPlayer().hitbox.x;
-        sw.getPlayer().hitbox.y = sw.getPlayer().getYCoord() + sw.getPlayer().hitbox.y;
+        sw.getPlayer().getHitbox().x = sw.getPlayer().getXCoord() + sw.getPlayer().getHitbox().x;
+        sw.getPlayer().getHitbox().y = sw.getPlayer().getYCoord() + sw.getPlayer().getHitbox().y;
 
         switch (entity.getDirection()) {
             case "north" -> {
-                entity.hitbox.y -= entity.getSpeed();
-                if (entity.hitbox.intersects(sw.getPlayer().hitbox)) {  //checks if the hitboxes are overlapping
+                entity.getHitbox().y -= entity.getSpeed();
+                if (entity.getHitbox().intersects(sw.getPlayer().getHitbox())) {  //checks if the hitboxes are overlapping
                     entity.colliding = true;
                     detected = true;
                 }
             }
             case "south" -> {
-                entity.hitbox.y += entity.getSpeed();
-                if (entity.hitbox.intersects(sw.getPlayer().hitbox)) {  //checks if the hitboxes are overlapping
+                entity.getHitbox().y += entity.getSpeed();
+                if (entity.getHitbox().intersects(sw.getPlayer().getHitbox())) {  //checks if the hitboxes are overlapping
                     entity.colliding = true;
                     detected = true;
                 }
             }
             case "west" -> {
-                entity.hitbox.x -= entity.getSpeed();
-                if (entity.hitbox.intersects(sw.getPlayer().hitbox)) {  //checks if the hitboxes are overlapping
+                entity.getHitbox().x -= entity.getSpeed();
+                if (entity.getHitbox().intersects(sw.getPlayer().getHitbox())) {  //checks if the hitboxes are overlapping
                     entity.colliding = true;
                     detected = true;
                 }
             }
             case "east" -> {
-                entity.hitbox.x += entity.getSpeed();
-                if (entity.hitbox.intersects(sw.getPlayer().hitbox)) {  //checks if the hitboxes are overlapping
+                entity.getHitbox().x += entity.getSpeed();
+                if (entity.getHitbox().intersects(sw.getPlayer().getHitbox())) {  //checks if the hitboxes are overlapping
                     entity.colliding = true;
                     detected = true;
                 }
             }
         }
-        entity.hitbox.x = entity.hitboxDefaultX;
-        entity.hitbox.y = entity.hitboxDefaultY;
-        sw.getPlayer().hitbox.x = sw.getPlayer().hitboxDefaultX;
-        sw.getPlayer().hitbox.y = sw.getPlayer().hitboxDefaultY;
+        entity.getHitbox().x = entity.getHitboxDefaultX();
+        entity.getHitbox().y = entity.getHitboxDefaultY();
+        sw.getPlayer().getHitbox().x = sw.getPlayer().getHitboxDefaultX();
+        sw.getPlayer().getHitbox().y = sw.getPlayer().getHitboxDefaultY();
 
         return detected;
     }

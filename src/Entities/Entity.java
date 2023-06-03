@@ -17,9 +17,9 @@ public class Entity {
     private String direction;
     public static int spriteCount = 0;
     public static int spriteNum = 1;
-    public Rectangle hitbox;
-    public int hitboxDefaultX;
-    public int hitboxDefaultY;
+    private Rectangle hitbox;
+    private int hitboxDefaultX;
+    private int hitboxDefaultY;
     public boolean collidable;
     public boolean colliding = false;
     public boolean alive;
@@ -59,6 +59,15 @@ public class Entity {
     public String getDirection() {
         return direction;
     }
+    public Rectangle getHitbox() {
+        return hitbox;
+    }
+    public int getHitboxDefaultX() {
+        return hitboxDefaultX;
+    }
+    public int getHitboxDefaultY() {
+        return hitboxDefaultY;
+    }
     public int getSpeed() {
         return speed;
     }
@@ -79,6 +88,15 @@ public class Entity {
     }
     public void setDirection(String direction) {
         this.direction = direction;
+    }
+    public void setHitbox(Rectangle hitbox) {
+        this.hitbox = hitbox;
+    }
+    public void setHitboxDefaultX(int hitboxDefaultX) {
+        this.hitboxDefaultX = hitboxDefaultX;
+    }
+    public void setHitboxDefaultY(int hitboxDefaultY) {
+        this.hitboxDefaultY = hitboxDefaultY;
     }
     public void setName(String name) {
         this.name = name;
@@ -105,6 +123,7 @@ public class Entity {
         return image;
     }
     public void setDefaultValues() {
+        /*unused for inheritance*/
     }
 
 

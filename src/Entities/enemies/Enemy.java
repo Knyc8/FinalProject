@@ -39,13 +39,9 @@ public class Enemy extends Entity {
             setDirection("east");
         }
 
-        hitbox = new Rectangle();
-        hitbox.x = 30;
-        hitbox.y = 36;
-        hitbox.width = 36;
-        hitbox.height =30;
-        hitboxDefaultX = 30;
-        hitboxDefaultY = 36;
+        setHitbox(new Rectangle(30, 36, 36, 30));
+        setHitboxDefaultX(30);
+        setHitboxDefaultY(36);
     }
 
     public void getImg() {
