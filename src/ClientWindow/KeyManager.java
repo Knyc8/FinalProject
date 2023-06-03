@@ -1,6 +1,5 @@
 package ClientWindow;
 
-import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -114,6 +113,7 @@ public class KeyManager implements KeyListener {
                 if (sw.ui.optionNum == 0)  //start game
                 {
                     sw.gameState = sw.TITLE_SCREEN_STATE;
+                    sw.fileManager.alreadyLoaded = false;
                 }
                 else if (sw.ui.optionNum == 1)  //save game
                 {

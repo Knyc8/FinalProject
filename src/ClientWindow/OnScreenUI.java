@@ -3,9 +3,9 @@ package ClientWindow;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Objects;
 
 public class OnScreenUI {
     SwingWindow sw;
@@ -21,34 +21,40 @@ public class OnScreenUI {
 
         try {
             InputStream inputStream = getClass().getResourceAsStream("/fonts/DungeonFont.TTF");
-            dungeonFont = Font.createFont(Font.TRUETYPE_FONT, inputStream);
-        } catch (FontFormatException ffe) {
+            if (inputStream != null) {
+                dungeonFont = Font.createFont(Font.TRUETYPE_FONT, inputStream);
+            }
+        } catch (FontFormatException | IOException ffe) {
             ffe.printStackTrace();
-        } catch (IOException ioe) {
+        }
+
+            torch = setImg("/player_sprites/pigzard_torch.png");
+            DFIcon = setImg("/icons/Dungeon_Floor_Icon.png");
+            wall = setImg("/icons/Wall.png");
+            bacon = setImg("/icons/fullBacon.png");
+            emptyBacon = setImg("/icons/emptyBacon.png");
+            sadCat = setImg("/icons/sadCat.png");
+            tDown = setImg("/icons/thumbsdown.png");
+            bCat = setImg("/icons/bananaCat.png");
+            cBCat = setImg("/icons/cryingCatBanana.png");
+            arrow = setImg("/icons/arrow.png");
+    }
+
+    private BufferedImage setImg(String path) {
+        try {
+            return ImageIO.read(Objects.requireNonNull(getClass().getResource(path)));
+        }
+        catch (IOException ioe)
+        {
             ioe.printStackTrace();
         }
-
-        try {
-            torch = ImageIO.read(getClass().getResource("/player_sprites/pigzard_torch.png"));
-            DFIcon = ImageIO.read(getClass().getResource("/icons/Dungeon_Floor_Icon.png"));
-            wall = ImageIO.read(getClass().getResource("/icons/Wall.png"));
-            bacon = ImageIO.read(getClass().getResource("/icons/fullBacon.png"));
-            emptyBacon = ImageIO.read(getClass().getResource("/icons/emptyBacon.png"));
-            sadCat = ImageIO.read(getClass().getResource("/icons/sadCat.png"));
-            tDown = ImageIO.read(getClass().getResource("/icons/thumbsdown.png"));
-            bCat = ImageIO.read(getClass().getResource("/icons/bananaCat.png"));
-            cBCat = ImageIO.read(getClass().getResource("/icons/cryingCatBanana.png"));
-            arrow = ImageIO.read(getClass().getResource("/icons/arrow.png"));
-
-        } catch(IOException ex) {
-            ex.printStackTrace();
-        }
+        return null;
     }
 
     /***
      * Displays the UI drawn in the different game states
      *
-     * @param graphics2D
+     * @param graphics2D represents the class that draws the images and strings
      */
     public void draw(Graphics2D graphics2D) {
         graphics2D.setFont(dungeonFont);
@@ -82,8 +88,6 @@ public class OnScreenUI {
 
     /***
      * Draws the title screen upon first execution
-     *
-     * @param graphics2D
      */
     private void drawTitleScreen(Graphics2D graphics2D) {
         //Background
@@ -186,8 +190,6 @@ public class OnScreenUI {
 
     /***
      * Draws any onscreen UI during the play state (E.G. hearts, current floor, etc.)
-     *
-     * @param graphics2D
      */
     private void drawPlayUI(Graphics2D graphics2D) {
         //Display health
@@ -211,7 +213,7 @@ public class OnScreenUI {
         //Background rectangle
         graphics2D.setColor(Color.gray);
         graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
-        graphics2D.fillRect(sw.SCREEN_WIDTH - sw.DISPLAYED_TILE_SIZE*2 - 20, 100 + sw.getDISPLAYED_TILE_SIZE()*1/3, sw.getDISPLAYED_TILE_SIZE()*2 + 10, sw.getDISPLAYED_TILE_SIZE());
+        graphics2D.fillRect(sw.SCREEN_WIDTH - sw.DISPLAYED_TILE_SIZE*2 - 20, 100 + sw.getDISPLAYED_TILE_SIZE()/3, sw.getDISPLAYED_TILE_SIZE()*2 + 10, sw.getDISPLAYED_TILE_SIZE());
         graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 
         //Display Enemies Killed
@@ -241,8 +243,6 @@ public class OnScreenUI {
 
     /***
      * Draws the pause screen when the esc is hit
-     *
-     * @param graphics2D
      */
     private void drawPausedScreen(Graphics2D graphics2D) {
         graphics2D.setColor(new Color(0,0,0,127));  //50% opacity
@@ -272,7 +272,7 @@ public class OnScreenUI {
             graphics2D.drawImage(sw.player.front3, x-sw.getDISPLAYED_TILE_SIZE()/2 - (45/4), y-(39), 45, 45, null);
         }
 
-        if (sw.fileManager.alreadySaved == true) {
+        if (sw.fileManager.alreadySaved) {
             displayText = "Progress Saved";
             messageCount++;
         }

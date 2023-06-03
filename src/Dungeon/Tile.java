@@ -7,7 +7,6 @@ import java.awt.image.BufferedImage;
  */
 public class Tile {
     private BufferedImage img;
-    private String pathName;
     public boolean collision = false;
 
     public void setCollision(Boolean c)
@@ -18,9 +17,6 @@ public class Tile {
     public void setImg(BufferedImage bi)
     {
         img = bi;
-    }
-    public void setPathName(String pn) {
-        pathName = pn;
     }
 
     public BufferedImage getImg() {

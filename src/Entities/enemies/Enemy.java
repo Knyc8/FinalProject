@@ -64,11 +64,8 @@ public class Enemy extends Entity {
     }
 
     public void action() {
-
-
         actionCount++;
 
-        int time = (int)(Math.random()*20) + 30;
         if (actionCount == 30) {
             int rand = (int) (Math.random()*4) + 1;  //random number from 1-4
 
@@ -92,14 +89,14 @@ public class Enemy extends Entity {
         super.update();
 
         restrainBounds();
-        this.spriteCount++;
-        if (this.spriteCount > 1500) {
-            if (this.spriteNum == 1) {
-                this.spriteNum = 2;
-            } else if (this.spriteNum == 2) {
-                this.spriteNum = 1;
+        spriteCount++;
+        if (spriteCount > 1500) {
+            if (spriteNum == 1) {
+                spriteNum = 2;
+            } else if (spriteNum == 2) {
+                spriteNum = 1;
             }
-            this.spriteCount = 0;
+            spriteCount = 0;
         }
     }
 

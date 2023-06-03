@@ -8,11 +8,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Objects;
 
 public class TileMapper {
     public SwingWindow sw;
     public Tile[] tiles;
-    public int tileNum[][];
+    public int[][] tileNum;
 
     public TileMapper(SwingWindow sw) {
         this.sw = sw;
@@ -32,20 +33,20 @@ public class TileMapper {
     {
         try {
             InputStream inputStream = getClass().getResourceAsStream(mapFileName);
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-            for (int r = 0; r < sw.getDUNGEON_ROW(); r++)
-            {
+            if (inputStream != null) {
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                for (int r = 0; r < sw.getDUNGEON_ROW(); r++) {
                 String line = bufferedReader.readLine();
                 String[] split = line.split(" ");
-                for (int c = 0; c < sw.getDUNGEON_COL(); c++)
-                {
+                for (int c = 0; c < sw.getDUNGEON_COL(); c++) {
                     tileNum[r][c] = Integer.parseInt(split[c]);
                 }
             }
             bufferedReader.close();
+        }
         } catch (Exception ex)
         {
-
+            System.out.println("Load Failed");
         }
     }
     /***
@@ -79,8 +80,8 @@ public class TileMapper {
     public void assignTileImg(int index, String pathName, Boolean collision) {
         try {
             tiles[index] = new Tile();
-            tiles[index].setImg(ImageIO.read(getClass().getResource("/dungeon_tiles/" + pathName + ".png")));
-            tiles[index].setPathName(pathName);
+            tiles[index].setImg(ImageIO.read(Objects.requireNonNull(getClass().getResource("/dungeon_tiles/" + pathName + ".png"))));
+            //tiles[index].setPathName(pathName);
             tiles[index].setCollision(collision);
 
         } catch(IOException ex) {
@@ -94,14 +95,14 @@ public class TileMapper {
             for (int dc = 0; dc < sw.getDUNGEON_COL(); dc++) {
                 int dungeonX = (dc * tileSize);
                 int dungeonY = (dr * tileSize);
-                int xScreenLoc = dungeonX - sw.getPlayer().xCoord + sw.getPlayer().SCREEN_X;
-                int yScreenLoc = dungeonY - sw.getPlayer().yCoord + sw.getPlayer().SCREEN_Y;
+                int xScreenLoc = dungeonX - sw.getPlayer().xCoord + sw.getPlayer().getSCREEN_X();
+                int yScreenLoc = dungeonY - sw.getPlayer().yCoord + sw.getPlayer().getSCREEN_Y();
 
                 //creates a boundary with which the tiles are drawn, thus minimizes the drawing of unseen tiles (especially for larger maps)
-                if (dungeonX + sw.getDISPLAYED_TILE_SIZE() > sw.getPlayer().xCoord - sw.getPlayer().SCREEN_X &&
-                        dungeonX - sw.getDISPLAYED_TILE_SIZE() < sw.getPlayer().xCoord + sw.getPlayer().SCREEN_X &&
-                        dungeonY + sw.getDISPLAYED_TILE_SIZE() > sw.getPlayer().yCoord - sw.getPlayer().SCREEN_Y &&
-                        dungeonY - sw.getDISPLAYED_TILE_SIZE() < sw.getPlayer().yCoord + sw.getPlayer().SCREEN_Y) {
+                if (dungeonX + sw.getDISPLAYED_TILE_SIZE() > sw.getPlayer().xCoord - sw.getPlayer().getSCREEN_X() &&
+                        dungeonX - sw.getDISPLAYED_TILE_SIZE() < sw.getPlayer().xCoord + sw.getPlayer().getSCREEN_X() &&
+                        dungeonY + sw.getDISPLAYED_TILE_SIZE() > sw.getPlayer().yCoord - sw.getPlayer().getSCREEN_Y() &&
+                        dungeonY - sw.getDISPLAYED_TILE_SIZE() < sw.getPlayer().yCoord + sw.getPlayer().getSCREEN_Y()) {
                     graphics2D.drawImage(tiles[tileNum[dr][dc]].getImg(), xScreenLoc, yScreenLoc, tileSize, tileSize, null);
                 }
             }

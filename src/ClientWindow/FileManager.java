@@ -1,8 +1,5 @@
 package ClientWindow;
 
-import Entities.Entity;
-import Entities.Player;
-
 import java.io.*;
 
 public class FileManager {
@@ -83,9 +80,8 @@ public class FileManager {
     public void deleteSaveFile()
     {
         if (save != null) {
-            save.delete();
-            save = null;
             System.out.println("File was deleted");
+            save.delete();
         }
     }
 }

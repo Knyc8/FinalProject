@@ -37,7 +37,7 @@ public class SwingWindow extends JPanel implements Runnable {
 
     //Entity settings
     Player player = new Player(this, keyManager);
-    public Entity monsters[] = new Entity[150];  //Can display up to 10 enemies at once
+    public Entity[] monsters = new Entity[150];  //Can display up to 10 enemies at once
     public ArrayList<Entity> projectiles = new ArrayList<>();
     public boolean[] monsterAlive;
     public int[][] monsterPos;
@@ -65,7 +65,6 @@ public class SwingWindow extends JPanel implements Runnable {
 
     /***
      * Sets up the title screen, etc. when the game is started
-     * @return
      */
     public void setUp() {
         gameState = TITLE_SCREEN_STATE;
@@ -83,13 +82,6 @@ public class SwingWindow extends JPanel implements Runnable {
         return SCREEN_HEIGHT;
     }
 
-    public int getSCREEN_TILE_COLUMNS() {
-        return SCREEN_TILE_COLUMNS;
-    }
-
-    public int getSCREEN_TILE_ROWS() {
-        return SCREEN_TILE_ROWS;
-    }
 
     public int getDUNGEON_COL() {
         return DUNGEON_COL;
@@ -110,9 +102,6 @@ public class SwingWindow extends JPanel implements Runnable {
     public Player getPlayer() {
         return player;
     }
-    public void setPlayer(Player playerFile) {
-        player = playerFile;
-    }
 
     /***
      * Calls and commences the game loop
@@ -128,7 +117,7 @@ public class SwingWindow extends JPanel implements Runnable {
      */
     @Override
     public void run() {
-        double refreshRate = 1000000000 / framesPerSecond;  //program runs in nanoseconds, and 1E9 nanoseconds equals 1 second (1 second/ 60 frames).
+        double refreshRate = (double)1000000000 / framesPerSecond;  //program runs in nanoseconds, and 1E9 nanoseconds equals 1 second (1 second/ 60 frames).
         double refreshInterval = System.nanoTime() + refreshRate;  //every refresh will occur 0.0167 seconds later than opposed to 1 nanosecond later.
         while (gameThread != null) {
 
@@ -160,19 +149,20 @@ public class SwingWindow extends JPanel implements Runnable {
             //Character movement
             player.update();
 
-            for (int i = 0; i < monsters.length; i++) {
-                if (monsters[i] != null) {
-                    monsters[i].update();
+            for (Entity monster : monsters) {
+                if (monster != null) {
+                    monster.update();
                 }
             }
 
             for (int i = 0; i < projectiles.size(); i++) {
                 if (projectiles.get(i) != null) {
-                    if(projectiles.get(i).alive == true) {
+                    if(projectiles.get(i).alive) {
                         projectiles.get(i).update();
                     }
-                    if (projectiles.get(i).alive == false) {
+                    if (!projectiles.get(i).alive) {
                         projectiles.remove(i);
+                        i--;
                     }
                 }
             }
@@ -188,7 +178,7 @@ public class SwingWindow extends JPanel implements Runnable {
         {
             loadingCount++;
             if (loadingCount >= 30) {
-                if (fileManager.alreadyLoaded == true) {
+                if (fileManager.alreadyLoaded) {
                     gameState = PLAY_STATE;
                     dungeonPlacer.loadMonsters();
                     getPlayer().immunity = true;
@@ -233,9 +223,9 @@ public class SwingWindow extends JPanel implements Runnable {
             }
 
             //Projectiles
-            for (int i = 0; i < projectiles.size(); i++) {
-                if (projectiles.get(i) != null) {
-                    projectiles.get(i).draw(graphic2D);
+            for (Entity projectile : projectiles) {
+                if (projectile != null) {
+                    projectile.draw(graphic2D);
                 }
             }
 

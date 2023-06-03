@@ -6,7 +6,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.io.Serializable;
+import java.util.Objects;
 
 public class Entity {
     //setup
@@ -41,61 +41,60 @@ public class Entity {
     public Entity (SwingWindow sw) {
         this.sw = sw;
     }
+
     public BufferedImage setImage(String pathname) {
         BufferedImage image = null;
         try{
-            image = ImageIO.read(getClass().getResource(pathname));
+            image = ImageIO.read(Objects.requireNonNull(getClass().getResource(pathname)));
         } catch (IOException ex) {
             ex.printStackTrace();;
         }
         return image;
     }
     public void draw(Graphics2D graphics2D) {
-        int screenX = xCoord - sw.getPlayer().xCoord + sw.getPlayer().SCREEN_X;
-        int screenY = yCoord - sw.getPlayer().yCoord + sw.getPlayer().SCREEN_Y;
+        int screenX = xCoord - sw.getPlayer().xCoord + sw.getPlayer().getSCREEN_X();
+        int screenY = yCoord - sw.getPlayer().yCoord + sw.getPlayer().getSCREEN_Y();
 
-        if (xCoord + sw.getDISPLAYED_TILE_SIZE() > sw.getPlayer().xCoord - sw.getPlayer().SCREEN_X &&
-                xCoord - sw.getDISPLAYED_TILE_SIZE() < sw.getPlayer().xCoord + sw.getPlayer().SCREEN_X &&
-                yCoord + sw.getDISPLAYED_TILE_SIZE() > sw.getPlayer().yCoord - sw.getPlayer().SCREEN_Y &&
-                yCoord - sw.getDISPLAYED_TILE_SIZE() < sw.getPlayer().yCoord + sw.getPlayer().SCREEN_Y) {
+        if (xCoord + sw.getDISPLAYED_TILE_SIZE() > sw.getPlayer().xCoord - sw.getPlayer().getSCREEN_X() &&
+                xCoord - sw.getDISPLAYED_TILE_SIZE() < sw.getPlayer().xCoord + sw.getPlayer().getSCREEN_X() &&
+                yCoord + sw.getDISPLAYED_TILE_SIZE() > sw.getPlayer().yCoord - sw.getPlayer().getSCREEN_Y() &&
+                yCoord - sw.getDISPLAYED_TILE_SIZE() < sw.getPlayer().yCoord + sw.getPlayer().getSCREEN_Y()) {
 
             BufferedImage image = null;
 
-            switch(direction)
-            {
-                case "north":
+            switch (direction) {
+                case "north" -> {
                     if (spriteNum == 1) {
                         image = back1;
                     }
                     if (spriteNum == 2) {
                         image = back2;
                     }
-                    break;
-                case "south":
+                }
+                case "south" -> {
                     if (spriteNum == 1) {
                         image = front1;
                     }
                     if (spriteNum == 2) {
                         image = front2;
                     }
-                    break;
-                case "west":
+                }
+                case "west" -> {
                     if (spriteNum == 1) {
                         image = left1;
                     }
                     if (spriteNum == 2) {
                         image = left2;
                     }
-                    break;
-                case "east":
+                }
+                case "east" -> {
                     if (spriteNum == 1) {
                         image = right1;
                     }
-                    if (spriteNum == 2)
-                    {
+                    if (spriteNum == 2) {
                         image = right2;
                     }
-                    break;
+                }
             }
 
             if (immunity)
@@ -117,7 +116,7 @@ public class Entity {
 
         colliding = false;
         sw.getCollisionDetector().detectTile(this);
-        Boolean detected = false;
+        boolean detected = false;
         if (!(this instanceof Projectile))
         {
             detected = sw.getCollisionDetector().detectPlayer(this);

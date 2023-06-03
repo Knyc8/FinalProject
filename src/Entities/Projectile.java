@@ -72,18 +72,18 @@ public class Projectile extends Entity{
     }
 
     public void draw(Graphics2D graphics2D) {
-        int screenX = xCoord - sw.getPlayer().xCoord + sw.getPlayer().SCREEN_X;
-        int screenY = yCoord - sw.getPlayer().yCoord + sw.getPlayer().SCREEN_Y;// + sw.getDISPLAYED_TILE_SIZE()/5;
+        int screenX = xCoord - sw.getPlayer().xCoord + sw.getPlayer().getSCREEN_X();
+        int screenY = yCoord - sw.getPlayer().yCoord + sw.getPlayer().getSCREEN_Y();// + sw.getDISPLAYED_TILE_SIZE()/5;
         int size = sw.getDISPLAYED_TILE_SIZE();
 
-        if (xCoord + sw.getDISPLAYED_TILE_SIZE() > sw.getPlayer().xCoord - sw.getPlayer().SCREEN_X &&
-                xCoord - sw.getDISPLAYED_TILE_SIZE() < sw.getPlayer().xCoord + sw.getPlayer().SCREEN_X &&
-                yCoord + sw.getDISPLAYED_TILE_SIZE() > sw.getPlayer().yCoord - sw.getPlayer().SCREEN_Y &&
-                yCoord - sw.getDISPLAYED_TILE_SIZE() < sw.getPlayer().yCoord + sw.getPlayer().SCREEN_Y) {
+        if (xCoord + sw.getDISPLAYED_TILE_SIZE() > sw.getPlayer().xCoord - sw.getPlayer().getSCREEN_X() &&
+                xCoord - sw.getDISPLAYED_TILE_SIZE() < sw.getPlayer().xCoord + sw.getPlayer().getSCREEN_X() &&
+                yCoord + sw.getDISPLAYED_TILE_SIZE() > sw.getPlayer().yCoord - sw.getPlayer().getSCREEN_Y() &&
+                yCoord - sw.getDISPLAYED_TILE_SIZE() < sw.getPlayer().yCoord + sw.getPlayer().getSCREEN_Y()) {
 
             BufferedImage image = null;
 
-            if (colliding == true || hp < 10)
+            if (colliding || hp < 10)
             {
                 if (this.spriteNum == 1) {
                     image = explosion1;
@@ -95,38 +95,39 @@ public class Projectile extends Entity{
             }
             else {
                 speed = 15;
-                switch(direction) {
-                    case "north":
+                switch (direction) {
+                    case "north" -> {
                         if (this.spriteNum == 1) {
                             image = back1;
                         }
                         if (this.spriteNum == 2) {
                             image = back2;
                         }
-                        break;
-                    case "south":
+                    }
+                    case "south" -> {
                         if (this.spriteNum == 1) {
                             image = front1;
                         }
                         if (this.spriteNum == 2) {
                             image = front2;
                         }
-                        break;
-                    case "west":
+                    }
+                    case "west" -> {
                         if (this.spriteNum == 1) {
                             image = left1;
                         }
                         if (this.spriteNum == 2) {
                             image = left2;
                         }
-                        break;
-                        case "east":
-                            if (this.spriteNum == 1) {
-                                image = right1;
-                            }
-                            if (this.spriteNum == 2) {
-                                image = right2;
-                            }
+                    }
+                    case "east" -> {
+                        if (this.spriteNum == 1) {
+                            image = right1;
+                        }
+                        if (this.spriteNum == 2) {
+                            image = right2;
+                        }
+                    }
                 }
             }
 

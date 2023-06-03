@@ -60,7 +60,7 @@ public class DungeonPlacer {
     public void loadMonsters() {
         for (int i = 0; i < sw.monsters.length; i++)
         {
-            if (sw.monsterAlive[i] == true)
+            if (sw.monsterAlive[i])
             {
                 sw.monsters[i] = new Enemy(sw);
                 sw.monsters[i].xCoord = sw.monsterPos[i][0];

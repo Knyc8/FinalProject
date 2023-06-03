@@ -8,8 +8,8 @@ import java.awt.image.BufferedImage;
 
 public class Player extends Entity{
     KeyManager km;
-    public final int SCREEN_X;
-    public final int SCREEN_Y;
+    private final int SCREEN_X;
+    private int SCREEN_Y;
     public int level;
     public int exp;
     public int enemiesKilled;
@@ -35,6 +35,14 @@ public class Player extends Entity{
         getPlayerSprite();
     }
 
+    public int getSCREEN_X() {
+        return SCREEN_X;
+    }
+
+    public int getSCREEN_Y() {
+        return SCREEN_Y;
+    }
+
     /***
      * Sets the players intial location, speed, and direction
      */
@@ -48,7 +56,7 @@ public class Player extends Entity{
         immunity = false;
         enemiesKilled = 0;
 
-        level = 5;
+        level = 1;
         exp = 0;
         maxHp = 3;
         hp = maxHp;
@@ -100,7 +108,7 @@ public class Player extends Entity{
             int enemyIdx = sw.getCollisionDetector().detectEntity(sw.monsters, this);
             takeDamage(enemyIdx);
 
-            if (colliding == false) {
+            if (!colliding) {
                 //dmgCount = 0;
                 if (direction.equals("north")) {  //up speed units
                     yCoord -= speed;  //top left is (0, 0)
@@ -127,17 +135,17 @@ public class Player extends Entity{
             }
         }
 
-        if (km.isShootPressed() == true) {
+        if (km.isShootPressed()) {
             speed = 10 / 2;
 
             if (level < 3) {
-                if (projectile.alive == false) {
+                if (!projectile.alive) {
                     projectile.set(xCoord, yCoord, direction, true, this);
                     sw.projectiles.add(projectile);
                 }
             }
             if (level >= 3 && level < 5) {
-                if (projectile.alive == false && projectile2.alive == false) {
+                if (!projectile.alive && !projectile2.alive) {
                     if (direction.equals("north") || direction.equals("south")) {
                         projectile.set(xCoord - 25, yCoord, direction, true, this);
                         projectile2.set(xCoord  +25, yCoord, direction, true, this);
@@ -151,7 +159,7 @@ public class Player extends Entity{
                 }
             }
             if (level >= 5) {
-                if (projectile.alive == false && projectile2.alive == false && projectile3.alive == false) {
+                if (!projectile.alive && !projectile2.alive && !projectile3.alive) {
                     if (direction.equals("north") || direction.equals("south")) {
                         projectile.set(xCoord - 50, yCoord, direction, true, this);
                         projectile2.set(xCoord, yCoord, direction, true, this);
@@ -174,7 +182,7 @@ public class Player extends Entity{
 
         if (immunity) {  //Invincibility loop
             iCount++;
-            if (sw.fileManager.alreadyLoaded == true)
+            if (sw.fileManager.alreadyLoaded)
             {
                 if (iCount > 300)  //4 second invincibility
                 {
@@ -194,9 +202,9 @@ public class Player extends Entity{
     }
 
     /***
-     * takes damage if the player is not invincible
+     * Makes the player take damage
      *
-     * @param entityIdx
+     * @param entityIdx represents the index current enemy in the enemy list
      */
     public void takeDamage(int entityIdx) {
         if (entityIdx != -1) {
@@ -209,7 +217,7 @@ public class Player extends Entity{
 
     public void damage(int entityIdx) {
         if (entityIdx != -1) {
-            if (sw.monsters[entityIdx].immunity == false) {
+            if (!sw.monsters[entityIdx].immunity) {
                 sw.monsters[entityIdx].hp--;
                 sw.monsters[entityIdx].immunity = true;
 
