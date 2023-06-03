@@ -21,7 +21,6 @@ public class Projectile extends Entity{
         setHp(getMaxHp());
         setDmg(1);
         setAlive(false);
-        setCollidable(true);
         getImg();
     }
 

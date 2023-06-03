@@ -20,7 +20,6 @@ public class Entity {
     private Rectangle hitbox;
     private int hitboxDefaultX;
     private int hitboxDefaultY;
-    private boolean collidable;
     private boolean colliding;
     private boolean alive;
     private boolean dying;
@@ -68,9 +67,6 @@ public class Entity {
     public int getHitboxDefaultY() {
         return hitboxDefaultY;
     }
-    public boolean isCollidable() {
-        return collidable;
-    }
     public boolean isColliding() {
         return colliding;
     }
@@ -110,17 +106,11 @@ public class Entity {
     public void setHitboxDefaultY(int hitboxDefaultY) {
         this.hitboxDefaultY = hitboxDefaultY;
     }
-    public void setCollidable(boolean collidable) {
-        this.collidable = collidable;
-    }
     public void setColliding(boolean colliding) {
         this.colliding = colliding;
     }
     public void setAlive(boolean alive) {
         this.alive = alive;
-    }
-    public void setDying(boolean dying) {
-        this.dying = dying;
     }
     public void setName(String name) {
         this.name = name;

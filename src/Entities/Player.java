@@ -87,7 +87,6 @@ public class Player extends Entity{
         setYCoord(getSw().getDISPLAYED_TILE_SIZE() * 4);
         setSpeed(10);
         setDirection("south");
-        setCollidable(true);
         immunity = false;
         enemiesKilled = 0;
 
