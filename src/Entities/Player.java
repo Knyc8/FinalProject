@@ -94,9 +94,9 @@ public class Player extends Entity{
         exp = 0;
         setMaxHp(3);
         setHp(getMaxHp());
-        projectile = new Projectile(getSw());
-        projectile2 = new Projectile(getSw());
-        projectile3 = new Projectile(getSw());
+        setProjectile(new Projectile(getSw()));
+        setProjectile2(new Projectile(getSw()));
+        setProjectile3(new Projectile(getSw()));
     }
 
 
@@ -161,40 +161,40 @@ public class Player extends Entity{
             setSpeed(10/2);
 
             if (level < 3) {
-                if (!projectile.isAlive()) {
-                    projectile.set(getXCoord(), getYCoord(), getDirection(), true, this);
-                    getSw().projectiles.add(projectile);
+                if (!getProjectile().isAlive()) {
+                    getProjectile().set(getXCoord(), getYCoord(), getDirection(), true, this);
+                    getSw().projectiles.add(getProjectile());
                 }
             }
             if (level >= 3 && level < 5) {
-                if (!projectile.isAlive() && !projectile2.isAlive()) {
+                if (!getProjectile().isAlive() && !getProjectile2().isAlive()) {
                     if (getDirection().equals("north") || getDirection().equals("south")) {
-                        projectile.set(getXCoord() - 25, getYCoord(), getDirection(), true, this);
-                        projectile2.set(getXCoord()  +25, getYCoord(), getDirection(), true, this);
+                        getProjectile().set(getXCoord() - 25, getYCoord(), getDirection(), true, this);
+                        getProjectile2().set(getXCoord()  +25, getYCoord(), getDirection(), true, this);
                     }
                     if (getDirection().equals("east") || getDirection().equals("west")) {
-                        projectile.set(getXCoord(), getYCoord() - 25, getDirection(), true, this);
-                        projectile2.set(getXCoord(), getYCoord() + 25, getDirection(), true, this);
+                        getProjectile().set(getXCoord(), getYCoord() - 25, getDirection(), true, this);
+                        getProjectile2().set(getXCoord(), getYCoord() + 25, getDirection(), true, this);
                     }
-                    getSw().projectiles.add(projectile);
-                    getSw().projectiles.add(projectile2);
+                    getSw().projectiles.add(getProjectile());
+                    getSw().projectiles.add(getProjectile2());
                 }
             }
             if (level >= 5) {
-                if (!projectile.isAlive() && !projectile2.isAlive() && !projectile3.isAlive()) {
+                if (!getProjectile().isAlive() && !getProjectile2().isAlive() && !getProjectile3().isAlive()) {
                     if (getDirection().equals("north") || getDirection().equals("south")) {
-                        projectile.set(getXCoord() - 50, getYCoord(), getDirection(), true, this);
-                        projectile2.set(getXCoord(), getYCoord(), getDirection(), true, this);
-                        projectile3.set(getXCoord() + 50, getYCoord(), getDirection(), true, this);
+                        getProjectile().set(getXCoord() - 50, getYCoord(), getDirection(), true, this);
+                        getProjectile2().set(getXCoord(), getYCoord(), getDirection(), true, this);
+                        getProjectile3().set(getXCoord() + 50, getYCoord(), getDirection(), true, this);
                     }
                     if (getDirection().equals("east") || getDirection().equals("west")) {
-                        projectile.set(getXCoord(), getYCoord() - 50, getDirection(), true, this);
-                        projectile2.set(getXCoord(), getYCoord(), getDirection(), true, this);
-                        projectile3.set(getXCoord(), getYCoord() + 50, getDirection(), true, this);
+                        getProjectile().set(getXCoord(), getYCoord() - 50, getDirection(), true, this);
+                        getProjectile2().set(getXCoord(), getYCoord(), getDirection(), true, this);
+                        getProjectile3().set(getXCoord(), getYCoord() + 50, getDirection(), true, this);
                     }
-                    getSw().projectiles.add(projectile);
-                    getSw().projectiles.add(projectile2);
-                    getSw().projectiles.add(projectile3);
+                    getSw().projectiles.add(getProjectile());
+                    getSw().projectiles.add(getProjectile2());
+                    getSw().projectiles.add(getProjectile3());
                 }
             }
         }

@@ -8,6 +8,7 @@ public class ClientRunner {
         gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         gameWindow.setResizable(false);
         gameWindow.setTitle("Wilboar's Crypt");
+        gameWindow.setUndecorated(true);
 
         SwingWindow gamePanel = new SwingWindow();
         gameWindow.add(gamePanel);

@@ -23,9 +23,9 @@ public class Entity {
     private boolean colliding;
     private boolean alive;
     private boolean dying;
-    public Projectile projectile;
-    Projectile projectile2;
-    Projectile projectile3;
+    private Projectile projectile;
+    private Projectile projectile2;
+    private Projectile projectile3;
     private boolean immune;
     private int iCount;
 
@@ -83,6 +83,15 @@ public class Entity {
     public int getICount() {
         return iCount;
     }
+    public Projectile getProjectile() {
+        return projectile;
+    }
+    public Projectile getProjectile2() {
+        return projectile2;
+    }
+    public Projectile getProjectile3() {
+        return projectile3;
+    }
     public int getSpeed() {
         return speed;
     }
@@ -124,6 +133,18 @@ public class Entity {
     }
     public void setICount(int iCount) {
         this.iCount = iCount;
+    }
+
+    public void setProjectile(Projectile projectile) {
+        this.projectile = projectile;
+    }
+
+    public void setProjectile2(Projectile projectile2) {
+        this.projectile2 = projectile2;
+    }
+
+    public void setProjectile3(Projectile projectile3) {
+        this.projectile3 = projectile3;
     }
     public void setName(String name) {
         this.name = name;
