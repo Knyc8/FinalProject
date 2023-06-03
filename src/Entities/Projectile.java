@@ -6,10 +6,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Projectile extends Entity{
-    Entity user;
-    BufferedImage explosion1, explosion2;
-    int spriteCount = 0;
-    int spriteNum = 1;
+    private Entity user;  //future purposes
+    private BufferedImage explosion1, explosion2;
 
     public Projectile(SwingWindow sw) {
         super(sw);
@@ -60,14 +58,14 @@ public class Projectile extends Entity{
             setAlive(false);
         }
 
-        this.spriteCount++;
-        if (this.spriteCount > 2) {
-            if (this.spriteNum == 1) {
-                this.spriteNum = 2;
-            } else if (this.spriteNum == 2) {
-                this.spriteNum = 1;
+        spriteCount++;
+        if (spriteCount > 2) {
+            if (spriteNum == 1) {
+                spriteNum = 2;
+            } else if (spriteNum == 2) {
+                spriteNum = 1;
             }
-            this.spriteCount = 0;
+            spriteCount = 0;
         }
     }
 
@@ -85,10 +83,10 @@ public class Projectile extends Entity{
 
             if (isColliding() || getHp() < 10)
             {
-                if (this.spriteNum == 1) {
+                if (spriteNum == 1) {
                     image = explosion1;
                 }
-                if (this.spriteNum == 2) {
+                if (spriteNum == 2) {
                     image = explosion2;
                 }
                 setSpeed(0);
@@ -97,34 +95,34 @@ public class Projectile extends Entity{
                 setSpeed(15);
                 switch (getDirection()) {
                     case "north" -> {
-                        if (this.spriteNum == 1) {
+                        if (spriteNum == 1) {
                             image = getBack1();
                         }
-                        if (this.spriteNum == 2) {
+                        if (spriteNum == 2) {
                             image = getBack2();
                         }
                     }
                     case "south" -> {
-                        if (this.spriteNum == 1) {
+                        if (spriteNum == 1) {
                             image = getFront1();
                         }
-                        if (this.spriteNum == 2) {
+                        if (spriteNum == 2) {
                             image = getFront2();
                         }
                     }
                     case "west" -> {
-                        if (this.spriteNum == 1) {
+                        if (spriteNum == 1) {
                             image = getLeft1();
                         }
-                        if (this.spriteNum == 2) {
+                        if (spriteNum == 2) {
                             image = getLeft2();
                         }
                     }
                     case "east" -> {
-                        if (this.spriteNum == 1) {
+                        if (spriteNum == 1) {
                             image = getRight1();
                         }
-                        if (this.spriteNum == 2) {
+                        if (spriteNum == 2) {
                             image = getRight2();
                         }
                     }
