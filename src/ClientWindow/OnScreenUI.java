@@ -269,7 +269,7 @@ public class OnScreenUI {
             graphics2D.setColor(Color.white);
             graphics2D.drawString(displayText, x, y);
             graphics2D.fillOval(x-sw.getDISPLAYED_TILE_SIZE()/2 - (45/4)-1, y-(40), 45, 45);
-            graphics2D.drawImage(sw.player.front3, x-sw.getDISPLAYED_TILE_SIZE()/2 - (45/4), y-(39), 45, 45, null);
+            graphics2D.drawImage(sw.player.getFront3(), x-sw.getDISPLAYED_TILE_SIZE()/2 - (45/4), y-(39), 45, 45, null);
         }
 
         if (sw.fileManager.alreadySaved) {
@@ -295,7 +295,7 @@ public class OnScreenUI {
             graphics2D.setColor(Color.white);
             graphics2D.drawString(displayText, x, y);
             graphics2D.fillOval(x-sw.getDISPLAYED_TILE_SIZE()/2 - (45/4)-1, y-(40), 45, 45);
-            graphics2D.drawImage(sw.player.front3, x-sw.getDISPLAYED_TILE_SIZE()/2 - (45/4), y-(39), 45, 45, null);
+            graphics2D.drawImage(sw.player.getFront3(), x-sw.getDISPLAYED_TILE_SIZE()/2 - (45/4), y-(39), 45, 45, null);
         }
 
         displayText = "Resume";
@@ -309,7 +309,7 @@ public class OnScreenUI {
             graphics2D.setColor(Color.white);
             graphics2D.drawString(displayText, x, y);
             graphics2D.fillOval(x-sw.getDISPLAYED_TILE_SIZE()/2 - (45/4)-1, y-(40), 45, 45);
-            graphics2D.drawImage(sw.player.front3, x-sw.getDISPLAYED_TILE_SIZE()/2 - (45/4), y-(39), 45, 45, null);
+            graphics2D.drawImage(sw.player.getFront3(), x-sw.getDISPLAYED_TILE_SIZE()/2 - (45/4), y-(39), 45, 45, null);
         }
     }
 

@@ -54,18 +54,18 @@ public class Player extends Entity{
         return enemiesKilled;
     }
     public void getPlayerSprite() {
-        back1 = setImage("/player_sprites/pigzard_b1.png");
-        back2 = setImage("/player_sprites/pigzard_b2.png");
-        back3 = setImage("/player_sprites/pigzard_b3.png");
-        front1 = setImage("/player_sprites/pigzard_f1.png");
-        front2 = setImage("/player_sprites/pigzard_f2.png");
-        front3 = setImage("/player_sprites/pigzard_f3.png");
-        left1 = setImage("/player_sprites/pigzard_l1.png");
-        left2 = setImage("/player_sprites/pigzard_l2.png");
-        left3 = setImage("/player_sprites/pigzard_l1.png");
-        right1 = setImage("/player_sprites/pigzard_r1.png");
-        right2 = setImage("/player_sprites/pigzard_r2.png");
-        right3 = setImage("/player_sprites/pigzard_r1.png");
+        setBack1(setImage("/player_sprites/pigzard_b1.png"));
+        setBack2(setImage("/player_sprites/pigzard_b2.png"));
+        setBack3(setImage("/player_sprites/pigzard_b3.png"));
+        setFront1(setImage("/player_sprites/pigzard_f1.png"));
+        setFront2(setImage("/player_sprites/pigzard_f2.png"));
+        setFront3(setImage("/player_sprites/pigzard_f3.png"));
+        setLeft1(setImage("/player_sprites/pigzard_l1.png"));
+        setLeft2(setImage("/player_sprites/pigzard_l2.png"));
+        setLeft3(setImage("/player_sprites/pigzard_l1.png"));
+        setRight1(setImage("/player_sprites/pigzard_r1.png"));
+        setRight2(setImage("/player_sprites/pigzard_r2.png"));
+        setRight3(setImage("/player_sprites/pigzard_r1.png"));
     }
 
     //Setters
@@ -282,56 +282,56 @@ public class Player extends Entity{
             case "north":
                 if (!km.isWPressed() && !km.isAPressed() && !km.isSPressed() && !km.isDPressed())
                 {
-                    image = back3;
+                    image = getBack3();
                 }
                 else {
                     if (spriteNum == 1) {
-                        image = back1;
+                        image = getBack1();
                     }
                     if (spriteNum == 2) {
-                        image = back2;
+                        image = getBack2();
                     }
                 }
                 break;
             case "south":
                 if (!km.isWPressed() && !km.isAPressed() && !km.isSPressed() && !km.isDPressed())
                 {
-                    image = front3;
+                    image = getFront3();
                 }
                 else {
                     if (spriteNum == 1) {
-                        image = front1;
+                        image = getFront1();
                     }
                     if (spriteNum == 2) {
-                        image = front2;
+                        image = getFront2();
                     }
                 }
                 break;
             case "west":
                 if (!km.isWPressed() && !km.isAPressed() && !km.isSPressed() && !km.isDPressed())
                 {
-                    image = left3;
+                    image = getLeft3();
                 }
                 else {
                     if (spriteNum == 1) {
-                        image = left1;
+                        image = getLeft1();
                     }
                     if (spriteNum == 2) {
-                        image = left2;
+                        image = getLeft2();
                     }
                 }
                 break;
             case "east":
                 if (!km.isWPressed() && !km.isAPressed() && !km.isSPressed() && !km.isDPressed())
                 {
-                    image = right3;
+                    image = getRight3();
                 }
                 else {
                     if (spriteNum == 1) {
-                        image = right1;
+                        image = getRight1();
                     }
                     if (spriteNum == 2) {
-                        image = right2;
+                        image = getRight2();
                     }
                 }
                 break;

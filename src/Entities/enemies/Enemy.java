@@ -44,18 +44,18 @@ public class Enemy extends Entity {
     }
 
     public void getImg() {
-        back1 = setImage("/enemy_sprites/MMM_b1.png");
-        back2 = setImage("/enemy_sprites/MMM_b2.png");
-        back3 = setImage("/enemy_sprites/MMM_b3.png");
-        front1 = setImage("/enemy_sprites/MMM_f1.png");
-        front2 = setImage("/enemy_sprites/MMM_f2.png");
-        front3 = setImage("/enemy_sprites/MMM_f3.png");
-        left1 = setImage("/enemy_sprites/MMM_l1.png");
-        left2 = setImage("/enemy_sprites/MMM_l2.png");
-        left3 = setImage("/enemy_sprites/MMM_l3.png");
-        right1 = setImage("/enemy_sprites/MMM_r1.png");
-        right2 = setImage("/enemy_sprites/MMM_r2.png");
-        right3 = setImage("/enemy_sprites/MMM_r3.png");
+        setBack1(setImage("/enemy_sprites/MMM_b1.png"));
+        setBack2(setImage("/enemy_sprites/MMM_b2.png"));
+        setBack3(setImage("/enemy_sprites/MMM_b3.png"));
+        setFront1(setImage("/enemy_sprites/MMM_f1.png"));
+        setFront2(setImage("/enemy_sprites/MMM_f2.png"));
+        setFront3(setImage("/enemy_sprites/MMM_f3.png"));
+        setLeft1(setImage("/enemy_sprites/MMM_l1.png"));
+        setLeft2(setImage("/enemy_sprites/MMM_l2.png"));
+        setLeft3(setImage("/enemy_sprites/MMM_l3.png"));
+        setRight1(setImage("/enemy_sprites/MMM_r1.png"));
+        setRight2(setImage("/enemy_sprites/MMM_r2.png"));
+        setRight3(setImage("/enemy_sprites/MMM_r3.png"));
     }
 
     public void action() {

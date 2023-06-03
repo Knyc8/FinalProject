@@ -9,11 +9,12 @@ import java.io.IOException;
 import java.util.Objects;
 
 public class Entity {
+    //VARIABLES
     //setup
     private final SwingWindow sw;
     private int xCoord, yCoord;  //represents the coordinates of the world as the player stays in the center
 
-    public BufferedImage back1, back2, back3, front1, front2, front3,  left1, left2, left3, right1, right2, right3;
+    private BufferedImage back1, back2, back3, front1, front2, front3,  left1, left2, left3, right1, right2, right3;
     private String direction;
     public static int spriteCount = 0;
     public static int spriteNum = 1;
@@ -36,7 +37,7 @@ public class Entity {
     private int hp;
     private int dmg;  //future purposes
 
-    //Constructor
+    //CONSTRUCTOR
     public Entity (SwingWindow sw) {
         this.sw = sw;
 
@@ -46,7 +47,7 @@ public class Entity {
     }
 
 
-    //Getters
+    //GETTERS
     public SwingWindow getSw() {
         return sw;
     }
@@ -103,7 +104,46 @@ public class Entity {
     }
 
 
-    //Setters
+    //IMAGE GETTERS
+    public BufferedImage getBack1() {
+        return back1;
+    }
+    public BufferedImage getBack2() {
+        return back2;
+    }
+    public BufferedImage getBack3() {
+        return back3;
+    }
+    public BufferedImage getFront1() {
+        return front1;
+    }
+    public BufferedImage getFront2() {
+        return front2;
+    }
+    public BufferedImage getFront3() {
+        return front3;
+    }
+    public BufferedImage getLeft1() {
+        return left1;
+    }
+    public BufferedImage getLeft2() {
+        return left2;
+    }
+    public BufferedImage getLeft3() {
+        return left3;
+    }
+    public BufferedImage getRight1() {
+        return right1;
+    }
+    public BufferedImage getRight2() {
+        return right2;
+    }
+    public BufferedImage getRight3() {
+        return right3;
+    }
+
+
+    //SETTERS
     public void setXCoord(int xCoord) {
         this.xCoord = xCoord;
     }
@@ -175,7 +215,46 @@ public class Entity {
     }
 
 
-    //Other methods
+    //IMAGE SETTERS
+    public void setBack1(BufferedImage back1) {
+        this.back1 = back1;
+    }
+    public void setBack2(BufferedImage back2) {
+        this.back2 = back2;
+    }
+    public void setBack3(BufferedImage back3) {
+        this.back3 = back3;
+    }
+    public void setFront1(BufferedImage front1) {
+        this.front1 = front1;
+    }
+    public void setFront2(BufferedImage front2) {
+        this.front2 = front2;
+    }
+    public void setFront3(BufferedImage front3) {
+        this.front3 = front3;
+    }
+    public void setLeft1(BufferedImage left1) {
+        this.left1 = left1;
+    }
+    public void setLeft2(BufferedImage left2) {
+        this.left2 = left2;
+    }
+    public void setLeft3(BufferedImage left3) {
+        this.left3 = left3;
+    }
+    public void setRight1(BufferedImage right1) {
+        this.right1 = right1;
+    }
+    public void setRight2(BufferedImage right2) {
+        this.right2 = right2;
+    }
+    public void setRight3(BufferedImage right3) {
+        this.right3 = right3;
+    }
+
+
+    //OTHER METHODS
     public void draw(Graphics2D graphics2D) {
         int screenX = xCoord - sw.getPlayer().getXCoord() + sw.getPlayer().getSCREEN_X();
         int screenY = yCoord - sw.getPlayer().getYCoord() + sw.getPlayer().getSCREEN_Y();
