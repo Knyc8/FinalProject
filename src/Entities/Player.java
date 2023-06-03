@@ -205,13 +205,13 @@ public class Player extends Entity{
 
         if (isImmune()) {  //Invincibility loop
             setICount(getICount()+1);
-            if (getSw().fileManager.initiallyLoaded)
+            if (getSw().fileManager.isInitiallyLoaded())
             {
                 if (getICount() > 300)  //4 second invincibility
                 {
                     setImmune(false);
                     setICount(0);
-                    getSw().fileManager.initiallyLoaded = false;
+                    getSw().fileManager.setInitiallyLoaded(false);
                 }
             }
             else {

@@ -9,9 +9,9 @@ import java.util.Objects;
 
 public class OnScreenUI {
     //VARIABLES
-    private SwingWindow sw;
+    private final SwingWindow sw;
     private Font dungeonFont;
-    private BufferedImage torch, DFIcon, wall, bacon, emptyBacon, sadCat, tDown, bCat, cBCat, arrow;
+    private final BufferedImage torch, DFIcon, wall, bacon, emptyBacon, sadCat, tDown, bCat, cBCat, arrow;
     private int optionNum = 0;
     private int messageCount = 0;
     private String displayText = "";
@@ -287,7 +287,7 @@ public class OnScreenUI {
             graphics2D.drawImage(sw.player.getFront3(), x-sw.getDISPLAYED_TILE_SIZE()/2 - (45/4), y-(39), 45, 45, null);
         }
 
-        if (sw.fileManager.alreadySaved) {
+        if (sw.fileManager.isAlreadySaved()) {
             displayText = "Progress Saved";
             messageCount++;
         }
@@ -298,7 +298,7 @@ public class OnScreenUI {
         if (messageCount >= 120) {
             displayText = "Save Game";
             messageCount = 0;
-            sw.fileManager.alreadySaved = false;
+            sw.fileManager.setAlreadySaved(false);
         }
         length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();  //centers the text
         x = sw.getSCREEN_WIDTH()/2 - length/2;
@@ -401,7 +401,7 @@ public class OnScreenUI {
         graphics2D.setStroke(oldStroke);
 
         //Save File Data
-        if (sw.fileManager.initiallyLoaded) {
+        if (sw.fileManager.isInitiallyLoaded()) {
             x = sw.getDISPLAYED_TILE_SIZE() * 2 - 7;
             y = sw.getDISPLAYED_TILE_SIZE() * 2 + 17;
             graphics2D.drawImage(torch, x, y, sw.getDISPLAYED_TILE_SIZE() * 5 / 2, sw.getDISPLAYED_TILE_SIZE() * 5 / 2, null);

@@ -3,17 +3,41 @@ package ClientWindow;
 import java.io.*;
 
 public class FileManager {
-    SwingWindow sw;
-    File save = new File("Save_File.dat");
-    public boolean alreadySaved = false;
-    public boolean initiallyLoaded = false;
-    public boolean currentlyLoaded = false;
+    //VARIABLES
+    private final SwingWindow sw;
+    private File save = new File("Save_File.dat");
+    private boolean alreadySaved = false;
+    private boolean initiallyLoaded = false;
+    private boolean currentlyLoaded = false;
 
+    //CONSTRUCTOR
     public FileManager(SwingWindow sw) {
         this.sw = sw;
     }
 
 
+    //GETTERS
+    public boolean isAlreadySaved() {
+        return alreadySaved;
+    }
+    public boolean isInitiallyLoaded() {
+        return initiallyLoaded;
+    }
+
+
+    //SETTERS
+    public void setAlreadySaved(boolean alreadySaved) {
+        this.alreadySaved = alreadySaved;
+    }
+    public void setInitiallyLoaded(boolean initiallyLoaded) {
+        this.initiallyLoaded = initiallyLoaded;
+    }
+    public void setCurrentlyLoaded(boolean currentlyLoaded) {
+        this.currentlyLoaded = currentlyLoaded;
+    }
+
+
+    //OTHER METHODS
     public boolean save() {
         try {
             save = new File("Save_File.dat");

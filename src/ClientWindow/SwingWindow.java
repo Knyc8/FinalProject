@@ -178,7 +178,7 @@ public class SwingWindow extends JPanel implements Runnable {
         {
             loadingCount++;
             if (loadingCount >= 30) {
-                if (fileManager.initiallyLoaded) {
+                if (fileManager.isInitiallyLoaded()) {
                     gameState = PLAY_STATE;
                     dungeonPlacer.loadMonsters();
                     getPlayer().setImmune(true);

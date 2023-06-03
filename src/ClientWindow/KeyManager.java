@@ -4,30 +4,34 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyManager implements KeyListener {
-    SwingWindow sw;
+    //VARIABLES
+    private final SwingWindow sw;
     private boolean wPressed, sPressed, aPressed, dPressed, shootPressed;
+
+    //CONSTRUCTOR
     public KeyManager(SwingWindow sw)
     {
         this.sw = sw;
     }
 
+
+    //GETTERS
     public boolean isWPressed() {
         return wPressed;
     }
-
     public boolean isSPressed() {
         return sPressed;
     }
-
     public boolean isAPressed() {
         return aPressed;
     }
-
     public boolean isDPressed() {
         return dPressed;
     }
     public boolean isShootPressed(){return shootPressed;}
 
+
+    //OTHER METHODS
     @Override
     public void keyTyped(KeyEvent e) {/*unused*/}
 
@@ -60,7 +64,7 @@ public class KeyManager implements KeyListener {
                 }
                 else if (sw.ui.getOptionNum() == 1)  //load game
                 {
-                    sw.fileManager.initiallyLoaded = sw.fileManager.load();
+                    sw.fileManager.setInitiallyLoaded(sw.fileManager.load());
                     sw.gameState = sw.LOAD_MENU_STATE;
                     keyCode = -1;
                     sw.ui.setOptionNum(0);
@@ -112,12 +116,12 @@ public class KeyManager implements KeyListener {
                 if (sw.ui.getOptionNum() == 0)
                 {
                     sw.gameState = sw.TITLE_SCREEN_STATE;
-                    sw.fileManager.initiallyLoaded = false;
-                    sw.fileManager.currentlyLoaded = false;
+                    sw.fileManager.setInitiallyLoaded(false);
+                    sw.fileManager.setCurrentlyLoaded(false);
                 }
                 else if (sw.ui.getOptionNum() == 1)  //save game
                 {
-                    sw.fileManager.alreadySaved = sw.fileManager.save();
+                    sw.fileManager.setAlreadySaved(sw.fileManager.save());
                 }
                 else {
                     sw.gameState = sw.PLAY_STATE;
@@ -144,15 +148,15 @@ public class KeyManager implements KeyListener {
             if (keyCode == KeyEvent.VK_ENTER || keyCode == KeyEvent.VK_SPACE) {
                 if (sw.ui.getOptionNum() == 0)  //Load game
                 {
-                    if (sw.fileManager.initiallyLoaded) {
+                    if (sw.fileManager.isInitiallyLoaded()) {
                         sw.gameState = sw.LOADING_STATE;
                     }
                 }
                 else {  //Return to TTS
                     sw.gameState = sw.TITLE_SCREEN_STATE;
                     sw.ui.setOptionNum(0);
-                    sw.fileManager.initiallyLoaded = false;
-                    sw.fileManager.currentlyLoaded = false;
+                    sw.fileManager.setInitiallyLoaded(false);
+                    sw.fileManager.setCurrentlyLoaded(false);
                 }
             }
         }
