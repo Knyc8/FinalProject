@@ -22,7 +22,7 @@ public class Enemy extends Entity {
         setSpeed(8);
         setMaxHp(1);
         setHp(getMaxHp());
-        collidable = true;
+        setCollidable(true);
         actionCount = 0;
 
         int rand = (int) (Math.random()*4) + 1;  //random number from 1-4

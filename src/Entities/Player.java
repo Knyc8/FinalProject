@@ -87,7 +87,7 @@ public class Player extends Entity{
         setYCoord(getSw().getDISPLAYED_TILE_SIZE() * 4);
         setSpeed(10);
         setDirection("south");
-        collidable = true;
+        setCollidable(true);
         immunity = false;
         enemiesKilled = 0;
 
@@ -124,14 +124,14 @@ public class Player extends Entity{
             }
 
             //check for tiles collisions
-            colliding = false;
+            setColliding(false);
             getSw().getCollisionDetector().detectTile(this);
 
             //check for enemy collisions
             int enemyIdx = getSw().getCollisionDetector().detectEntity(getSw().monsters, this);
             takeDamage(enemyIdx);
 
-            if (!colliding) {
+            if (!isColliding()) {
                 //dmgCount = 0;
                 if (getDirection().equals("north")) {  //up speed units
                     setYCoord(getYCoord() - getSpeed());  //top left is (0, 0)
@@ -162,13 +162,13 @@ public class Player extends Entity{
             setSpeed(10/2);
 
             if (level < 3) {
-                if (!projectile.alive) {
+                if (!projectile.isAlive()) {
                     projectile.set(getXCoord(), getYCoord(), getDirection(), true, this);
                     getSw().projectiles.add(projectile);
                 }
             }
             if (level >= 3 && level < 5) {
-                if (!projectile.alive && !projectile2.alive) {
+                if (!projectile.isAlive() && !projectile2.isAlive()) {
                     if (getDirection().equals("north") || getDirection().equals("south")) {
                         projectile.set(getXCoord() - 25, getYCoord(), getDirection(), true, this);
                         projectile2.set(getXCoord()  +25, getYCoord(), getDirection(), true, this);
@@ -182,7 +182,7 @@ public class Player extends Entity{
                 }
             }
             if (level >= 5) {
-                if (!projectile.alive && !projectile2.alive && !projectile3.alive) {
+                if (!projectile.isAlive() && !projectile2.isAlive() && !projectile3.isAlive()) {
                     if (getDirection().equals("north") || getDirection().equals("south")) {
                         projectile.set(getXCoord() - 50, getYCoord(), getDirection(), true, this);
                         projectile2.set(getXCoord(), getYCoord(), getDirection(), true, this);

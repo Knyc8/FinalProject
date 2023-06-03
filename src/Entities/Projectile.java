@@ -20,8 +20,8 @@ public class Projectile extends Entity{
         setMaxHp(45);
         setHp(getMaxHp());
         setDmg(1);
-        alive = false;
-        collidable = true;
+        setAlive(false);
+        setCollidable(true);
         getImg();
     }
 
@@ -42,7 +42,7 @@ public class Projectile extends Entity{
         setXCoord(xCoord);
         setYCoord(yCoord);
         setDirection(dir);
-        this.alive = alive;
+        setAlive(alive);
         this.user = user;
         setHp(getMaxHp());
     }
@@ -58,7 +58,7 @@ public class Projectile extends Entity{
         setHp(getHp()-1);
 
         if (getHp() <= 0) {
-            alive = false;
+            setAlive(false);
         }
 
         this.spriteCount++;
@@ -84,7 +84,7 @@ public class Projectile extends Entity{
 
             BufferedImage image = null;
 
-            if (colliding || getHp() < 10)
+            if (isColliding() || getHp() < 10)
             {
                 if (this.spriteNum == 1) {
                     image = explosion1;

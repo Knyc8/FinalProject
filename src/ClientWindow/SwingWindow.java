@@ -157,10 +157,10 @@ public class SwingWindow extends JPanel implements Runnable {
 
             for (int i = 0; i < projectiles.size(); i++) {
                 if (projectiles.get(i) != null) {
-                    if(projectiles.get(i).alive) {
+                    if(projectiles.get(i).isAlive()) {
                         projectiles.get(i).update();
                     }
-                    if (!projectiles.get(i).alive) {
+                    if (!projectiles.get(i).isAlive()) {
                         projectiles.remove(i);
                         i--;
                     }
@@ -212,7 +212,7 @@ public class SwingWindow extends JPanel implements Runnable {
             //Enemies
             for (int i = 0; i < monsters.length; i++) {
                 if (monsters[i] != null) {
-                    if (monsters[i].dying)
+                    if (monsters[i].isDying())
                     {
                         monsters[i] = null;
                     }

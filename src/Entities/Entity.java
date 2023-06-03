@@ -20,10 +20,10 @@ public class Entity {
     private Rectangle hitbox;
     private int hitboxDefaultX;
     private int hitboxDefaultY;
-    public boolean collidable;
-    public boolean colliding = false;
-    public boolean alive;
-    public boolean dying;
+    private boolean collidable;
+    private boolean colliding;
+    private boolean alive;
+    private boolean dying;
     public Projectile projectile;
     Projectile projectile2;
     Projectile projectile3;
@@ -68,6 +68,18 @@ public class Entity {
     public int getHitboxDefaultY() {
         return hitboxDefaultY;
     }
+    public boolean isCollidable() {
+        return collidable;
+    }
+    public boolean isColliding() {
+        return colliding;
+    }
+    public boolean isAlive() {
+        return alive;
+    }
+    public boolean isDying() {
+        return dying;
+    }
     public int getSpeed() {
         return speed;
     }
@@ -97,6 +109,18 @@ public class Entity {
     }
     public void setHitboxDefaultY(int hitboxDefaultY) {
         this.hitboxDefaultY = hitboxDefaultY;
+    }
+    public void setCollidable(boolean collidable) {
+        this.collidable = collidable;
+    }
+    public void setColliding(boolean colliding) {
+        this.colliding = colliding;
+    }
+    public void setAlive(boolean alive) {
+        this.alive = alive;
+    }
+    public void setDying(boolean dying) {
+        this.dying = dying;
     }
     public void setName(String name) {
         this.name = name;
