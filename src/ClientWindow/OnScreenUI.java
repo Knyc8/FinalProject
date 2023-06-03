@@ -107,29 +107,29 @@ public class OnScreenUI {
     private void drawTitleScreen(Graphics2D graphics2D) {
         //Background
         graphics2D.setColor(Color.black);
-        graphics2D.fillRect(0,0, sw.SCREEN_WIDTH, sw.SCREEN_HEIGHT);
+        graphics2D.fillRect(0,0, sw.getSCREEN_WIDTH(), sw.getSCREEN_HEIGHT());
         graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.25f));  //25% opacity
-        graphics2D.drawImage(wall, 0, 0, sw.SCREEN_WIDTH/2, sw.SCREEN_HEIGHT, null);
-        graphics2D.drawImage(wall, sw.SCREEN_WIDTH/2, 0, sw.SCREEN_WIDTH/2, sw.SCREEN_HEIGHT, null);
+        graphics2D.drawImage(wall, 0, 0, sw.getSCREEN_WIDTH()/2, sw.getSCREEN_HEIGHT(), null);
+        graphics2D.drawImage(wall, sw.getSCREEN_WIDTH()/2, 0, sw.getSCREEN_WIDTH()/2, sw.getSCREEN_HEIGHT(), null);
 
         //Border
         graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));  //100% opacity
-        float thickness = sw.DISPLAYED_TILE_SIZE/4f;
+        float thickness = sw.getDISPLAYED_TILE_SIZE()/4f;
         Stroke oldStroke = graphics2D.getStroke();
         graphics2D.setStroke(new BasicStroke(thickness));
         graphics2D.setColor(Color.white);
-        graphics2D.drawRect(0, 0, sw.getSCREEN_WIDTH(), sw.SCREEN_HEIGHT);
+        graphics2D.drawRect(0, 0, sw.getSCREEN_WIDTH(), sw.getSCREEN_HEIGHT());
         graphics2D.setStroke(oldStroke);
 
         //Doors
         graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));  //50% opacity
-        int door1X = sw.SCREEN_WIDTH/4 - (sw.getDISPLAYED_TILE_SIZE()*15)/4;
+        int door1X = sw.getSCREEN_WIDTH()/4 - (sw.getDISPLAYED_TILE_SIZE()*15)/4;
         int door1Y = (sw.getDISPLAYED_TILE_SIZE()*5)/2;
         graphics2D.drawImage(DFIcon, door1X, door1Y, sw.getDISPLAYED_TILE_SIZE()*5, sw.getDISPLAYED_TILE_SIZE()*5, null);  //1st door
-        int door2X = sw.SCREEN_WIDTH/2 - (sw.getDISPLAYED_TILE_SIZE()*5)/2 - 4;
+        int door2X = sw.getSCREEN_WIDTH()/2 - (sw.getDISPLAYED_TILE_SIZE()*5)/2 - 4;
         int door2Y = (sw.getDISPLAYED_TILE_SIZE()*5)/2;
         graphics2D.drawImage(DFIcon, door2X, door2Y, sw.getDISPLAYED_TILE_SIZE()*5, sw.getDISPLAYED_TILE_SIZE()*5, null);  //2nd door
-        int door3X = (sw.SCREEN_WIDTH*3)/4 - (sw.getDISPLAYED_TILE_SIZE()*5)/4;
+        int door3X = (sw.getSCREEN_WIDTH()*3)/4 - (sw.getDISPLAYED_TILE_SIZE()*5)/4;
         int door3Y = (sw.getDISPLAYED_TILE_SIZE()*5)/2;
         graphics2D.drawImage(DFIcon, door3X, door3Y, sw.getDISPLAYED_TILE_SIZE()*5, sw.getDISPLAYED_TILE_SIZE()*5, null);  //3rd door
 
@@ -178,7 +178,7 @@ public class OnScreenUI {
             graphics2D.drawString(displayText, x, y);
             graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
             graphics2D.drawImage(DFIcon, door2X, door2Y, sw.getDISPLAYED_TILE_SIZE()*5, sw.getDISPLAYED_TILE_SIZE()*5, null);  //2nd door
-            x = sw.getSCREEN_WIDTH()/2 - (sw.DISPLAYED_TILE_SIZE*3)/2;
+            x = sw.getSCREEN_WIDTH()/2 - (sw.getDISPLAYED_TILE_SIZE()*3)/2;
             y = (door2Y + sw.getDISPLAYED_TILE_SIZE()*5)/2;
             graphics2D.drawImage(torch, x, y, sw.getDISPLAYED_TILE_SIZE() * 3, sw.getDISPLAYED_TILE_SIZE() * 3, null);
         }
@@ -208,7 +208,7 @@ public class OnScreenUI {
      */
     private void drawPlayUI(Graphics2D graphics2D) {
         //Display health
-        int xheart  = sw.DISPLAYED_TILE_SIZE/2;
+        int xheart  = sw.getDISPLAYED_TILE_SIZE()/2;
         for (int i = 0; i < sw.player.getHp(); i++) {
             graphics2D.drawImage(bacon, xheart, 15, (sw.getDISPLAYED_TILE_SIZE()*3)/4, (sw.getDISPLAYED_TILE_SIZE()*3)/4, null);
             xheart += sw.getDISPLAYED_TILE_SIZE()/2;
@@ -217,18 +217,18 @@ public class OnScreenUI {
             graphics2D.drawImage(emptyBacon, xheart, 15, (sw.getDISPLAYED_TILE_SIZE()*3)/4, (sw.getDISPLAYED_TILE_SIZE()*3)/4, null);
             xheart += sw.getDISPLAYED_TILE_SIZE()/2;
         }
-        graphics2D.drawImage(DFIcon, sw.SCREEN_WIDTH-(sw.getDISPLAYED_TILE_SIZE() +15), 15, sw.getDISPLAYED_TILE_SIZE(), sw.getDISPLAYED_TILE_SIZE(), null);
+        graphics2D.drawImage(DFIcon, sw.getSCREEN_WIDTH()-(sw.getDISPLAYED_TILE_SIZE() +15), 15, sw.getDISPLAYED_TILE_SIZE(), sw.getDISPLAYED_TILE_SIZE(), null);
 
         //Display Level
         graphics2D.setFont(graphics2D.getFont().deriveFont(Font.BOLD, 75f));
         displayText = Integer.toString(sw.getPlayer().getLevel());
         int length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();
-        graphics2D.drawString(displayText, sw.SCREEN_WIDTH - 64 - length/2, 100);
+        graphics2D.drawString(displayText, sw.getSCREEN_WIDTH() - 64 - length/2, 100);
 
         //Background rectangle
         graphics2D.setColor(Color.gray);
         graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
-        graphics2D.fillRect(sw.SCREEN_WIDTH - sw.DISPLAYED_TILE_SIZE*2 - 20, 100 + sw.getDISPLAYED_TILE_SIZE()/3, sw.getDISPLAYED_TILE_SIZE()*2 + 10, sw.getDISPLAYED_TILE_SIZE());
+        graphics2D.fillRect(sw.getSCREEN_WIDTH() - sw.getDISPLAYED_TILE_SIZE()*2 - 20, 100 + sw.getDISPLAYED_TILE_SIZE()/3, sw.getDISPLAYED_TILE_SIZE()*2 + 10, sw.getDISPLAYED_TILE_SIZE());
         graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 
         //Display Enemies Killed
@@ -237,23 +237,23 @@ public class OnScreenUI {
         displayText = Integer.toString(sw.getPlayer().getEnemiesKilled());
         displayText = "Enemies Killed:  " + displayText;
         length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();
-        graphics2D.drawString(displayText, sw.SCREEN_WIDTH - length - 15, 100 + sw.getDISPLAYED_TILE_SIZE()*2/3);
+        graphics2D.drawString(displayText, sw.getSCREEN_WIDTH() - length - 15, 100 + sw.getDISPLAYED_TILE_SIZE()*2/3);
 
         //Display XP
         displayText = Integer.toString((sw.getPlayer().getLevel()*5) - sw.getPlayer().getExp());
         displayText = "Exp til level up:  " + displayText;
         length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();
-        graphics2D.drawString(displayText, sw.SCREEN_WIDTH - length - 15, 100 + sw.getDISPLAYED_TILE_SIZE()*3/3);
+        graphics2D.drawString(displayText, sw.getSCREEN_WIDTH() - length - 15, 100 + sw.getDISPLAYED_TILE_SIZE()*3/3);
 
         //XP Bar
         graphics2D.setColor(Color.gray);
-        graphics2D.fillRect(sw.SCREEN_WIDTH - sw.DISPLAYED_TILE_SIZE*2 - 15, 100+ sw.getDISPLAYED_TILE_SIZE()+7, sw.getDISPLAYED_TILE_SIZE()*2, sw.getDISPLAYED_TILE_SIZE()/10 + 10);
+        graphics2D.fillRect(sw.getSCREEN_WIDTH() - sw.getDISPLAYED_TILE_SIZE()*2 - 15, 100+ sw.getDISPLAYED_TILE_SIZE()+7, sw.getDISPLAYED_TILE_SIZE()*2, sw.getDISPLAYED_TILE_SIZE()/10 + 10);
         graphics2D.setColor(Color.darkGray);
-        graphics2D.fillRect(sw.SCREEN_WIDTH - sw.DISPLAYED_TILE_SIZE*2 - 12, 100+ sw.getDISPLAYED_TILE_SIZE()+10, (sw.getDISPLAYED_TILE_SIZE()*2 - 6), sw.getDISPLAYED_TILE_SIZE()/10 + 4 );
+        graphics2D.fillRect(sw.getSCREEN_WIDTH() - sw.getDISPLAYED_TILE_SIZE()*2 - 12, 100+ sw.getDISPLAYED_TILE_SIZE()+10, (sw.getDISPLAYED_TILE_SIZE()*2 - 6), sw.getDISPLAYED_TILE_SIZE()/10 + 4 );
         graphics2D.setColor(Color.green);
         double xpProgress = (double) sw.getPlayer().getExp()/(sw.getPlayer().getLevel()*5);
         int progressWidth = (int) ((sw.getDISPLAYED_TILE_SIZE()*2 - 6) * xpProgress);
-        graphics2D.fillRect(sw.SCREEN_WIDTH - sw.DISPLAYED_TILE_SIZE*2 - 12, 100+ sw.getDISPLAYED_TILE_SIZE()+10, progressWidth, sw.getDISPLAYED_TILE_SIZE()/10 + 4 );
+        graphics2D.fillRect(sw.getSCREEN_WIDTH() - sw.getDISPLAYED_TILE_SIZE()*2 - 12, 100+ sw.getDISPLAYED_TILE_SIZE()+10, progressWidth, sw.getDISPLAYED_TILE_SIZE()/10 + 4 );
     }
 
     /***
@@ -261,7 +261,7 @@ public class OnScreenUI {
      */
     private void drawPausedScreen(Graphics2D graphics2D) {
         graphics2D.setColor(new Color(0,0,0,127));  //50% opacity
-        graphics2D.fillRect(0,0, sw.SCREEN_WIDTH, sw.SCREEN_HEIGHT);
+        graphics2D.fillRect(0,0, sw.getSCREEN_WIDTH(), sw.getSCREEN_HEIGHT());
         graphics2D.setColor(Color.white);
         graphics2D.setFont(graphics2D.getFont().deriveFont(Font.BOLD, 150f));
         displayText = "PAUSED";
@@ -330,7 +330,7 @@ public class OnScreenUI {
 
     public void drawLoseScreen(Graphics2D graphics2D) {
         graphics2D.setColor(new Color(0,0,0));  //50% opacity
-        graphics2D.fillRect(0,0, sw.SCREEN_WIDTH, sw.SCREEN_HEIGHT);
+        graphics2D.fillRect(0,0, sw.getSCREEN_WIDTH(), sw.getSCREEN_HEIGHT());
         graphics2D.setColor(Color.white);
         graphics2D.setFont(graphics2D.getFont().deriveFont(Font.BOLD, 150f));
         displayText = "You Lose!";
@@ -365,10 +365,10 @@ public class OnScreenUI {
     public void drawLoadScreen(Graphics2D graphics2D) {
         //Background
         graphics2D.setColor(Color.black);
-        graphics2D.fillRect(0,0, sw.SCREEN_WIDTH, sw.SCREEN_HEIGHT);
+        graphics2D.fillRect(0,0, sw.getSCREEN_WIDTH(), sw.getSCREEN_HEIGHT());
         graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.25f));  //25% opacity
-        graphics2D.drawImage(wall, 0, 0, sw.SCREEN_WIDTH/2, sw.SCREEN_HEIGHT, null);
-        graphics2D.drawImage(wall, sw.SCREEN_WIDTH/2, 0, sw.SCREEN_WIDTH/2, sw.SCREEN_HEIGHT, null);
+        graphics2D.drawImage(wall, 0, 0, sw.getSCREEN_WIDTH()/2, sw.getSCREEN_HEIGHT(), null);
+        graphics2D.drawImage(wall, sw.getSCREEN_WIDTH()/2, 0, sw.getSCREEN_WIDTH()/2, sw.getSCREEN_HEIGHT(), null);
 
         //Load Box
         graphics2D.setFont(graphics2D.getFont().deriveFont(Font.BOLD, 50f));
@@ -384,18 +384,18 @@ public class OnScreenUI {
         y = sw.getDISPLAYED_TILE_SIZE()*2;
         graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
         graphics2D.setColor(Color.darkGray);
-        graphics2D.fillRect(x, y, sw.SCREEN_WIDTH-sw.DISPLAYED_TILE_SIZE*4, sw.getDISPLAYED_TILE_SIZE()*3);
+        graphics2D.fillRect(x, y, sw.getSCREEN_WIDTH()-sw.getDISPLAYED_TILE_SIZE()*4, sw.getDISPLAYED_TILE_SIZE()*3);
         graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
-        float thickness = sw.DISPLAYED_TILE_SIZE/10f;
+        float thickness = sw.getDISPLAYED_TILE_SIZE()/10f;
         Stroke oldStroke = graphics2D.getStroke();
         graphics2D.setStroke(new BasicStroke(thickness));
         graphics2D.setColor(new Color(255,255,255,127));
-        graphics2D.drawRect(x, y, sw.SCREEN_WIDTH-sw.DISPLAYED_TILE_SIZE*4, sw.getDISPLAYED_TILE_SIZE()*3);
+        graphics2D.drawRect(x, y, sw.getSCREEN_WIDTH()-sw.getDISPLAYED_TILE_SIZE()*4, sw.getDISPLAYED_TILE_SIZE()*3);
         if (optionNum == 0)
         {
             graphics2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
             graphics2D.setColor(Color.white);
-            graphics2D.drawRect(x, y, sw.SCREEN_WIDTH-sw.DISPLAYED_TILE_SIZE*4, sw.getDISPLAYED_TILE_SIZE()*3);
+            graphics2D.drawRect(x, y, sw.getSCREEN_WIDTH()-sw.getDISPLAYED_TILE_SIZE()*4, sw.getDISPLAYED_TILE_SIZE()*3);
             graphics2D.setStroke(oldStroke);
         }
         graphics2D.setStroke(oldStroke);
@@ -438,7 +438,7 @@ public class OnScreenUI {
         displayText = "Return to Title Screen";
         length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();  //centers the text
         x = sw.getSCREEN_WIDTH()/2 - length/2;
-        y = sw.getSCREEN_HEIGHT()/2 + sw.DISPLAYED_TILE_SIZE*3/2;
+        y = sw.getSCREEN_HEIGHT()/2 + sw.getDISPLAYED_TILE_SIZE()*3/2;
         graphics2D.setColor(new Color(255,255,255,127));
         graphics2D.drawString(displayText, x, y);
         if (optionNum == 1)
@@ -450,7 +450,7 @@ public class OnScreenUI {
 
     public void drawLoadingScreen(Graphics2D graphics2D) {
         graphics2D.setColor(Color.black);
-        graphics2D.fillRect(0,0, sw.SCREEN_WIDTH, sw.SCREEN_HEIGHT);
+        graphics2D.fillRect(0,0, sw.getSCREEN_WIDTH(), sw.getSCREEN_HEIGHT());
 
         graphics2D.setFont(graphics2D.getFont().deriveFont(Font.BOLD, 100f));
         graphics2D.setColor(Color.white);

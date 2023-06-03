@@ -11,18 +11,19 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class SwingWindow extends JPanel implements Runnable {
+    //VARIABLES
     //Screen dimensions
-    final int STANDARD_TILE_SIZE = 32;  //32 x 32 tiles/character sprites
-    final int TILE_SCALE = 3;   //Makes 32x32 sprites bigger for modern computer resolutions
-    final int DISPLAYED_TILE_SIZE = STANDARD_TILE_SIZE * TILE_SCALE;    //The actual size the sprite will be displayed as (96x96 pixels)
-    final int SCREEN_TILE_COLUMNS = 16;   //Num of tiles horizontally
-    final int SCREEN_TILE_ROWS = 10;    //Num of tiles vertically
-    final int SCREEN_WIDTH = DISPLAYED_TILE_SIZE * SCREEN_TILE_COLUMNS;   //Horizontal resolution (96 * 16 = 1536 pixels)
-    final int SCREEN_HEIGHT = DISPLAYED_TILE_SIZE * SCREEN_TILE_ROWS;    //Vertical resolution (96 * 10 = 960 pixels)
+    private final int STANDARD_TILE_SIZE = 32;  //32 x 32 tiles/character sprites
+    private final int TILE_SCALE = 3;   //Makes 32x32 sprites bigger for modern computer resolutions
+    private final int DISPLAYED_TILE_SIZE = STANDARD_TILE_SIZE * TILE_SCALE;    //The actual size the sprite will be displayed as (96x96 pixels)
+    private final int SCREEN_TILE_COLUMNS = 16;   //Num of tiles horizontally
+    private final int SCREEN_TILE_ROWS = 10;    //Num of tiles vertically
+    private final int SCREEN_WIDTH = DISPLAYED_TILE_SIZE * SCREEN_TILE_COLUMNS;   //Horizontal resolution (96 * 16 = 1536 pixels)
+    private final int SCREEN_HEIGHT = DISPLAYED_TILE_SIZE * SCREEN_TILE_ROWS;    //Vertical resolution (96 * 10 = 960 pixels)
 
     //Dungeon setting
-    final int DUNGEON_COL = 50;
-    final int DUNGEON_ROW = 50;
+    private final int DUNGEON_COL = 50;
+    private final int DUNGEON_ROW = 50;
 
     //Game Setup
     int framesPerSecond = 60;  //screen refreshes 60 times every second
@@ -51,6 +52,8 @@ public class SwingWindow extends JPanel implements Runnable {
     public final int LOAD_MENU_STATE = 4;
     public final int LOADING_STATE = 5;
 
+
+    //CONSTRUCTOR
     /***
      * Initializes the dimensions of the screen and client inputs
      */
@@ -63,6 +66,35 @@ public class SwingWindow extends JPanel implements Runnable {
         setFocusable(true);  //makes the program focus for key inputs
     }
 
+
+    //GETTERS
+    public int getDISPLAYED_TILE_SIZE() {
+        return DISPLAYED_TILE_SIZE;
+    }
+    public int getSCREEN_WIDTH() {
+        return SCREEN_WIDTH;
+    }
+    public int getSCREEN_HEIGHT() {
+        return SCREEN_HEIGHT;
+    }
+    public int getDUNGEON_COL() {
+        return DUNGEON_COL;
+    }
+    public int getDUNGEON_ROW() {
+        return DUNGEON_ROW;
+    }
+    public TileMapper getTileMapper() {
+        return tileMapper;
+    }
+    public CollisionDetector getCollisionDetector() {
+        return collisionDetector;
+    }
+    public Player getPlayer() {
+        return player;
+    }
+
+
+    //SETTERS
     /***
      * Sets up the title screen, etc. when the game is started
      */
@@ -70,39 +102,8 @@ public class SwingWindow extends JPanel implements Runnable {
         gameState = TITLE_SCREEN_STATE;
     }
 
-    public int getDISPLAYED_TILE_SIZE() {
-        return DISPLAYED_TILE_SIZE;
-    }
 
-    public int getSCREEN_WIDTH() {
-        return SCREEN_WIDTH;
-    }
-
-    public int getSCREEN_HEIGHT() {
-        return SCREEN_HEIGHT;
-    }
-
-
-    public int getDUNGEON_COL() {
-        return DUNGEON_COL;
-    }
-
-    public int getDUNGEON_ROW() {
-        return DUNGEON_ROW;
-    }
-
-    public TileMapper getTileMapper() {
-        return tileMapper;
-    }
-
-    public CollisionDetector getCollisionDetector() {
-        return collisionDetector;
-    }
-
-    public Player getPlayer() {
-        return player;
-    }
-
+    //OTHER METHODS
     /***
      * Calls and commences the game loop
      */
