@@ -33,7 +33,7 @@ public class CollisionDetector {
                 hitBoxBottomSide = (hitBoxBottomY + entity.getSpeed()) / sw.getDISPLAYED_TILE_SIZE();
                 tile1 = sw.getTileMapper().tileNum[hitBoxBottomSide][hitBoxLeftSide];  //bottom left corner
                 tile2 = sw.getTileMapper().tileNum[hitBoxBottomSide][hitBoxRightSide];  //bottom right corner
-                if (sw.getTileMapper().tiles[tile1].collision || sw.getTileMapper().tiles[tile2].collision) {
+                if (sw.getTileMapper().tiles[tile1].getCollision() || sw.getTileMapper().tiles[tile2].getCollision()) {
                     entity.setColliding(true);
                 }
             }
@@ -41,7 +41,7 @@ public class CollisionDetector {
                 hitBoxTopSide = (hitBoxTopY - entity.getSpeed()) / sw.getDISPLAYED_TILE_SIZE();
                 tile1 = sw.getTileMapper().tileNum[hitBoxTopSide][hitBoxLeftSide];  //top left corner
                 tile2 = sw.getTileMapper().tileNum[hitBoxTopSide][hitBoxRightSide];  //top right corner
-                if (sw.getTileMapper().tiles[tile1].collision || sw.getTileMapper().tiles[tile2].collision) {
+                if (sw.getTileMapper().tiles[tile1].getCollision() || sw.getTileMapper().tiles[tile2].getCollision()) {
                     entity.setColliding(true);
                 }
             }
@@ -49,7 +49,7 @@ public class CollisionDetector {
                 hitBoxLeftSide = (hitBoxLeftX - entity.getSpeed()) / sw.getDISPLAYED_TILE_SIZE();
                 tile1 = sw.getTileMapper().tileNum[hitBoxTopSide][hitBoxLeftSide];  //top left corner
                 tile2 = sw.getTileMapper().tileNum[hitBoxBottomSide][hitBoxLeftSide];  //bottom left corner
-                if (sw.getTileMapper().tiles[tile1].collision || sw.getTileMapper().tiles[tile2].collision) {
+                if (sw.getTileMapper().tiles[tile1].getCollision() || sw.getTileMapper().tiles[tile2].getCollision()) {
                     entity.setColliding(true);
                 }
             }
@@ -57,7 +57,7 @@ public class CollisionDetector {
                 hitBoxRightSide = (hitBoxRightX + entity.getSpeed()) / sw.getDISPLAYED_TILE_SIZE();
                 tile1 = sw.getTileMapper().tileNum[hitBoxTopSide][hitBoxRightSide];  //top right corner
                 tile2 = sw.getTileMapper().tileNum[hitBoxBottomSide][hitBoxRightSide];  //bottom right corner
-                if (sw.getTileMapper().tiles[tile1].collision || sw.getTileMapper().tiles[tile2].collision) {
+                if (sw.getTileMapper().tiles[tile1].getCollision() || sw.getTileMapper().tiles[tile2].getCollision()) {
                     entity.setColliding(true);
                 }
             }
