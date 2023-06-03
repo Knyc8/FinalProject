@@ -31,33 +31,33 @@ public class CollisionDetector {
         switch (entity.getDirection()) {
             case "south" -> {
                 hitBoxBottomSide = (hitBoxBottomY + entity.getSpeed()) / sw.getDISPLAYED_TILE_SIZE();
-                tile1 = sw.getTileMapper().tileNum[hitBoxBottomSide][hitBoxLeftSide];  //bottom left corner
-                tile2 = sw.getTileMapper().tileNum[hitBoxBottomSide][hitBoxRightSide];  //bottom right corner
-                if (sw.getTileMapper().tiles[tile1].getCollision() || sw.getTileMapper().tiles[tile2].getCollision()) {
+                tile1 = sw.getTileMapper().getTileNum()[hitBoxBottomSide][hitBoxLeftSide];  //bottom left corner
+                tile2 = sw.getTileMapper().getTileNum()[hitBoxBottomSide][hitBoxRightSide];  //bottom right corner
+                if (sw.getTileMapper().getTiles()[tile1].getCollision() || sw.getTileMapper().getTiles()[tile2].getCollision()) {
                     entity.setColliding(true);
                 }
             }
             case "north" -> {
                 hitBoxTopSide = (hitBoxTopY - entity.getSpeed()) / sw.getDISPLAYED_TILE_SIZE();
-                tile1 = sw.getTileMapper().tileNum[hitBoxTopSide][hitBoxLeftSide];  //top left corner
-                tile2 = sw.getTileMapper().tileNum[hitBoxTopSide][hitBoxRightSide];  //top right corner
-                if (sw.getTileMapper().tiles[tile1].getCollision() || sw.getTileMapper().tiles[tile2].getCollision()) {
+                tile1 = sw.getTileMapper().getTileNum()[hitBoxTopSide][hitBoxLeftSide];  //top left corner
+                tile2 = sw.getTileMapper().getTileNum()[hitBoxTopSide][hitBoxRightSide];  //top right corner
+                if (sw.getTileMapper().getTiles()[tile1].getCollision() || sw.getTileMapper().getTiles()[tile2].getCollision()) {
                     entity.setColliding(true);
                 }
             }
             case "west" -> {
                 hitBoxLeftSide = (hitBoxLeftX - entity.getSpeed()) / sw.getDISPLAYED_TILE_SIZE();
-                tile1 = sw.getTileMapper().tileNum[hitBoxTopSide][hitBoxLeftSide];  //top left corner
-                tile2 = sw.getTileMapper().tileNum[hitBoxBottomSide][hitBoxLeftSide];  //bottom left corner
-                if (sw.getTileMapper().tiles[tile1].getCollision() || sw.getTileMapper().tiles[tile2].getCollision()) {
+                tile1 = sw.getTileMapper().getTileNum()[hitBoxTopSide][hitBoxLeftSide];  //top left corner
+                tile2 = sw.getTileMapper().getTileNum()[hitBoxBottomSide][hitBoxLeftSide];  //bottom left corner
+                if (sw.getTileMapper().getTiles()[tile1].getCollision() || sw.getTileMapper().getTiles()[tile2].getCollision()) {
                     entity.setColliding(true);
                 }
             }
             case "east" -> {
                 hitBoxRightSide = (hitBoxRightX + entity.getSpeed()) / sw.getDISPLAYED_TILE_SIZE();
-                tile1 = sw.getTileMapper().tileNum[hitBoxTopSide][hitBoxRightSide];  //top right corner
-                tile2 = sw.getTileMapper().tileNum[hitBoxBottomSide][hitBoxRightSide];  //bottom right corner
-                if (sw.getTileMapper().tiles[tile1].getCollision() || sw.getTileMapper().tiles[tile2].getCollision()) {
+                tile1 = sw.getTileMapper().getTileNum()[hitBoxTopSide][hitBoxRightSide];  //top right corner
+                tile2 = sw.getTileMapper().getTileNum()[hitBoxBottomSide][hitBoxRightSide];  //bottom right corner
+                if (sw.getTileMapper().getTiles()[tile1].getCollision() || sw.getTileMapper().getTiles()[tile2].getCollision()) {
                     entity.setColliding(true);
                 }
             }

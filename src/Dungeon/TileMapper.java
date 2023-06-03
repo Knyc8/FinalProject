@@ -11,10 +11,12 @@ import java.io.InputStreamReader;
 import java.util.Objects;
 
 public class TileMapper {
-    public SwingWindow sw;
-    public Tile[] tiles;
-    public int[][] tileNum;
+    //VARIABLES
+    private SwingWindow sw;
+    private Tile[] tiles;
+    private int[][] tileNum;
 
+    //CONSTRUCTOR
     public TileMapper(SwingWindow sw) {
         this.sw = sw;
         tiles = new Tile[50];  //The array length represents the different types of tiles
@@ -24,31 +26,8 @@ public class TileMapper {
         getTileImg();
     }
 
-    /***
-     * Loads the map file and transfers the values from the file into the tileNum Array
-     *
-     * @param mapFileName represents the name of the current map file
-     */
-    public void loadMapFile(String mapFileName)
-    {
-        try {
-            InputStream inputStream = getClass().getResourceAsStream(mapFileName);
-            if (inputStream != null) {
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
-                for (int r = 0; r < sw.getDUNGEON_ROW(); r++) {
-                String line = bufferedReader.readLine();
-                String[] split = line.split(" ");
-                for (int c = 0; c < sw.getDUNGEON_COL(); c++) {
-                    tileNum[r][c] = Integer.parseInt(split[c]);
-                }
-            }
-            bufferedReader.close();
-        }
-        } catch (Exception ex)
-        {
-            System.out.println("Load Failed");
-        }
-    }
+
+    //GETTERS
     /***
      * This method assigns a tile image to a tile object within the tiles array
      */
@@ -76,12 +55,45 @@ public class TileMapper {
         assignTileImg(16, "16", true);
         assignTileImg(17, "17", true);
     }
+    public Tile[] getTiles() {
+        return tiles;
+    }
+    public int[][] getTileNum() {
+        return tileNum;
+    }
+
+
+    //OTHER METHODS
+    /***
+     * Loads the map file and transfers the values from the file into the tileNum Array
+     *
+     * @param mapFileName represents the name of the current map file
+     */
+    public void loadMapFile(String mapFileName)
+    {
+        try {
+            InputStream inputStream = getClass().getResourceAsStream(mapFileName);
+            if (inputStream != null) {
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                for (int r = 0; r < sw.getDUNGEON_ROW(); r++) {
+                String line = bufferedReader.readLine();
+                String[] split = line.split(" ");
+                for (int c = 0; c < sw.getDUNGEON_COL(); c++) {
+                    tileNum[r][c] = Integer.parseInt(split[c]);
+                }
+            }
+            bufferedReader.close();
+        }
+        } catch (Exception ex)
+        {
+            System.out.println("Load Failed");
+        }
+    }
 
     public void assignTileImg(int index, String pathName, Boolean collision) {
         try {
             tiles[index] = new Tile();
             tiles[index].setImg(ImageIO.read(Objects.requireNonNull(getClass().getResource("/dungeon_tiles/" + pathName + ".png"))));
-            //tiles[index].setPathName(pathName);
             tiles[index].setCollision(collision);
 
         } catch(IOException ex) {
