@@ -76,27 +76,27 @@ public class OnScreenUI {
         graphics2D.setColor(Color.white);
 
         //TITLE SCREEN STATE
-        if (sw.gameState == sw.TITLE_SCREEN_STATE) {
+        if (sw.getGameState() == sw.getTITLE_SCREEN_STATE()) {
             drawTitleScreen(graphics2D);
         }
         //PLAY STATE
-        else if (sw.gameState == sw.PLAY_STATE) {
+        else if (sw.getGameState() == sw.getPLAY_STATE()) {
             drawPlayUI(graphics2D);
         }
         //PAUSED STATE
-        else if (sw.gameState == sw.PAUSED_STATE) {
+        else if (sw.getGameState() == sw.getPAUSED_STATE()) {
             drawPausedScreen(graphics2D);
         }
         //LOSE STATE
-        else if (sw.gameState == sw.LOSE_STATE) {
+        else if (sw.getGameState() == sw.getLOSE_STATE()) {
             drawLoseScreen(graphics2D);
         }
         //LOAD MENU STATE
-        else if (sw.gameState == sw.LOAD_MENU_STATE){
+        else if (sw.getGameState() == sw.getLOAD_MENU_STATE()){
             drawLoadScreen(graphics2D);
         }
         //LOADING STATE
-        else if (sw.gameState == sw.LOADING_STATE) {
+        else if (sw.getGameState() == sw.getLOADING_STATE()) {
             drawLoadingScreen(graphics2D);
         }
     }

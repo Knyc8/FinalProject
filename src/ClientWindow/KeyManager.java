@@ -40,7 +40,7 @@ public class KeyManager implements KeyListener {
         int keyCode = e.getKeyCode();  //gets user keystroke
 
         //TITLE SCREEN STATE
-        if (sw.gameState == sw.TITLE_SCREEN_STATE)
+        if (sw.getGameState() == sw.getTITLE_SCREEN_STATE())
         {
             if (keyCode == KeyEvent.VK_A || keyCode == KeyEvent.VK_LEFT) {
                 sw.getUi().setOptionNum(sw.getUi().getOptionNum()-1);
@@ -59,13 +59,12 @@ public class KeyManager implements KeyListener {
             if (keyCode == KeyEvent.VK_ENTER || keyCode == KeyEvent.VK_SPACE) {
                 if (sw.getUi().getOptionNum() == 0)  //start game
                 {
-                    sw.gameState = sw.LOADING_STATE;
-                    //Set up enemies
+                    sw.setGameState(sw.getLOADING_STATE());
                 }
                 else if (sw.getUi().getOptionNum() == 1)  //load game
                 {
                     sw.getFileManager().setInitiallyLoaded(sw.getFileManager().load());
-                    sw.gameState = sw.LOAD_MENU_STATE;
+                    sw.setGameState(sw.getLOAD_MENU_STATE());
                     keyCode = -1;
                     sw.getUi().setOptionNum(0);
                 }
@@ -76,7 +75,7 @@ public class KeyManager implements KeyListener {
         }
 
         //PLAY STATE
-        if (sw.gameState != sw.PAUSED_STATE) {  //prevents inputs when paused or in title screen
+        if (sw.getGameState() != sw.getPAUSED_STATE()) {  //prevents inputs when paused or in title screen
             if (keyCode == KeyEvent.VK_W) {
                 wPressed = true;
             }
@@ -90,14 +89,14 @@ public class KeyManager implements KeyListener {
                 dPressed = true;
             }
         }
-        if (sw.gameState == sw.PLAY_STATE) {
+        if (sw.getGameState() == sw.getPLAY_STATE()) {
             if (keyCode == KeyEvent.VK_J) {
                 shootPressed = true;
             }
         }
 
         //PAUSED STATE
-        if (sw.gameState == sw.PAUSED_STATE) {
+        if (sw.getGameState() == sw.getPAUSED_STATE()) {
             if (keyCode == KeyEvent.VK_W || keyCode == KeyEvent.VK_UP) {
                 sw.getUi().setOptionNum(sw.getUi().getOptionNum()-1);
                 if (sw.getUi().getOptionNum() < 0)
@@ -115,7 +114,7 @@ public class KeyManager implements KeyListener {
             if (keyCode == KeyEvent.VK_ENTER || keyCode == KeyEvent.VK_SPACE) {
                 if (sw.getUi().getOptionNum() == 0)
                 {
-                    sw.gameState = sw.TITLE_SCREEN_STATE;
+                    sw.setGameState(sw.getTITLE_SCREEN_STATE());
                     sw.getFileManager().setInitiallyLoaded(false);
                     sw.getFileManager().setCurrentlyLoaded(false);
                 }
@@ -124,13 +123,13 @@ public class KeyManager implements KeyListener {
                     sw.getFileManager().setAlreadySaved(sw.getFileManager().save());
                 }
                 else {
-                    sw.gameState = sw.PLAY_STATE;
+                    sw.setGameState(sw.getPLAY_STATE());
                 }
             }
         }
 
         //Load Game Menu State
-        if (sw.gameState == sw.LOAD_MENU_STATE) {
+        if (sw.getGameState() == sw.getLOAD_MENU_STATE()) {
             if (keyCode == KeyEvent.VK_W || keyCode == KeyEvent.VK_UP) {
                 sw.getUi().setOptionNum(sw.getUi().getOptionNum()-1);
                 if (sw.getUi().getOptionNum() < 0)
@@ -149,11 +148,11 @@ public class KeyManager implements KeyListener {
                 if (sw.getUi().getOptionNum() == 0)  //Load game
                 {
                     if (sw.getFileManager().isInitiallyLoaded()) {
-                        sw.gameState = sw.LOADING_STATE;
+                        sw.setGameState(sw.getLOADING_STATE());
                     }
                 }
                 else {  //Return to TTS
-                    sw.gameState = sw.TITLE_SCREEN_STATE;
+                    sw.setGameState(sw.getTITLE_SCREEN_STATE());
                     sw.getUi().setOptionNum(0);
                     sw.getFileManager().setInitiallyLoaded(false);
                     sw.getFileManager().setCurrentlyLoaded(false);
@@ -162,12 +161,12 @@ public class KeyManager implements KeyListener {
         }
 
         if (keyCode == KeyEvent.VK_ESCAPE) {
-            if (sw.gameState == sw.PLAY_STATE) {
-                sw.gameState = sw.PAUSED_STATE;
+            if (sw.getGameState() == sw.getPLAY_STATE()) {
+                sw.setGameState(sw.getPAUSED_STATE());
                 sw.getUi().setOptionNum(0);
             }
-            if (sw.gameState == sw.LOSE_STATE) {
-                sw.gameState = sw.TITLE_SCREEN_STATE;
+            if (sw.getGameState() == sw.getLOSE_STATE()) {
+                sw.setGameState(sw.getTITLE_SCREEN_STATE());
                 sw.getUi().setOptionNum(0);
             }
         }

@@ -37,20 +37,20 @@ public class SwingWindow extends JPanel implements Runnable {
     private int loadingCount = 0;
 
     //Entity settings
-    private Player player = new Player(this, keyManager);
-    private Entity[] monsters = new Entity[150];  //Can display up to 10 enemies at once
-    private ArrayList<Entity> projectiles = new ArrayList<>();
+    private final Player player = new Player(this, keyManager);
+    private final Entity[] monsters = new Entity[150];  //Can display up to 10 enemies at once
+    private final ArrayList<Entity> projectiles = new ArrayList<>();
     private boolean[] monsterAlive;
     private int[][] monsterPos;
 
     //Game Running State
-    public int gameState;
-    public final int TITLE_SCREEN_STATE = 0;
-    public final int PLAY_STATE = 1;
-    public final int PAUSED_STATE = 2;
-    public final int LOSE_STATE = 3;
-    public final int LOAD_MENU_STATE = 4;
-    public final int LOADING_STATE = 5;
+    private int gameState;
+    private final int TITLE_SCREEN_STATE = 0;
+    private final int PLAY_STATE = 1;
+    private final int PAUSED_STATE = 2;
+    private final int LOSE_STATE = 3;
+    private final int LOAD_MENU_STATE = 4;
+    private final int LOADING_STATE = 5;
 
 
     //CONSTRUCTOR
@@ -110,6 +110,27 @@ public class SwingWindow extends JPanel implements Runnable {
     public int[][] getMonsterPos() {
         return monsterPos;
     }
+    public int getGameState() {
+        return gameState;
+    }
+    public int getTITLE_SCREEN_STATE() {
+        return TITLE_SCREEN_STATE;
+    }
+    public int getPLAY_STATE() {
+        return PLAY_STATE;
+    }
+    public int getPAUSED_STATE() {
+        return PAUSED_STATE;
+    }
+    public int getLOSE_STATE() {
+        return LOSE_STATE;
+    }
+    public int getLOAD_MENU_STATE() {
+        return LOAD_MENU_STATE;
+    }
+    public int getLOADING_STATE() {
+        return LOADING_STATE;
+    }
 
 
     //SETTERS
@@ -124,6 +145,9 @@ public class SwingWindow extends JPanel implements Runnable {
     }
     public void setMonsterPos(int[][] monsterPos) {
         this.monsterPos = monsterPos;
+    }
+    public void setGameState(int gameState) {
+        this.gameState = gameState;
     }
 
 
