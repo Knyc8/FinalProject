@@ -55,7 +55,7 @@ public class Projectile extends Entity{
     public void update() {
 
         super.update();
-        int enemyIdx = getSw().getCollisionDetector().detectEntity(getSw().monsters, this);
+        int enemyIdx = getSw().getCollisionDetector().detectEntity(getSw().getMonsters(), this);
         if (enemyIdx != -1) {
             getSw().getPlayer().damage(enemyIdx);
         }

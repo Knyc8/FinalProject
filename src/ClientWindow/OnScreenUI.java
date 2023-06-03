@@ -209,11 +209,11 @@ public class OnScreenUI {
     private void drawPlayUI(Graphics2D graphics2D) {
         //Display health
         int xheart  = sw.getDISPLAYED_TILE_SIZE()/2;
-        for (int i = 0; i < sw.player.getHp(); i++) {
+        for (int i = 0; i < sw.getPlayer().getHp(); i++) {
             graphics2D.drawImage(bacon, xheart, 15, (sw.getDISPLAYED_TILE_SIZE()*3)/4, (sw.getDISPLAYED_TILE_SIZE()*3)/4, null);
             xheart += sw.getDISPLAYED_TILE_SIZE()/2;
         }
-        for (int i = 0; i < sw.player.getMaxHp() - sw.player.getHp(); i++) {
+        for (int i = 0; i < sw.getPlayer().getMaxHp() - sw.getPlayer().getHp(); i++) {
             graphics2D.drawImage(emptyBacon, xheart, 15, (sw.getDISPLAYED_TILE_SIZE()*3)/4, (sw.getDISPLAYED_TILE_SIZE()*3)/4, null);
             xheart += sw.getDISPLAYED_TILE_SIZE()/2;
         }
@@ -284,7 +284,7 @@ public class OnScreenUI {
             graphics2D.setColor(Color.white);
             graphics2D.drawString(displayText, x, y);
             graphics2D.fillOval(x-sw.getDISPLAYED_TILE_SIZE()/2 - (45/4)-1, y-(40), 45, 45);
-            graphics2D.drawImage(sw.player.getFront3(), x-sw.getDISPLAYED_TILE_SIZE()/2 - (45/4), y-(39), 45, 45, null);
+            graphics2D.drawImage(sw.getPlayer().getFront3(), x-sw.getDISPLAYED_TILE_SIZE()/2 - (45/4), y-(39), 45, 45, null);
         }
 
         if (sw.getFileManager().isAlreadySaved()) {
@@ -310,7 +310,7 @@ public class OnScreenUI {
             graphics2D.setColor(Color.white);
             graphics2D.drawString(displayText, x, y);
             graphics2D.fillOval(x-sw.getDISPLAYED_TILE_SIZE()/2 - (45/4)-1, y-(40), 45, 45);
-            graphics2D.drawImage(sw.player.getFront3(), x-sw.getDISPLAYED_TILE_SIZE()/2 - (45/4), y-(39), 45, 45, null);
+            graphics2D.drawImage(sw.getPlayer().getFront3(), x-sw.getDISPLAYED_TILE_SIZE()/2 - (45/4), y-(39), 45, 45, null);
         }
 
         displayText = "Resume";
@@ -324,7 +324,7 @@ public class OnScreenUI {
             graphics2D.setColor(Color.white);
             graphics2D.drawString(displayText, x, y);
             graphics2D.fillOval(x-sw.getDISPLAYED_TILE_SIZE()/2 - (45/4)-1, y-(40), 45, 45);
-            graphics2D.drawImage(sw.player.getFront3(), x-sw.getDISPLAYED_TILE_SIZE()/2 - (45/4), y-(39), 45, 45, null);
+            graphics2D.drawImage(sw.getPlayer().getFront3(), x-sw.getDISPLAYED_TILE_SIZE()/2 - (45/4), y-(39), 45, 45, null);
         }
     }
 
@@ -412,7 +412,7 @@ public class OnScreenUI {
             x = sw.getDISPLAYED_TILE_SIZE() * 5;
             y = sw.getDISPLAYED_TILE_SIZE() * 3;
             graphics2D.drawString(displayText, x, y);
-            displayText = "Enemies Killed: " + sw.getPlayer().getEnemiesKilled() + "/" + sw.monsters.length;
+            displayText = "Enemies Killed: " + sw.getPlayer().getEnemiesKilled() + "/" + sw.getMonsters().length;
             x = sw.getDISPLAYED_TILE_SIZE() * 7;
             y = sw.getDISPLAYED_TILE_SIZE() * 11 / 3;
             graphics2D.drawString(displayText, x, y);

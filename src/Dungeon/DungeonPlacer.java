@@ -56,26 +56,26 @@ public class DungeonPlacer {
             startY = roomInfo[room][2];
             endY = roomInfo[room][3];
 
-            sw.monsters[i] = new Enemy(sw);
+            sw.getMonsters()[i] = new Enemy(sw);
             int randX = (int) (Math.random() * (endX - startX + 1)) + startX;
             int randY = (int) (Math.random() * (endY - startY + 1)) + startY;
-            sw.monsters[i].setXCoord(sw.getDISPLAYED_TILE_SIZE() * randX);
-            sw.monsters[i].setYCoord(sw.getDISPLAYED_TILE_SIZE() * randY);
+            sw.getMonsters()[i].setXCoord(sw.getDISPLAYED_TILE_SIZE() * randX);
+            sw.getMonsters()[i].setYCoord(sw.getDISPLAYED_TILE_SIZE() * randY);
         }
     }
 
     public void loadMonsters() {
-        for (int i = 0; i < sw.monsters.length; i++)
+        for (int i = 0; i < sw.getMonsters().length; i++)
         {
-            if (sw.monsterAlive[i])
+            if (sw.getMonsterAlive()[i])
             {
-                sw.monsters[i] = new Enemy(sw);
-                sw.monsters[i].setXCoord(sw.monsterPos[i][0]);
-                sw.monsters[i].setYCoord(sw.monsterPos[i][1]);
+                sw.getMonsters()[i] = new Enemy(sw);
+                sw.getMonsters()[i].setXCoord(sw.getMonsterPos()[i][0]);
+                sw.getMonsters()[i].setYCoord(sw.getMonsterPos()[i][1]);
             }
             else
             {
-                sw.monsters[i] = null;
+                sw.getMonsters()[i] = null;
             }
         }
     }

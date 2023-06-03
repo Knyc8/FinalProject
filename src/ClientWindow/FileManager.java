@@ -52,16 +52,16 @@ public class FileManager {
             dl.setYCoord(sw.getPlayer().getYCoord());
             dl.setEnemiesKilled(sw.getPlayer().getEnemiesKilled());
             dl.setDirection(sw.getPlayer().getDirection());
-            dl.setMonsterAlive(new boolean[sw.monsters.length]);
-            dl.setMonsterPos(new int[sw.monsters.length][2]);
+            dl.setMonsterAlive(new boolean[sw.getMonsters().length]);
+            dl.setMonsterPos(new int[sw.getMonsters().length][2]);
 
-            for (int i = 0; i < sw.monsters.length; i++)
+            for (int i = 0; i < sw.getMonsters().length; i++)
             {
-                if (sw.monsters[i] != null)
+                if (sw.getMonsters()[i] != null)
                 {
                     dl.getMonsterAlive()[i] = true;
-                    dl.getMonsterPos()[i][0] = sw.monsters[i].getXCoord();
-                    dl.getMonsterPos()[i][1] = sw.monsters[i].getYCoord();
+                    dl.getMonsterPos()[i][0] = sw.getMonsters()[i].getXCoord();
+                    dl.getMonsterPos()[i][1] = sw.getMonsters()[i].getYCoord();
                 }
                 else {
                     dl.getMonsterAlive()[i] = false;
@@ -93,8 +93,8 @@ public class FileManager {
             sw.getPlayer().setEnemiesKilled(dl.getEnemiesKilled());
             sw.getPlayer().setDirection(dl.getDirection());
 
-            sw.monsterAlive = dl.getMonsterAlive();
-            sw.monsterPos = dl.getMonsterPos();
+            sw.setMonsterAlive(dl.getMonsterAlive());
+            sw.setMonsterPos(dl.getMonsterPos());
 
             return true;
 

@@ -128,7 +128,7 @@ public class Player extends Entity{
             getSw().getCollisionDetector().detectTile(this);
 
             //check for enemy collisions
-            int enemyIdx = getSw().getCollisionDetector().detectEntity(getSw().monsters, this);
+            int enemyIdx = getSw().getCollisionDetector().detectEntity(getSw().getMonsters(), this);
             takeDamage(enemyIdx);
 
             if (!isColliding()) {
@@ -164,7 +164,7 @@ public class Player extends Entity{
             if (level < 3) {
                 if (!getProjectile().isAlive()) {
                     getProjectile().set(getXCoord(), getYCoord(), getDirection(), true, this);
-                    getSw().projectiles.add(getProjectile());
+                    getSw().getProjectiles().add(getProjectile());
                 }
             }
             if (level >= 3 && level < 5) {
@@ -177,8 +177,8 @@ public class Player extends Entity{
                         getProjectile().set(getXCoord(), getYCoord() - 25, getDirection(), true, this);
                         getProjectile2().set(getXCoord(), getYCoord() + 25, getDirection(), true, this);
                     }
-                    getSw().projectiles.add(getProjectile());
-                    getSw().projectiles.add(getProjectile2());
+                    getSw().getProjectiles().add(getProjectile());
+                    getSw().getProjectiles().add(getProjectile2());
                 }
             }
             if (level >= 5) {
@@ -193,9 +193,9 @@ public class Player extends Entity{
                         getProjectile2().set(getXCoord(), getYCoord(), getDirection(), true, this);
                         getProjectile3().set(getXCoord(), getYCoord() + 50, getDirection(), true, this);
                     }
-                    getSw().projectiles.add(getProjectile());
-                    getSw().projectiles.add(getProjectile2());
-                    getSw().projectiles.add(getProjectile3());
+                    getSw().getProjectiles().add(getProjectile());
+                    getSw().getProjectiles().add(getProjectile2());
+                    getSw().getProjectiles().add(getProjectile3());
                 }
             }
         }
@@ -240,14 +240,14 @@ public class Player extends Entity{
 
     public void damage(int entityIdx) {
         if (entityIdx != -1) {
-            if (!getSw().monsters[entityIdx].isImmune()) {
-                getSw().monsters[entityIdx].setHp(getSw().monsters[entityIdx].getHp()-1);
-                getSw().monsters[entityIdx].setImmune(true);
+            if (!getSw().getMonsters()[entityIdx].isImmune()) {
+                getSw().getMonsters()[entityIdx].setHp(getSw().getMonsters()[entityIdx].getHp()-1);
+                getSw().getMonsters()[entityIdx].setImmune(true);
 
 
-                if (getSw().monsters[entityIdx].getHp() <= 0)
+                if (getSw().getMonsters()[entityIdx].getHp() <= 0)
                 {
-                    getSw().monsters[entityIdx] = null;
+                    getSw().getMonsters()[entityIdx] = null;
                     exp++;
                     enemiesKilled++;
                     levelUp();

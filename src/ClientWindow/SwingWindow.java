@@ -37,11 +37,11 @@ public class SwingWindow extends JPanel implements Runnable {
     private int loadingCount = 0;
 
     //Entity settings
-    Player player = new Player(this, keyManager);
-    public Entity[] monsters = new Entity[150];  //Can display up to 10 enemies at once
-    public ArrayList<Entity> projectiles = new ArrayList<>();
-    public boolean[] monsterAlive;
-    public int[][] monsterPos;
+    private Player player = new Player(this, keyManager);
+    private Entity[] monsters = new Entity[150];  //Can display up to 10 enemies at once
+    private ArrayList<Entity> projectiles = new ArrayList<>();
+    private boolean[] monsterAlive;
+    private int[][] monsterPos;
 
     //Game Running State
     public int gameState;
@@ -98,6 +98,18 @@ public class SwingWindow extends JPanel implements Runnable {
     public FileManager getFileManager() {
         return fileManager;
     }
+    public Entity[] getMonsters() {
+        return monsters;
+    }
+    public ArrayList<Entity> getProjectiles() {
+        return projectiles;
+    }
+    public boolean[] getMonsterAlive() {
+        return monsterAlive;
+    }
+    public int[][] getMonsterPos() {
+        return monsterPos;
+    }
 
 
     //SETTERS
@@ -106,6 +118,12 @@ public class SwingWindow extends JPanel implements Runnable {
      */
     public void setUp() {
         gameState = TITLE_SCREEN_STATE;
+    }
+    public void setMonsterAlive(boolean[] monsterAlive) {
+        this.monsterAlive = monsterAlive;
+    }
+    public void setMonsterPos(int[][] monsterPos) {
+        this.monsterPos = monsterPos;
     }
 
 
