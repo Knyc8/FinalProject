@@ -6,7 +6,8 @@ public class FileManager {
     SwingWindow sw;
     File save = new File("Save_File.dat");
     public boolean alreadySaved = false;
-    public boolean alreadyLoaded = false;
+    public boolean initiallyLoaded = false;
+    public boolean currentlyLoaded = false;
 
     public FileManager(SwingWindow sw) {
         this.sw = sw;
@@ -19,13 +20,13 @@ public class FileManager {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(save));
 
             DataLibrary dl = new DataLibrary();
-            dl.maxHp = sw.getPlayer().maxHp;
-            dl.hp = sw.getPlayer().hp;
-            dl.exp = sw.getPlayer().exp;
-            dl.level = sw.getPlayer().level;
+            dl.maxHp = sw.getPlayer().getMaxHp();
+            dl.hp = sw.getPlayer().getHp();
+            dl.exp = sw.getPlayer().getExp();
+            dl.level = sw.getPlayer().getLevel();
             dl.xCoord = sw.getPlayer().xCoord;
             dl.yCoord = sw.getPlayer().yCoord;
-            dl.enemiesKilled = sw.getPlayer().enemiesKilled;
+            dl.enemiesKilled = sw.getPlayer().getEnemiesKilled();
             dl.direction = sw.getPlayer().direction;
             dl.monsterAlive = new boolean[sw.monsters.length];
             dl.monsterPos = new int[sw.monsters.length][2];
@@ -56,15 +57,16 @@ public class FileManager {
     public boolean load() {
         try {
             ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(new File("Save_File.dat")));
+            currentlyLoaded = true;
 
             DataLibrary dl = (DataLibrary) objectInputStream.readObject();
-            sw.getPlayer().maxHp = dl.maxHp;
-            sw.getPlayer().hp = dl.hp;
-            sw.getPlayer().exp = dl.exp;
-            sw.getPlayer().level = dl.level;
+            sw.getPlayer().setMaxHp(dl.maxHp);
+            sw.getPlayer().setHp(dl.hp);
+            sw.getPlayer().setExp(dl.exp);
+            sw.getPlayer().setLevel(dl.level);
             sw.getPlayer().xCoord = dl.xCoord;
             sw.getPlayer().yCoord = dl.yCoord;
-            sw.getPlayer().enemiesKilled = dl.enemiesKilled;
+            sw.getPlayer().setEnemiesKilled(dl.enemiesKilled);
             sw.getPlayer().direction = dl.direction;
 
             sw.monsterAlive = dl.monsterAlive;
@@ -79,7 +81,7 @@ public class FileManager {
 
     public void deleteSaveFile()
     {
-        if (save != null) {
+        if (save != null && currentlyLoaded) {
             System.out.println("File was deleted");
             save.delete();
         }

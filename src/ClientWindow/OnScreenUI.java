@@ -194,11 +194,11 @@ public class OnScreenUI {
     private void drawPlayUI(Graphics2D graphics2D) {
         //Display health
         int xheart  = sw.DISPLAYED_TILE_SIZE/2;
-        for (int i = 0; i < sw.player.hp; i++) {
+        for (int i = 0; i < sw.player.getHp(); i++) {
             graphics2D.drawImage(bacon, xheart, 15, (sw.getDISPLAYED_TILE_SIZE()*3)/4, (sw.getDISPLAYED_TILE_SIZE()*3)/4, null);
             xheart += sw.getDISPLAYED_TILE_SIZE()/2;
         }
-        for (int i = 0; i < sw.player.maxHp - sw.player.hp; i++) {
+        for (int i = 0; i < sw.player.getMaxHp() - sw.player.getHp(); i++) {
             graphics2D.drawImage(emptyBacon, xheart, 15, (sw.getDISPLAYED_TILE_SIZE()*3)/4, (sw.getDISPLAYED_TILE_SIZE()*3)/4, null);
             xheart += sw.getDISPLAYED_TILE_SIZE()/2;
         }
@@ -206,7 +206,7 @@ public class OnScreenUI {
 
         //Display Level
         graphics2D.setFont(graphics2D.getFont().deriveFont(Font.BOLD, 75f));
-        displayText = Integer.toString(sw.getPlayer().level);
+        displayText = Integer.toString(sw.getPlayer().getLevel());
         int length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();
         graphics2D.drawString(displayText, sw.SCREEN_WIDTH - 64 - length/2, 100);
 
@@ -219,13 +219,13 @@ public class OnScreenUI {
         //Display Enemies Killed
         graphics2D.setColor(Color.white);
         graphics2D.setFont(graphics2D.getFont().deriveFont(Font.BOLD, 35f));
-        displayText = Integer.toString(sw.getPlayer().enemiesKilled);
+        displayText = Integer.toString(sw.getPlayer().getEnemiesKilled());
         displayText = "Enemies Killed:  " + displayText;
         length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();
         graphics2D.drawString(displayText, sw.SCREEN_WIDTH - length - 15, 100 + sw.getDISPLAYED_TILE_SIZE()*2/3);
 
         //Display XP
-        displayText = Integer.toString((sw.getPlayer().level*5) - sw.getPlayer().exp);
+        displayText = Integer.toString((sw.getPlayer().getLevel()*5) - sw.getPlayer().getExp());
         displayText = "Exp til level up:  " + displayText;
         length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();
         graphics2D.drawString(displayText, sw.SCREEN_WIDTH - length - 15, 100 + sw.getDISPLAYED_TILE_SIZE()*3/3);
@@ -236,7 +236,7 @@ public class OnScreenUI {
         graphics2D.setColor(Color.darkGray);
         graphics2D.fillRect(sw.SCREEN_WIDTH - sw.DISPLAYED_TILE_SIZE*2 - 12, 100+ sw.getDISPLAYED_TILE_SIZE()+10, (sw.getDISPLAYED_TILE_SIZE()*2 - 6), sw.getDISPLAYED_TILE_SIZE()/10 + 4 );
         graphics2D.setColor(Color.green);
-        double xpProgress = (double) sw.getPlayer().exp/(sw.getPlayer().level*5);
+        double xpProgress = (double) sw.getPlayer().getExp()/(sw.getPlayer().getLevel()*5);
         int progressWidth = (int) ((sw.getDISPLAYED_TILE_SIZE()*2 - 6) * xpProgress);
         graphics2D.fillRect(sw.SCREEN_WIDTH - sw.DISPLAYED_TILE_SIZE*2 - 12, 100+ sw.getDISPLAYED_TILE_SIZE()+10, progressWidth, sw.getDISPLAYED_TILE_SIZE()/10 + 4 );
     }
@@ -386,18 +386,18 @@ public class OnScreenUI {
         graphics2D.setStroke(oldStroke);
 
         //Save File Data
-        if (sw.fileManager.alreadyLoaded) {
+        if (sw.fileManager.initiallyLoaded) {
             x = sw.getDISPLAYED_TILE_SIZE() * 2 - 7;
             y = sw.getDISPLAYED_TILE_SIZE() * 2 + 17;
             graphics2D.drawImage(torch, x, y, sw.getDISPLAYED_TILE_SIZE() * 5 / 2, sw.getDISPLAYED_TILE_SIZE() * 5 / 2, null);
 
-            displayText = "Hitpoints: " + sw.getPlayer().hp + "/" + sw.getPlayer().maxHp;
-            displayText += " - - - - - Current Level: " + sw.getPlayer().level;
-            displayText += " - - - - - Exp: " + sw.getPlayer().exp + "/" + sw.getPlayer().level * 5;
+            displayText = "Hitpoints: " + sw.getPlayer().getHp() + "/" + sw.getPlayer().getMaxHp();
+            displayText += " - - - - - Current Level: " + sw.getPlayer().getLevel();
+            displayText += " - - - - - Exp: " + sw.getPlayer().getExp() + "/" + sw.getPlayer().getLevel() * 5;
             x = sw.getDISPLAYED_TILE_SIZE() * 5;
             y = sw.getDISPLAYED_TILE_SIZE() * 3;
             graphics2D.drawString(displayText, x, y);
-            displayText = "Enemies Killed: " + sw.getPlayer().enemiesKilled + "/" + sw.monsters.length;
+            displayText = "Enemies Killed: " + sw.getPlayer().getEnemiesKilled() + "/" + sw.monsters.length;
             x = sw.getDISPLAYED_TILE_SIZE() * 7;
             y = sw.getDISPLAYED_TILE_SIZE() * 11 / 3;
             graphics2D.drawString(displayText, x, y);

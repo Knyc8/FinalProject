@@ -7,13 +7,15 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Player extends Entity{
-    KeyManager km;
+    //Variables
+    private final KeyManager km;
     private final int SCREEN_X;
-    private int SCREEN_Y;
-    public int level;
-    public int exp;
-    public int enemiesKilled;
+    private final int SCREEN_Y;
+    private int level;
+    private int exp;
+    private int enemiesKilled;
 
+    //Constructor
     /***
      * Initializes the SwingWindow and KeyManager
      *
@@ -35,22 +37,55 @@ public class Player extends Entity{
         getPlayerSprite();
     }
 
+    //Getters
     public int getSCREEN_X() {
         return SCREEN_X;
     }
-
     public int getSCREEN_Y() {
         return SCREEN_Y;
     }
+    public int getLevel() {
+        return level;
+    }
+    public int getExp() {
+        return exp;
+    }
+    public int getEnemiesKilled() {
+        return enemiesKilled;
+    }
+    public void getPlayerSprite() {
+        back1 = setImage("/player_sprites/pigzard_b1.png");
+        back2 = setImage("/player_sprites/pigzard_b2.png");
+        back3 = setImage("/player_sprites/pigzard_b3.png");
+        front1 = setImage("/player_sprites/pigzard_f1.png");
+        front2 = setImage("/player_sprites/pigzard_f2.png");
+        front3 = setImage("/player_sprites/pigzard_f3.png");
+        left1 = setImage("/player_sprites/pigzard_l1.png");
+        left2 = setImage("/player_sprites/pigzard_l2.png");
+        left3 = setImage("/player_sprites/pigzard_l1.png");
+        right1 = setImage("/player_sprites/pigzard_r1.png");
+        right2 = setImage("/player_sprites/pigzard_r2.png");
+        right3 = setImage("/player_sprites/pigzard_r1.png");
+    }
 
+    //Setters
+    public void setLevel(int level) {
+        this.level = level;
+    }
+    public void setExp(int exp) {
+        this.exp = exp;
+    }
+    public void setEnemiesKilled(int enemiesKilled) {
+        this.enemiesKilled = enemiesKilled;
+    }
     /***
      * Sets the players intial location, speed, and direction
      */
     public void setDefaultValues() {
-        name = "Player";
+        setName("Player");
         xCoord = sw.getDISPLAYED_TILE_SIZE() * 7;
         yCoord = sw.getDISPLAYED_TILE_SIZE() * 4;
-        speed = 10;
+        setSpeed(10);
         direction = "south";
         collidable = true;
         immunity = false;
@@ -58,27 +93,15 @@ public class Player extends Entity{
 
         level = 1;
         exp = 0;
-        maxHp = 3;
-        hp = maxHp;
+        setMaxHp(3);
+        setHp(getMaxHp());
         projectile = new Projectile(sw);
         projectile2 = new Projectile(sw);
         projectile3 = new Projectile(sw);
     }
 
-    public void getPlayerSprite() {
-            back1 = setImage("/player_sprites/pigzard_b1.png");
-            back2 = setImage("/player_sprites/pigzard_b2.png");
-            back3 = setImage("/player_sprites/pigzard_b3.png");
-            front1 = setImage("/player_sprites/pigzard_f1.png");
-            front2 = setImage("/player_sprites/pigzard_f2.png");
-            front3 = setImage("/player_sprites/pigzard_f3.png");
-            left1 = setImage("/player_sprites/pigzard_l1.png");
-            left2 = setImage("/player_sprites/pigzard_l2.png");
-            left3 = setImage("/player_sprites/pigzard_l1.png");
-            right1 = setImage("/player_sprites/pigzard_r1.png");
-            right2 = setImage("/player_sprites/pigzard_r2.png");
-            right3 = setImage("/player_sprites/pigzard_r1.png");
-    }
+
+    //Other methods
 
     public void update() {
         if (km.isWPressed() || km.isSPressed() || km.isAPressed() || km.isDPressed()) {
@@ -111,16 +134,16 @@ public class Player extends Entity{
             if (!colliding) {
                 //dmgCount = 0;
                 if (direction.equals("north")) {  //up speed units
-                    yCoord -= speed;  //top left is (0, 0)
+                    yCoord -= getSpeed();  //top left is (0, 0)
                 }
                 if (direction.equals("south")) {  //down speed units
-                    yCoord += speed;
+                    yCoord += getSpeed();
                 }
                 if (direction.equals("west")) {  //left speed units
-                    xCoord -= speed;
+                    xCoord -= getSpeed();
                 }
                 if (direction.equals("east")) {  //right speed units
-                    xCoord += speed;
+                    xCoord += getSpeed();
                 }
             }
 
@@ -136,7 +159,7 @@ public class Player extends Entity{
         }
 
         if (km.isShootPressed()) {
-            speed = 10 / 2;
+            setSpeed(10/2);
 
             if (level < 3) {
                 if (!projectile.alive) {
@@ -177,18 +200,18 @@ public class Player extends Entity{
             }
         }
         else {
-            speed = 10;
+            setSpeed(10);
         }
 
         if (immunity) {  //Invincibility loop
             iCount++;
-            if (sw.fileManager.alreadyLoaded)
+            if (sw.fileManager.initiallyLoaded)
             {
                 if (iCount > 300)  //4 second invincibility
                 {
                     immunity = false;
                     iCount = 0;
-                    sw.fileManager.alreadyLoaded = false;
+                    sw.fileManager.initiallyLoaded = false;
                 }
             }
             else {
@@ -209,7 +232,7 @@ public class Player extends Entity{
     public void takeDamage(int entityIdx) {
         if (entityIdx != -1) {
             if (!immunity) {
-                hp--;
+                setHp(getHp()-1);
             }
             immunity = true;
         }
@@ -218,10 +241,10 @@ public class Player extends Entity{
     public void damage(int entityIdx) {
         if (entityIdx != -1) {
             if (!sw.monsters[entityIdx].immunity) {
-                sw.monsters[entityIdx].hp--;
+                sw.monsters[entityIdx].setHp(sw.monsters[entityIdx].getHp()-1);
                 sw.monsters[entityIdx].immunity = true;
 
-                if (sw.monsters[entityIdx].hp <= 0)
+                if (sw.monsters[entityIdx].getHp() <= 0)
                 {
                     sw.monsters[entityIdx] = null;
                     exp++;
@@ -237,16 +260,16 @@ public class Player extends Entity{
         if (exp == level*5)
         {
             level++;
-            hp++;
+            setHp(getHp()+1);
             exp = 0;
             if (level % 2 == 0)
             {
-                maxHp++;
-                hp++;
+                setMaxHp(getMaxHp()+1);
+                setHp(getHp()+1);
             }
-            if (hp > maxHp)
+            if (getHp() > getMaxHp())
             {
-                hp = maxHp;
+                setHp(getMaxHp());
             }
         }
     }

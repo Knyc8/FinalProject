@@ -143,7 +143,7 @@ public class SwingWindow extends JPanel implements Runnable {
 
     public void update() {
         if (gameState == TITLE_SCREEN_STATE) {
-            player.hp = player.maxHp;
+            player.setHp(player.getMaxHp());
         }
         if (gameState == PLAY_STATE) {
             //Character movement
@@ -168,7 +168,7 @@ public class SwingWindow extends JPanel implements Runnable {
             }
         }
 
-        if (player.hp == 0)
+        if (player.getHp() == 0)
         {
             gameState = LOSE_STATE;
             fileManager.deleteSaveFile();
@@ -178,7 +178,7 @@ public class SwingWindow extends JPanel implements Runnable {
         {
             loadingCount++;
             if (loadingCount >= 30) {
-                if (fileManager.alreadyLoaded) {
+                if (fileManager.initiallyLoaded) {
                     gameState = PLAY_STATE;
                     dungeonPlacer.loadMonsters();
                     getPlayer().immunity = true;

@@ -15,11 +15,11 @@ public class Projectile extends Entity{
         super(sw);
 
         hitbox = new Rectangle(15, 21, 66, 60);
-        name = "fireball";
-        speed = 15;
-        maxHp = 45;
-        hp = maxHp;
-        dmg = 1;
+        setName("fireball");
+        setSpeed(15);
+        setMaxHp(45);
+        setHp(getMaxHp());
+        setDmg(1);
         alive = false;
         collidable = true;
         getImg();
@@ -44,7 +44,7 @@ public class Projectile extends Entity{
         direction = dir;
         this.alive = alive;
         this.user = user;
-        this.hp = this.maxHp;
+        setHp(getMaxHp());
     }
 
     public void update() {
@@ -55,8 +55,9 @@ public class Projectile extends Entity{
             sw.getPlayer().damage(enemyIdx);
         }
 
-        hp--;
-        if (hp <= 0) {
+        setHp(getHp()-1);
+
+        if (getHp() <= 0) {
             alive = false;
         }
 
@@ -83,7 +84,7 @@ public class Projectile extends Entity{
 
             BufferedImage image = null;
 
-            if (colliding || hp < 10)
+            if (colliding || getHp() < 10)
             {
                 if (this.spriteNum == 1) {
                     image = explosion1;
@@ -91,10 +92,10 @@ public class Projectile extends Entity{
                 if (this.spriteNum == 2) {
                     image = explosion2;
                 }
-                speed = 0;
+                setSpeed(0);
             }
             else {
-                speed = 15;
+                setSpeed(15);
                 switch (direction) {
                     case "north" -> {
                         if (this.spriteNum == 1) {

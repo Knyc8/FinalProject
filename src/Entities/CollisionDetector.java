@@ -27,7 +27,7 @@ public class CollisionDetector {
 
         switch (entity.direction) {
             case "south" -> {
-                hitBoxBottomSide = (hitBoxBottomY + entity.speed) / sw.getDISPLAYED_TILE_SIZE();
+                hitBoxBottomSide = (hitBoxBottomY + entity.getSpeed()) / sw.getDISPLAYED_TILE_SIZE();
                 tile1 = sw.getTileMapper().tileNum[hitBoxBottomSide][hitBoxLeftSide];  //bottom left corner
                 tile2 = sw.getTileMapper().tileNum[hitBoxBottomSide][hitBoxRightSide];  //bottom right corner
                 if (sw.getTileMapper().tiles[tile1].collision || sw.getTileMapper().tiles[tile2].collision) {
@@ -35,7 +35,7 @@ public class CollisionDetector {
                 }
             }
             case "north" -> {
-                hitBoxTopSide = (hitBoxTopY - entity.speed) / sw.getDISPLAYED_TILE_SIZE();
+                hitBoxTopSide = (hitBoxTopY - entity.getSpeed()) / sw.getDISPLAYED_TILE_SIZE();
                 tile1 = sw.getTileMapper().tileNum[hitBoxTopSide][hitBoxLeftSide];  //top left corner
                 tile2 = sw.getTileMapper().tileNum[hitBoxTopSide][hitBoxRightSide];  //top right corner
                 if (sw.getTileMapper().tiles[tile1].collision || sw.getTileMapper().tiles[tile2].collision) {
@@ -43,7 +43,7 @@ public class CollisionDetector {
                 }
             }
             case "west" -> {
-                hitBoxLeftSide = (hitBoxLeftX - entity.speed) / sw.getDISPLAYED_TILE_SIZE();
+                hitBoxLeftSide = (hitBoxLeftX - entity.getSpeed()) / sw.getDISPLAYED_TILE_SIZE();
                 tile1 = sw.getTileMapper().tileNum[hitBoxTopSide][hitBoxLeftSide];  //top left corner
                 tile2 = sw.getTileMapper().tileNum[hitBoxBottomSide][hitBoxLeftSide];  //bottom left corner
                 if (sw.getTileMapper().tiles[tile1].collision || sw.getTileMapper().tiles[tile2].collision) {
@@ -51,7 +51,7 @@ public class CollisionDetector {
                 }
             }
             case "east" -> {
-                hitBoxRightSide = (hitBoxRightX + entity.speed) / sw.getDISPLAYED_TILE_SIZE();
+                hitBoxRightSide = (hitBoxRightX + entity.getSpeed()) / sw.getDISPLAYED_TILE_SIZE();
                 tile1 = sw.getTileMapper().tileNum[hitBoxTopSide][hitBoxRightSide];  //top right corner
                 tile2 = sw.getTileMapper().tileNum[hitBoxBottomSide][hitBoxRightSide];  //bottom right corner
                 if (sw.getTileMapper().tiles[tile1].collision || sw.getTileMapper().tiles[tile2].collision) {
@@ -76,28 +76,28 @@ public class CollisionDetector {
 
                 switch (entity.direction) {
                     case "north" -> {
-                        entity.hitbox.y -= entity.speed;
+                        entity.hitbox.y -= entity.getSpeed();
                         if (entity.hitbox.intersects(recipients[i].hitbox)) {  //checks if the hitboxes are overlapping
                             entity.colliding = true;
                             idx = i;
                         }
                     }
                     case "south" -> {
-                        entity.hitbox.y += entity.speed;
+                        entity.hitbox.y += entity.getSpeed();
                         if (entity.hitbox.intersects(recipients[i].hitbox)) {  //checks if the hitboxes are overlapping
                             entity.colliding = true;
                             idx = i;
                         }
                     }
                     case "west" -> {
-                        entity.hitbox.x -= entity.speed;
+                        entity.hitbox.x -= entity.getSpeed();
                         if (entity.hitbox.intersects(recipients[i].hitbox)) {  //checks if the hitboxes are overlapping
                             entity.colliding = true;
                             idx = i;
                         }
                     }
                     case "east" -> {
-                        entity.hitbox.x += entity.speed;
+                        entity.hitbox.x += entity.getSpeed();
                         if (entity.hitbox.intersects(recipients[i].hitbox)) {  //checks if the hitboxes are overlapping
                             entity.colliding = true;
                             idx = i;
@@ -125,28 +125,28 @@ public class CollisionDetector {
 
         switch (entity.direction) {
             case "north" -> {
-                entity.hitbox.y -= entity.speed;
+                entity.hitbox.y -= entity.getSpeed();
                 if (entity.hitbox.intersects(sw.getPlayer().hitbox)) {  //checks if the hitboxes are overlapping
                     entity.colliding = true;
                     detected = true;
                 }
             }
             case "south" -> {
-                entity.hitbox.y += entity.speed;
+                entity.hitbox.y += entity.getSpeed();
                 if (entity.hitbox.intersects(sw.getPlayer().hitbox)) {  //checks if the hitboxes are overlapping
                     entity.colliding = true;
                     detected = true;
                 }
             }
             case "west" -> {
-                entity.hitbox.x -= entity.speed;
+                entity.hitbox.x -= entity.getSpeed();
                 if (entity.hitbox.intersects(sw.getPlayer().hitbox)) {  //checks if the hitboxes are overlapping
                     entity.colliding = true;
                     detected = true;
                 }
             }
             case "east" -> {
-                entity.hitbox.x += entity.speed;
+                entity.hitbox.x += entity.getSpeed();
                 if (entity.hitbox.intersects(sw.getPlayer().hitbox)) {  //checks if the hitboxes are overlapping
                     entity.colliding = true;
                     detected = true;

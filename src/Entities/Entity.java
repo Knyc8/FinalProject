@@ -31,17 +31,46 @@ public class Entity {
     public int iCount = 0;
 
     //stats
-    public String name;
-    public int speed;
-    public int maxHp;
-    public int hp;
-    public int dmg;
+    private String name;  //future purposes
+    private int speed;
+    private int maxHp;
+    private int hp;
+    private int dmg;  //future purposes
 
-
+    //Constructor
     public Entity (SwingWindow sw) {
         this.sw = sw;
     }
 
+
+    //Getters
+    public int getSpeed() {
+        return speed;
+    }
+    public int getMaxHp() {
+        return maxHp;
+    }
+    public int getHp() {
+        return hp;
+    }
+
+
+    //Setters
+    public void setName(String name) {
+        this.name = name;
+    }
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+    public void setMaxHp(int maxHp) {
+        this.maxHp = maxHp;
+    }
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+    public void setDmg(int dmg) {
+        this.dmg = dmg;
+    }
     public BufferedImage setImage(String pathname) {
         BufferedImage image = null;
         try{
@@ -51,6 +80,11 @@ public class Entity {
         }
         return image;
     }
+    public void setDefaultValues() {
+    }
+
+
+    //Other methods
     public void draw(Graphics2D graphics2D) {
         int screenX = xCoord - sw.getPlayer().xCoord + sw.getPlayer().getSCREEN_X();
         int screenY = yCoord - sw.getPlayer().yCoord + sw.getPlayer().getSCREEN_Y();
@@ -106,10 +140,7 @@ public class Entity {
         }
     }
 
-    public void action() {}
-
-    public void setDefaultValues() {
-    }
+    public void action() {/*unused for polymorphism*/}
 
     public void update() {
         this.action();
@@ -124,7 +155,7 @@ public class Entity {
 
         if (detected) {  //deals dmg to player
             if (!sw.getPlayer().immunity) {
-                sw.getPlayer().hp--;
+                sw.getPlayer().setHp(getHp()-1);
                 sw.getPlayer().immunity = true;
             }
         }

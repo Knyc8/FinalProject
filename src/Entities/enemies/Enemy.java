@@ -18,10 +18,10 @@ public class Enemy extends Entity {
     }
 
     public void setDefaultValues() {
-        name = "Miles the Magical Mouse";
-        speed = 8;
-        maxHp = 1;
-        hp = maxHp;
+        setName("Miles the Magical Mouse");
+        setSpeed(8);
+        setMaxHp(1);
+        setHp(getMaxHp());
         collidable = true;
         actionCount = 0;
 

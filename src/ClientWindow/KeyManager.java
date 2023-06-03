@@ -60,9 +60,8 @@ public class KeyManager implements KeyListener {
                 }
                 else if (sw.ui.optionNum == 1)  //load game
                 {
-                    sw.fileManager.alreadyLoaded = sw.fileManager.load();
+                    sw.fileManager.initiallyLoaded = sw.fileManager.load();
                     sw.gameState = sw.LOAD_MENU_STATE;
-                    System.out.println(sw.gameState);
                     keyCode = -1;
                     sw.ui.optionNum = 0;
                 }
@@ -110,10 +109,11 @@ public class KeyManager implements KeyListener {
                 }
             }
             if (keyCode == KeyEvent.VK_ENTER || keyCode == KeyEvent.VK_SPACE) {
-                if (sw.ui.optionNum == 0)  //start game
+                if (sw.ui.optionNum == 0)
                 {
                     sw.gameState = sw.TITLE_SCREEN_STATE;
-                    sw.fileManager.alreadyLoaded = false;
+                    sw.fileManager.initiallyLoaded = false;
+                    sw.fileManager.currentlyLoaded = false;
                 }
                 else if (sw.ui.optionNum == 1)  //save game
                 {
@@ -144,14 +144,15 @@ public class KeyManager implements KeyListener {
             if (keyCode == KeyEvent.VK_ENTER || keyCode == KeyEvent.VK_SPACE) {
                 if (sw.ui.optionNum == 0)  //Load game
                 {
-                    if (sw.fileManager.alreadyLoaded) {
+                    if (sw.fileManager.initiallyLoaded) {
                         sw.gameState = sw.LOADING_STATE;
                     }
                 }
                 else {  //Return to TTS
                     sw.gameState = sw.TITLE_SCREEN_STATE;
                     sw.ui.optionNum = 0;
-                    sw.fileManager.alreadyLoaded = false;
+                    sw.fileManager.initiallyLoaded = false;
+                    sw.fileManager.currentlyLoaded = false;
                 }
             }
         }
