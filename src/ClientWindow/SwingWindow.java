@@ -26,15 +26,15 @@ public class SwingWindow extends JPanel implements Runnable {
     private final int DUNGEON_ROW = 50;
 
     //Game Setup
-    int framesPerSecond = 60;  //screen refreshes 60 times every second
-    Thread gameThread;  //allows the game to run indefinitely
-    OnScreenUI ui = new OnScreenUI(this);
-    KeyManager keyManager = new KeyManager(this);  //allows the program to take key inputs
-    TileMapper tileMapper = new TileMapper(this);
-    CollisionDetector collisionDetector = new CollisionDetector(this);
-    public DungeonPlacer dungeonPlacer = new DungeonPlacer(this);
-    public FileManager fileManager = new FileManager(this);
-    int loadingCount = 0;
+    private final int FRAMES_PER_SECOND = 60;  //screen refreshes 60 times every second
+    private Thread gameThread;  //allows the game to run indefinitely
+    private OnScreenUI ui = new OnScreenUI(this);
+    private final KeyManager keyManager = new KeyManager(this);  //allows the program to take key inputs
+    private final TileMapper tileMapper = new TileMapper(this);
+    private final CollisionDetector collisionDetector = new CollisionDetector(this);
+    private final DungeonPlacer dungeonPlacer = new DungeonPlacer(this);
+    private final FileManager fileManager = new FileManager(this);
+    private int loadingCount = 0;
 
     //Entity settings
     Player player = new Player(this, keyManager);
@@ -92,6 +92,12 @@ public class SwingWindow extends JPanel implements Runnable {
     public Player getPlayer() {
         return player;
     }
+    public OnScreenUI getUi() {
+        return ui;
+    }
+    public FileManager getFileManager() {
+        return fileManager;
+    }
 
 
     //SETTERS
@@ -118,7 +124,7 @@ public class SwingWindow extends JPanel implements Runnable {
      */
     @Override
     public void run() {
-        double refreshRate = (double)1000000000 / framesPerSecond;  //program runs in nanoseconds, and 1E9 nanoseconds equals 1 second (1 second/ 60 frames).
+        double refreshRate = (double)1000000000 / FRAMES_PER_SECOND;  //program runs in nanoseconds, and 1E9 nanoseconds equals 1 second (1 second/ 60 frames).
         double refreshInterval = System.nanoTime() + refreshRate;  //every refresh will occur 0.0167 seconds later than opposed to 1 nanosecond later.
         while (gameThread != null) {
 

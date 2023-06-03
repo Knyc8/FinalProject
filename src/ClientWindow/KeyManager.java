@@ -43,31 +43,31 @@ public class KeyManager implements KeyListener {
         if (sw.gameState == sw.TITLE_SCREEN_STATE)
         {
             if (keyCode == KeyEvent.VK_A || keyCode == KeyEvent.VK_LEFT) {
-                sw.ui.setOptionNum(sw.ui.getOptionNum()-1);
-                if (sw.ui.getOptionNum() < 0)
+                sw.getUi().setOptionNum(sw.getUi().getOptionNum()-1);
+                if (sw.getUi().getOptionNum() < 0)
                 {
-                    sw.ui.setOptionNum(2);
+                    sw.getUi().setOptionNum(2);
                 }
             }
             if (keyCode == KeyEvent.VK_D || keyCode == KeyEvent.VK_RIGHT) {
-                sw.ui.setOptionNum(sw.ui.getOptionNum()+1);
-                if (sw.ui.getOptionNum() > 2)
+                sw.getUi().setOptionNum(sw.getUi().getOptionNum()+1);
+                if (sw.getUi().getOptionNum() > 2)
                 {
-                    sw.ui.setOptionNum(0);
+                    sw.getUi().setOptionNum(0);
                 }
             }
             if (keyCode == KeyEvent.VK_ENTER || keyCode == KeyEvent.VK_SPACE) {
-                if (sw.ui.getOptionNum() == 0)  //start game
+                if (sw.getUi().getOptionNum() == 0)  //start game
                 {
                     sw.gameState = sw.LOADING_STATE;
                     //Set up enemies
                 }
-                else if (sw.ui.getOptionNum() == 1)  //load game
+                else if (sw.getUi().getOptionNum() == 1)  //load game
                 {
-                    sw.fileManager.setInitiallyLoaded(sw.fileManager.load());
+                    sw.getFileManager().setInitiallyLoaded(sw.getFileManager().load());
                     sw.gameState = sw.LOAD_MENU_STATE;
                     keyCode = -1;
-                    sw.ui.setOptionNum(0);
+                    sw.getUi().setOptionNum(0);
                 }
                 else {
                     System.exit(0);  //exit game
@@ -99,29 +99,29 @@ public class KeyManager implements KeyListener {
         //PAUSED STATE
         if (sw.gameState == sw.PAUSED_STATE) {
             if (keyCode == KeyEvent.VK_W || keyCode == KeyEvent.VK_UP) {
-                sw.ui.setOptionNum(sw.ui.getOptionNum()-1);
-                if (sw.ui.getOptionNum() < 0)
+                sw.getUi().setOptionNum(sw.getUi().getOptionNum()-1);
+                if (sw.getUi().getOptionNum() < 0)
                 {
-                    sw.ui.setOptionNum(2);
+                    sw.getUi().setOptionNum(2);
                 }
             }
             if (keyCode == KeyEvent.VK_S || keyCode == KeyEvent.VK_DOWN) {
-                sw.ui.setOptionNum(sw.ui.getOptionNum()+1);
-                if (sw.ui.getOptionNum() > 2)
+                sw.getUi().setOptionNum(sw.getUi().getOptionNum()+1);
+                if (sw.getUi().getOptionNum() > 2)
                 {
-                    sw.ui.setOptionNum(0);
+                    sw.getUi().setOptionNum(0);
                 }
             }
             if (keyCode == KeyEvent.VK_ENTER || keyCode == KeyEvent.VK_SPACE) {
-                if (sw.ui.getOptionNum() == 0)
+                if (sw.getUi().getOptionNum() == 0)
                 {
                     sw.gameState = sw.TITLE_SCREEN_STATE;
-                    sw.fileManager.setInitiallyLoaded(false);
-                    sw.fileManager.setCurrentlyLoaded(false);
+                    sw.getFileManager().setInitiallyLoaded(false);
+                    sw.getFileManager().setCurrentlyLoaded(false);
                 }
-                else if (sw.ui.getOptionNum() == 1)  //save game
+                else if (sw.getUi().getOptionNum() == 1)  //save game
                 {
-                    sw.fileManager.setAlreadySaved(sw.fileManager.save());
+                    sw.getFileManager().setAlreadySaved(sw.getFileManager().save());
                 }
                 else {
                     sw.gameState = sw.PLAY_STATE;
@@ -132,31 +132,31 @@ public class KeyManager implements KeyListener {
         //Load Game Menu State
         if (sw.gameState == sw.LOAD_MENU_STATE) {
             if (keyCode == KeyEvent.VK_W || keyCode == KeyEvent.VK_UP) {
-                sw.ui.setOptionNum(sw.ui.getOptionNum()-1);
-                if (sw.ui.getOptionNum() < 0)
+                sw.getUi().setOptionNum(sw.getUi().getOptionNum()-1);
+                if (sw.getUi().getOptionNum() < 0)
                 {
-                    sw.ui.setOptionNum(1);
+                    sw.getUi().setOptionNum(1);
                 }
             }
             if (keyCode == KeyEvent.VK_S || keyCode == KeyEvent.VK_DOWN) {
-                sw.ui.setOptionNum(sw.ui.getOptionNum()+1);
-                if (sw.ui.getOptionNum() > 1)
+                sw.getUi().setOptionNum(sw.getUi().getOptionNum()+1);
+                if (sw.getUi().getOptionNum() > 1)
                 {
-                    sw.ui.setOptionNum(0);
+                    sw.getUi().setOptionNum(0);
                 }
             }
             if (keyCode == KeyEvent.VK_ENTER || keyCode == KeyEvent.VK_SPACE) {
-                if (sw.ui.getOptionNum() == 0)  //Load game
+                if (sw.getUi().getOptionNum() == 0)  //Load game
                 {
-                    if (sw.fileManager.isInitiallyLoaded()) {
+                    if (sw.getFileManager().isInitiallyLoaded()) {
                         sw.gameState = sw.LOADING_STATE;
                     }
                 }
                 else {  //Return to TTS
                     sw.gameState = sw.TITLE_SCREEN_STATE;
-                    sw.ui.setOptionNum(0);
-                    sw.fileManager.setInitiallyLoaded(false);
-                    sw.fileManager.setCurrentlyLoaded(false);
+                    sw.getUi().setOptionNum(0);
+                    sw.getFileManager().setInitiallyLoaded(false);
+                    sw.getFileManager().setCurrentlyLoaded(false);
                 }
             }
         }
@@ -164,11 +164,11 @@ public class KeyManager implements KeyListener {
         if (keyCode == KeyEvent.VK_ESCAPE) {
             if (sw.gameState == sw.PLAY_STATE) {
                 sw.gameState = sw.PAUSED_STATE;
-                sw.ui.setOptionNum(0);
+                sw.getUi().setOptionNum(0);
             }
             if (sw.gameState == sw.LOSE_STATE) {
                 sw.gameState = sw.TITLE_SCREEN_STATE;
-                sw.ui.setOptionNum(0);
+                sw.getUi().setOptionNum(0);
             }
         }
     }

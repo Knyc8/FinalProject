@@ -287,7 +287,7 @@ public class OnScreenUI {
             graphics2D.drawImage(sw.player.getFront3(), x-sw.getDISPLAYED_TILE_SIZE()/2 - (45/4), y-(39), 45, 45, null);
         }
 
-        if (sw.fileManager.isAlreadySaved()) {
+        if (sw.getFileManager().isAlreadySaved()) {
             displayText = "Progress Saved";
             messageCount++;
         }
@@ -298,7 +298,7 @@ public class OnScreenUI {
         if (messageCount >= 120) {
             displayText = "Save Game";
             messageCount = 0;
-            sw.fileManager.setAlreadySaved(false);
+            sw.getFileManager().setAlreadySaved(false);
         }
         length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();  //centers the text
         x = sw.getSCREEN_WIDTH()/2 - length/2;
@@ -401,7 +401,7 @@ public class OnScreenUI {
         graphics2D.setStroke(oldStroke);
 
         //Save File Data
-        if (sw.fileManager.isInitiallyLoaded()) {
+        if (sw.getFileManager().isInitiallyLoaded()) {
             x = sw.getDISPLAYED_TILE_SIZE() * 2 - 7;
             y = sw.getDISPLAYED_TILE_SIZE() * 2 + 17;
             graphics2D.drawImage(torch, x, y, sw.getDISPLAYED_TILE_SIZE() * 5 / 2, sw.getDISPLAYED_TILE_SIZE() * 5 / 2, null);
