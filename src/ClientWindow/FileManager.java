@@ -44,27 +44,27 @@ public class FileManager {
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream(save));
 
             DataLibrary dl = new DataLibrary();
-            dl.maxHp = sw.getPlayer().getMaxHp();
-            dl.hp = sw.getPlayer().getHp();
-            dl.exp = sw.getPlayer().getExp();
-            dl.level = sw.getPlayer().getLevel();
-            dl.xCoord = sw.getPlayer().getXCoord();
-            dl.yCoord = sw.getPlayer().getYCoord();
-            dl.enemiesKilled = sw.getPlayer().getEnemiesKilled();
-            dl.direction = sw.getPlayer().getDirection();
-            dl.monsterAlive = new boolean[sw.monsters.length];
-            dl.monsterPos = new int[sw.monsters.length][2];
+            dl.setMaxHp(sw.getPlayer().getMaxHp());
+            dl.setHp(sw.getPlayer().getHp());
+            dl.setExp(sw.getPlayer().getExp());
+            dl.setLevel(sw.getPlayer().getLevel());
+            dl.setXCoord(sw.getPlayer().getXCoord());
+            dl.setYCoord(sw.getPlayer().getYCoord());
+            dl.setEnemiesKilled(sw.getPlayer().getEnemiesKilled());
+            dl.setDirection(sw.getPlayer().getDirection());
+            dl.setMonsterAlive(new boolean[sw.monsters.length]);
+            dl.setMonsterPos(new int[sw.monsters.length][2]);
 
             for (int i = 0; i < sw.monsters.length; i++)
             {
                 if (sw.monsters[i] != null)
                 {
-                    dl.monsterAlive[i] = true;
-                    dl.monsterPos[i][0] = sw.monsters[i].getXCoord();
-                    dl.monsterPos[i][1] = sw.monsters[i].getYCoord();
+                    dl.getMonsterAlive()[i] = true;
+                    dl.getMonsterPos()[i][0] = sw.monsters[i].getXCoord();
+                    dl.getMonsterPos()[i][1] = sw.monsters[i].getYCoord();
                 }
                 else {
-                    dl.monsterAlive[i] = false;
+                    dl.getMonsterAlive()[i] = false;
                 }
             }
 
@@ -84,17 +84,17 @@ public class FileManager {
             currentlyLoaded = true;
 
             DataLibrary dl = (DataLibrary) objectInputStream.readObject();
-            sw.getPlayer().setMaxHp(dl.maxHp);
-            sw.getPlayer().setHp(dl.hp);
-            sw.getPlayer().setExp(dl.exp);
-            sw.getPlayer().setLevel(dl.level);
-            sw.getPlayer().setXCoord(dl.xCoord);
-            sw.getPlayer().setYCoord(dl.yCoord);
-            sw.getPlayer().setEnemiesKilled(dl.enemiesKilled);
-            sw.getPlayer().setDirection(dl.direction);
+            sw.getPlayer().setMaxHp(dl.getMaxHp());
+            sw.getPlayer().setHp(dl.getHp());
+            sw.getPlayer().setExp(dl.getExp());
+            sw.getPlayer().setLevel(dl.getLevel());
+            sw.getPlayer().setXCoord(dl.getXCoord());
+            sw.getPlayer().setYCoord(dl.getYCoord());
+            sw.getPlayer().setEnemiesKilled(dl.getEnemiesKilled());
+            sw.getPlayer().setDirection(dl.getDirection());
 
-            sw.monsterAlive = dl.monsterAlive;
-            sw.monsterPos = dl.monsterPos;
+            sw.monsterAlive = dl.getMonsterAlive();
+            sw.monsterPos = dl.getMonsterPos();
 
             return true;
 
