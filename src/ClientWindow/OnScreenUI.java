@@ -8,13 +8,15 @@ import java.io.InputStream;
 import java.util.Objects;
 
 public class OnScreenUI {
-    SwingWindow sw;
-    Font dungeonFont;
-    BufferedImage torch, DFIcon, wall, bacon, emptyBacon, sadCat, tDown, bCat, cBCat, arrow;
-    int optionNum = 0;
-    int messageCount = 0;
-    String displayText = "";
+    //VARIABLES
+    private SwingWindow sw;
+    private Font dungeonFont;
+    private BufferedImage torch, DFIcon, wall, bacon, emptyBacon, sadCat, tDown, bCat, cBCat, arrow;
+    private int optionNum = 0;
+    private int messageCount = 0;
+    private String displayText = "";
 
+    //CONSTRUCTOR
     public OnScreenUI(SwingWindow sw)
     {
         this.sw = sw;
@@ -40,6 +42,17 @@ public class OnScreenUI {
             arrow = setImg("/icons/arrow.png");
     }
 
+
+    //GETTERS
+    public int getOptionNum() {
+        return optionNum;
+    }
+
+
+    //SETTERS
+    public void setOptionNum(int optionNum) {
+        this.optionNum = optionNum;
+    }
     private BufferedImage setImg(String path) {
         try {
             return ImageIO.read(Objects.requireNonNull(getClass().getResource(path)));
@@ -51,6 +64,8 @@ public class OnScreenUI {
         return null;
     }
 
+
+    //OTHER METHODS
     /***
      * Displays the UI drawn in the different game states
      *
