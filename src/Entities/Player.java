@@ -86,7 +86,7 @@ public class Player extends Entity{
         setXCoord(getSw().getDISPLAYED_TILE_SIZE() * 7);
         setYCoord(getSw().getDISPLAYED_TILE_SIZE() * 4);
         setSpeed(10);
-        direction = "south";
+        setDirection("south");
         collidable = true;
         immunity = false;
         enemiesKilled = 0;
@@ -108,19 +108,19 @@ public class Player extends Entity{
             //Character orientation
             if (km.isWPressed())
             {
-                direction = "north";
+                setDirection("north");
             }
             if (km.isSPressed())
             {
-                direction = "south";
+                setDirection("south");
             }
             if (km.isAPressed())
             {
-                direction = "west";
+                setDirection("west");
             }
             if (km.isDPressed())
             {
-                direction = "east";
+                setDirection("east");
             }
 
             //check for tiles collisions
@@ -133,16 +133,16 @@ public class Player extends Entity{
 
             if (!colliding) {
                 //dmgCount = 0;
-                if (direction.equals("north")) {  //up speed units
+                if (getDirection().equals("north")) {  //up speed units
                     setYCoord(getYCoord() - getSpeed());  //top left is (0, 0)
                 }
-                if (direction.equals("south")) {  //down speed units
+                if (getDirection().equals("south")) {  //down speed units
                     setYCoord(getYCoord() + getSpeed());
                 }
-                if (direction.equals("west")) {  //left speed units
+                if (getDirection().equals("west")) {  //left speed units
                     setXCoord(getXCoord() - getSpeed());
                 }
-                if (direction.equals("east")) {  //right speed units
+                if (getDirection().equals("east")) {  //right speed units
                     setXCoord(getXCoord() + getSpeed());
                 }
             }
@@ -163,19 +163,19 @@ public class Player extends Entity{
 
             if (level < 3) {
                 if (!projectile.alive) {
-                    projectile.set(getXCoord(), getYCoord(), direction, true, this);
+                    projectile.set(getXCoord(), getYCoord(), getDirection(), true, this);
                     getSw().projectiles.add(projectile);
                 }
             }
             if (level >= 3 && level < 5) {
                 if (!projectile.alive && !projectile2.alive) {
-                    if (direction.equals("north") || direction.equals("south")) {
-                        projectile.set(getXCoord() - 25, getYCoord(), direction, true, this);
-                        projectile2.set(getXCoord()  +25, getYCoord(), direction, true, this);
+                    if (getDirection().equals("north") || getDirection().equals("south")) {
+                        projectile.set(getXCoord() - 25, getYCoord(), getDirection(), true, this);
+                        projectile2.set(getXCoord()  +25, getYCoord(), getDirection(), true, this);
                     }
-                    if (direction.equals("east") || direction.equals("west")) {
-                        projectile.set(getXCoord(), getYCoord() - 25, direction, true, this);
-                        projectile2.set(getXCoord(), getYCoord() + 25, direction, true, this);
+                    if (getDirection().equals("east") || getDirection().equals("west")) {
+                        projectile.set(getXCoord(), getYCoord() - 25, getDirection(), true, this);
+                        projectile2.set(getXCoord(), getYCoord() + 25, getDirection(), true, this);
                     }
                     getSw().projectiles.add(projectile);
                     getSw().projectiles.add(projectile2);
@@ -183,15 +183,15 @@ public class Player extends Entity{
             }
             if (level >= 5) {
                 if (!projectile.alive && !projectile2.alive && !projectile3.alive) {
-                    if (direction.equals("north") || direction.equals("south")) {
-                        projectile.set(getXCoord() - 50, getYCoord(), direction, true, this);
-                        projectile2.set(getXCoord(), getYCoord(), direction, true, this);
-                        projectile3.set(getXCoord() + 50, getYCoord(), direction, true, this);
+                    if (getDirection().equals("north") || getDirection().equals("south")) {
+                        projectile.set(getXCoord() - 50, getYCoord(), getDirection(), true, this);
+                        projectile2.set(getXCoord(), getYCoord(), getDirection(), true, this);
+                        projectile3.set(getXCoord() + 50, getYCoord(), getDirection(), true, this);
                     }
-                    if (direction.equals("east") || direction.equals("west")) {
-                        projectile.set(getXCoord(), getYCoord() - 50, direction, true, this);
-                        projectile2.set(getXCoord(), getYCoord(), direction, true, this);
-                        projectile3.set(getXCoord(), getYCoord() + 50, direction, true, this);
+                    if (getDirection().equals("east") || getDirection().equals("west")) {
+                        projectile.set(getXCoord(), getYCoord() - 50, getDirection(), true, this);
+                        projectile2.set(getXCoord(), getYCoord(), getDirection(), true, this);
+                        projectile3.set(getXCoord(), getYCoord() + 50, getDirection(), true, this);
                     }
                     getSw().projectiles.add(projectile);
                     getSw().projectiles.add(projectile2);
@@ -277,7 +277,7 @@ public class Player extends Entity{
     public void draw(Graphics2D graphic2D) {
         BufferedImage image = null;
 
-        switch(direction)
+        switch(getDirection())
         {
             case "north":
                 if (!km.isWPressed() && !km.isAPressed() && !km.isSPressed() && !km.isDPressed())

@@ -403,7 +403,7 @@ public class OnScreenUI {
             graphics2D.drawString(displayText, x, y);
             displayText = "X Position: " + sw.getPlayer().getXCoord() + " - - - - - ";
             displayText += "Y Position: " + sw.getPlayer().getYCoord() + " - - - - - ";
-            displayText += "Facing :" + sw.getPlayer().direction;
+            displayText += "Facing :" + sw.getPlayer().getDirection();
             x = sw.getDISPLAYED_TILE_SIZE() * 5 - 25;
             y = sw.getDISPLAYED_TILE_SIZE() * 13 / 3;
             graphics2D.drawString(displayText, x, y);

@@ -27,16 +27,16 @@ public class Enemy extends Entity {
 
         int rand = (int) (Math.random()*4) + 1;  //random number from 1-4
         if (rand == 1) {
-            direction = "north";
+            setDirection("north");
         }
         if (rand == 2) {
-            direction = "south";
+            setDirection("south");
         }
         if (rand == 3) {
-            direction = "west";
+            setDirection("west");
         }
         if (rand == 4) {
-            direction = "east";
+            setDirection("east");
         }
 
         hitbox = new Rectangle();
@@ -70,16 +70,16 @@ public class Enemy extends Entity {
             int rand = (int) (Math.random()*4) + 1;  //random number from 1-4
 
             if (rand == 1) {
-                direction = "north";
+                setDirection("north");
             }
             if (rand == 2) {
-                direction = "south";
+                setDirection("south");
             }
             if (rand == 3) {
-                direction = "west";
+                setDirection("west");
             }
             if (rand == 4) {
-                direction = "east";
+                setDirection("east");
             }
             actionCount = 0;
         }

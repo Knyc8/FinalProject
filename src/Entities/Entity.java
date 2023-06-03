@@ -14,7 +14,7 @@ public class Entity {
     private int xCoord, yCoord;  //represents the coordinates of the world as the player stays in the center
 
     public BufferedImage back1, back2, back3, front1, front2, front3,  left1, left2, left3, right1, right2, right3;
-    public String direction;
+    private String direction;
     public static int spriteCount = 0;
     public static int spriteNum = 1;
     public Rectangle hitbox;
@@ -40,6 +40,9 @@ public class Entity {
     //Constructor
     public Entity (SwingWindow sw) {
         this.sw = sw;
+
+        colliding = false;
+        immunity = false;
     }
 
 
@@ -47,15 +50,15 @@ public class Entity {
     public SwingWindow getSw() {
         return sw;
     }
-
     public int getXCoord() {
         return xCoord;
     }
-
     public int getYCoord() {
         return yCoord;
     }
-
+    public String getDirection() {
+        return direction;
+    }
     public int getSpeed() {
         return speed;
     }
@@ -68,15 +71,15 @@ public class Entity {
 
 
     //Setters
-
     public void setXCoord(int xCoord) {
         this.xCoord = xCoord;
     }
-
     public void setYCoord(int yCoord) {
         this.yCoord = yCoord;
     }
-
+    public void setDirection(String direction) {
+        this.direction = direction;
+    }
     public void setName(String name) {
         this.name = name;
     }

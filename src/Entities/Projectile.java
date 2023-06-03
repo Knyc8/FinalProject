@@ -41,7 +41,7 @@ public class Projectile extends Entity{
     public void set(int xCoord, int yCoord, String dir, Boolean alive, Entity user){
         setXCoord(xCoord);
         setYCoord(yCoord);
-        direction = dir;
+        setDirection(dir);
         this.alive = alive;
         this.user = user;
         setHp(getMaxHp());
@@ -96,7 +96,7 @@ public class Projectile extends Entity{
             }
             else {
                 setSpeed(15);
-                switch (direction) {
+                switch (getDirection()) {
                     case "north" -> {
                         if (this.spriteNum == 1) {
                             image = back1;

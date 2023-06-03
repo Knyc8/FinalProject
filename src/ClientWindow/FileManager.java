@@ -27,7 +27,7 @@ public class FileManager {
             dl.xCoord = sw.getPlayer().getXCoord();
             dl.yCoord = sw.getPlayer().getYCoord();
             dl.enemiesKilled = sw.getPlayer().getEnemiesKilled();
-            dl.direction = sw.getPlayer().direction;
+            dl.direction = sw.getPlayer().getDirection();
             dl.monsterAlive = new boolean[sw.monsters.length];
             dl.monsterPos = new int[sw.monsters.length][2];
 
@@ -67,7 +67,7 @@ public class FileManager {
             sw.getPlayer().setXCoord(dl.xCoord);
             sw.getPlayer().setYCoord(dl.yCoord);
             sw.getPlayer().setEnemiesKilled(dl.enemiesKilled);
-            sw.getPlayer().direction = dl.direction;
+            sw.getPlayer().setDirection(dl.direction);
 
             sw.monsterAlive = dl.monsterAlive;
             sw.monsterPos = dl.monsterPos;
