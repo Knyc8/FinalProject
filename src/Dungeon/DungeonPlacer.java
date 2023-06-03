@@ -7,8 +7,11 @@ import Entities.enemies.Enemy;
  * places entities in a specific location in the dungeon
  */
 public class DungeonPlacer {
-    SwingWindow sw;
-    public int[][] roomInfo;
+    //VARIABLES
+    private SwingWindow sw;
+    private int[][] roomInfo;
+
+    //CONSTRUCTOR
     public DungeonPlacer(SwingWindow sw)
     {
         this.sw = sw;
@@ -16,6 +19,8 @@ public class DungeonPlacer {
         setUpRooms();
     }
 
+
+    //SETTERS
     /***
      * Contains the x and y values of the
      */
@@ -31,6 +36,8 @@ public class DungeonPlacer {
         roomInfo[7] = new int[]{29, 48, 29, 48};  //room 8: {startX, endX, startY, endY, startAmt, endAmt};
     }
 
+
+    //OTHER METHODS
     public void placeMonsters() {
         for (int i = 0; i < 150; i++) {  //150 total enemies
             int startX = 0;
