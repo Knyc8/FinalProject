@@ -10,8 +10,8 @@ import java.util.Objects;
 
 public class Entity {
     //setup
-    public SwingWindow sw;
-    public int xCoord, yCoord;  //represents the coordinates of the world as the player stays in the center
+    private final SwingWindow sw;
+    private int xCoord, yCoord;  //represents the coordinates of the world as the player stays in the center
 
     public BufferedImage back1, back2, back3, front1, front2, front3,  left1, left2, left3, right1, right2, right3;
     public String direction;
@@ -44,6 +44,18 @@ public class Entity {
 
 
     //Getters
+    public SwingWindow getSw() {
+        return sw;
+    }
+
+    public int getXCoord() {
+        return xCoord;
+    }
+
+    public int getYCoord() {
+        return yCoord;
+    }
+
     public int getSpeed() {
         return speed;
     }
@@ -56,6 +68,15 @@ public class Entity {
 
 
     //Setters
+
+    public void setXCoord(int xCoord) {
+        this.xCoord = xCoord;
+    }
+
+    public void setYCoord(int yCoord) {
+        this.yCoord = yCoord;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -86,13 +107,13 @@ public class Entity {
 
     //Other methods
     public void draw(Graphics2D graphics2D) {
-        int screenX = xCoord - sw.getPlayer().xCoord + sw.getPlayer().getSCREEN_X();
-        int screenY = yCoord - sw.getPlayer().yCoord + sw.getPlayer().getSCREEN_Y();
+        int screenX = xCoord - sw.getPlayer().getXCoord() + sw.getPlayer().getSCREEN_X();
+        int screenY = yCoord - sw.getPlayer().getYCoord() + sw.getPlayer().getSCREEN_Y();
 
-        if (xCoord + sw.getDISPLAYED_TILE_SIZE() > sw.getPlayer().xCoord - sw.getPlayer().getSCREEN_X() &&
-                xCoord - sw.getDISPLAYED_TILE_SIZE() < sw.getPlayer().xCoord + sw.getPlayer().getSCREEN_X() &&
-                yCoord + sw.getDISPLAYED_TILE_SIZE() > sw.getPlayer().yCoord - sw.getPlayer().getSCREEN_Y() &&
-                yCoord - sw.getDISPLAYED_TILE_SIZE() < sw.getPlayer().yCoord + sw.getPlayer().getSCREEN_Y()) {
+        if (xCoord + sw.getDISPLAYED_TILE_SIZE() > sw.getPlayer().getXCoord() - sw.getPlayer().getSCREEN_X() &&
+                xCoord - sw.getDISPLAYED_TILE_SIZE() < sw.getPlayer().getXCoord() + sw.getPlayer().getSCREEN_X() &&
+                yCoord + sw.getDISPLAYED_TILE_SIZE() > sw.getPlayer().getYCoord() - sw.getPlayer().getSCREEN_Y() &&
+                yCoord - sw.getDISPLAYED_TILE_SIZE() < sw.getPlayer().getYCoord() + sw.getPlayer().getSCREEN_Y()) {
 
             BufferedImage image = null;
 
@@ -155,7 +176,7 @@ public class Entity {
 
         if (detected) {  //deals dmg to player
             if (!sw.getPlayer().immunity) {
-                sw.getPlayer().setHp(getHp()-1);
+                sw.getPlayer().setHp(sw.getPlayer().getHp()-1);
                 sw.getPlayer().immunity = true;
             }
         }

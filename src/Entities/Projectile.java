@@ -39,8 +39,8 @@ public class Projectile extends Entity{
     }
 
     public void set(int xCoord, int yCoord, String dir, Boolean alive, Entity user){
-        this.xCoord = xCoord;
-        this.yCoord = yCoord;
+        setXCoord(xCoord);
+        setYCoord(yCoord);
         direction = dir;
         this.alive = alive;
         this.user = user;
@@ -50,9 +50,9 @@ public class Projectile extends Entity{
     public void update() {
 
         super.update();
-        int enemyIdx = sw.getCollisionDetector().detectEntity(sw.monsters, this);
+        int enemyIdx = getSw().getCollisionDetector().detectEntity(getSw().monsters, this);
         if (enemyIdx != -1) {
-            sw.getPlayer().damage(enemyIdx);
+            getSw().getPlayer().damage(enemyIdx);
         }
 
         setHp(getHp()-1);
@@ -73,14 +73,14 @@ public class Projectile extends Entity{
     }
 
     public void draw(Graphics2D graphics2D) {
-        int screenX = xCoord - sw.getPlayer().xCoord + sw.getPlayer().getSCREEN_X();
-        int screenY = yCoord - sw.getPlayer().yCoord + sw.getPlayer().getSCREEN_Y();// + sw.getDISPLAYED_TILE_SIZE()/5;
-        int size = sw.getDISPLAYED_TILE_SIZE();
+        int screenX = getXCoord() - getSw().getPlayer().getXCoord() + getSw().getPlayer().getSCREEN_X();
+        int screenY = getYCoord() - getSw().getPlayer().getYCoord() + getSw().getPlayer().getSCREEN_Y();// + sw.getDISPLAYED_TILE_SIZE()/5;
+        int size = getSw().getDISPLAYED_TILE_SIZE();
 
-        if (xCoord + sw.getDISPLAYED_TILE_SIZE() > sw.getPlayer().xCoord - sw.getPlayer().getSCREEN_X() &&
-                xCoord - sw.getDISPLAYED_TILE_SIZE() < sw.getPlayer().xCoord + sw.getPlayer().getSCREEN_X() &&
-                yCoord + sw.getDISPLAYED_TILE_SIZE() > sw.getPlayer().yCoord - sw.getPlayer().getSCREEN_Y() &&
-                yCoord - sw.getDISPLAYED_TILE_SIZE() < sw.getPlayer().yCoord + sw.getPlayer().getSCREEN_Y()) {
+        if (getXCoord() + getSw().getDISPLAYED_TILE_SIZE() > getSw().getPlayer().getXCoord() - getSw().getPlayer().getSCREEN_X() &&
+                getXCoord() - getSw().getDISPLAYED_TILE_SIZE() < getSw().getPlayer().getXCoord() + getSw().getPlayer().getSCREEN_X() &&
+                getYCoord() + getSw().getDISPLAYED_TILE_SIZE() > getSw().getPlayer().getYCoord() - getSw().getPlayer().getSCREEN_Y() &&
+                getYCoord() - getSw().getDISPLAYED_TILE_SIZE() < getSw().getPlayer().getYCoord() + getSw().getPlayer().getSCREEN_Y()) {
 
             BufferedImage image = null;
 

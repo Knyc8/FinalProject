@@ -83,8 +83,8 @@ public class Player extends Entity{
      */
     public void setDefaultValues() {
         setName("Player");
-        xCoord = sw.getDISPLAYED_TILE_SIZE() * 7;
-        yCoord = sw.getDISPLAYED_TILE_SIZE() * 4;
+        setXCoord(getSw().getDISPLAYED_TILE_SIZE() * 7);
+        setYCoord(getSw().getDISPLAYED_TILE_SIZE() * 4);
         setSpeed(10);
         direction = "south";
         collidable = true;
@@ -95,9 +95,9 @@ public class Player extends Entity{
         exp = 0;
         setMaxHp(3);
         setHp(getMaxHp());
-        projectile = new Projectile(sw);
-        projectile2 = new Projectile(sw);
-        projectile3 = new Projectile(sw);
+        projectile = new Projectile(getSw());
+        projectile2 = new Projectile(getSw());
+        projectile3 = new Projectile(getSw());
     }
 
 
@@ -125,25 +125,25 @@ public class Player extends Entity{
 
             //check for tiles collisions
             colliding = false;
-            sw.getCollisionDetector().detectTile(this);
+            getSw().getCollisionDetector().detectTile(this);
 
             //check for enemy collisions
-            int enemyIdx = sw.getCollisionDetector().detectEntity(sw.monsters, this);
+            int enemyIdx = getSw().getCollisionDetector().detectEntity(getSw().monsters, this);
             takeDamage(enemyIdx);
 
             if (!colliding) {
                 //dmgCount = 0;
                 if (direction.equals("north")) {  //up speed units
-                    yCoord -= getSpeed();  //top left is (0, 0)
+                    setYCoord(getYCoord() - getSpeed());  //top left is (0, 0)
                 }
                 if (direction.equals("south")) {  //down speed units
-                    yCoord += getSpeed();
+                    setYCoord(getYCoord() + getSpeed());
                 }
                 if (direction.equals("west")) {  //left speed units
-                    xCoord -= getSpeed();
+                    setXCoord(getXCoord() - getSpeed());
                 }
                 if (direction.equals("east")) {  //right speed units
-                    xCoord += getSpeed();
+                    setXCoord(getXCoord() + getSpeed());
                 }
             }
 
@@ -163,39 +163,39 @@ public class Player extends Entity{
 
             if (level < 3) {
                 if (!projectile.alive) {
-                    projectile.set(xCoord, yCoord, direction, true, this);
-                    sw.projectiles.add(projectile);
+                    projectile.set(getXCoord(), getYCoord(), direction, true, this);
+                    getSw().projectiles.add(projectile);
                 }
             }
             if (level >= 3 && level < 5) {
                 if (!projectile.alive && !projectile2.alive) {
                     if (direction.equals("north") || direction.equals("south")) {
-                        projectile.set(xCoord - 25, yCoord, direction, true, this);
-                        projectile2.set(xCoord  +25, yCoord, direction, true, this);
+                        projectile.set(getXCoord() - 25, getYCoord(), direction, true, this);
+                        projectile2.set(getXCoord()  +25, getYCoord(), direction, true, this);
                     }
                     if (direction.equals("east") || direction.equals("west")) {
-                        projectile.set(xCoord, yCoord - 25, direction, true, this);
-                        projectile2.set(xCoord, yCoord + 25, direction, true, this);
+                        projectile.set(getXCoord(), getYCoord() - 25, direction, true, this);
+                        projectile2.set(getXCoord(), getYCoord() + 25, direction, true, this);
                     }
-                    sw.projectiles.add(projectile);
-                    sw.projectiles.add(projectile2);
+                    getSw().projectiles.add(projectile);
+                    getSw().projectiles.add(projectile2);
                 }
             }
             if (level >= 5) {
                 if (!projectile.alive && !projectile2.alive && !projectile3.alive) {
                     if (direction.equals("north") || direction.equals("south")) {
-                        projectile.set(xCoord - 50, yCoord, direction, true, this);
-                        projectile2.set(xCoord, yCoord, direction, true, this);
-                        projectile3.set(xCoord + 50, yCoord, direction, true, this);
+                        projectile.set(getXCoord() - 50, getYCoord(), direction, true, this);
+                        projectile2.set(getXCoord(), getYCoord(), direction, true, this);
+                        projectile3.set(getXCoord() + 50, getYCoord(), direction, true, this);
                     }
                     if (direction.equals("east") || direction.equals("west")) {
-                        projectile.set(xCoord, yCoord - 50, direction, true, this);
-                        projectile2.set(xCoord, yCoord, direction, true, this);
-                        projectile3.set(xCoord, yCoord + 50, direction, true, this);
+                        projectile.set(getXCoord(), getYCoord() - 50, direction, true, this);
+                        projectile2.set(getXCoord(), getYCoord(), direction, true, this);
+                        projectile3.set(getXCoord(), getYCoord() + 50, direction, true, this);
                     }
-                    sw.projectiles.add(projectile);
-                    sw.projectiles.add(projectile2);
-                    sw.projectiles.add(projectile3);
+                    getSw().projectiles.add(projectile);
+                    getSw().projectiles.add(projectile2);
+                    getSw().projectiles.add(projectile3);
                 }
             }
         }
@@ -205,13 +205,13 @@ public class Player extends Entity{
 
         if (immunity) {  //Invincibility loop
             iCount++;
-            if (sw.fileManager.initiallyLoaded)
+            if (getSw().fileManager.initiallyLoaded)
             {
                 if (iCount > 300)  //4 second invincibility
                 {
                     immunity = false;
                     iCount = 0;
-                    sw.fileManager.initiallyLoaded = false;
+                    getSw().fileManager.initiallyLoaded = false;
                 }
             }
             else {
@@ -240,13 +240,13 @@ public class Player extends Entity{
 
     public void damage(int entityIdx) {
         if (entityIdx != -1) {
-            if (!sw.monsters[entityIdx].immunity) {
-                sw.monsters[entityIdx].setHp(sw.monsters[entityIdx].getHp()-1);
-                sw.monsters[entityIdx].immunity = true;
+            if (!getSw().monsters[entityIdx].immunity) {
+                getSw().monsters[entityIdx].setHp(getSw().monsters[entityIdx].getHp()-1);
+                getSw().monsters[entityIdx].immunity = true;
 
-                if (sw.monsters[entityIdx].getHp() <= 0)
+                if (getSw().monsters[entityIdx].getHp() <= 0)
                 {
-                    sw.monsters[entityIdx] = null;
+                    getSw().monsters[entityIdx] = null;
                     exp++;
                     enemiesKilled++;
                     levelUp();
@@ -342,7 +342,7 @@ public class Player extends Entity{
             graphic2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.5f));
         }
 
-        graphic2D.drawImage(image, SCREEN_X, SCREEN_Y, sw.getDISPLAYED_TILE_SIZE(), sw.getDISPLAYED_TILE_SIZE(), null);  //draws sprite on the screen
+        graphic2D.drawImage(image, SCREEN_X, SCREEN_Y, getSw().getDISPLAYED_TILE_SIZE(), getSw().getDISPLAYED_TILE_SIZE(), null);  //draws sprite on the screen
         graphic2D.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
     }
 }

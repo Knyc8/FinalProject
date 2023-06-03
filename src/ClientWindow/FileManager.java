@@ -24,8 +24,8 @@ public class FileManager {
             dl.hp = sw.getPlayer().getHp();
             dl.exp = sw.getPlayer().getExp();
             dl.level = sw.getPlayer().getLevel();
-            dl.xCoord = sw.getPlayer().xCoord;
-            dl.yCoord = sw.getPlayer().yCoord;
+            dl.xCoord = sw.getPlayer().getXCoord();
+            dl.yCoord = sw.getPlayer().getYCoord();
             dl.enemiesKilled = sw.getPlayer().getEnemiesKilled();
             dl.direction = sw.getPlayer().direction;
             dl.monsterAlive = new boolean[sw.monsters.length];
@@ -36,8 +36,8 @@ public class FileManager {
                 if (sw.monsters[i] != null)
                 {
                     dl.monsterAlive[i] = true;
-                    dl.monsterPos[i][0] = sw.monsters[i].xCoord;
-                    dl.monsterPos[i][1] = sw.monsters[i].yCoord;
+                    dl.monsterPos[i][0] = sw.monsters[i].getXCoord();
+                    dl.monsterPos[i][1] = sw.monsters[i].getYCoord();
                 }
                 else {
                     dl.monsterAlive[i] = false;
@@ -64,8 +64,8 @@ public class FileManager {
             sw.getPlayer().setHp(dl.hp);
             sw.getPlayer().setExp(dl.exp);
             sw.getPlayer().setLevel(dl.level);
-            sw.getPlayer().xCoord = dl.xCoord;
-            sw.getPlayer().yCoord = dl.yCoord;
+            sw.getPlayer().setXCoord(dl.xCoord);
+            sw.getPlayer().setYCoord(dl.yCoord);
             sw.getPlayer().setEnemiesKilled(dl.enemiesKilled);
             sw.getPlayer().direction = dl.direction;
 

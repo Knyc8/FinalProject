@@ -401,8 +401,8 @@ public class OnScreenUI {
             x = sw.getDISPLAYED_TILE_SIZE() * 7;
             y = sw.getDISPLAYED_TILE_SIZE() * 11 / 3;
             graphics2D.drawString(displayText, x, y);
-            displayText = "X Position: " + sw.getPlayer().xCoord + " - - - - - ";
-            displayText += "Y Position: " + sw.getPlayer().yCoord + " - - - - - ";
+            displayText = "X Position: " + sw.getPlayer().getXCoord() + " - - - - - ";
+            displayText += "Y Position: " + sw.getPlayer().getYCoord() + " - - - - - ";
             displayText += "Facing :" + sw.getPlayer().direction;
             x = sw.getDISPLAYED_TILE_SIZE() * 5 - 25;
             y = sw.getDISPLAYED_TILE_SIZE() * 13 / 3;

@@ -52,8 +52,8 @@ public class DungeonPlacer {
             sw.monsters[i] = new Enemy(sw);
             int randX = (int) (Math.random() * (endX - startX + 1)) + startX;
             int randY = (int) (Math.random() * (endY - startY + 1)) + startY;
-            sw.monsters[i].xCoord = sw.getDISPLAYED_TILE_SIZE() * randX;
-            sw.monsters[i].yCoord = sw.getDISPLAYED_TILE_SIZE() * randY;
+            sw.monsters[i].setXCoord(sw.getDISPLAYED_TILE_SIZE() * randX);
+            sw.monsters[i].setYCoord(sw.getDISPLAYED_TILE_SIZE() * randY);
         }
     }
 
@@ -63,8 +63,8 @@ public class DungeonPlacer {
             if (sw.monsterAlive[i])
             {
                 sw.monsters[i] = new Enemy(sw);
-                sw.monsters[i].xCoord = sw.monsterPos[i][0];
-                sw.monsters[i].yCoord = sw.monsterPos[i][1];
+                sw.monsters[i].setXCoord(sw.monsterPos[i][0]);
+                sw.monsters[i].setYCoord(sw.monsterPos[i][1]);
             }
             else
             {

@@ -13,10 +13,10 @@ public class CollisionDetector {
     }
 
     public void detectTile(Entity entity) {
-        int hitBoxLeftX = entity.xCoord + entity.hitbox.x;
-        int hitBoxRightX = entity.xCoord + entity.hitbox.x + entity.hitbox.width;
-        int hitBoxTopY = entity.yCoord + entity.hitbox.y;
-        int hitBoxBottomY = entity.yCoord + entity.hitbox.y + entity.hitbox.height;
+        int hitBoxLeftX = entity.getXCoord() + entity.hitbox.x;
+        int hitBoxRightX = entity.getXCoord() + entity.hitbox.x + entity.hitbox.width;
+        int hitBoxTopY = entity.getYCoord() + entity.hitbox.y;
+        int hitBoxBottomY = entity.getYCoord() + entity.hitbox.y + entity.hitbox.height;
 
         int hitBoxLeftSide = hitBoxLeftX/sw.getDISPLAYED_TILE_SIZE();
         int hitBoxRightSide = hitBoxRightX/sw.getDISPLAYED_TILE_SIZE();
@@ -67,12 +67,12 @@ public class CollisionDetector {
         for (int i = 0; i < recipients.length; i++) {
             if (recipients[i] != null) {
                 //Get entity hitbox
-                entity.hitbox.x = entity.xCoord + entity.hitbox.x;
-                entity.hitbox.y = entity.yCoord + entity.hitbox.y;
+                entity.hitbox.x = entity.getXCoord() + entity.hitbox.x;
+                entity.hitbox.y = entity.getYCoord() + entity.hitbox.y;
 
                 //Get recipient hitbox
-                recipients[i].hitbox.x = recipients[i].xCoord + recipients[i].hitbox.x;
-                recipients[i].hitbox.y = recipients[i].yCoord + recipients[i].hitbox.y;
+                recipients[i].hitbox.x = recipients[i].getXCoord() + recipients[i].hitbox.x;
+                recipients[i].hitbox.y = recipients[i].getYCoord() + recipients[i].hitbox.y;
 
                 switch (entity.direction) {
                     case "north" -> {
@@ -116,12 +116,12 @@ public class CollisionDetector {
     public boolean detectPlayer(Entity entity) {
         boolean detected = false;
         //Get entity hitbox
-        entity.hitbox.x = entity.xCoord + entity.hitbox.x;
-        entity.hitbox.y = entity.yCoord + entity.hitbox.y;
+        entity.hitbox.x = entity.getXCoord() + entity.hitbox.x;
+        entity.hitbox.y = entity.getYCoord() + entity.hitbox.y;
 
         //Get player hitbox
-        sw.getPlayer().hitbox.x = sw.getPlayer().xCoord + sw.getPlayer().hitbox.x;
-        sw.getPlayer().hitbox.y = sw.getPlayer().yCoord + sw.getPlayer().hitbox.y;
+        sw.getPlayer().hitbox.x = sw.getPlayer().getXCoord() + sw.getPlayer().hitbox.x;
+        sw.getPlayer().hitbox.y = sw.getPlayer().getYCoord() + sw.getPlayer().hitbox.y;
 
         switch (entity.direction) {
             case "north" -> {

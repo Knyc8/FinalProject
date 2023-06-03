@@ -101,17 +101,17 @@ public class Enemy extends Entity {
     }
 
     public void restrainBounds(){
-        if (yCoord < sw.getDISPLAYED_TILE_SIZE() * 6)
+        if (getYCoord() < getSw().getDISPLAYED_TILE_SIZE() * 6)
         {
-            if (xCoord < sw.getDISPLAYED_TILE_SIZE() * 17)
+            if (getXCoord() < getSw().getDISPLAYED_TILE_SIZE() * 17)
             {
-                xCoord = sw.getDISPLAYED_TILE_SIZE() * 17;
+                setXCoord(getSw().getDISPLAYED_TILE_SIZE() * 17);
             }
         }
-        if (xCoord < sw.getDISPLAYED_TILE_SIZE() * 13)
-            if (yCoord < sw.getDISPLAYED_TILE_SIZE() * 8)
+        if (getXCoord() < getSw().getDISPLAYED_TILE_SIZE() * 13)
+            if (getYCoord() < getSw().getDISPLAYED_TILE_SIZE() * 8)
             {
-                yCoord = sw.getDISPLAYED_TILE_SIZE() * 8;
+                setYCoord(getSw().getDISPLAYED_TILE_SIZE() * 8);
             }
     }
 }
