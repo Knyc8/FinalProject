@@ -6,9 +6,11 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Projectile extends Entity{
+    //VARIABLES
     private Entity user;  //future purposes
     private BufferedImage explosion1, explosion2;
 
+    //CONSTRUCTOR
     public Projectile(SwingWindow sw) {
         super(sw);
 
@@ -22,6 +24,8 @@ public class Projectile extends Entity{
         getImg();
     }
 
+
+    //GETTERS
     public void getImg() {
         setBack1(setImage("/projectiles/pigball_up_1.png"));
         setBack2(setImage("/projectiles/pigball_up_2.png"));
@@ -35,6 +39,8 @@ public class Projectile extends Entity{
         explosion2 = setImage("/projectiles/explosion2.png");
     }
 
+
+    //SETTERS
     public void set(int xCoord, int yCoord, String dir, Boolean alive, Entity user){
         setXCoord(xCoord);
         setYCoord(yCoord);
@@ -44,6 +50,8 @@ public class Projectile extends Entity{
         setHp(getMaxHp());
     }
 
+
+    //OTHER METHODS
     public void update() {
 
         super.update();

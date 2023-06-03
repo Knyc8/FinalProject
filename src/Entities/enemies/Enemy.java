@@ -6,8 +6,11 @@ import ClientWindow.SwingWindow;
 import java.awt.*;
 
 public class Enemy extends Entity {
+    //VARIABLES
 //    private int room;  //future implementation
     private int actionCount;
+
+    //CONSTRUCTOR
     public Enemy(SwingWindow sw) {
         super(sw);
 
@@ -17,6 +20,25 @@ public class Enemy extends Entity {
         getImg();
     }
 
+
+    //GETTERS
+    public void getImg() {
+        setBack1(setImage("/enemy_sprites/MMM_b1.png"));
+        setBack2(setImage("/enemy_sprites/MMM_b2.png"));
+        setBack3(setImage("/enemy_sprites/MMM_b3.png"));
+        setFront1(setImage("/enemy_sprites/MMM_f1.png"));
+        setFront2(setImage("/enemy_sprites/MMM_f2.png"));
+        setFront3(setImage("/enemy_sprites/MMM_f3.png"));
+        setLeft1(setImage("/enemy_sprites/MMM_l1.png"));
+        setLeft2(setImage("/enemy_sprites/MMM_l2.png"));
+        setLeft3(setImage("/enemy_sprites/MMM_l3.png"));
+        setRight1(setImage("/enemy_sprites/MMM_r1.png"));
+        setRight2(setImage("/enemy_sprites/MMM_r2.png"));
+        setRight3(setImage("/enemy_sprites/MMM_r3.png"));
+    }
+
+
+    //SETTERS
     public void setDefaultValues() {
         setName("Miles the Magical Mouse");
         setSpeed(8);
@@ -43,21 +65,8 @@ public class Enemy extends Entity {
         setHitboxDefaultY(36);
     }
 
-    public void getImg() {
-        setBack1(setImage("/enemy_sprites/MMM_b1.png"));
-        setBack2(setImage("/enemy_sprites/MMM_b2.png"));
-        setBack3(setImage("/enemy_sprites/MMM_b3.png"));
-        setFront1(setImage("/enemy_sprites/MMM_f1.png"));
-        setFront2(setImage("/enemy_sprites/MMM_f2.png"));
-        setFront3(setImage("/enemy_sprites/MMM_f3.png"));
-        setLeft1(setImage("/enemy_sprites/MMM_l1.png"));
-        setLeft2(setImage("/enemy_sprites/MMM_l2.png"));
-        setLeft3(setImage("/enemy_sprites/MMM_l3.png"));
-        setRight1(setImage("/enemy_sprites/MMM_r1.png"));
-        setRight2(setImage("/enemy_sprites/MMM_r2.png"));
-        setRight3(setImage("/enemy_sprites/MMM_r3.png"));
-    }
 
+    //OTHER METHODS
     public void action() {
         actionCount++;
 

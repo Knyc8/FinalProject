@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Player extends Entity{
-    //Variables
+    //VARIABLES
     private final KeyManager km;
     private final int SCREEN_X;
     private final int SCREEN_Y;
@@ -15,7 +15,7 @@ public class Player extends Entity{
     private int exp;
     private int enemiesKilled;
 
-    //Constructor
+    //CONSTRUCTOR
     /***
      * Initializes the SwingWindow and KeyManager
      *
@@ -37,7 +37,8 @@ public class Player extends Entity{
         getPlayerSprite();
     }
 
-    //Getters
+
+    //GETTERS
     public int getSCREEN_X() {
         return SCREEN_X;
     }
@@ -68,7 +69,8 @@ public class Player extends Entity{
         setRight3(setImage("/player_sprites/pigzard_r1.png"));
     }
 
-    //Setters
+
+    //SETTERS
     public void setLevel(int level) {
         this.level = level;
     }
@@ -100,8 +102,7 @@ public class Player extends Entity{
     }
 
 
-    //Other methods
-
+    //OTHER METHODS
     public void update() {
         if (km.isWPressed() || km.isSPressed() || km.isAPressed() || km.isDPressed()) {
             //Character orientation

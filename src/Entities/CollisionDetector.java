@@ -6,12 +6,15 @@ import ClientWindow.SwingWindow;
  * Handles the collisions betweens entity hitboxes and tiles
  */
 public class CollisionDetector {
-    SwingWindow sw;
+    //VARIABLES
+    private SwingWindow sw;
 
+    //CONSTRUCTOR
     public CollisionDetector(SwingWindow sw) {
         this.sw = sw;
     }
 
+    //METHODS
     public void detectTile(Entity entity) {
         int hitBoxLeftX = entity.getXCoord() + entity.getHitbox().x;
         int hitBoxRightX = entity.getXCoord() + entity.getHitbox().x + entity.getHitbox().width;
