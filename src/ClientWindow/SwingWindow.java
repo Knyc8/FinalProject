@@ -17,7 +17,7 @@ public class SwingWindow extends JPanel implements Runnable {
     private final int TILE_SCALE = 3;   //Makes 32x32 sprites bigger for modern computer resolutions
     private final int DISPLAYED_TILE_SIZE = STANDARD_TILE_SIZE * TILE_SCALE;    //The actual size the sprite will be displayed as (96x96 pixels)
     private final int SCREEN_TILE_COLUMNS = 16;   //Num of tiles horizontally
-    private final int SCREEN_TILE_ROWS = 10;    //Num of tiles vertically
+    private final int SCREEN_TILE_ROWS = 9;    //Num of tiles vertically
     private final int SCREEN_WIDTH = DISPLAYED_TILE_SIZE * SCREEN_TILE_COLUMNS;   //Horizontal resolution (96 * 16 = 1536 pixels)
     private final int SCREEN_HEIGHT = DISPLAYED_TILE_SIZE * SCREEN_TILE_ROWS;    //Vertical resolution (96 * 10 = 960 pixels)
 

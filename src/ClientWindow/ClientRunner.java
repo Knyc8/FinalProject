@@ -1,6 +1,7 @@
 package ClientWindow;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class ClientRunner {
     public static void main(String[] args) {
@@ -13,6 +14,7 @@ public class ClientRunner {
         SwingWindow gamePanel = new SwingWindow();
         gameWindow.add(gamePanel);
         gameWindow.pack();  //Sizes the window to the preferred panel size in the SwingWindow class
+        gameWindow.setExtendedState(Frame.MAXIMIZED_BOTH);
         gameWindow.setLocationRelativeTo(null); //puts the window in the center of screen
         gameWindow.setVisible(true);
 
