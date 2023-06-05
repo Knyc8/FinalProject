@@ -254,6 +254,14 @@ public class OnScreenUI {
         double xpProgress = (double) sw.getPlayer().getExp()/(sw.getPlayer().getLevel()*5);
         int progressWidth = (int) ((sw.getDISPLAYED_TILE_SIZE()*2 - 6) * xpProgress);
         graphics2D.fillRect(sw.getSCREEN_WIDTH() - sw.getDISPLAYED_TILE_SIZE()*2 - 12, 100+ sw.getDISPLAYED_TILE_SIZE()+10, progressWidth, sw.getDISPLAYED_TILE_SIZE()/10 + 4 );
+
+        //Play Instructions
+        graphics2D.setColor(Color.white);
+        displayText = "WASD to move -- J to shoot -- ESC to pause";
+        length = (int)graphics2D.getFontMetrics().getStringBounds(displayText, graphics2D).getWidth();
+        int x = sw.getSCREEN_WIDTH()/2 - length/2;
+        int y = sw.getDISPLAYED_TILE_SIZE()/2;
+        graphics2D.drawString(displayText, x, y);
     }
 
     /***
